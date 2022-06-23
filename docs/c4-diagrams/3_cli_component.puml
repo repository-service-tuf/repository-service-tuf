@@ -1,0 +1,36 @@
+@startuml Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+!include <tupadr3/dev2/python>
+!include <office/Services/web_services>
+!include <office/Servers/file_server>
+!include <tupadr3/govicons/folder>
+
+AddContainerTag("rest_api", $sprite="web_services", $legendText="Repository REST API")
+AddContainerTag("python", $sprite="python", $legendText="Python Application")
+AddContainerTag("folder", $sprite="folder", $legendText="File System")
+AddComponentTag("python_component", $sprite="python", $legendText="Python Application")
+
+Boundary(CLI, "Command Line Interface"){
+
+    Component(admin, "admin", "Administrative Commands", $tags="python_component"){
+        Container(ceremony, "ceremony", "", "Bootstrap TUF Metatada", $tags="python")
+        Container(bump_version, "bump-version", "role", "Bump Role version", $tags="python")
+        Container(rotate_key, "key-rotate", "top-level role", "Rotate top level key", $tags="python")
+    }
+
+    Container(requests, "Repository Requests", "Requests", $tags="python")
+    ContainerDb(fs, "Local File System", $tags=folder) #Grey
+
+    Rel(ceremony, requests, "HTTPS")
+    Rel(ceremony, fs, "Writes")
+    Rel(bump_version, requests, "HTTPS")
+    Rel(rotate_key, requests, "HTTPS")
+
+}
+
+Container(rest_api, "REST API", "Python", $tags="rest_api")
+
+Rel(requests, rest_api, "HTTPS")
+SHOW_LEGEND()
+@enduml

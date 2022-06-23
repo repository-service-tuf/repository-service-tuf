@@ -1,2 +1,6 @@
-# kaprien
-Umbrella
+# Kaprien
+
+This is the KAPRIEN Project Umbrella repository.
+
+- General documentation
+- Integration tests
