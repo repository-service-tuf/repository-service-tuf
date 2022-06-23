@@ -1,0 +1,131 @@
+@startuml Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+
+!include osaPuml/Common.puml
+!include osaPuml/User/all.puml
+
+!include <office/Servers/application_server>
+!include <office/Services/web_services>
+!include <office/Concepts/application_generic>
+!include <office/Concepts/service_application>
+!include <office/Servers/web_server>
+!include <office/Communications/queue_viewer>
+!include <office/Concepts/clock>
+!include <office/Concepts/tasks>
+!include <tupadr3/dev2/python>
+!include <tupadr3/material/local_library>
+
+' icon for Celery logo
+sprite $celery [50x50/16] {
+00000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000
+00000555555555555555555555555555555555555555550000
+00004222222222211111111111111111111222222222245000
+00053443333333333222222222222222333333333334434500
+00034433333333322222222222222222233333333333443600
+00044433333333333222222222222222233333333334444600
+00044444333333333222222211222222333333333344444600
+00044444433333333223566766543222233333333444444600
+0004444444333333249FFFFFFFFFDA75322333334444444600
+00045444443333325FEBAAAAAAABBCFFD95333344444444600
+0004544444433325FBAAAAAAAAAAAAAABEFC63444444454600
+000454444444433BCAAAA9AABAAA99AAAAAF73444444555600
+000555444444435FAAAAAB97789ACBBAAAAB33444445555700
+000555544444437DAAAAB5222223468BCAC734444455555700
+000555555444439BAAAB61333332222358C434444555555700
+000555555544439BAA9B423333333333223344455555565700
+000565555554439BAAAB433333333334443444555555566700
+000565555555439BAAAC433333333334444444555555666700
+000666555555449BAAAC433333334444444445555556666700
+000776665555549BAAAC434333334444444455555666777800
+000777766666549BAAAC434444444444455555666677777800
+00077766666665ABAAAC544444444555555566666677777800
+00077776666665ABAAAC544444444555555566666677777800
+00077777666665ABAAAC545444455555555566666677777800
+00077777666665ABAAAC545454555555555566666677777800
+00077777666665ACABAC545555555555555666666677777900
+00077777666665ACBBAC545555555555556666666777777900
+00077777766665ACBBBC545555555555566666666777777900
+00077777766665ACBBBD555555555555666666667777777900
+00077777776665ACBBBD555555555656666666667777777900
+00077777777665ACBBBD656555566666666666677777788900
+00077777777765ACBBBD656666666666666666777777788900
+00078777777765ADBCBE656666666665567667777777788900
+00088777777775ADCCBDA556665555679DF767777777788900
+000887777777768ECCCCF96556678ADFFDEA67777777888900
+000888877777767FCCCCCFECCCFFFFDCCCCE76777778888900
+000888887777776ADCCCCCCDDDCCCCCCCCCFA6777788888900
+0008888887777766DDCCCCCCCCCCCCCCDFE977777888888900
+00088888887777766CFDCCCCCCCCDFFDA86567778888888900
+0008888888887777658BEFFFFFDCA876556787888888888900
+00088888888877777755667766655566787788888888888900
+00088888888888877787666666677788777888888888888900
+00089888888888888777888888877777888888888888889900
+00099888888888888888887877888888888888888888899A00
+00099999999888888888888888888888888888999999999900
+00099999999999999999999999999999999999999999999000
+00009AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA90000
+00000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000
+}
+
+AddContainerTag("rest_api", $sprite="web_server", $legendText="Repository REST API")
+AddContainerTag("queue", $sprite="queue_viewer", $legendText="Message Queue")
+AddContainerTag("scheduler", $sprite="clock", $legendText="Scheduler for tasks")
+AddContainerTag("tasks", $sprite="tasks", $legendText="Celery Tasks Publisher")
+AddComponentTag("celery", $sprite="celery", $legendText="Celery Application")
+AddComponentTag("python", $sprite="python", $legendText="Python Application")
+AddComponentTag("service", $sprite="python", $legendText="Python Application")
+AddContainerTag("storage_service", $sprite="file_server", $legendText="Storage Service", $bgColor=Gray)
+AddContainerTag("key_service", $sprite="lock_with_key_security", $legendText="Key Service", $bgColor=Gray)
+
+Boundary(repository_worker, "Repository Worker"){
+    Component(api, "FastAPI", "Python"){
+        Container(api_bootstrap, "bootstrap", $tags="rest_api")
+        Container(api_targets, "targets", $tags="rest_api")
+        Container(api_snapshot, "snapshot", $tags="rest_api")
+        Container(api_timestamp, "timestamp", $tags="rest_api")
+        Container(api_scheduler, "scheduler", $tags="rest_api")
+        Lay_R(api_scheduler, api_targets)
+    }
+
+    Component(celery, "Celery", "Python", $tags=celery){
+        Container(scheduler, "scheduler", $tags="scheduler")
+        Container(tasks, "task publisher", $tags="tasks")
+    }
+
+    Component(interfaces, "Interfaces", "Services Interfaces", $tags="python"){
+        Container(istorage, "Storage Interface", "FileSystem, SaaS", $tags="service")
+        Container(ikey_storage, "KeyStorage Interface", "Local Vault/SaaS", $tags="service")
+        Container(irepository, "Python-TUF Interface", "Python-TUF", $tags="service")
+        Rel(irepository, ikey_storage, "uses")
+        Rel(irepository, istorage, "uses")
+        Lay_R(istorage, ikey_storage)
+    }
+
+    Lay_L(interfaces, celery)
+
+    Rel(api_bootstrap, irepository, "uses")
+
+    Component(config, "Python", "Configuration", $tags="python")
+
+    Rel(api_scheduler, config, "uses")
+    Rel(scheduler, config, "uses")
+    Rel(api_targets, tasks, "uses")
+    Rel(api_snapshot, tasks, "uses")
+    Rel(api_timestamp, tasks, "uses")
+    Rel(interfaces, config, "uses")
+}
+
+Container(queue, "Queue", "Message Queue", $tags="queue")
+ContainerDb(storage_service, "Storage Service", "Local/SaaS Storage", $tags="storage_service") #Grey
+ContainerDb(key_service, "Key Service", "Local/SaaS Vault", $tags="key_service") #Grey
+
+Rel(tasks, queue, "publish")
+Rel(scheduler, queue, "publish")
+Rel(istorage, storage_service, "read/write")
+Rel(ikey_storage, key_service, "read/write")
+
+SHOW_LEGEND()
+@enduml

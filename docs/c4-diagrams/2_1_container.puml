@@ -1,0 +1,79 @@
+@startuml General View (Container level)
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+!include osaPuml/Common.puml
+!include osaPuml/User/all.puml
+
+!include <office/Servers/file_server>
+!include <office/Servers/application_server>
+!include <office/Services/web_services>
+!include <office/Concepts/application_generic>
+!include <office/Concepts/service_application>
+!include <office/Servers/web_server>
+!include <office/Communications/queue_viewer>
+!include <office/Devices/management_console>
+!include <logos/terminal>
+!include <office/Security/lock_with_key_security>
+!include <office/Concepts/download>
+
+
+AddPersonTag("project_mantainers", $sprite="osa_user_large_group", $legendText="Project Mantainers", $bgColor=Gray)
+AddPersonTag("admin", $sprite="osa_user_audit,color=yellow", $legendSprite="osa_user_audit,scale=0.25,color=yellow", $legendText="Repository Admins", $bgColor=Gray)
+AddPersonTag("repository_users", $sprite="osa_user_green_developer", $legendSprite="osa_user_green_developer,scale=0.25,color=yellow", $legendText="Repository Users", $bgColor=Gray)
+
+AddContainerTag("webui", $sprite="application_server", $legendText="Web UI Interface", $bgColor=Gray)
+AddContainerTag("key_service", $sprite="lock_with_key_security", $legendText="Key Service", $bgColor=Gray)
+AddContainerTag("storage_service", $sprite="file_server", $legendText="Storage Service", $bgColor=Gray)
+AddContainerTag("rest_api", $sprite="web_server", $legendText="Repository REST API")
+AddContainerTag("repo_worker", $sprite="service_application", $legendText="Repository Metadata Worker")
+AddContainerTag("queue", $sprite="queue_viewer", $legendText="Message Queue")
+AddContainerTag("ci_cd", $sprite="application_generic", $legendText="CI/CD, Artfact Management, etc")
+AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed TUF Metadata")
+AddContainerTag("download_target", $sprite="download", $legendText="Download file/target/package", $bgColor=Gray)
+
+AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=0.5,color=#438DD5", $legendText="CLI")
+AddRelTag("bowser", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="management_console,scale=0.5", $legendText="Browser")
+AddRelTag("download", $textColor="Green", $lineColor="$ARROW_COLOR")
+AddRelTag("share", $textColor="orange", $lineColor="orange", $lineStyle = DashedLine())
+
+Person(mantainers_user, "Mantainers", $tags="project_mantainers") #Grey
+Person(administration_user, "Admin", $tags="admin") #Grey
+Person(repository_users, "Users", $tags="repository_users")
+
+Container(webui, "WebUI", $tags="webui") #Grey
+Container(automation, "Automations", "CI/CD, Artfact Systems, ...", $tags="ci_cd") #Grey
+
+System_Boundary(repository, "Repository") {
+    Container(rest_api, "REST API", "Python", $tags="rest_api")
+    Container(repo_worker, "Repository Worker", "consume", $tags="repo_worker")
+    Container(queue, "Queue", "Message Queue", $tags="queue")
+}
+
+ContainerDb(key_service, "Key Service", "Local/SaaS Vault", $tags="key_service") #Grey
+ContainerDb(storage_service, "Storage Service", "Local/SaaS Storage", $tags="storage_service") #Grey
+Container(download_target, "Download", $tags="download_target") #Grey
+Container(webserver, "Metadata", "Optional", "TUF Metadata", $tags="metadata_web") #Grey
+
+Rel(administration_user, rest_api, "Admin CLI", $tags="terminal")
+Rel_R(administration_user, webui, "Browser", $tags="bowser")
+Rel_R(automation, rest_api, "HTTPS + Tokens")
+Rel(mantainers_user, rest_api, "Admin CLI", $tags="terminal")
+Rel_L(mantainers_user, webui, "Browser", $tags="bowser")
+Rel(mantainers_user, automation, "Projects")
+
+Rel(webui, rest_api, "HTTPS")
+Rel(rest_api, queue, "Producer", "Tasks")
+
+Rel_U(repo_worker, queue, "Consumer", "tasks")
+Rel_R(repo_worker, key_service, "Read/Write", "Online Keys")
+Rel_L(repo_worker, storage_service, "Read/Write", "Repository Metadata")
+Rel(storage_service, webserver, "Render/Share/View", $tags="share")
+Rel_L(repository_users, webserver, "1", "Verify Target Metadata", $tags="download")
+Rel_R(repository_users, download_target, "2", "Download Target", $tags="download")
+
+
+Lay_D(repo_worker, webserver)
+
+SHOW_LEGEND()
+@enduml

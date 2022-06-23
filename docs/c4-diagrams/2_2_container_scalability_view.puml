@@ -1,0 +1,135 @@
+@startuml General View (Container level)
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+!include osaPuml/Common.puml
+!include osaPuml/User/all.puml
+
+!include <office/Servers/file_server>
+!include <office/Servers/application_server>
+!include <office/Services/web_services>
+!include <office/Concepts/application_generic>
+!include <office/Concepts/service_application>
+!include <office/Servers/web_server>
+!include <office/Communications/queue_viewer>
+!include <office/Devices/management_console>
+!include <logos/terminal>
+!include <office/Security/lock_with_key_security>
+!include <office/Concepts/download>
+!include <office/Servers/cluster_server>
+
+AddPersonTag("project_mantainers", $sprite="osa_user_large_group", $legendText="Project Mantainers", $bgColor=Gray)
+AddPersonTag("admin", $sprite="osa_user_audit,color=yellow", $legendSprite="osa_user_audit,scale=0.25,color=yellow", $legendText="Repository Admins", $bgColor=Gray)
+AddPersonTag("repository_users", $sprite="osa_user_green_developer", $legendSprite="osa_user_green_developer,scale=0.25,color=yellow", $legendText="Repository Users", $bgColor=Gray)
+
+AddContainerTag("webui", $sprite="application_server", $legendText="Web UI Interface", $bgColor=Gray)
+AddContainerTag("key_service", $sprite="lock_with_key_security", $legendText="Key Service", $bgColor=Gray)
+AddContainerTag("storage_service", $sprite="file_server", $legendText="Storage Service", $bgColor=Gray)
+AddContainerTag("rest_api", $sprite="web_server", $legendText="Repository REST API")
+AddContainerTag("repo_worker", $sprite="service_application", $legendText="Repository Metadata Worker")
+AddContainerTag("queue", $sprite="queue_viewer", $legendText="Message Queue")
+AddContainerTag("ci_cd", $sprite="application_generic", $legendText="CI/CD, Artfact Management, etc")
+AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed TUF Metadata")
+AddContainerTag("download_target", $sprite="download", $legendText="Download file/target/package", $bgColor=Gray)
+AddContainerTag("queue_cluster", $sprite="cluster_server", $legendText="Queue Cluster")
+
+AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=0.5,color=#438DD5", $legendText="CLI")
+AddRelTag("bowser", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="management_console,scale=0.5", $legendText="Browser")
+AddRelTag("download", $textColor="Green", $lineColor="$ARROW_COLOR")
+AddRelTag("share", $textColor="orange", $lineColor="orange", $lineStyle = DashedLine())
+
+Person(users, "Users", $tags="project_mantainers") #Grey
+
+Container(automation, "Automations", "CI/CD, Artfact Systems, ...", $tags="ci_cd") #Grey
+
+Boundary(load_balance, "Load Balance") {
+    Container(webui_1, "WebUI", $tags="webui") #Grey
+    Container(webui_2, "WebUI", $tags="webui") #Grey
+    Container(webui_3, "WebUI", $tags="webui") #Grey
+    Container(webui_n, "WebUI [N]", $tags="webui") #Grey
+    Lay_R(webui_1, webui_2)
+    Lay_R(webui_2, webui_3)
+    Lay_R(webui_3, webui_n)
+
+}
+
+Boundary(apis, "REST API"){
+    Container(api_gateway, "API Gateway", "Local/SaaS API Gateway", "Security, Authentication, etc")
+    Container(rest_api_1, "REST API", "Python", $tags="rest_api")
+    Container(rest_api_2, "REST API", "Python", $tags="rest_api")
+    Container(rest_api_3, "REST API", "Python", $tags="rest_api")
+    Container(rest_api_n, "REST API[N]", "Python", $tags="rest_api")
+    Lay_R(api_gateway, rest_api_1)
+    Lay_R(rest_api_1, rest_api_2)
+    Lay_R(rest_api_2, rest_api_3)
+    Lay_R(rest_api_3, rest_api_n)
+    Rel(api_gateway, rest_api_1,)
+    Rel(api_gateway, rest_api_2,)
+    Rel(api_gateway, rest_api_3,)
+    Rel(api_gateway, rest_api_n,)
+}
+
+Boundary(message_queue, "Messsage Queue Federation") {
+     Container(queue_1, "Queue Node 1", "Message Queue", $tags="queue")
+     Container(queue_service, "Queue", "Message Queue", $tags="queue_cluster")
+     Container(queue_n, "Queue Node [N]", "Message Queue", $tags="queue")
+}
+Rel_L(queue_service, queue_1,)
+Rel_R(queue_service, queue_n,)
+Boundary(repository_workers, "Repository Workers", "* this still some research ongoing, see notes") {
+    Container(repo_worker_1, "Repository Worker 1", "consumer", $tags="repo_worker")
+    Container(repo_worker_2, "Repository Worker 2", "consumer", $tags="repo_worker")
+    Container(repo_worker_3, "Repository Worker 3", "consumer", $tags="repo_worker")
+    Container(repo_worker_n, "Repository Worker n", "consumer", $tags="repo_worker")
+    Lay_R(repo_worker_1, repo_worker_2)
+    Lay_R(repo_worker_2, repo_worker_3)
+    Lay_R(repo_worker_3, repo_worker_n)
+}
+note right of repository_workers
+1. https://bit.ly/3J7POim
+2. https://bit.ly/3K5Cs7N
+end note
+
+ContainerDb(key_service, "Key Service", "Local/SaaS Vault", $tags="key_service") #Grey
+ContainerDb(storage_service, "Storage Service", "Local/SaaS Storage", $tags="storage_service") #Grey
+
+Rel(users, api_gateway, "Admin CLI", $tags="terminal")
+Rel(users, load_balance, "Browser", $tags="bowser")
+' Rel(mantainers_user, api_gateway, "Admin CLI", $tags="terminal")
+' Rel(mantainers_user, load_balance, "Browser", $tags="bowser")
+' Rel(mantainers_user, automation, "Projects")
+Rel_R(automation, api_gateway, "HTTPS + Tokens")
+Rel(webui_1, api_gateway, "HTTPS")
+Rel(webui_2, api_gateway, "HTTPS")
+Rel(webui_3, api_gateway, "HTTPS")
+Rel(webui_n, api_gateway, "HTTPS")
+' Rel_L(apis, queue, "Producer", "Tasks")
+
+' Rel_U(repo_worker, queue, "Consumer", "tasks")
+' Rel_R(repo_worker, key_service, "Read/Write", "Online Keys")
+' Rel_L(repo_worker, storage_service, "Read/Write", "Repository Metadata")
+' Rel(storage_service, webserver, "Render/Share/View", $tags="share")
+' Rel_L(repository_users, webserver, "1", "Verify Metadata", $tags="download")
+' Rel_R(repository_users, download_target, "2", "Download File", $tags="download")
+Rel_D(rest_api_1, queue_service, "Tasks")
+Rel_D(rest_api_2, queue_service, "Tasks")
+Rel_D(rest_api_3, queue_service, "Tasks")
+Rel_D(rest_api_n, queue_service, "Tasks")
+
+Rel_U(repo_worker_1, queue_service, "Consumer")
+Rel_U(repo_worker_2, queue_service, "Consumer")
+Rel_U(repo_worker_3, queue_service, "Consumer")
+Rel_U(repo_worker_n, queue_service, "Consumer")
+
+Rel_D(repo_worker_1, storage_service, "read/write")
+Rel_D(repo_worker_2, storage_service, "read/write")
+Rel_D(repo_worker_3, storage_service, "read/write")
+Rel_D(repo_worker_n, storage_service, "read/write")
+Rel_D(repo_worker_1, key_service, "read/write")
+Rel_D(repo_worker_2, key_service, "read/write")
+Rel_D(repo_worker_3, key_service, "read/write")
+Rel_D(repo_worker_n, key_service, "read/write")
+' Lay_D(repo_worker, webserver)
+
+SHOW_LEGEND()
+@enduml
