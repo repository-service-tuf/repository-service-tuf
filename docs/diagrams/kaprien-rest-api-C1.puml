@@ -1,0 +1,18 @@
+@startuml Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+AddRelTag("validate", $textColor="orange", $lineColor="Blue", $lineStyle = DashedLine())
+AddRelTag("download", $textColor="orange", $lineColor="Blue")
+
+
+Person(user, "API User")  #Grey
+
+System(kaprien, "KAPRIEN-REST-API", "Signed Metadata")
+System(queue, "Broker", "Redis, RabbitMQ, etc") #Grey
+
+Rel_D(user, kaprien, "HTTP Requests")
+Rel_D(kaprien, queue, "Publisher, Backend")
+
+
+HIDE_STEREOTYPE()
+@enduml

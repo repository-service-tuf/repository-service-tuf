@@ -1,0 +1,22 @@
+@startuml Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+AddRelTag("validate", $textColor="orange", $lineColor="Blue", $lineStyle = DashedLine())
+AddRelTag("download", $textColor="orange", $lineColor="Blue")
+
+
+Person(user, "Downloader User") #Grey
+
+System(kaprien, "Kaprien", "Signed Metadata")
+System(ci_cd, "CI/CD, Artifact Systems, Distribution Platform", "Jenkins, Github Action, Gitlab, CircleCI, JFrog Artifactory, Custom Solution, etc") #Grey
+System(files_repository, "Repository Files", "HTTPS, FTP , JFrog Artifactory, NPN, etc") #Grey
+
+
+Rel_L(ci_cd, kaprien, "API")
+Rel(ci_cd, files_repository, "Upload file")
+Rel(kaprien, files_repository, "Upload Metadata")
+Rel_U(user, files_repository, "1", "", "Validate", $tags="validate")
+Rel_U(user, files_repository, "2", "", "Install, Download Update", $tags="download")
+
+HIDE_STEREOTYPE()
+@enduml

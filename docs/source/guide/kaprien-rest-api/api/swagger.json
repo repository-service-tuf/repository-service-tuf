@@ -1,0 +1,1911 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Kaprien Rest API",
+        "description": "Kaprien Rest API service for Kaprien Server",
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/api/v1/bootstrap/": {
+            "get": {
+                "tags": [
+                    "v1",
+                    "v1"
+                ],
+                "summary": "Check the bootstrap status. Scope: read:bootstrap",
+                "description": "Check if the boostrap of the system is done or not.",
+                "operationId": "get_api_v1_bootstrap__get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BootstrapGetResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": [
+                            "read:bootstrap"
+                        ]
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "v1",
+                    "v1"
+                ],
+                "summary": "Bootstrap the system with initial signed Metadata. Scope: write:bootstrap",
+                "description": "Initialize the Kaprien with initial signed Metadata and Settings.",
+                "operationId": "post_api_v1_bootstrap__post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BootstrapPayload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BootstrapPostResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": [
+                            "write:bootstrap"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/api/v1/config/": {
+            "get": {
+                "tags": [
+                    "v1",
+                    "v1"
+                ],
+                "summary": "List settings. Scope: read:settings",
+                "description": "Returns the configuration settings",
+                "operationId": "get_api_v1_config__get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/kaprien_api__config__Response"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": [
+                            "read:settings"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/api/v1/targets/": {
+            "post": {
+                "tags": [
+                    "v1",
+                    "v1"
+                ],
+                "summary": "Add targets files to Metadata. Scope: write:bootstrap",
+                "description": "Add targets files to Metadata.",
+                "operationId": "post_api_v1_targets__post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Payload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/kaprien_api__targets__Response"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": [
+                            "write:targets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/api/v1/token/": {
+            "get": {
+                "tags": [
+                    "v1",
+                    "v1"
+                ],
+                "summary": "Get token details. Scope: read:token",
+                "description": "Return the token details. It requires an authenticated token with scope authorization.",
+                "operationId": "get_api_v1_token__get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": [
+                            "read:token"
+                        ]
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "title": "Token",
+                            "description": "Token to be validated",
+                            "required": true,
+                            "type": "string"
+                        },
+                        "description": "Token to be validated"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetTokenResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "v1",
+                    "v1"
+                ],
+                "summary": "Issue token user/password authentication",
+                "description": "Issue a token with scopes for all granted user scope.",
+                "operationId": "post_api_v1_token__post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Body_post_api_v1_token__post"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostTokenResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/token/new/": {
+            "post": {
+                "tags": [
+                    "v1",
+                    "v1"
+                ],
+                "summary": "Issue token from authenticated token. Scope: write:token",
+                "description": "Issue token from a valid and existent token.",
+                "operationId": "post_token_api_v1_token_new__post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TokenRequestPayload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostTokenResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": [
+                            "write:token"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Body_post_api_v1_token__post": {
+                "title": "Body_post_api_v1_token__post",
+                "required": [
+                    "username",
+                    "password"
+                ],
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "title": "Username",
+                        "type": "string"
+                    },
+                    "password": {
+                        "title": "Password",
+                        "type": "string"
+                    },
+                    "scope": {
+                        "title": "Scope",
+                        "type": "string",
+                        "description": "Add scopes separeted by space. Default user scopes. Users might not have all scopes. Available scopes: read:bootstrap read:settings read:targets read:token write:bootstrap write:targets write:token",
+                        "default": ""
+                    },
+                    "expires": {
+                        "title": "Expires",
+                        "type": "integer",
+                        "description": "Expiration in hours. Default: 1 hour",
+                        "default": 1
+                    }
+                }
+            },
+            "BootstrapGetResponse": {
+                "title": "BootstrapGetResponse",
+                "type": "object",
+                "properties": {
+                    "bootstrap": {
+                        "title": "Bootstrap",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "title": "Message",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "bootstrap": false,
+                    "message": "System available for bootstrap."
+                }
+            },
+            "BootstrapPayload": {
+                "title": "BootstrapPayload",
+                "required": [
+                    "settings",
+                    "metadata"
+                ],
+                "type": "object",
+                "properties": {
+                    "settings": {
+                        "$ref": "#/components/schemas/Settings"
+                    },
+                    "metadata": {
+                        "title": "Metadata",
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/TUFMetadata"
+                        }
+                    }
+                },
+                "example": {
+                    "settings": {
+                        "service": {
+                            "targets_base_url": "http://www.example.com/repository/"
+                        },
+                        "roles": {
+                            "root": {
+                                "expiration": 356,
+                                "num_of_keys": 2,
+                                "threshold": 1,
+                                "keys": {},
+                                "offline_keys": true
+                            },
+                            "targets": {
+                                "expiration": 365,
+                                "num_of_keys": 2,
+                                "threshold": 1,
+                                "keys": {},
+                                "offline_keys": true,
+                                "paths": [
+                                    "*",
+                                    "*/*"
+                                ]
+                            },
+                            "snapshot": {
+                                "expiration": 1,
+                                "num_of_keys": 1,
+                                "threshold": 1,
+                                "keys": {
+                                    "snapshot_1": {
+                                        "filename": "snapshot1.key",
+                                        "password": "strongPass",
+                                        "key": {
+                                            "keytype": "ed25519",
+                                            "scheme": "ed25519",
+                                            "keyid": "282b4be91d94eb633740a7536772e8dd3228980252c978319acb6857764a645c",
+                                            "keyid_hash_algorithms": [
+                                                "sha256",
+                                                "sha512"
+                                            ],
+                                            "keyval": {
+                                                "public": "8112c6b8b350e155db925ee0fad8931635039f82e1fb1a75d42cb546426e4681",
+                                                "private": "637bb52eba4c4c3ba1e6860665a477a3d640b71ad794b886f77705ee25e8e17e"
+                                            }
+                                        }
+                                    }
+                                },
+                                "offline_keys": false
+                            },
+                            "timestamp": {
+                                "expiration": 1,
+                                "num_of_keys": 1,
+                                "threshold": 1,
+                                "keys": {
+                                    "timestamp_1": {
+                                        "filename": "timestamp1.key",
+                                        "password": "strongPass",
+                                        "key": {
+                                            "keytype": "ed25519",
+                                            "scheme": "ed25519",
+                                            "keyid": "6e3bea1c56cca6cf2154443e31ff8d8181ab19a394633017bb9eb4aea3903258",
+                                            "keyid_hash_algorithms": [
+                                                "sha256",
+                                                "sha512"
+                                            ],
+                                            "keyval": {
+                                                "public": "2480d2e348d5df371ea569be9ef7365864f6f713b8f906f47f1f514025784fb6",
+                                                "private": "802ebe69b0e0ed1f18466c0c95aa900fb95f0afbff02547f344e913e9b980e54"
+                                            }
+                                        }
+                                    }
+                                },
+                                "offline_keys": false
+                            },
+                            "bin": {
+                                "expiration": 365,
+                                "num_of_keys": 1,
+                                "threshold": 1,
+                                "keys": {},
+                                "offline_keys": true
+                            },
+                            "bins": {
+                                "expiration": 1,
+                                "num_of_keys": 1,
+                                "threshold": 1,
+                                "keys": {
+                                    "bins_1": {
+                                        "filename": "bins1.key",
+                                        "password": "strongPass",
+                                        "key": {
+                                            "keytype": "ed25519",
+                                            "scheme": "ed25519",
+                                            "keyid": "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d",
+                                            "keyid_hash_algorithms": [
+                                                "sha256",
+                                                "sha512"
+                                            ],
+                                            "keyval": {
+                                                "public": "9ed73acff98d521b0852dffcb8e78f01173ca7c7d839e5468be64e7c4c0f97f3",
+                                                "private": "1af3820446daf377298cf050edd5732f55e39af031d64e1013a01b26ec3b89b5"
+                                            }
+                                        }
+                                    }
+                                },
+                                "offline_keys": false,
+                                "number_hash_prefixes": 4
+                            }
+                        }
+                    },
+                    "metadata": {
+                        "1.targets": {
+                            "signatures": [
+                                {
+                                    "keyid": "2ae0c9035e5e89f61e95dd922a0f6ee8d92a2629cef649886e278f8a757d7610",
+                                    "sig": "db96c06ac92ba0c70df3a6b7be3ae1b1d3a40060fc85c88cd0ccaca4dac8cff4a81a9c3bf6bc0a1d30d992d684651d552e8afa2ebedd037b42d862a758ea1b0e"
+                                },
+                                {
+                                    "keyid": "777a9b799d80eeb4985abe79faf39ebe67620d59c20ef5a79fc1232ccd911661",
+                                    "sig": "1c5533089445f118ebe22673520c4aa4a5a4868e15c0f28d5c4dd67f3b8237d72b7a16aa1af5be551b2b2026395d2d7a65e40214e7a00fa824f12b15f181c10d"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 2,
+                                "spec_version": "1.0.30",
+                                "expires": "2023-08-15T17:14:37Z",
+                                "targets": {},
+                                "delegations": {
+                                    "keys": {
+                                        "c224661b5259d6bf30b03fa1f32fc92769eea0f410a7be59028d4bc1cb0712cf": {
+                                            "keytype": "ed25519",
+                                            "scheme": "ed25519",
+                                            "keyval": {
+                                                "public": "47257613c31f1bc49ac27be3d588d886c263d2c78efea4c4cea4ef923dcb2b19"
+                                            }
+                                        }
+                                    },
+                                    "roles": [
+                                        {
+                                            "name": "bin",
+                                            "terminating": false,
+                                            "keyids": [
+                                                "c224661b5259d6bf30b03fa1f32fc92769eea0f410a7be59028d4bc1cb0712cf"
+                                            ],
+                                            "threshold": 1,
+                                            "paths": [
+                                                "*/*",
+                                                "*/*/*/*"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "1.snapshot": {
+                            "signatures": [
+                                {
+                                    "keyid": "282b4be91d94eb633740a7536772e8dd3228980252c978319acb6857764a645c",
+                                    "sig": "e8fc13cb7a6170e90827cc614fd74f830ca3e6713534ba709eb15d1d90cf625576595d00e7c7031e32536144e43018f30aed72c7ad2394bcd47c27f341944b0d"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "snapshot",
+                                "version": 2,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:54Z",
+                                "meta": {
+                                    "targets.json": {
+                                        "version": 2
+                                    },
+                                    "bins-0.json": {
+                                        "version": 1
+                                    },
+                                    "bins-1.json": {
+                                        "version": 1
+                                    },
+                                    "bins-2.json": {
+                                        "version": 1
+                                    },
+                                    "bins-3.json": {
+                                        "version": 1
+                                    },
+                                    "bins-4.json": {
+                                        "version": 1
+                                    },
+                                    "bins-5.json": {
+                                        "version": 1
+                                    },
+                                    "bins-6.json": {
+                                        "version": 1
+                                    },
+                                    "bins-7.json": {
+                                        "version": 1
+                                    },
+                                    "bins-8.json": {
+                                        "version": 1
+                                    },
+                                    "bins-9.json": {
+                                        "version": 1
+                                    },
+                                    "bins-a.json": {
+                                        "version": 1
+                                    },
+                                    "bins-b.json": {
+                                        "version": 1
+                                    },
+                                    "bins-c.json": {
+                                        "version": 1
+                                    },
+                                    "bins-d.json": {
+                                        "version": 1
+                                    },
+                                    "bins-e.json": {
+                                        "version": 1
+                                    },
+                                    "bins-f.json": {
+                                        "version": 1
+                                    },
+                                    "bin.json": {
+                                        "version": 1
+                                    }
+                                }
+                            }
+                        },
+                        "timestamp": {
+                            "signatures": [
+                                {
+                                    "keyid": "6e3bea1c56cca6cf2154443e31ff8d8181ab19a394633017bb9eb4aea3903258",
+                                    "sig": "964de9be0d382f9fad443846dc85bd397bc220e5f275c6e76fe3a79652f56e0e3a805c03b542317cfdaafdbac55e79927e1913a220a21bbc57ec5ec55bcda10b"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "timestamp",
+                                "version": 2,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:54Z",
+                                "meta": {
+                                    "snapshot.json": {
+                                        "version": 2
+                                    }
+                                }
+                            }
+                        },
+                        "1.root": {
+                            "signatures": [
+                                {
+                                    "keyid": "b4ef64e350c358eceeffa380427fa29632bb2565db2d5c3ffbdb2b83eecb3163",
+                                    "sig": "08f1f4ecaa06fa3fa621447da13c1f0f510f82916015638cb4bfc81a402016c5414f8bf230a7d76e6e7d8f65bbacaf56cd72bd43126c35f3936e9c14cdde1c02"
+                                },
+                                {
+                                    "keyid": "4b476f153f6bfd5d454688048f5e699556eba2b9dd42bdfebc9f01d772eea967",
+                                    "sig": "199d313c2f239803ba415ef31d30c388215afa14077aff0ba3260156d0af6c4c1e3c6c0d1fd625ceddac127d5cd6b4c742d13a59f80f7498a486d2f0d067f807"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "root",
+                                "version": 1,
+                                "spec_version": "1.0.30",
+                                "expires": "2023-08-06T17:14:37Z",
+                                "consistent_snapshot": true,
+                                "keys": {
+                                    "6e3bea1c56cca6cf2154443e31ff8d8181ab19a394633017bb9eb4aea3903258": {
+                                        "keytype": "ed25519",
+                                        "scheme": "ed25519",
+                                        "keyval": {
+                                            "public": "2480d2e348d5df371ea569be9ef7365864f6f713b8f906f47f1f514025784fb6"
+                                        }
+                                    },
+                                    "2ae0c9035e5e89f61e95dd922a0f6ee8d92a2629cef649886e278f8a757d7610": {
+                                        "keytype": "ed25519",
+                                        "scheme": "ed25519",
+                                        "keyval": {
+                                            "public": "d6c86a414e3e94d9cf4080bf44bf3d1b5894c219cf315c607ca8a95b8cd3f94a"
+                                        }
+                                    },
+                                    "777a9b799d80eeb4985abe79faf39ebe67620d59c20ef5a79fc1232ccd911661": {
+                                        "keytype": "ed25519",
+                                        "scheme": "ed25519",
+                                        "keyval": {
+                                            "public": "84db0aaaea9532ed6e9f6b64d1be111ca720636b71bed685ebd5f6314d089218"
+                                        }
+                                    },
+                                    "b4ef64e350c358eceeffa380427fa29632bb2565db2d5c3ffbdb2b83eecb3163": {
+                                        "keytype": "ed25519",
+                                        "scheme": "ed25519",
+                                        "keyval": {
+                                            "public": "4450892c1732be8820e5e969ccc9a90be0d186107e2a95725ee2e43e02558fcd"
+                                        }
+                                    },
+                                    "4b476f153f6bfd5d454688048f5e699556eba2b9dd42bdfebc9f01d772eea967": {
+                                        "keytype": "ed25519",
+                                        "scheme": "ed25519",
+                                        "keyval": {
+                                            "public": "5922e84d7a9c88b379647957307fd3613a3901d7425837b9da27c3fb6308c75e"
+                                        }
+                                    },
+                                    "282b4be91d94eb633740a7536772e8dd3228980252c978319acb6857764a645c": {
+                                        "keytype": "ed25519",
+                                        "scheme": "ed25519",
+                                        "keyval": {
+                                            "public": "8112c6b8b350e155db925ee0fad8931635039f82e1fb1a75d42cb546426e4681"
+                                        }
+                                    }
+                                },
+                                "roles": {
+                                    "timestamp": {
+                                        "keyids": [
+                                            "6e3bea1c56cca6cf2154443e31ff8d8181ab19a394633017bb9eb4aea3903258"
+                                        ],
+                                        "threshold": 1
+                                    },
+                                    "targets": {
+                                        "keyids": [
+                                            "2ae0c9035e5e89f61e95dd922a0f6ee8d92a2629cef649886e278f8a757d7610",
+                                            "777a9b799d80eeb4985abe79faf39ebe67620d59c20ef5a79fc1232ccd911661"
+                                        ],
+                                        "threshold": 1
+                                    },
+                                    "root": {
+                                        "keyids": [
+                                            "b4ef64e350c358eceeffa380427fa29632bb2565db2d5c3ffbdb2b83eecb3163",
+                                            "4b476f153f6bfd5d454688048f5e699556eba2b9dd42bdfebc9f01d772eea967"
+                                        ],
+                                        "threshold": 1
+                                    },
+                                    "snapshot": {
+                                        "keyids": [
+                                            "282b4be91d94eb633740a7536772e8dd3228980252c978319acb6857764a645c"
+                                        ],
+                                        "threshold": 1
+                                    }
+                                }
+                            }
+                        },
+                        "2.targets": {
+                            "signatures": [
+                                {
+                                    "keyid": "2ae0c9035e5e89f61e95dd922a0f6ee8d92a2629cef649886e278f8a757d7610",
+                                    "sig": "db96c06ac92ba0c70df3a6b7be3ae1b1d3a40060fc85c88cd0ccaca4dac8cff4a81a9c3bf6bc0a1d30d992d684651d552e8afa2ebedd037b42d862a758ea1b0e"
+                                },
+                                {
+                                    "keyid": "777a9b799d80eeb4985abe79faf39ebe67620d59c20ef5a79fc1232ccd911661",
+                                    "sig": "1c5533089445f118ebe22673520c4aa4a5a4868e15c0f28d5c4dd67f3b8237d72b7a16aa1af5be551b2b2026395d2d7a65e40214e7a00fa824f12b15f181c10d"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 2,
+                                "spec_version": "1.0.30",
+                                "expires": "2023-08-15T17:14:37Z",
+                                "targets": {},
+                                "delegations": {
+                                    "keys": {
+                                        "c224661b5259d6bf30b03fa1f32fc92769eea0f410a7be59028d4bc1cb0712cf": {
+                                            "keytype": "ed25519",
+                                            "scheme": "ed25519",
+                                            "keyval": {
+                                                "public": "47257613c31f1bc49ac27be3d588d886c263d2c78efea4c4cea4ef923dcb2b19"
+                                            }
+                                        }
+                                    },
+                                    "roles": [
+                                        {
+                                            "name": "bin",
+                                            "terminating": false,
+                                            "keyids": [
+                                                "c224661b5259d6bf30b03fa1f32fc92769eea0f410a7be59028d4bc1cb0712cf"
+                                            ],
+                                            "threshold": 1,
+                                            "paths": [
+                                                "*/*",
+                                                "*/*/*/*"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "1.bins-0": {
+                            "signatures": [
+                                {
+                                    "keyid": "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d",
+                                    "sig": "0be5f3dccd25e36ed19852a25eb7d32e66a33722a4c8ac66d96e5842da392515013475be942c3c12fa7a113bbbe0d288a65978a723909b83c7b1b036ef923202"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 1,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:37Z",
+                                "targets": {}
+                            }
+                        },
+                        "1.bins-1": {
+                            "signatures": [
+                                {
+                                    "keyid": "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d",
+                                    "sig": "0be5f3dccd25e36ed19852a25eb7d32e66a33722a4c8ac66d96e5842da392515013475be942c3c12fa7a113bbbe0d288a65978a723909b83c7b1b036ef923202"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 1,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:37Z",
+                                "targets": {}
+                            }
+                        },
+                        "1.bins-2": {
+                            "signatures": [
+                                {
+                                    "keyid": "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d",
+                                    "sig": "0be5f3dccd25e36ed19852a25eb7d32e66a33722a4c8ac66d96e5842da392515013475be942c3c12fa7a113bbbe0d288a65978a723909b83c7b1b036ef923202"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 1,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:37Z",
+                                "targets": {}
+                            }
+                        },
+                        "1.bins-3": {
+                            "signatures": [
+                                {
+                                    "keyid": "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d",
+                                    "sig": "0be5f3dccd25e36ed19852a25eb7d32e66a33722a4c8ac66d96e5842da392515013475be942c3c12fa7a113bbbe0d288a65978a723909b83c7b1b036ef923202"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 1,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:37Z",
+                                "targets": {}
+                            }
+                        },
+                        "1.bins-4": {
+                            "signatures": [
+                                {
+                                    "keyid": "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d",
+                                    "sig": "0be5f3dccd25e36ed19852a25eb7d32e66a33722a4c8ac66d96e5842da392515013475be942c3c12fa7a113bbbe0d288a65978a723909b83c7b1b036ef923202"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 1,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:37Z",
+                                "targets": {}
+                            }
+                        },
+                        "1.bins-5": {
+                            "signatures": [
+                                {
+                                    "keyid": "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d",
+                                    "sig": "0be5f3dccd25e36ed19852a25eb7d32e66a33722a4c8ac66d96e5842da392515013475be942c3c12fa7a113bbbe0d288a65978a723909b83c7b1b036ef923202"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 1,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:37Z",
+                                "targets": {}
+                            }
+                        },
+                        "1.bins-6": {
+                            "signatures": [
+                                {
+                                    "keyid": "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d",
+                                    "sig": "0be5f3dccd25e36ed19852a25eb7d32e66a33722a4c8ac66d96e5842da392515013475be942c3c12fa7a113bbbe0d288a65978a723909b83c7b1b036ef923202"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 1,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:37Z",
+                                "targets": {}
+                            }
+                        },
+                        "1.bins-7": {
+                            "signatures": [
+                                {
+                                    "keyid": "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d",
+                                    "sig": "0be5f3dccd25e36ed19852a25eb7d32e66a33722a4c8ac66d96e5842da392515013475be942c3c12fa7a113bbbe0d288a65978a723909b83c7b1b036ef923202"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 1,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:37Z",
+                                "targets": {}
+                            }
+                        },
+                        "1.bins-8": {
+                            "signatures": [
+                                {
+                                    "keyid": "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d",
+                                    "sig": "0be5f3dccd25e36ed19852a25eb7d32e66a33722a4c8ac66d96e5842da392515013475be942c3c12fa7a113bbbe0d288a65978a723909b83c7b1b036ef923202"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 1,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:37Z",
+                                "targets": {}
+                            }
+                        },
+                        "1.bins-9": {
+                            "signatures": [
+                                {
+                                    "keyid": "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d",
+                                    "sig": "0be5f3dccd25e36ed19852a25eb7d32e66a33722a4c8ac66d96e5842da392515013475be942c3c12fa7a113bbbe0d288a65978a723909b83c7b1b036ef923202"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 1,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:37Z",
+                                "targets": {}
+                            }
+                        },
+                        "1.bins-a": {
+                            "signatures": [
+                                {
+                                    "keyid": "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d",
+                                    "sig": "0be5f3dccd25e36ed19852a25eb7d32e66a33722a4c8ac66d96e5842da392515013475be942c3c12fa7a113bbbe0d288a65978a723909b83c7b1b036ef923202"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 1,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:37Z",
+                                "targets": {}
+                            }
+                        },
+                        "1.bins-b": {
+                            "signatures": [
+                                {
+                                    "keyid": "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d",
+                                    "sig": "0be5f3dccd25e36ed19852a25eb7d32e66a33722a4c8ac66d96e5842da392515013475be942c3c12fa7a113bbbe0d288a65978a723909b83c7b1b036ef923202"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 1,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:37Z",
+                                "targets": {}
+                            }
+                        },
+                        "1.bins-c": {
+                            "signatures": [
+                                {
+                                    "keyid": "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d",
+                                    "sig": "0be5f3dccd25e36ed19852a25eb7d32e66a33722a4c8ac66d96e5842da392515013475be942c3c12fa7a113bbbe0d288a65978a723909b83c7b1b036ef923202"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 1,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:37Z",
+                                "targets": {}
+                            }
+                        },
+                        "1.bins-d": {
+                            "signatures": [
+                                {
+                                    "keyid": "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d",
+                                    "sig": "0be5f3dccd25e36ed19852a25eb7d32e66a33722a4c8ac66d96e5842da392515013475be942c3c12fa7a113bbbe0d288a65978a723909b83c7b1b036ef923202"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 1,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:37Z",
+                                "targets": {}
+                            }
+                        },
+                        "1.bins-e": {
+                            "signatures": [
+                                {
+                                    "keyid": "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d",
+                                    "sig": "0be5f3dccd25e36ed19852a25eb7d32e66a33722a4c8ac66d96e5842da392515013475be942c3c12fa7a113bbbe0d288a65978a723909b83c7b1b036ef923202"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 1,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:37Z",
+                                "targets": {}
+                            }
+                        },
+                        "1.bins-f": {
+                            "signatures": [
+                                {
+                                    "keyid": "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d",
+                                    "sig": "0be5f3dccd25e36ed19852a25eb7d32e66a33722a4c8ac66d96e5842da392515013475be942c3c12fa7a113bbbe0d288a65978a723909b83c7b1b036ef923202"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 1,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:37Z",
+                                "targets": {}
+                            }
+                        },
+                        "1.bin": {
+                            "signatures": [
+                                {
+                                    "keyid": "c224661b5259d6bf30b03fa1f32fc92769eea0f410a7be59028d4bc1cb0712cf",
+                                    "sig": "35ab9552e35628332bcde5778a62cdf267b60b2ea077c1080df4967b74fa025cba4374dfcf6a3407a60e6e6c8cd5646706f3c25af725a430f171cf594f59d104"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "targets",
+                                "version": 1,
+                                "spec_version": "1.0.30",
+                                "expires": "2023-08-15T17:14:37Z",
+                                "targets": {},
+                                "delegations": {
+                                    "keys": {
+                                        "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d": {
+                                            "keytype": "ed25519",
+                                            "scheme": "ed25519",
+                                            "keyval": {
+                                                "public": "9ed73acff98d521b0852dffcb8e78f01173ca7c7d839e5468be64e7c4c0f97f3"
+                                            }
+                                        }
+                                    },
+                                    "succinct_roles": {
+                                        "bit_length": 4,
+                                        "name_prefix": "bins",
+                                        "keyids": [
+                                            "3c9e9cebf5fa18b7cd58d2d5427f041cf08ce889a68654efde28ea38641f5b5d"
+                                        ],
+                                        "threshold": 1
+                                    }
+                                }
+                            }
+                        },
+                        "2.snapshot": {
+                            "signatures": [
+                                {
+                                    "keyid": "282b4be91d94eb633740a7536772e8dd3228980252c978319acb6857764a645c",
+                                    "sig": "e8fc13cb7a6170e90827cc614fd74f830ca3e6713534ba709eb15d1d90cf625576595d00e7c7031e32536144e43018f30aed72c7ad2394bcd47c27f341944b0d"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "snapshot",
+                                "version": 2,
+                                "spec_version": "1.0.30",
+                                "expires": "2022-08-16T17:14:54Z",
+                                "meta": {
+                                    "targets.json": {
+                                        "version": 2
+                                    },
+                                    "bins-0.json": {
+                                        "version": 1
+                                    },
+                                    "bins-1.json": {
+                                        "version": 1
+                                    },
+                                    "bins-2.json": {
+                                        "version": 1
+                                    },
+                                    "bins-3.json": {
+                                        "version": 1
+                                    },
+                                    "bins-4.json": {
+                                        "version": 1
+                                    },
+                                    "bins-5.json": {
+                                        "version": 1
+                                    },
+                                    "bins-6.json": {
+                                        "version": 1
+                                    },
+                                    "bins-7.json": {
+                                        "version": 1
+                                    },
+                                    "bins-8.json": {
+                                        "version": 1
+                                    },
+                                    "bins-9.json": {
+                                        "version": 1
+                                    },
+                                    "bins-a.json": {
+                                        "version": 1
+                                    },
+                                    "bins-b.json": {
+                                        "version": 1
+                                    },
+                                    "bins-c.json": {
+                                        "version": 1
+                                    },
+                                    "bins-d.json": {
+                                        "version": 1
+                                    },
+                                    "bins-e.json": {
+                                        "version": 1
+                                    },
+                                    "bins-f.json": {
+                                        "version": 1
+                                    },
+                                    "bin.json": {
+                                        "version": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "BootstrapPostResponse": {
+                "title": "BootstrapPostResponse",
+                "type": "object",
+                "properties": {
+                    "task_id": {
+                        "title": "Task Id",
+                        "type": "string"
+                    },
+                    "message": {
+                        "title": "Message",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "task_id": "7a634b556f784ae88785d36425f9a218",
+                    "message": "Bootstrap accepted."
+                }
+            },
+            "GetTokenResponse": {
+                "title": "GetTokenResponse",
+                "required": [
+                    "data",
+                    "message"
+                ],
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "$ref": "#/components/schemas/TokenPublicData"
+                    },
+                    "message": {
+                        "title": "Message",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "data": {
+                        "scopes": [
+                            "read:bootstrap",
+                            "read:settings",
+                            "read:targets",
+                            "read:token",
+                            "write:bootstrap",
+                            "write:targets",
+                            "write:token"
+                        ],
+                        "expired": false,
+                        "expiration": "2022-08-19T17:29:39"
+                    },
+                    "message": "Token information"
+                }
+            },
+            "HTTPValidationError": {
+                "title": "HTTPValidationError",
+                "type": "object",
+                "properties": {
+                    "detail": {
+                        "title": "Detail",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        }
+                    }
+                }
+            },
+            "Payload": {
+                "title": "Payload",
+                "required": [
+                    "targets"
+                ],
+                "type": "object",
+                "properties": {
+                    "targets": {
+                        "title": "Targets",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Targets"
+                        }
+                    }
+                },
+                "example": {
+                    "targets": [
+                        {
+                            "info": {
+                                "length": 11342,
+                                "hashes": {
+                                    "blake2b-256": "716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a"
+                                },
+                                "custom": {
+                                    "key": "value"
+                                }
+                            },
+                            "path": "file1.tar.gz"
+                        },
+                        {
+                            "info": {
+                                "length": 630,
+                                "hashes": {
+                                    "blake2b-256": "69217a3079908094e11121d042354a7c1f55b6482ca1a51e1b250dfd1ed0eef9"
+                                },
+                                "custom": {
+                                    "key": "value"
+                                }
+                            },
+                            "path": "file2.tar.gz"
+                        }
+                    ]
+                }
+            },
+            "PayloadTargetsHashes": {
+                "title": "PayloadTargetsHashes",
+                "required": [
+                    "blake2b-256"
+                ],
+                "type": "object",
+                "properties": {
+                    "blake2b-256": {
+                        "title": "Blake2B-256",
+                        "type": "string"
+                    }
+                }
+            },
+            "PostTokenResponse": {
+                "title": "PostTokenResponse",
+                "required": [
+                    "access_token"
+                ],
+                "type": "object",
+                "properties": {
+                    "access_token": {
+                        "title": "Access Token",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJz...fhpp0"
+                }
+            },
+            "ResponseData": {
+                "title": "ResponseData",
+                "required": [
+                    "targets",
+                    "task_id"
+                ],
+                "type": "object",
+                "properties": {
+                    "targets": {
+                        "title": "Targets",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "task_id": {
+                        "title": "Task Id",
+                        "type": "string"
+                    }
+                }
+            },
+            "RoleSettings": {
+                "title": "RoleSettings",
+                "required": [
+                    "expiration",
+                    "num_of_keys",
+                    "threshold",
+                    "offline_keys"
+                ],
+                "type": "object",
+                "properties": {
+                    "expiration": {
+                        "title": "Expiration",
+                        "type": "integer"
+                    },
+                    "num_of_keys": {
+                        "title": "Num Of Keys",
+                        "type": "integer"
+                    },
+                    "threshold": {
+                        "title": "Threshold",
+                        "type": "integer"
+                    },
+                    "keys": {
+                        "title": "Keys",
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/SettingsKeys"
+                        }
+                    },
+                    "offline_keys": {
+                        "title": "Offline Keys",
+                        "type": "boolean"
+                    },
+                    "paths": {
+                        "title": "Paths",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "number_hash_prefixes": {
+                        "title": "Number Hash Prefixes",
+                        "type": "integer"
+                    }
+                }
+            },
+            "ServiceSettings": {
+                "title": "ServiceSettings",
+                "required": [
+                    "targets_base_url"
+                ],
+                "type": "object",
+                "properties": {
+                    "targets_base_url": {
+                        "title": "Targets Base Url",
+                        "type": "string"
+                    }
+                }
+            },
+            "Settings": {
+                "title": "Settings",
+                "required": [
+                    "roles",
+                    "service"
+                ],
+                "type": "object",
+                "properties": {
+                    "roles": {
+                        "title": "Roles",
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/RoleSettings"
+                        }
+                    },
+                    "service": {
+                        "$ref": "#/components/schemas/ServiceSettings"
+                    }
+                }
+            },
+            "SettingsKeyBody": {
+                "title": "SettingsKeyBody",
+                "required": [
+                    "keytype",
+                    "scheme",
+                    "keyid",
+                    "keyid_hash_algorithms",
+                    "keyval"
+                ],
+                "type": "object",
+                "properties": {
+                    "keytype": {
+                        "title": "Keytype",
+                        "type": "string"
+                    },
+                    "scheme": {
+                        "title": "Scheme",
+                        "type": "string"
+                    },
+                    "keyid": {
+                        "title": "Keyid",
+                        "type": "string"
+                    },
+                    "keyid_hash_algorithms": {
+                        "title": "Keyid Hash Algorithms",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "keyval": {
+                        "title": "Keyval",
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "SettingsKeys": {
+                "title": "SettingsKeys",
+                "required": [
+                    "filename",
+                    "password",
+                    "key"
+                ],
+                "type": "object",
+                "properties": {
+                    "filename": {
+                        "title": "Filename",
+                        "type": "string"
+                    },
+                    "password": {
+                        "title": "Password",
+                        "type": "string"
+                    },
+                    "key": {
+                        "$ref": "#/components/schemas/SettingsKeyBody"
+                    }
+                }
+            },
+            "TUFKeys": {
+                "title": "TUFKeys",
+                "required": [
+                    "keytype",
+                    "scheme",
+                    "keyval"
+                ],
+                "type": "object",
+                "properties": {
+                    "keytype": {
+                        "title": "Keytype",
+                        "type": "string"
+                    },
+                    "scheme": {
+                        "title": "Scheme",
+                        "type": "string"
+                    },
+                    "keyval": {
+                        "title": "Keyval",
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "TUFMetadata": {
+                "title": "TUFMetadata",
+                "required": [
+                    "signatures",
+                    "signed"
+                ],
+                "type": "object",
+                "properties": {
+                    "signatures": {
+                        "title": "Signatures",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TUFSignatures"
+                        }
+                    },
+                    "signed": {
+                        "$ref": "#/components/schemas/TUFSigned"
+                    }
+                }
+            },
+            "TUFSignatures": {
+                "title": "TUFSignatures",
+                "required": [
+                    "keyid",
+                    "sig"
+                ],
+                "type": "object",
+                "properties": {
+                    "keyid": {
+                        "title": "Keyid",
+                        "type": "string"
+                    },
+                    "sig": {
+                        "title": "Sig",
+                        "type": "string"
+                    }
+                }
+            },
+            "TUFSigned": {
+                "title": "TUFSigned",
+                "required": [
+                    "_type",
+                    "version",
+                    "spec_version",
+                    "expires"
+                ],
+                "type": "object",
+                "properties": {
+                    "_type": {
+                        "title": " Type",
+                        "type": "string"
+                    },
+                    "version": {
+                        "title": "Version",
+                        "type": "integer"
+                    },
+                    "spec_version": {
+                        "title": "Spec Version",
+                        "type": "string"
+                    },
+                    "expires": {
+                        "title": "Expires",
+                        "type": "string"
+                    },
+                    "keys": {
+                        "title": "Keys",
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/TUFKeys"
+                        }
+                    },
+                    "roles": {
+                        "title": "Roles",
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/TUFSignedRoles"
+                        }
+                    },
+                    "meta": {
+                        "title": "Meta",
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/TUFSignedMetaFile"
+                        }
+                    },
+                    "targets": {
+                        "title": "Targets",
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "delegations": {
+                        "$ref": "#/components/schemas/TUFSignedDelegations"
+                    }
+                }
+            },
+            "TUFSignedDelegations": {
+                "title": "TUFSignedDelegations",
+                "required": [
+                    "keys"
+                ],
+                "type": "object",
+                "properties": {
+                    "keys": {
+                        "title": "Keys",
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/TUFKeys"
+                        }
+                    },
+                    "roles": {
+                        "title": "Roles",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TUFSignedDelegationsRoles"
+                        }
+                    },
+                    "succinct_roles": {
+                        "$ref": "#/components/schemas/TUFSignedDelegationsSuccinctRoles"
+                    }
+                }
+            },
+            "TUFSignedDelegationsRoles": {
+                "title": "TUFSignedDelegationsRoles",
+                "required": [
+                    "name",
+                    "terminating",
+                    "keyids",
+                    "threshold"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "terminating": {
+                        "title": "Terminating",
+                        "type": "boolean"
+                    },
+                    "keyids": {
+                        "title": "Keyids",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "threshold": {
+                        "title": "Threshold",
+                        "type": "integer"
+                    },
+                    "paths": {
+                        "title": "Paths",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "path_hash_prefixes": {
+                        "title": "Path Hash Prefixes",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "TUFSignedDelegationsSuccinctRoles": {
+                "title": "TUFSignedDelegationsSuccinctRoles",
+                "required": [
+                    "bit_length",
+                    "name_prefix",
+                    "keyids",
+                    "threshold"
+                ],
+                "type": "object",
+                "properties": {
+                    "bit_length": {
+                        "title": "Bit Length",
+                        "exclusiveMaximum": 33.0,
+                        "exclusiveMinimum": 0.0,
+                        "type": "integer"
+                    },
+                    "name_prefix": {
+                        "title": "Name Prefix",
+                        "type": "string"
+                    },
+                    "keyids": {
+                        "title": "Keyids",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "threshold": {
+                        "title": "Threshold",
+                        "type": "integer"
+                    }
+                }
+            },
+            "TUFSignedMetaFile": {
+                "title": "TUFSignedMetaFile",
+                "required": [
+                    "version"
+                ],
+                "type": "object",
+                "properties": {
+                    "version": {
+                        "title": "Version",
+                        "type": "integer"
+                    }
+                }
+            },
+            "TUFSignedRoles": {
+                "title": "TUFSignedRoles",
+                "required": [
+                    "keyids",
+                    "threshold"
+                ],
+                "type": "object",
+                "properties": {
+                    "keyids": {
+                        "title": "Keyids",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "threshold": {
+                        "title": "Threshold",
+                        "type": "integer"
+                    }
+                }
+            },
+            "Targets": {
+                "title": "Targets",
+                "required": [
+                    "info",
+                    "path"
+                ],
+                "type": "object",
+                "properties": {
+                    "info": {
+                        "$ref": "#/components/schemas/TargetsInfo"
+                    },
+                    "path": {
+                        "title": "Path",
+                        "type": "string"
+                    }
+                }
+            },
+            "TargetsInfo": {
+                "title": "TargetsInfo",
+                "required": [
+                    "length",
+                    "hashes"
+                ],
+                "type": "object",
+                "properties": {
+                    "length": {
+                        "title": "Length",
+                        "type": "integer"
+                    },
+                    "hashes": {
+                        "$ref": "#/components/schemas/PayloadTargetsHashes"
+                    },
+                    "custom": {
+                        "title": "Custom",
+                        "type": "object"
+                    }
+                }
+            },
+            "TokenPublicData": {
+                "title": "TokenPublicData",
+                "required": [
+                    "expired"
+                ],
+                "type": "object",
+                "properties": {
+                    "scopes": {
+                        "title": "Scopes",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "expired": {
+                        "title": "Expired",
+                        "type": "boolean"
+                    },
+                    "expiration": {
+                        "title": "Expiration",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "TokenRequestPayload": {
+                "title": "TokenRequestPayload",
+                "required": [
+                    "scopes",
+                    "expires"
+                ],
+                "type": "object",
+                "properties": {
+                    "scopes": {
+                        "title": "Scopes",
+                        "type": "array",
+                        "items": {
+                            "enum": [
+                                "read:bootstrap",
+                                "read:settings",
+                                "read:targets",
+                                "read:token",
+                                "write:targets"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "expires": {
+                        "title": "Expires",
+                        "type": "integer",
+                        "description": "In hour(s)"
+                    }
+                },
+                "example": {
+                    "scopes": [
+                        "read:token",
+                        "read:settings"
+                    ],
+                    "expires": 24
+                }
+            },
+            "ValidationError": {
+                "title": "ValidationError",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "type": "object",
+                "properties": {
+                    "loc": {
+                        "title": "Location",
+                        "type": "array",
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        }
+                    },
+                    "msg": {
+                        "title": "Message",
+                        "type": "string"
+                    },
+                    "type": {
+                        "title": "Error Type",
+                        "type": "string"
+                    }
+                }
+            },
+            "kaprien_api__config__Response": {
+                "title": "Response",
+                "required": [
+                    "data",
+                    "message"
+                ],
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "type": "object"
+                    },
+                    "message": {
+                        "title": "Message",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "data": {
+                        "targets_base_url": "http://www.example.com/repository/",
+                        "bootstrap": "893eb4aec8af499a9f5cc90984ddf3a3",
+                        "bins_number_prefixes": "4",
+                        "bins_num_keys": "1",
+                        "bins_threshold": "1",
+                        "bins_expiration": "1",
+                        "bin_num_keys": "1",
+                        "bin_threshold": "1",
+                        "bin_expiration": "365",
+                        "timestamp_num_keys": "1",
+                        "timestamp_threshold": "1",
+                        "timestamp_expiration": "1",
+                        "snapshot_num_keys": "1",
+                        "snapshot_threshold": "1",
+                        "snapshot_expiration": "1",
+                        "targets_paths": [
+                            "*",
+                            "*/*"
+                        ],
+                        "targets_num_keys": "2",
+                        "targets_threshold": "1",
+                        "targets_expiration": "365",
+                        "root_num_keys": "2",
+                        "root_threshold": "1",
+                        "root_expiration": "356"
+                    },
+                    "message": "Current Settings"
+                }
+            },
+            "kaprien_api__targets__Response": {
+                "title": "Response",
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "$ref": "#/components/schemas/ResponseData"
+                    },
+                    "message": {
+                        "title": "Message",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "data": {
+                        "targets": [
+                            "file1.tar.gz",
+                            "file2.tar.gz"
+                        ],
+                        "task_id": "06ee6db3cbab4b26be505352c2f2e2c3"
+                    },
+                    "message": "Target(s) successfully submitted."
+                }
+            }
+        },
+        "securitySchemes": {
+            "OAuth2PasswordBearer": {
+                "type": "oauth2",
+                "flows": {
+                    "password": {
+                        "scopes": {
+                            "read:targets": "Read (GET) targets",
+                            "read:bootstrap": "Read (GET) bootstrap",
+                            "read:settings": "Read (GET) settings",
+                            "read:token": "Read (GET) tokens",
+                            "write:targets": "Write (POST) targets",
+                            "write:token": "Write (POST) token",
+                            "write:bootstrap": "Write (POST) bootstrap"
+                        },
+                        "tokenUrl": "/api/v1/token"
+                    }
+                }
+            }
+        }
+    }
+}
