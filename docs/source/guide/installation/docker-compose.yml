@@ -1,0 +1,84 @@
+version: "3.7"
+
+volumes:
+  kaprien-rest-api-data:
+  kaprien-repo-worker-data:
+  kaprien-mq-data:
+  kaprien-storage:
+  kaprien-keystorage:
+  kaprien-redis-data:
+
+secrets:
+  SECRETS_KAPRIEN_ADMIN_PASSWORD:
+    external: True
+  SECRETS_KAPRIEN_TOKEN_KEY:
+    external: True
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    volumes:
+     - "kaprien-mq-data:/var/lib/rabbitmq"
+    healthcheck:
+      test: "exit 0"
+    restart: always
+    tty: true
+
+  redis:
+    image: redis:4.0
+    volumes:
+      - kaprien-redis-data:/data
+    healthcheck:
+      test: "exit 0"
+    restart: always
+    tty: true
+
+  kaprien-repo-worker:
+    image: ghcr.io/kaprien/kaprien-repo-worker:dev
+    volumes:
+      - kaprien-repo-worker-data:/data
+      - kaprien-storage:/var/opt/kaprien/storage
+      - kaprien-keystorage:/var/opt/kaprien/keystorage
+    command: celery -A app worker -B -l debug -Q metadata_repository -n kaprien@dev
+    environment:
+      KAPRIEN_STORAGE_BACKEND: LocalStorage
+      KAPRIEN_KEYVAULT_BACKEND: LocalKeyVault
+      KAPRIEN_LOCAL_STORAGE_BACKEND_PATH: /var/opt/kaprien/storage
+      KAPRIEN_LOCAL_KEYVAULT_PATH: /var/opt/kaprien/keystorage
+      KAPRIEN_RABBITMQ_SERVER: guest:guest@rabbitmq:5672
+      KAPRIEN_REDIS_SERVER: redis://redis
+      KAPRIEN_WORKER_ID: dev
+    depends_on:
+      - rabbitmq
+    healthcheck:
+      test: "exit 0"
+    restart: always
+    tty: true
+
+  kaprien-rest-api:
+    image: ghcr.io/kaprien/kaprien-rest-api:dev
+    volumes:
+      - kaprien-rest-api-data:/data
+    command: uvicorn app:kaprien_app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - 80:8000
+    secrets:
+      - SECRETS_KAPRIEN_ADMIN_PASSWORD
+      - SECRETS_KAPRIEN_TOKEN_KEY
+    environment:
+      KAPRIEN_RABBITMQ_SERVER: guest:guest@rabbitmq:5672
+      KAPRIEN_REDIS_SERVER: redis://redis
+      SECRETS_KAPRIEN_TOKEN_KEY: /run/secrets/SECRETS_KAPRIEN_TOKEN_KEY
+      SECRETS_KAPRIEN_ADMIN_PASSWORD: /run/secrets/SECRETS_KAPRIEN_ADMIN_PASSWORD
+    depends_on:
+      - rabbitmq
+      - redis
+      - kaprien-repo-worker
+
+  web-server:
+      image: python:3.10-slim-buster
+      command: python -m http.server -d /www 8080
+      volumes:
+        - kaprien-storage:/www
+      ports:
+        - "8080:8080"

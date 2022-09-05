@@ -1,0 +1,82 @@
+@startuml General View (Container level)
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+!include osaPuml/Common.puml
+!include osaPuml/User/all.puml
+
+!include <office/Servers/file_server>
+!include <office/Servers/application_server>
+!include <office/Services/web_services>
+!include <office/Concepts/application_generic>
+!include <office/Concepts/service_application>
+!include <office/Servers/web_server>
+!include <office/Communications/queue_viewer>
+!include <office/Devices/management_console>
+!include <logos/terminal>
+!include <office/Security/lock_with_key_security>
+!include <office/Concepts/download>
+
+
+AddContainerTag("webui", $sprite="application_server", $legendText="Web UI Interface", $bgColor=Gray)
+AddContainerTag("key_service", $sprite="lock_with_key_security", $legendText="Key Service", $bgColor=Gray)
+AddContainerTag("storage_service", $sprite="file_server", $legendText="Storage Service", $bgColor=Gray)
+AddContainerTag("rest_api", $sprite="web_server", $legendText="Repository REST API")
+AddContainerTag("repo_worker", $sprite="service_application", $legendText="Repository Metadata Worker")
+AddContainerTag("queue", $sprite="queue_viewer", $legendText="Message Queue")
+AddContainerTag("ci_cd", $sprite="application_generic", $legendText="CI/CD, Artfact Management, etc")
+AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed TUF Metadata")
+AddContainerTag("download_target", $sprite="download", $legendText="Download file/target/package", $bgColor=Gray)
+AddContainerTag("terminal", $sprite="terminal,scale=0.5,color=#000000", $legendText="CLI")
+
+AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=0.75,color=#000000", $legendText="Kaprien CLI")
+AddRelTag("bowser", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="management_console,scale=0.5", $legendText="Browser")
+AddRelTag("download", $textColor="Green", $lineColor="$ARROW_COLOR")
+AddRelTag("share", $textColor="orange", $lineColor="grey", $lineStyle = DashedLine())
+
+
+System_Boundary(kaprien_repo_worker, "KAPRIEN-REPO-WORKER") #APPLICATION {
+    Container_Boundary(app, "app")  #LightSkyBlue {
+        Container_Boundary(tuf, "tuf") #DeepSkyBlue{
+            Container(exceptions, "exceptions")
+            Container_Boundary(interfaces, "interfaces") #CornflowerBlue {
+                Container(IStorage, "Storage Interface")
+                Container(IKeyVault, "Key Vault Interface")
+            }
+            Container(repository, "repository")
+        }
+        Container_Boundary(services, "services") #LightSteelBlue {
+            Container(LocalStorage, "LocalStorage", "File System")
+            Container(LocalKeyVault, "LocalKeyVault", "File System")
+        }
+
+        Container(config, "config", "runner")
+        Container(kaprien, "Kaprien", "Repository")
+
+        Container_Ext(celery, "Celery()")
+        Container_Ext(dynaconf, "Dynaconf()")
+    }
+    ContainerDb(data_dir, "/data", "File System", "Service settings\nRepository settings\nUsers db", $tags="storage_service")
+}
+' Container(kaprien_rest_api, "KAPRIEN-REST-API", $tags="rest_api")
+Container_Ext(broker, "Broker/Backend", "RabbitMQ, Redis, etc", $tags="queue") #Grey
+Container_Ext(storage, "Metadata Storage", "specific technology", $tags="key_service") #Grey
+Container_Ext(key_storage, "Key Vault Storage", "specific technology", $tags="storage_service") #Grey
+
+Rel(LocalStorage, storage, " ")
+Rel(LocalKeyVault, key_storage, " ")
+Rel(IKeyVault, LocalKeyVault, "uses")
+Rel(IStorage, LocalStorage, "uses")
+Rel(exceptions, services, " ")
+Rel(kaprien, config, " ")
+Rel(config, repository, " ")
+Rel(config, interfaces, " ")
+Rel_L(config, dynaconf, " ")
+Rel_U(kaprien, celery, " ")
+Rel_D(celery, broker, "Publisher")
+Rel(broker, celery, "Consumer")
+Rel_L(dynaconf, data_dir, "Write data")
+
+
+HIDE_STEREOTYPE()
+@enduml

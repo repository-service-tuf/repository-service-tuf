@@ -1,0 +1,34 @@
+@startuml Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Container(root, "Root" , "offline Key") #Red
+Container(timestamp, "Timestamp", "online Key") #Green
+Container(snapshot, "Snapshot", "online Key") #Green
+Container(targets, "Targets",  "offline Key") #Red
+Container(bin, "bin", "offline Key") #Red
+Container(bins_1, "bins-1", "online [bins] Key") #Green
+Container(bins_2, "bins-2", "online [bins] Key") #Green
+Container(bins_3, "bins-3", "online [bins] Key") #Green
+Container(bins_N, "bins-N", "online [bins] Key") #Green
+
+ContainerDb(targets_bins_1, "Hash Bins Targets 1", "file1, file2, file3, ...")
+ContainerDb(targets_bins_2, "Hash Bins Targets 2", "file11, file12, file13, ...")
+ContainerDb(targets_bins_3, "Hash Bins Targets 3", "file21, file22, file23, ...")
+ContainerDb(targets_bins_N, "Hash Bins Targets N", "fileN1, fileN2, fileN3, ...")
+
+Rel_D(root, timestamp, "sign")
+Rel_D(root, snapshot, "sign")
+Rel_D(root, targets, "sign")
+Rel_D(targets, bin, "delegates")
+Rel_D(bin, bins_1, "delegates")
+Rel_D(bins_1, targets_bins_1, " ")
+Rel_D(bin, bins_2, "delegates")
+Rel_D(bins_2, targets_bins_2, " ")
+Rel_D(bin, bins_3, "delegates")
+Rel_D(bins_3, targets_bins_3, " ")
+Rel_D(bin, bins_N, "delegates")
+Rel_D(bins_N, targets_bins_N, " ")
+
+
+HIDE_STEREOTYPE()
+@enduml

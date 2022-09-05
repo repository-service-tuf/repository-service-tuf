@@ -25,21 +25,21 @@ AddPersonTag("repository_users", $sprite="osa_user_green_developer", $legendSpri
 AddContainerTag("webui", $sprite="application_server", $legendText="Web UI Interface", $bgColor=Gray)
 AddContainerTag("key_service", $sprite="lock_with_key_security", $legendText="Key Service", $bgColor=Gray)
 AddContainerTag("storage_service", $sprite="file_server", $legendText="Storage Service", $bgColor=Gray)
-AddContainerTag("rest_api", $sprite="web_server", $legendText="Repository REST API")
-AddContainerTag("repo_worker", $sprite="service_application", $legendText="Repository Metadata Worker")
-AddContainerTag("queue", $sprite="queue_viewer", $legendText="Message Queue")
+AddContainerTag("kaprien_rest_api", $sprite="web_server", $legendText="Repository KAPRIEN-REST-API")
+AddContainerTag("kaprien_repo_worker", $sprite="service_application", $legendText="Repository Metadata Worker")
+AddContainerTag("queue", $sprite="queue_viewer", $legendText="Message Broker")
 AddContainerTag("ci_cd", $sprite="application_generic", $legendText="CI/CD, Artfact Management, etc")
 AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed TUF Metadata")
 AddContainerTag("download_target", $sprite="download", $legendText="Download file/target/package", $bgColor=Gray)
-AddContainerTag("queue_cluster", $sprite="cluster_server", $legendText="Queue Cluster")
+AddContainerTag("queue_cluster", $sprite="cluster_server", $legendText="Broker Cluster")
 
-AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=0.5,color=#438DD5", $legendText="CLI")
+AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=1.0,color=#438DD5", $legendText="CLI")
 AddRelTag("bowser", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="management_console,scale=0.5", $legendText="Browser")
 AddRelTag("download", $textColor="Green", $lineColor="$ARROW_COLOR")
 AddRelTag("share", $textColor="orange", $lineColor="orange", $lineStyle = DashedLine())
 AddRelTag("sync", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $lineStyle="---")
 
-note right of repository_workers
+note left of repository_workers_r1
 1. https://bit.ly/3J7POim
 2. https://bit.ly/3K5Cs7N
 end note
@@ -50,7 +50,7 @@ Boundary(tenant, "Tenant"){
     Person(users_2, "Users", $tags="project_mantainers") #Grey
 
     Container(automation, "Automations", "CI/CD, Artfact Systems, ...", $tags="ci_cd") #Grey
-    Container(queue, "Queue Federation", "Queue Cluster", $tags="queue")
+    Container(queue, "Broker Federation", "Broker Cluster", $tags="queue")  #Grey
 
     Boundary(region_1, "Region 1") {
         Boundary(load_balance_r1, "Load Balance") {
@@ -58,20 +58,20 @@ Boundary(tenant, "Tenant"){
             Container(webui_2, "WebUI", $tags="webui") #Grey
             Lay_R(webui_1, webui_2)
         }
-        Boundary(apis_r1, "REST API"){
-            Container(api_gateway_r1, "API Gateway", "Local/SaaS API Gateway", "Security, Authentication, etc")
-            Container(rest_api_1, "REST API", "Python", $tags="rest_api")
-            Container(rest_api_2, "REST API", "Python", $tags="rest_api")
-            Lay_R(api_gateway_r1, rest_api_1)
-            Lay_R(rest_api_1, rest_api_2)
-            Rel(api_gateway_r1, rest_api_1,)
-            Rel(api_gateway_r1, rest_api_2,)
+        Boundary(apis_r1, "KAPRIEN-REST-API"){
+            Container(api_gateway_r1, "API Gateway", "Local/SaaS API Gateway", "Security, Authentication, etc") #Grey
+            Container(kaprien_rest_api_1, "KAPRIEN-REST-API", "Python", $tags="kaprien_rest_api")
+            Container(kaprien_rest_api_2, "KAPRIEN-REST-API", "Python", $tags="kaprien_rest_api")
+            Lay_R(api_gateway_r1, kaprien_rest_api_1)
+            Lay_R(kaprien_rest_api_1, kaprien_rest_api_2)
+            Rel(api_gateway_r1, kaprien_rest_api_1,)
+            Rel(api_gateway_r1, kaprien_rest_api_2,)
         }
-        Container(queue_service_r1, "Queue", "Region 1 Cluster", $tags="queue_cluster")
+        Container(queue_service_r1, "Broker", "Region 1 Cluster", $tags="queue_cluster")  #Grey
         Boundary(repository_workers_r1, "Repository Workers", "* this still some research ongoing, see notes") {
-            Container(repo_worker_1, "Repository Worker 1", "consumer", $tags="repo_worker")
-            Container(repo_worker_2, "Repository Worker 2", "consumer", $tags="repo_worker")
-            Lay_R(repo_worker_1, repo_worker_2)
+            Container(kaprien_repo_worker_1, "KAPRIEN-REPO-WORKER 1", "consumer", $tags="kaprien_repo_worker")
+            Container(kaprien_repo_worker_2, "KAPRIEN-REPO-WORKER 2", "consumer", $tags="kaprien_repo_worker")
+            Lay_R(kaprien_repo_worker_1, kaprien_repo_worker_2)
         }
 
         Rel(automation, api_gateway_r1, "HTTPS")
@@ -80,11 +80,11 @@ Boundary(tenant, "Tenant"){
         Rel(webui_1, api_gateway_r1, "HTTPS")
         Rel(webui_2, api_gateway_r1, "HTTPS")
 
-        Rel_D(rest_api_1, queue_service_r1, "Tasks")
-        Rel_D(rest_api_2, queue_service_r1, "Tasks")
+        Rel_D(kaprien_rest_api_1, queue_service_r1, "Tasks")
+        Rel_D(kaprien_rest_api_2, queue_service_r1, "Tasks")
 
-        Rel_U(repo_worker_1, queue_service_r1, "Consumer")
-        Rel_U(repo_worker_2, queue_service_r1, "Consumer")
+        Rel_U(kaprien_repo_worker_1, queue_service_r1, "Consumer")
+        Rel_U(kaprien_repo_worker_2, queue_service_r1, "Consumer")
     }
 
     Boundary(region_2, "Region 2") {
@@ -93,20 +93,20 @@ Boundary(tenant, "Tenant"){
             Container(webui_4, "WebUI", $tags="webui") #Grey
             Lay_R(webui_3, webui_4)
         }
-        Boundary(apis_r2, "REST API"){
-            Container(api_gateway_r2, "API Gateway", "Local/SaaS API Gateway", "Security, Authentication, etc")
-            Container(rest_api_3, "REST API", "Python", $tags="rest_api")
-            Container(rest_api_4, "REST API", "Python", $tags="rest_api")
-            Lay_R(api_gateway_r2, rest_api_3)
-            Lay_R(rest_api_3, rest_api_4)
-            Rel(api_gateway_r2, rest_api_3,)
-            Rel(api_gateway_r2, rest_api_4,)
+        Boundary(apis_r2, "KAPRIEN-REST-API"){
+            Container(api_gateway_r2, "API Gateway", "Local/SaaS API Gateway", "Security, Authentication, etc") #Grey
+            Container(kaprien_rest_api_3, "KAPRIEN-REST-API", "Python", $tags="kaprien_rest_api")
+            Container(kaprien_rest_api_4, "KAPRIEN-REST-API", "Python", $tags="kaprien_rest_api")
+            Lay_R(api_gateway_r2, kaprien_rest_api_3)
+            Lay_R(kaprien_rest_api_3, kaprien_rest_api_4)
+            Rel(api_gateway_r2, kaprien_rest_api_3,)
+            Rel(api_gateway_r2, kaprien_rest_api_4,)
         }
-        Container(queue_service_r2, "Queue", "Region 1 Cluster", $tags="queue_cluster")
+        Container(queue_service_r2, "Broker", "Region 1 Cluster", $tags="queue_cluster")  #Grey
         Boundary(repository_workers_r2, "Repository Workers", "* this still some research ongoing, see notes") {
-            Container(repo_worker_3, "Repository Worker 1", "consumer", $tags="repo_worker")
-            Container(repo_worker_4, "Repository Worker 2", "consumer", $tags="repo_worker")
-            Lay_R(repo_worker_3, repo_worker_4)
+            Container(kaprien_repo_worker_3, "KAPRIEN-REPO-WORKER 1", "consumer", $tags="kaprien_repo_worker")
+            Container(kaprien_repo_worker_4, "KAPRIEN-REPO-WORKER 2", "consumer", $tags="kaprien_repo_worker")
+            Lay_R(kaprien_repo_worker_3, kaprien_repo_worker_4)
         }
 
 
@@ -116,30 +116,32 @@ Boundary(tenant, "Tenant"){
         Rel(webui_3, api_gateway_r2, "HTTPS")
         Rel(webui_4, api_gateway_r2, "HTTPS")
 
-        Rel_D(rest_api_3, queue_service_r2, "Tasks")
-        Rel_D(rest_api_4, queue_service_r2, "Tasks")
+        Rel_D(kaprien_rest_api_3, queue_service_r2, "Tasks")
+        Rel_D(kaprien_rest_api_4, queue_service_r2, "Tasks")
 
-        Rel_U(repo_worker_3, queue_service_r2, "Consumer")
-        Rel_U(repo_worker_4, queue_service_r2, "Consumer")
+        Rel_U(kaprien_repo_worker_3, queue_service_r2, "Consumer")
+        Rel_U(kaprien_repo_worker_4, queue_service_r2, "Consumer")
     }
 
     ContainerDb(key_service, "Key Service", "Local/SaaS Vault", $tags="key_service") #Grey
     ContainerDb(storage_service, "Storage Service", "Local/SaaS Storage", $tags="storage_service") #Grey
 
-    Rel(users_1, api_gateway_r1, "Admin CLI", $tags="terminal")
-    Rel(users_1, load_balance_r1, "Admin CLI", $tags="browser")
+    Rel(users_1, api_gateway_r1, "KAPRIEN-CLII", $tags="terminal")
+    Rel(users_1, load_balance_r1, "KAPRIEN-CLII", $tags="browser")
 
-    Rel(users_2, api_gateway_r2, "Admin CLI", $tags="terminal")
-    Rel(users_2, load_balance_r2, "Admin CLI", $tags="browser")
+    Rel(users_2, api_gateway_r2, "KAPRIEN-CLII", $tags="terminal")
+    Rel(users_2, load_balance_r2, "KAPRIEN-CLII", $tags="browser")
 
-    Rel_D(repo_worker_1, storage_service, "read/write")
-    Rel_D(repo_worker_2, storage_service, "read/write")
-    Rel_D(repo_worker_1, key_service, "read/write")
-    Rel_D(repo_worker_2, key_service, "read/write")
-    Rel_D(repo_worker_3, storage_service, "read/write")
-    Rel_D(repo_worker_4, storage_service, "read/write")
-    Rel_D(repo_worker_3, key_service, "read/write")
-    Rel_D(repo_worker_4, key_service, "read/write")
+    Rel_D(kaprien_repo_worker_1, storage_service, "read/write")
+    Rel_D(kaprien_repo_worker_2, storage_service, "read/write")
+    Rel_D(kaprien_repo_worker_1, key_service, "read/write")
+    Rel_D(kaprien_repo_worker_2, key_service, "read/write")
+    Rel_D(kaprien_repo_worker_3, storage_service, "read/write")
+    Rel_D(kaprien_repo_worker_4, storage_service, "read/write")
+    Rel_D(kaprien_repo_worker_3, key_service, "read/write")
+    Rel_D(kaprien_repo_worker_4, key_service, "read/write")
     }
-SHOW_LEGEND()
+
+HIDE_STEREOTYPE()
+
 @enduml

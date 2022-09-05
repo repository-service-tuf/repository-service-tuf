@@ -1,0 +1,18 @@
+@startuml Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+AddRelTag("validate", $textColor="orange", $lineColor="Blue", $lineStyle = DashedLine())
+AddRelTag("download", $textColor="orange", $lineColor="Blue")
+
+
+System(queue, "Broker", "Redis, RabbitMQ, etc") #Grey
+System(kaprien_repo_worker, "KAPRIEN-REPO-WORKER", "Metadata Repository Worker")
+System_Ext(repository_storage, "Storage Service", "File System, Object Storage, Database, etc")
+System_Ext(key_storage, "Key Vault Service", "File System, AWS KMS, Azure Key Vault, etc")
+Rel_D(queue, kaprien_repo_worker, "Consumer")
+Rel_U(kaprien_repo_worker, queue, "Publisher")
+Rel_D(kaprien_repo_worker, repository_storage, "Read/Write")
+Rel_D(kaprien_repo_worker, key_storage, "Read/Write")
+
+HIDE_STEREOTYPE()
+@enduml

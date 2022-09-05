@@ -1,0 +1,51 @@
+@startuml General View (Container level)
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+!include osaPuml/Common.puml
+!include osaPuml/User/all.puml
+
+!include <office/Servers/file_server>
+!include <office/Servers/application_server>
+!include <office/Services/web_services>
+!include <office/Concepts/application_generic>
+!include <office/Concepts/service_application>
+!include <office/Servers/web_server>
+!include <office/Communications/queue_viewer>
+!include <office/Devices/management_console>
+!include <logos/terminal>
+!include <office/Security/lock_with_key_security>
+!include <office/Concepts/download>
+
+
+AddPersonTag("admin", $sprite="osa_user_audit,color=yellow", $legendSprite="osa_user_audit,scale=0.25,color=yellow", $legendText="Repository Admins", $bgColor=Gray)
+AddPersonTag("user", $sprite="osa_user_green_developer", $legendSprite="osa_user_green_developer,scale=0.25,color=yellow", $legendText="Repository Users", $bgColor=Gray)
+
+AddContainerTag("webui", $sprite="application_server", $legendText="Web UI Interface", $bgColor=Gray)
+AddContainerTag("key_service", $sprite="lock_with_key_security", $legendText="Key Service", $bgColor=Gray)
+AddContainerTag("storage_service", $sprite="file_server", $legendText="Storage Service", $bgColor=Gray)
+AddContainerTag("rest_api", $sprite="web_server", $legendText="Repository REST API")
+AddContainerTag("repo_worker", $sprite="service_application", $legendText="Repository Metadata Worker")
+AddContainerTag("queue", $sprite="queue_viewer", $legendText="Message Queue")
+AddContainerTag("ci_cd", $sprite="application_generic", $legendText="CI/CD, Artfact Management, etc")
+AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed TUF Metadata")
+AddContainerTag("download_target", $sprite="download", $legendText="Download file/target/package", $bgColor=Gray)
+AddContainerTag("terminal", $sprite="terminal,scale=1,color=#0000FF", $legendText="CLI")
+
+AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=0.75,color=#000000", $legendText="Kaprien CLI")
+AddRelTag("bowser", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="management_console,scale=0.5", $legendText="Browser")
+AddRelTag("download", $textColor="Green", $lineColor="$ARROW_COLOR")
+AddRelTag("share", $textColor="orange", $lineColor="grey", $lineStyle = DashedLine())
+AddRelTag("os", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="file_server,scale=0.75,color=#000000", $legendText="Writes OS")
+
+Person(administration_user, "Admin") #Grey
+
+Container(kaprien_cli, "KAPRIEN-CLI", $tags="terminal")
+Container(kaprien_rest_api, "KAPRIEN-REST-API", $tags="rest_api") #LightBlue
+Rel_D(administration_user, kaprien_cli, "shell", $tags="terminal")
+Rel_U(kaprien_cli, administration_user, "writes", $tags="os")
+Rel_D(kaprien_cli, kaprien_rest_api, "HTTP")
+
+
+HIDE_STEREOTYPE()
+@enduml

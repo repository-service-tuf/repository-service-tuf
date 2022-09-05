@@ -1,6 +1,9 @@
 [submodule "kaprien-rest-api"]
 	path = kaprien-rest-api
-	url = git@github.com:KAPRIEN/kaprien-rest-api.git
+	url = git@github.com:kaprien/kaprien-rest-api.git
 [submodule "kaprien-cli"]
 	path = kaprien-cli
-	url = git@github.com:KAPRIEN/kaprien-cli.git
+	url = git@github.com:kaprien/kaprien-cli.git
+[submodule "kaprien-repo-worker"]
+	path = kaprien-repo-worker
+	url = git@github.com:kaprien/kaprien-repo-worker.git
