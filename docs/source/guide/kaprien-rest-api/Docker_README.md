@@ -16,9 +16,9 @@ In order to run this container you'll need docker installed.
 Some required services:
 
 * kaprien-repo-worker
-* Compatible Borker Service with [Celery](http://docs.celeryq.dev/),
-  recommended [RabbitMQ](https://www.rabbitmq.com) or
-  [Redis](https://redis.com)
+* Compatible Borker and Result Backend Service with
+  [Celery](https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers/index.html).
+  Recomended: [RabbitMQ](https://www.rabbitmq.com) or [Redis](https://redis.com)
 
 
 ## Usage
@@ -26,8 +26,8 @@ Some required services:
 ### Container Parameters
 
 ```shell
-docker run --env="KAPRIEN_RABBITMQ_SERVER=guest:guest@rabbitmq:5672" \
-    --env="KAPRIEN_REDIS_SERVER=redis://redis" \
+docker run --env="KAPRIEN_BROKER_SERVER=amqp://guest:guest@rabbitmq:5672" \
+    --env="KAPRIEN_RESULT_BACKEND_SERVER=redis://redis" \
     --env="SECRETS_KAPRIEN_TOKEN_KEY=secret" \
     --env="SECRETS_KAPRIEN_ADMIN_PASSWORD=password" \
     ghcr.io/kaprien/kaprien-repo-worker:latest \
@@ -37,26 +37,34 @@ docker run --env="KAPRIEN_RABBITMQ_SERVER=guest:guest@rabbitmq:5672" \
 
 ### Environment Variables
 
-#### `KAPRIEN_RABBITMQ_SERVER`
+#### (Required) `KAPRIEN_BROKER_SERVER`
 
-Broker server address. This is required.
+Broker server address.
 
-Example: `guest:guest@rabbitmq:5672`
+The broker must to be compatible with Celery. See [Celery Broker Instructions](https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers/index.html#broker-instructions)
 
-#### `KAPRIEN_REDIS_SERVER`
+Example: `amqp://guest:guest@rabbitmq:5672`
 
-Description: Redis server address.. This is required.
+#### (Required) `KAPRIEN_RESULT_BACKEND_SERVER`
+
+Redis server address.
+
+The result backend must to be compatible with Celery. See
+[Celery Task result backend settings](https://docs.celeryq.dev/en/stable/userguide/configuration.html#task-result-backend-settings)
 
 Example: `redis://redis`
 
-#### `SECRETS_KAPRIEN_TOKEN_KEY`
+#### (Required) `SECRETS_KAPRIEN_TOKEN_KEY`
 
-Secret Token to hash the Tokens. . This is required.
+Secret Token for hash the Tokens.
 
+#### (Required) `SECRETS_KAPRIEN_ADMIN_PASSWORD`
 
-#### `SECRETS_KAPRIEN_ADMIN_PASSWORD`
+Secret admin password.
 
-Secret admin password. This is required.
+#### (Optional) `DATA_DIR`
+
+Data Directory. Default: `/data/`.
 
 ### Volumes
 

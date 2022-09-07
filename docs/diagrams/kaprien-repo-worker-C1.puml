@@ -5,7 +5,7 @@ AddRelTag("validate", $textColor="orange", $lineColor="Blue", $lineStyle = Dashe
 AddRelTag("download", $textColor="orange", $lineColor="Blue")
 
 
-System(queue, "Broker", "Redis, RabbitMQ, etc") #Grey
+System(queue, "Broker/Backend", "Redis, RabbitMQ, etc") #Grey
 System(kaprien_repo_worker, "KAPRIEN-REPO-WORKER", "Metadata Repository Worker")
 System_Ext(repository_storage, "Storage Service", "File System, Object Storage, Database, etc")
 System_Ext(key_storage, "Key Vault Service", "File System, AWS KMS, Azure Key Vault, etc")

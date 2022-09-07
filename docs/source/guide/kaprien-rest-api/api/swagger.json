@@ -129,7 +129,7 @@
                     "v1",
                     "v1"
                 ],
-                "summary": "Add targets files to Metadata. Scope: write:bootstrap",
+                "summary": "Add targets files to Metadata. Scope: write:targets",
                 "description": "Add targets files to Metadata.",
                 "operationId": "post_api_v1_targets__post",
                 "requestBody": {
