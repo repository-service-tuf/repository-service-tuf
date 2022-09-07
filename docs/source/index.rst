@@ -55,6 +55,8 @@ v0.0.1
 - [ ] Snapshot Key Rotation
 - [ ] Timestamp Key Rotation
 - [ ] BINS Key Rotation
+- [ ] Implement HTTPS for the Rest API
+- [ ] Add TLS/SSL for Broker communication
 
 Documentation List
 ==================
