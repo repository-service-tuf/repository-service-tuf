@@ -46,6 +46,7 @@ System_Boundary(kaprien_rest_api, "KAPRIEN-REST-API") #APPLICATION {
             Container(api_config, "config")
             Container(api_bootstrap, "bootstrap")
             Container(api_targets, "targets")
+            Container(api_tasks, "tasks")
             Container(api_token, "token")
         }
         Container_Boundary(users, "users", SQL) #LightBlue {
@@ -58,6 +59,7 @@ System_Boundary(kaprien_rest_api, "KAPRIEN-REST-API") #APPLICATION {
         Container(bootstrap, "bootstrap")
         Container(targets, "targets")
         Container(token, "token")
+        Container(tasks, "tasks")
         Container(metadata, "metadata")
 
         Container_Ext(celery, "Celery()")
@@ -78,9 +80,11 @@ Rel(api_bootstrap, bootstrap, " ")
 Rel(api_config, config, " ")
 Rel(api_targets, targets, " ")
 Rel(api_token, token, " ")
+Rel(api_tasks, tasks, " ")
 Rel(fast_api_authentication, token, "O2Auth")
 Rel(targets, metadata, " ")
 Rel(bootstrap, metadata, " ")
+Rel(tasks, metadata, " ")
 Rel(targets, config, " ")
 Rel(bootstrap, config, " ")
 Rel(metadata, celery, " ")
@@ -98,5 +102,6 @@ Lay_R(token, bootstrap)
 Lay_R(bootstrap, targets)
 Lay_R(sqlalchemy, dynaconf)
 Lay_R(dynaconf, celery)
+
 HIDE_STEREOTYPE()
 @enduml

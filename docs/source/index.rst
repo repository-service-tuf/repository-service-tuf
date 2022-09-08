@@ -40,23 +40,25 @@ Roadmap
 v0.0.1
 ------
 
-- [x] Authentication using Token
-- [x] Authorization defined by Scope
-- [x] Bootstrap the Kaprien Service (Initial TUF Metadata)
-- [x] Storage Service: Local file system
-- [x] Key Vault Service: Local file system
-- [x] Add targets
-- [ ] Delete targets
-- [x] Generate Token
-- [x] Retrieves the Kaprien Server settings
-- [x] Automatically version Bump Snapshot Metadata
-- [x] Automatically version Bump Timestamp Metadata
-- [x] Automatically version Bump hash-bins Metadata
-- [ ] Snapshot Key Rotation
-- [ ] Timestamp Key Rotation
-- [ ] BINS Key Rotation
-- [ ] Implement HTTPS for the Rest API
-- [ ] Add TLS/SSL for Broker communication
+- [✔️] Authentication using Token
+- [✔️] Authorization defined by Scope
+- [✔️] Bootstrap the Kaprien Service (Initial TUF Metadata)
+- [✔️] Storage Service: Local file system
+- [✔️] Key Vault Service: Local file system
+- [✔️] Add targets
+- [ ] Delete targets (`Issue #14 <https://github.com/kaprien/kaprien/issues/14>`_)
+- [✔️] Generate Token
+- [✔️] Retrieves the Kaprien Server settings
+- [✔️] Automatically version Bump Snapshot Metadata
+- [✔️] Automatically version Bump Timestamp Metadata
+- [✔️] Automatically version Bump hash-bins Metadata
+- [ ] `Snapshot` Key(s) Rotation (`Issue #15 <https://github.com/kaprien/kaprien/issues/15>`_)
+- [ ] `Timestamp` Key(s) Rotation (`Issue #15 <https://github.com/kaprien/kaprien/issues/15>`_)
+- [ ] `BINS` Key(s) Rotation (`Issue #15 <https://github.com/kaprien/kaprien/issues/15>`_)
+- [ ] Online Key(s) Rotation [`Root`, `Targets`, `BIN`] (`Issue #15 <https://github.com/kaprien/kaprien/issues/15>`_)
+- [ ] Implement HTTPS for the Rest API (`Issue #6 <https://github.com/kaprien/kaprien/issues/6>`_)
+- [ ] Add TLS/SSL for Broker and Result Backend communication (`Issue #6 <https://github.com/kaprien/kaprien/issues/6>`_)
+- [ ] Add TLS/SSL for Broker communication (`Issue #6 <https://github.com/kaprien/kaprien/issues/6>`_)
 
 Documentation List
 ==================
