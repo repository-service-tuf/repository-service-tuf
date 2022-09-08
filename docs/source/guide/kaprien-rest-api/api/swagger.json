@@ -329,6 +329,63 @@
                     }
                 ]
             }
+        },
+        "/api/v1/task/": {
+            "get": {
+                "tags": [
+                    "v1",
+                    "v1"
+                ],
+                "summary": "Get task status. Scope: read:tasks",
+                "description": "Get Repository Metadata task status. The status is according with Celery tasks: `PENDING` the task still not processed or unknown/inexistent task. `RECEIVED` task is reveived by the broker server. `PRE_RUN` the task will start by kaprien-repo-worker. `RUNNING` the task is in execution. `FAILURE` the task failed to executed. `SUCCESS` the task execution is finished.",
+                "operationId": "get_api_v1_task__get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": [
+                            "read:tasks"
+                        ]
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "task_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "title": "Task Id",
+                            "description": "Task id",
+                            "required": true,
+                            "type": "string"
+                        },
+                        "description": "Task id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/kaprien_api__tasks__Response"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -352,7 +409,7 @@
                     "scope": {
                         "title": "Scope",
                         "type": "string",
-                        "description": "Add scopes separeted by space. Default user scopes. Users might not have all scopes. Available scopes: read:bootstrap read:settings read:targets read:token write:bootstrap write:targets write:token",
+                        "description": "Add scopes separeted by space. Default user scopes. Users might not have all scopes. Available scopes: read:bootstrap read:settings read:targets read:tasks read:token write:bootstrap write:targets write:token",
                         "default": ""
                     },
                     "expires": {
@@ -1165,6 +1222,7 @@
                             "read:bootstrap",
                             "read:settings",
                             "read:targets",
+                            "read:tasks",
                             "read:token",
                             "write:bootstrap",
                             "write:targets",
@@ -1722,6 +1780,30 @@
                     }
                 }
             },
+            "TasksData": {
+                "title": "TasksData",
+                "required": [
+                    "task_id",
+                    "status"
+                ],
+                "type": "object",
+                "properties": {
+                    "task_id": {
+                        "title": "Task Id",
+                        "type": "string",
+                        "description": "Task ID"
+                    },
+                    "status": {
+                        "title": "Status",
+                        "type": "string",
+                        "description": "Status according with Celery Tasks"
+                    },
+                    "result": {
+                        "title": "Result",
+                        "description": "Details about the task execution."
+                    }
+                }
+            },
             "TokenPublicData": {
                 "title": "TokenPublicData",
                 "required": [
@@ -1886,6 +1968,34 @@
                     },
                     "message": "Target(s) successfully submitted."
                 }
+            },
+            "kaprien_api__tasks__Response": {
+                "title": "Response",
+                "required": [
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "$ref": "#/components/schemas/TasksData"
+                    },
+                    "message": {
+                        "title": "Message",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "data": {
+                        "tasks": [
+                            {
+                                "task_id": "91353735ef7d48099df86d8bfa30316e",
+                                "status": "SUCCESS",
+                                "result": true
+                            }
+                        ],
+                        "message": "Task details. "
+                    }
+                }
             }
         },
         "securitySchemes": {
@@ -1897,6 +2007,7 @@
                             "read:targets": "Read (GET) targets",
                             "read:bootstrap": "Read (GET) bootstrap",
                             "read:settings": "Read (GET) settings",
+                            "read:tasks": "Read (GET) tasks",
                             "read:token": "Read (GET) tokens",
                             "write:targets": "Write (POST) targets",
                             "write:token": "Write (POST) token",
