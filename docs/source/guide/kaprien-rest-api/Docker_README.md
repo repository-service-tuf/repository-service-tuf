@@ -26,7 +26,8 @@ Some required services:
 ### Container Parameters
 
 ```shell
-docker run --env="KAPRIEN_BROKER_SERVER=amqp://guest:guest@rabbitmq:5672" \
+docker run --env="KAPRIEN_BOOTSTRAP_NODE=true" \
+    --env="KAPRIEN_BROKER_SERVER=amqp://guest:guest@rabbitmq:5672" \
     --env="KAPRIEN_RESULT_BACKEND_SERVER=redis://redis" \
     --env="SECRETS_KAPRIEN_TOKEN_KEY=secret" \
     --env="SECRETS_KAPRIEN_ADMIN_PASSWORD=password" \
@@ -36,6 +37,15 @@ docker run --env="KAPRIEN_BROKER_SERVER=amqp://guest:guest@rabbitmq:5672" \
 
 
 ### Environment Variables
+
+#### (Optional) `KAPRIEN_BOOTSTRAP_NODE`
+
+The value type is boolean (true/false [case sensitive](https://www.dynaconf.com/configuration/#available-options)).
+Default: false
+
+Enable the container to be a bootstrap node.
+
+If the container is enabled to be a bootstrap node, the endpoint `/api/v1/bootstrap` will be visible and accept connections using token authentication and scope `write:bootstrap`
 
 #### (Required) `KAPRIEN_BROKER_SERVER`
 
