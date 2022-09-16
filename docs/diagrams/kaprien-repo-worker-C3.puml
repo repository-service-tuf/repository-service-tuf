@@ -36,43 +36,46 @@ AddRelTag("share", $textColor="orange", $lineColor="grey", $lineStyle = DashedLi
 
 
 System_Boundary(kaprien_repo_worker, "KAPRIEN-REPO-WORKER") #APPLICATION {
-    Container_Boundary(app, "app")  #LightSkyBlue {
-        Container_Boundary(tuf, "tuf") #DeepSkyBlue{
-            Container(exceptions, "exceptions")
-            Container_Boundary(interfaces, "interfaces") #CornflowerBlue {
-                Container(IStorage, "Storage Interface")
-                Container(IKeyVault, "Key Vault Interface")
-            }
-            Container(repository, "repository")
-        }
-        Container_Boundary(services, "services") #LightSteelBlue {
-            Container(LocalStorage, "LocalStorage", "File System")
-            Container(LocalKeyVault, "LocalKeyVault", "File System")
-        }
+    Container_Boundary(app, "app.py") #DeepSkyBlue{
+        Container(metadata_repository, "MetadataRepository", "File System")
 
-        Container(config, "config", "runner")
-        Container(kaprien, "Kaprien", "Repository")
-
+    }
+    Container_Boundary(repo_worker, "repo_worker")  #LightSkyBlue {
         Container_Ext(celery, "Celery()")
         Container_Ext(dynaconf, "Dynaconf()")
+        Container(repository, "repository")
+
+        Container_Boundary(interfaces, "interfaces") #CornflowerBlue {
+            Container(IStorage, "Storage Interface")
+            Container(IKeyVault, "Key Vault Interface")
+        }
+        Container_Boundary(services, "services") #DeepSkyBlue{
+            Container_Boundary(keyvault, "keyvault") #LightSteelBlue {
+                Container(LocalKeyVault, "LocalKeyVault", "File System")
+            }
+            Container_Boundary(storage, "storage") #LightSteelBlue {
+                Container(LocalStorage, "LocalStorage", "File System")
+            }
+        }
     }
     ContainerDb(data_dir, "/data", "File System", "Service settings\nRepository settings\nUsers db", $tags="storage_service")
 }
 ' Container(kaprien_rest_api, "KAPRIEN-REST-API", $tags="rest_api")
-Container_Ext(broker, "Broker/Backend", "RabbitMQ, Redis, etc", $tags="queue") #Grey
-Container_Ext(storage, "Metadata Storage", "specific technology", $tags="key_service") #Grey
-Container_Ext(key_storage, "Key Vault Storage", "specific technology", $tags="storage_service") #Grey
+Container_Ext(broker, "Broker", "RabbitMQ, Redis, etc", $tags="queue") #Grey
+Container_Ext(redis, "Redis", "Redis Server", $tags="queue") #Grey
+Container_Ext(ext_storage, "Metadata Storage", "specific technology", $tags="key_service") #Grey
+Container_Ext(ext_key_storage, "Key Vault Storage", "specific technology", $tags="storage_service") #Grey
 
-Rel(LocalStorage, storage, " ")
-Rel(LocalKeyVault, key_storage, " ")
+Rel(LocalStorage, ext_storage, " ")
+Rel(LocalKeyVault, ext_key_storage, " ")
 Rel(IKeyVault, LocalKeyVault, "uses")
 Rel(IStorage, LocalStorage, "uses")
-Rel(exceptions, services, " ")
-Rel(kaprien, config, " ")
-Rel(config, repository, " ")
-Rel(config, interfaces, " ")
-Rel_L(config, dynaconf, " ")
-Rel_U(kaprien, celery, " ")
+Rel(metadata_repository, IStorage, " ")
+Rel(metadata_repository, IKeyVault, " ")
+Rel(metadata_repository, celery, " ")
+Rel(metadata_repository, repository, " ")
+Rel(metadata_repository, dynaconf, " ")
+Rel_U(dynaconf, redis, "Write data")
 Rel_D(celery, broker, "Publisher")
 Rel(broker, celery, "Consumer")
 Rel_L(dynaconf, data_dir, "Write data")

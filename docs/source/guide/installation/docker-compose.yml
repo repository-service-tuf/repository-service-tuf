@@ -14,6 +14,11 @@ secrets:
     external: True
   SECRETS_KAPRIEN_TOKEN_KEY:
     external: True
+  # HTTPS (SSL)
+  # API_KEY:
+  #   external: True
+  # API_CRT:
+  #   external: True
 
 services:
   rabbitmq:
@@ -40,16 +45,16 @@ services:
       - kaprien-repo-worker-data:/data
       - kaprien-storage:/var/opt/kaprien/storage
       - kaprien-keystorage:/var/opt/kaprien/keystorage
-    command: celery -A app worker -B -l debug -Q metadata_repository -n kaprien@dev
     environment:
       KAPRIEN_STORAGE_BACKEND: LocalStorage
       KAPRIEN_KEYVAULT_BACKEND: LocalKeyVault
       KAPRIEN_LOCAL_STORAGE_BACKEND_PATH: /var/opt/kaprien/storage
       KAPRIEN_LOCAL_KEYVAULT_PATH: /var/opt/kaprien/keystorage
       KAPRIEN_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
-      KAPRIEN_RESULT_BACKEND_SERVER: redis://redis
+      KAPRIEN_REDIS_SERVER: redis://redis
       KAPRIEN_WORKER_ID: dev
     depends_on:
+      - redis
       - rabbitmq
     healthcheck:
       test: "exit 0"
@@ -68,17 +73,24 @@ services:
     image: ghcr.io/kaprien/kaprien-rest-api:dev
     volumes:
       - kaprien-rest-api-data:/data
-    command: uvicorn app:kaprien_app --host 0.0.0.0 --port 8000 --reload
     ports:
-      - 80:8000
+      - 80:80
+      - 443:443
+    environment:
+      KAPRIEN_BOOTSTRAP_NODE: "true"
+      KAPRIEN_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
+      KAPRIEN_REDIS_SERVER: redis://redis
+      SECRETS_KAPRIEN_TOKEN_KEY: /run/secrets/SECRETS_KAPRIEN_TOKEN_KEY
+      SECRETS_KAPRIEN_ADMIN_PASSWORD: /run/secrets/SECRETS_KAPRIEN_ADMIN_PASSWORD
+      # HTTP (SSL)
+      # SECRETS_KAPRIEN_SSL_CERT: /run/secrets/API_CRT
+      # SECRETS_KAPRIEN_SSL_KEY: /run/secrets/API_KEY
     secrets:
       - SECRETS_KAPRIEN_ADMIN_PASSWORD
       - SECRETS_KAPRIEN_TOKEN_KEY
-    environment:
-      KAPRIEN_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
-      KAPRIEN_RESULT_BACKEND_SERVER: redis://redis
-      SECRETS_KAPRIEN_TOKEN_KEY: /run/secrets/SECRETS_KAPRIEN_TOKEN_KEY
-      SECRETS_KAPRIEN_ADMIN_PASSWORD: /run/secrets/SECRETS_KAPRIEN_ADMIN_PASSWORD
+      # HTTPS (SSL)
+      # - API_CRT
+      # - API_KEY
     depends_on:
       - rabbitmq
       - redis

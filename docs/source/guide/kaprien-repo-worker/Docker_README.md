@@ -31,9 +31,8 @@ docker run --env="KAPRIEN_WORKER_ID=worker1" \
     --env="KAPRIEN_KEYVAULT_BACKEND=LocalKeyVault" \
     --env="KAPRIEN_LOCAL_KEYVAULT_PATH=keyvault" \
     --env="KAPRIEN_BROKER_SERVER=guest:guest@rabbitmq:5672" \
-    --env="KAPRIEN_RESULT_BACKEND_SERVER=redis://redis" \
+    --env="KAPRIEN_REDIS_SERVER=redis://redis" \
     ghcr.io/kaprien/kaprien-repo-worker:latest \
-    celery -A app worker -B -l debug -Q metadata_repository -n kaprien@dev
 ```
 
 
@@ -48,7 +47,7 @@ See [Celery Broker Instructions](https://docs.celeryq.dev/en/stable/getting-star
 
 Example: `guest:guest@rabbitmq:5672`
 
-#### (Required) `KAPRIEN_RESULT_BACKEND_SERVER`
+#### (Required) `KAPRIEN_REDIS_SERVER`
 
 Redis server address.
 
@@ -56,6 +55,21 @@ The result backend must to be compatible with Celery. See
 [Celery Task result backend settings](https://docs.celeryq.dev/en/stable/userguide/configuration.html#task-result-backend-settings)
 
 Example: `redis://redis`
+
+#### (Optional) `KAPRIEN_REDIS_SERVER_PORT`
+
+Redis Server port number. Default: 6379
+
+#### (Optional) `KAPRIEN_REDIS_SERVER_DB_RESULT`
+
+Redis Server DB number for Result Backend (tasks). Default: 0
+
+#### (Optional) `KAPRIEN_REDIS_SERVER_DB_REPO_SETTINGS`
+
+Redis Server DB number for repository settings. Default: 1
+
+This settings are shared accress the Repository Workers
+(``kaprien-repo-worker``) to have dynamic configuration.
 
 #### (Required) `KAPRIEN_STORAGE_BACKEND`
 
@@ -82,6 +96,13 @@ Available types:
 
 Container data directory. Default: `/data`
 
-### Volumes
+### Persistent data
 
-* `/data` - File location
+* `$DATA_DIR`. Default: `/data`
+
+### Customization/Tuning
+
+The `kaprien-repo-worker` uses supervisord and uses a `supervisor.conf`
+from `$DATA_DIR`.
+
+It can be used to customize/tuning performance of Celery.

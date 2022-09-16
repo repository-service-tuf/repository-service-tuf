@@ -38,14 +38,19 @@ Current supported Key Vault Service types:
     - LocalKeyVault (File System)
     - KMS (AWS KMS -- to be implemented)
 
-The ``kaprien-repo-worker`` also stores configuration settings. These are the
-`service settings` and `task settings`.
-The `service settings`` are related to the operational configurations to run the
+The ``kaprien-repo-worker`` stores configuration settings. These are the
+**Worker Settings**.
+
+The ``kaprien-repo-worker``also uses the **Repository Settings**, from
+``KAPRIEN_REDIS_SERVER``.
+
+**Worker Settings**: are related to the operational configurations to run the
 ``kaprien-repo-worker`` such as worker id, Broker, type of Storage, Key
 Vault services and their sub-configurations, etc.
-The `task settings` are given by ``kaprien-rest-api`` inside the task and
-are stored temporarily to run routine tasks such as bumping snapshot and
-timestamp metadata.
+
+**Repository Settings** are given by ``kaprien-rest-api`` and
+are stored in ``KAPRIEN_REDIS_SERVER`` to run routine tasks such as bumping
+snapshot and timestamp metadata, etc.
 
 
 .. uml:: ../../diagrams/kaprien-repo-worker-C2.puml

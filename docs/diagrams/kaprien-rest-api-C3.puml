@@ -66,10 +66,11 @@ System_Boundary(kaprien_rest_api, "KAPRIEN-REST-API") #APPLICATION {
         Container_Ext(sqlalchemy, "SQLAlchemy()")
         Container_Ext(dynaconf, "Dynaconf()")
     }
-    ContainerDb(data_dir, "/data", "File System", "Service settings\nRepository settings\nUsers db", $tags="storage_service")
+    ContainerDb(data_dir, "$DATA_DIR", "File System", "Service settings\nRepository settings\nUsers db", $tags="storage_service")
 }
 ' Container(kaprien_rest_api, "KAPRIEN-REST-API", $tags="rest_api")
-Container(broker, "Broker/Backend", "RabbitMQ, Redis, etc", $tags="queue") #Grey
+Container(broker, "Broker", "RabbitMQ, Redis, etc", $tags="queue") #Grey
+Container(redis, "Redis", "Redis Server", $tags="queue") #Grey
 Container(ci_cd, "Third Part Software", "Jenkis, Github, Gitlab, etc", $tags="ci_cd") #Grey
 
 Rel(administration_user, kaprien_rest_api, "KAPRIEN-CLI", $tags="terminal")
@@ -85,7 +86,6 @@ Rel(fast_api_authentication, token, "O2Auth")
 Rel(targets, metadata, " ")
 Rel(bootstrap, metadata, " ")
 Rel(tasks, metadata, " ")
-Rel(targets, config, " ")
 Rel(bootstrap, config, " ")
 Rel(metadata, celery, " ")
 Rel(crud, models, " ")
@@ -96,7 +96,9 @@ Rel(crud, sqlalchemy, " ")
 Rel(config, dynaconf, " ")
 Rel(dynaconf, data_dir, "Write data")
 Rel(sqlalchemy, data_dir, "Write data")
-Rel(celery, broker, "Publisher, Consumer")
+Rel(celery, broker, "Publisher")
+Rel_D(celery, redis, "Publisher, Consumer")
+Rel_D(dynaconf, redis, "Publisher, Consumer")
 
 Lay_R(token, bootstrap)
 Lay_R(bootstrap, targets)

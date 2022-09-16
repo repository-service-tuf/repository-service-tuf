@@ -56,7 +56,7 @@ v0.0.1
 - [ ] `Timestamp` Key(s) Rotation (`Issue #15 <https://github.com/kaprien/kaprien/issues/15>`_)
 - [ ] `BINS` Key(s) Rotation (`Issue #15 <https://github.com/kaprien/kaprien/issues/15>`_)
 - [ ] Online Key(s) Rotation [`Root`, `Targets`, `BIN`] (`Issue #15 <https://github.com/kaprien/kaprien/issues/15>`_)
-- [ ] Implement HTTPS for the Rest API (`Issue #6 <https://github.com/kaprien/kaprien/issues/6>`_)
+- [✔️] Implement HTTPS for the Rest API (`Issue #6 <https://github.com/kaprien/kaprien/issues/6>`_)
 - [ ] Add TLS/SSL for Broker and Result Backend communication (`Issue #6 <https://github.com/kaprien/kaprien/issues/6>`_)
 - [ ] Add TLS/SSL for Broker communication (`Issue #6 <https://github.com/kaprien/kaprien/issues/6>`_)
 
