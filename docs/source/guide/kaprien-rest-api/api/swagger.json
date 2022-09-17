@@ -1262,6 +1262,7 @@
                         }
                     }
                 },
+                "description": "Targets payload for method POST",
                 "example": {
                     "targets": [
                         {
@@ -1958,6 +1959,7 @@
                         "type": "string"
                     }
                 },
+                "description": "Targets Response",
                 "example": {
                     "data": {
                         "targets": [

@@ -27,9 +27,20 @@ Steps
 
     .. code:: shell
 
-        $ docker swarm init
-        $ printf "secret password" | docker secret create SECRETS_KAPRIEN_ADMIN_PASSWORD -
-        $ printf $(openssl rand -base64 32) | docker secret create SECRETS_KAPRIEN_TOKEN_KEY -
+      $ docker swarm init
+      $ printf "secret password" | docker secret create SECRETS_KAPRIEN_ADMIN_PASSWORD -
+      $ printf $(openssl rand -base64 32) | docker secret create SECRETS_KAPRIEN_TOKEN_KEY -
+
+    .. note::
+
+      **HTTPS**
+
+      Add your Certificate and your Key in the secrets
+
+      .. code:: shell
+
+        $ docker secret create API_KEY /path/to/api.key
+        $ docker secret create API_CRT /path/to/api.crt
 
 
 2. Create a Docker Compose (functional example above)
@@ -37,13 +48,28 @@ Steps
    - It uses Docker Volume for the persistent data.
    - It uses Docker Secrets to store/use the ``KAPRIEN_TOKEN_KEY`` (Used to
      generate API Tokens) and ``KAPRIEN_ADMIN_PASSWORD``.
+
+     .. note::
+        **HTTPS**
+
+        Uncoment ``API_KEY`` and ``API_CRT`` in the `secrets` section
+        (lines 18-21).
+
    - It uses RabbitMQ as a `broker` for the tasks.
-   - It uses Redis as the `backend` for the task results.
-   - It configures the ``kaprien-repo-worker`` configuration as environment
+   - It uses Redis for the task results and internal tasks.
+   - It adds the ``kaprien-repo-worker`` configuration as environment
      variables (storage/key vault type and paths, broker, backend, and repo
-     worker id). The volumes for storage and key storage as Docker Volume (`a`)
+     worker id). The volumes for storage and key storage as Docker Volume.
    - It configures the ``kaprien-rest-api`` using environment variables for
-     the secrets, and the data as Docker Volume (`a`)
+     the secrets, and the data as Docker Volume.
+
+     .. note::
+      **HTTPS**
+
+      - Uncoment environment variables for the certificate and key (lines 86-87)
+      - Uncoment the in `kaprien-rest-api secrets` section (lines 93-93)
+      - (Optionally) Comment port 80:80 (line 77)
+
    - Web Server uses a Python container that exposes the docker volume with
      the Repository Metadata as  HTTP in 8080 port.
 
@@ -51,6 +77,7 @@ Steps
 
     .. literalinclude:: docker-compose.yml
         :language: yaml
+        :linenos:
         :name: docker-compose.yml
 
 
