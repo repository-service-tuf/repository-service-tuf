@@ -22,3 +22,4 @@ docs:
 	cp -r kaprien-repo-worker/docs/source/devel/design.rst docs/source/devel/kaprien-repo-worker_design.rst
 
 	sphinx-build -E -W -b html docs/source docs/build/html
+	plantuml -tpng docs/diagrams/1_1_kaprien.puml
