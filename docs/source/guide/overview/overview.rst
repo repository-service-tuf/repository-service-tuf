@@ -47,8 +47,8 @@ manage the Kaprien Server.
 The command line supports the Ceremony (signing the initial Repository Metadata
 and Kaprien Service setup), generating Tokens to be used by CI/CD for example.
 
-Usage
-=====
+The Repository Metadata
+=======================
 
 Kaprien is to secure downloads with signed Repository Metadata.
 Kaprien implements The Update Framework (TUF) As a Service as part of your

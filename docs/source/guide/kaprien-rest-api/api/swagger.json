@@ -136,7 +136,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Payload"
+                                "$ref": "#/components/schemas/AddPayload"
                             }
                         }
                     },
@@ -171,6 +171,57 @@
                     {
                         "OAuth2PasswordBearer": [
                             "write:targets"
+                        ]
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "v1",
+                    "v1"
+                ],
+                "summary": "Remove targets files from Metadata. Scope: delete:targets",
+                "description": "Remove targets files from Metadata.",
+                "operationId": "delete_api_v1_targets__delete",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DeletePayload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/kaprien_api__targets__Response"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": [
+                            "delete:targets"
                         ]
                     }
                 ]
@@ -390,6 +441,51 @@
     },
     "components": {
         "schemas": {
+            "AddPayload": {
+                "title": "AddPayload",
+                "required": [
+                    "targets"
+                ],
+                "type": "object",
+                "properties": {
+                    "targets": {
+                        "title": "Targets",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Targets"
+                        }
+                    }
+                },
+                "description": "POST method required Payload.",
+                "example": {
+                    "targets": [
+                        {
+                            "info": {
+                                "length": 11342,
+                                "hashes": {
+                                    "blake2b-256": "716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a"
+                                },
+                                "custom": {
+                                    "key": "value"
+                                }
+                            },
+                            "path": "file1.tar.gz"
+                        },
+                        {
+                            "info": {
+                                "length": 630,
+                                "hashes": {
+                                    "blake2b-256": "69217a3079908094e11121d042354a7c1f55b6482ca1a51e1b250dfd1ed0eef9"
+                                },
+                                "custom": {
+                                    "key": "value"
+                                }
+                            },
+                            "path": "file2.tar.gz"
+                        }
+                    ]
+                }
+            },
             "Body_post_api_v1_token__post": {
                 "title": "Body_post_api_v1_token__post",
                 "required": [
@@ -409,7 +505,7 @@
                     "scope": {
                         "title": "Scope",
                         "type": "string",
-                        "description": "Add scopes separeted by space. Default user scopes. Users might not have all scopes. Available scopes: read:bootstrap read:settings read:targets read:tasks read:token write:bootstrap write:targets write:token",
+                        "description": "Add scopes separeted by space. Default user scopes. Users might not have all scopes. Available scopes: read:bootstrap read:settings read:targets read:tasks read:token write:bootstrap write:targets write:token delete:targets",
                         "default": ""
                     },
                     "expires": {
@@ -1200,6 +1296,30 @@
                     "message": "Bootstrap accepted."
                 }
             },
+            "DeletePayload": {
+                "title": "DeletePayload",
+                "required": [
+                    "targets"
+                ],
+                "type": "object",
+                "properties": {
+                    "targets": {
+                        "title": "Targets",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "description": "DELETE method required Payload.",
+                "example": {
+                    "targets": [
+                        "v3.4.1/file-3.4.1.tar.gz",
+                        "config-3.4.1.yaml",
+                        "file1.tar.gz"
+                    ]
+                }
+            },
             "GetTokenResponse": {
                 "title": "GetTokenResponse",
                 "required": [
@@ -1226,7 +1346,8 @@
                             "read:token",
                             "write:bootstrap",
                             "write:targets",
-                            "write:token"
+                            "write:token",
+                            "delete:targets"
                         ],
                         "expired": false,
                         "expiration": "2022-08-19T17:29:39"
@@ -1245,51 +1366,6 @@
                             "$ref": "#/components/schemas/ValidationError"
                         }
                     }
-                }
-            },
-            "Payload": {
-                "title": "Payload",
-                "required": [
-                    "targets"
-                ],
-                "type": "object",
-                "properties": {
-                    "targets": {
-                        "title": "Targets",
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Targets"
-                        }
-                    }
-                },
-                "description": "Targets payload for method POST",
-                "example": {
-                    "targets": [
-                        {
-                            "info": {
-                                "length": 11342,
-                                "hashes": {
-                                    "blake2b-256": "716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a"
-                                },
-                                "custom": {
-                                    "key": "value"
-                                }
-                            },
-                            "path": "file1.tar.gz"
-                        },
-                        {
-                            "info": {
-                                "length": 630,
-                                "hashes": {
-                                    "blake2b-256": "69217a3079908094e11121d042354a7c1f55b6482ca1a51e1b250dfd1ed0eef9"
-                                },
-                                "custom": {
-                                    "key": "value"
-                                }
-                            },
-                            "path": "file2.tar.gz"
-                        }
-                    ]
                 }
             },
             "PayloadTargetsHashes": {
@@ -1968,7 +2044,7 @@
                         ],
                         "task_id": "06ee6db3cbab4b26be505352c2f2e2c3"
                     },
-                    "message": "Target(s) successfully submitted."
+                    "message": "New Target(s) successfully submitted."
                 }
             },
             "kaprien_api__tasks__Response": {
@@ -2013,7 +2089,8 @@
                             "read:token": "Read (GET) tokens",
                             "write:targets": "Write (POST) targets",
                             "write:token": "Write (POST) token",
-                            "write:bootstrap": "Write (POST) bootstrap"
+                            "write:bootstrap": "Write (POST) bootstrap",
+                            "delete:targets": "Delete (DELETE) targets"
                         },
                         "tokenUrl": "/api/v1/token"
                     }
