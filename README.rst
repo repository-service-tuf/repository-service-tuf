@@ -24,6 +24,7 @@ flows is easy using the REST API Service.
 .. kaprien-image-high-level
 
 .. image:: docs/diagrams/1_1_kaprien.png
+    :align: center
 
 Using
 =====
