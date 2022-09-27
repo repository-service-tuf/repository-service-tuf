@@ -23,3 +23,6 @@ docs:
 
 	sphinx-build -E -W -b html docs/source docs/build/html
 	plantuml -tpng docs/diagrams/1_1_kaprien.puml
+
+requirements:
+	pipenv lock -r > requirements-docs.txt
