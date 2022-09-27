@@ -1,8 +1,9 @@
 .PHONY: all docs
 
 docs:
+	git submodule update --init --recursive
 	git submodule foreach git pull origin main
-
+	ls -la kaprien-cli/
 	# kaprien-cli
 	cp -r kaprien-cli/docs/diagrams/* docs/diagrams/
 	rm -rf docs/source/guide/kaprien-cli/*
