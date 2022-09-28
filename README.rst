@@ -9,17 +9,33 @@ Kaprien
 What is Kaprien?
 ================
 
-Kaprien implements a Server with a signed Metadata Repository using `The Update
-Framework <http://theupdateframework.io/>`_ (TUF) as a Service.
+Kaprien is a system for securing software downloads with signed repository
+metadata that helps clients be sure they are retrieving the latest version of
+content published by the repository and that the content has not been tampered
+with between the repository and the client (for example, by an on-path
+attacker). This protects users downloading, installing, and updating content
+from an artifact repository, such as a web server, JFrog Artifactory, GithHub
+packages, etc.
 
-Kaprien can be deployed and used in the edge or public/private cloud along
-build systems (i.e., Jenkins, GitHub Actions, GitLab, CircleCI, etc.).
-It protects users downloading, installing, and updating from your artifact
-repository (web server, JFrog Artifactory, Github Packages, etc.)
+Kaprien implements a Server with a signed Metadata Repository using `The Update
+Framework <http://theupdateframework.io/>`_ (TUF) as a Service. It is designed
+to be deployed as part of an existing content delivery solution and can be
+deployed and used in the edge or public/private cloud alongside artifact
+production systems (i.e., build systems including Jenkins, GitHub Actions,
+GitLab, CircleCI, etc.).
 
 Kaprien provides a REST API Service to integrate your release flows and
 architecture to scale efficiently. Deploying and integrating into your release
 flows is easy using the REST API Service.
+
+Kaprien compared to other solutions:
+
+Rugged: Kaprien is a collection of services to deploy scalable and distributed
+TUF Repository. It also provides an easy interface to integrate (through Rest
+API) and a tool for managing the Metadata Repository.
+
+PyPI/PEP 458: Kaprien is a generalisation of the design in PEP 458 that can be
+integrated into a variety of content repository architectures.
 
 .. kaprien-image-high-level
 

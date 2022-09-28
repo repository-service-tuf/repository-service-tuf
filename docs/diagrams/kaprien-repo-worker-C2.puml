@@ -16,31 +16,81 @@
 !include <logos/terminal>
 !include <office/Security/lock_with_key_security>
 !include <office/Concepts/download>
+!include <cloudinsight/redis>
 
+!include <azure/AzureCommon>
+!include <azure/Storage/AzureBlobStorage>
+!include <azure/Security/AzureKeyVault>
+
+!include <awslib/AWSCommon>
+!include <awslib/SecurityIdentityAndCompliance/KeyManagementService>
+!include <awslib/Storage/S3Bucket>
+
+sprite $kaprien [160x160/16z] {
+xPg9Ukii3a2rWLd5-x_jr28TdEBSkbdQp7m-_t8tOXzBGe1puGqvEJavEJavEJavEJavEJavEJavGIHY9iGtL6CNKcqNIbg4u6qW5rj7ZOla8WX_3uh9rQgg
+rUW_rLLteR-sSxKrhQjQswBcs5gB37-8qzRg9LYjnCLxv_mIKbkfsbR5IF17SEfshRNicM20947NA9gXH_WBV6lz_iKJp227PYEqLOONWoJE6y9auS2q9d3D
+dy0jo3VJQyszqerzQbjgzCINq6IUhOYPe8EVGGxm8dYfVKB-5st6ZRYWy8eGT2Zs42Q45o3fqjjgrKwrNwckSSaq1q-OYMaZ2Au_Iy7ds-NMUYExHdlhM616
+Y96z8DDOFQYs-W91YjR3J2ujZiaGj-HcE9XX5lRUEs5X7ZbF9fZWcRWrWsON1ES5LmLs_SWldaayCSCWcc20fu7XqXcAGzW14VRzq7t0mCICaw1xcbxkRQ7A
+joFnI_p4CSFa1wbfqqRm5AZPuxO5lnkOMYkozMD1O01XPjY2kaxZ_2mzNUF7y0tS33y-oK9CmaB2_7MiFYd3sFKY7XXeswisL8G4oJ4AoJpXwdCod8zEjj3N
+k0zm1D1IAy2pIEfDyq7iheUkqmDYTH_XWdaX00bCy5C2wBv43ud7UZyNr28stcyoRFjgs65fgey6aBx4WzYOppfekIq8YmdoU404SBUk_N00-tO3HyFewpq9
+xXMVQUMcLe93S0oU0lZW59RhO10peVJrVgyCt5x8qUFjv3pO0tCRSsEizo9VQv1w2ze-b3-Q7NeeVDjK8JCjjjuxOeODPLi6emGFJ3vxa7j9LmLYVku30jxu
+pK8uT2Vc12Uu5x8j5MxzB7Gm_EQ4ZdI7Gm6m_Dp5FB-ah_VzL34NtpnT9l036FXMjJ7S1vQlJySin2pCDER7Q2ZpgaExfoMXRUJlxp3SLA-JX4A2x8Y4P2g-
+tNOzdPOC6Q5_O0sssIMmXGZi7Y0u5T-ykjRfwHXPY4PnOEkjSkRExdJn4XeHQ6sQW_ibA2pa_EA9nsOwtxzBnRftOuTMXzSpi27Cn2_x4sJci7WcBymqOj0A
+t0NjRo_SrMx9MvJandRrAZZ4JFR61fcOnpowjy7m_jn2mQ73jpQ7yn-Qd_DytJsN-_rixZDCa9z3D3C75_a3fD4z7_HphNwtU4ShFZhuvwiM4LkNmHVxpV6v
+NO9fas0IHoWasoUez_ajt_ZDnJSZLqC4UKLGS3lzCxp2RnJVuH2Z010X45_ri0XFo2z-rzzcvlv8Clx_yFfcVZoc7jFU-d3iW9MWmmo0RkfXz_SNwLVj20pu
+o1PlNf-5mC70ZnvsVtzcctTqTIX2dVOd4xlx6_7ujG7XO-iRhdhEBumorjrmeFZszuS80tpe9LRf7sPc2TwnU6QPY-_u6Nz67ZWV8PTc8M8cyOlqlJFEvulZ
+9JWHR0Vi72Fy45hMd5ZhOaRn8WIq-esooN2OnIA8Uu5jsbO2mm_0fVKFQWlGJnlSfp6Epkpm4xW5Ng1gZxeNr_vTpsg8S1Gg_TjGjUP9BCp0QElwU6wxjb7z
+xUzBBcYpSXtQdnr2LovVlV9FNZThZtj6G24cSKBZq5PDSB3iLzrsr6WnD9hzidc0mu9Oh9nR42AxYdK_8HQKJLlLyVrRQNpZjR0DwhG4njKPZWnPRApreAFz
+DDBLbjwUM72CsLBRih-xsLAewv4zBgs20rocC_ujQ6VNv625DyhibmkXpo9ZAlwqV29Z3xX-refbNixbK2-OcYawk_Jjj_RBxUNx6cPsmGavnyppVTEnRnEc
+XOi4KE0fVhPKMZtpr-FiaHMJzq-LB097_93_wOVCw3pBECCDtA6zbhknus4yvBSeVXS_8MA0ANu7zwh-vgx-Y1_Nwh_niqO0R4r_lb0uqbqQtkd7waZzl_oG
+RRiXoCouK_dnPV53agWEW6fnXBVyBAzaJP3XdlYvVjcZZCj6BGlrPfHhfLj-u029o7hgFVN7Q_p27NvvSqEgVDCFNTV4ANE78jCF5lHply8m67up99Rc_UCq
+7JkMfmVyWWUyvMSm0VF-NZeUNN_3p_ChO2nAt_Y1EFxcbFVzAudCF_UZYAO7gDJz67QPiaZn1r79DhObnmSWkVINi02MQ7h0YgkVDaziZEPd47UmjsmNcjrI
+yKT_c-Gmjc1B0S1aUk3ZPN_rIUoLyvM2WDckOFjdWcDWRBeQLZt2PtzM1a24bI8NF-sK9lrChrUKvi6rebNNM1U2mpWxLntYqm-M11UaugTVDRfVRALUKTe2
+lXMxHlC8Fm1z_c5-0TM1GIhm9Ry5hVLF463_Sq_mKuZT4Vnd_42K-_agGFVJ5fmX22lale2sdZWcU07p_iMf0529q-l_Fs7s0r4X3TF-wctyW5KNU6C_O0Vl
+wsVyZ_cTVgVVwHVUsg-r4YToQs_X1wNTeZQ2lyUtebedjDLMu0t0r6v1y1RuN4kTA87WNS0Tu3MSd9oSuD-rkil__mN6uk4lu5eM02gb_5EGLFCV-gLIvPjn
+3l_EprVB7h9pZjUVY20wJ-P5m9v0fF_1vUMBE0Jn3d_1htgk9IC015q9_RL1qgeC47Lngeog4G3pEg0GGDOGj6h1NuXVYAMG_Jo9nAm2L5ED8PS444gkHGbB
+2G2XPiUn9e2OIrbIKlzoFyqbvuAVSzcNwe1gJW0fLu9OIc02gYK0bHmHV2dO2rPgMNx3h-PgSN2nQatgWEp6IwaCiLG2c-01kEPIjHGbIAMW3VkD_B952foM
+A4kfdtvXzGkbRFtI4i8IiFlnh_ZL1ToQFOYhfQizlnanvq9RFyjlNqf-CNwbB80vzL1vLtDP_L99iS-FVF7BVNu4aU3NPya8L7x1pngAg1PWhQe-gL_Z5qll
+BqdL_7f_YRhY0Oegzi--6EoDLqGGs3a2SZPRFJfd_La4np2m3eusVlpchsE5zSPGUNC_Awpt1Pa9_byuEJavEJav-Gy
+}
 
 AddContainerTag("webui", $sprite="application_server", $legendText="Web UI Interface", $bgColor=Gray)
 AddContainerTag("key_service", $sprite="lock_with_key_security", $legendText="Key Service", $bgColor=Gray)
 AddContainerTag("storage_service", $sprite="file_server", $legendText="Storage Service", $bgColor=Gray)
-AddContainerTag("rest_api", $sprite="web_server", $legendText="Repository REST API")
-AddContainerTag("repo_worker", $sprite="service_application", $legendText="Repository Metadata Worker")
+AddContainerTag("repo_worker", $sprite="kaprien,scale=0.8", $legendText="Repository Metadata Worker")
 AddContainerTag("queue", $sprite="queue_viewer", $legendText="Message Queue")
 AddContainerTag("ci_cd", $sprite="application_generic", $legendText="CI/CD, Artfact Management, etc")
 AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed TUF Metadata")
 AddContainerTag("download_target", $sprite="download", $legendText="Download file/target/package", $bgColor=Gray)
 AddContainerTag("terminal", $sprite="terminal,scale=0.5,color=#000000", $legendText="CLI")
+AddContainerTag("redis", $sprite="redis", $legendText="CLI")
+AddContainerTag("aws_s3", $sprite="S3Bucket", $legendText="Storage")
+AddContainerTag("aws_kms", $sprite="KeyManagementService", $legendText="KeyVault")
+AddContainerTag("azure_blob", $sprite="AzureBlobStorage", $legendText="Storge")
+AddContainerTag("azure_kv", $sprite="AzureKeyVault", $legendText="KeyVault")
 
 AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=0.75,color=#000000", $legendText="Kaprien CLI")
 AddRelTag("bowser", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="management_console,scale=0.5", $legendText="Browser")
 AddRelTag("download", $textColor="Green", $lineColor="$ARROW_COLOR")
 AddRelTag("share", $textColor="orange", $lineColor="grey", $lineStyle = DashedLine())
 
-Container(kaprien_repo_worker, "KAPRIEN-REPO-WORKER", "Metadata Repository Worker", $tags="rest_api")
+Container(kaprien_repo_worker, "KAPRIEN-REPO-WORKER", "Metadata Repository Worker", $tags="repo_worker")
 ContainerDb(data_dir, "/$DATA_DIR", "File System", "Service settings\nRepository Settings", $tags="storage_service")
 Container_Ext(broker, "Broker/Backend", "RabbitMQ, Redis, etc", $tags="queue") #Grey
-Container_Ext(repository_storage, "Storage Service", "File System, Object Storage, Database, etc")
-Container_Ext(key_storage, "Key Vault Service", "File System, AWS KMS, Azure Key Vault, etc")
+Container_Ext(redis, "Redis", "Redis Server", $tags="redis") #Grey
+Container_Boundary(repository_storage, "Storage Service"){
+    Container_Ext(stg_fs, "Filesystem", "Storage", $tags="storage_service") #Grey
+    Container_Ext(aws_s3, "AWS S3", "Storage", $tags="aws_s3") #Grey
+    Container_Ext(azure_blob, "Azure Blob", "Storage", $tags="azure_blob") #Grey
+}
+Container_Boundary(key_storage, "Key Vault Service"){
+    Container_Ext(key_fs, "Filesystem", "Storage", $tags="storage_service") #Grey
+    Container_Ext(aws_kms, "AWS KMS", "Storage", $tags="aws_kms") #Grey
+    Container_Ext(azure_kv, "Azure Key Vault", "Storage", $tags="azure_kv") #Grey
+}
 Rel_D(broker, kaprien_repo_worker, "Consumer", "Tasks")
 Rel_U(kaprien_repo_worker, broker, "Publisher", "Tasks")
+Rel_U(kaprien_repo_worker, redis, "Repository Configuration", "Consumer")
 Rel_R(kaprien_repo_worker, data_dir, "Write/Read", "Config settings")
 Rel_D(kaprien_repo_worker, repository_storage, "Write/Read", "TUF Metadata")
 Rel_D(kaprien_repo_worker, key_storage, "Write/Read", "Online Keys")
