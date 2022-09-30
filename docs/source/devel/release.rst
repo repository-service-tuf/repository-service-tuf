@@ -1,6 +1,6 @@
-=======================
-Kaprien Release process
-=======================
+======================================
+TUF Repository Service Release process
+======================================
 
 Release process
 ===============

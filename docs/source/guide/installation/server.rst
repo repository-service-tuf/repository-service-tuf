@@ -1,13 +1,17 @@
-===========================
-Kaprien Server Installation
-===========================
+===================================
+TUF Repository Service Installation
+===================================
 
-Kaprien Server is a combination of micro-services.
- - ``kaprien-rest-api``
- - ``kaprien-repo-worker``
+TUF Repository Service (TRS) is a combination of micro-services:
 
-Both services require a Broker server, Redis server and a Web server to publish the
-signed Repository Metadata.
+ - TUF Repository Service API (``tuf-repository-service-api``)
+ - TUF Repository Service Worker (``tuf-repository-service-worker``)
+
+Both services require a Broker server, Redis server and a Web server to
+publish the signed Repository Metadata.
+
+To manage your TRS deploy, you use TUF Repository Service Command Line
+Interface (CLI) ``tuf-repositoru-service-cli`` -- Command: ``trs-cli``
 
 .. toctree::
    :maxdepth: 1

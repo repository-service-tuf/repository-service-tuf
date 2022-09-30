@@ -1,14 +1,14 @@
 
-The Kaprien has two main services (``kaprien-rest-api``,
-``kaprien-repo-worker``) and one tool (``kaprien-cli``)
+The TUF Repository Service has two main services (``trs-rest-api``,
+``trs-repo-worker``) and one tool (``trs-cli``)
 
-.. uml:: ../../diagrams/2_2_kaprien.puml
+.. uml:: ../../diagrams/2_2_trs.puml
 
 By design, it helps scalability and reliability for complex and
 distributed deployment. As the example below
 
 
-.. uml:: ../../diagrams/2_3_kaprien.puml
+.. uml:: ../../diagrams/2_3_trs.puml
 
 
 Components/Tools
@@ -22,6 +22,6 @@ Components/Tools
 .. toctree::
     :maxdepth: 2
 
-    kaprien-cli_design
-    kaprien-rest-api_design
-    kaprien-repo-worker_design
+    tuf-repository-service-cli_design
+    tuf-repository-service-api_design
+    tuf-repository-service-worker_design

@@ -1,18 +1,18 @@
 version: "3.7"
 
 volumes:
-  kaprien-rest-api-data:
-  kaprien-repo-worker-data:
-  kaprien-mq-data:
-  kaprien-storage:
-  kaprien-keystorage:
-  kaprien-redis-data:
+  tuf-repository-service-api-data:
+  tuf-repository-service-worker-data:
+  tuf-repository-service-mq-data:
+  tuf-repository-service-storage:
+  tuf-repository-service-keystorage:
+  tuf-repository-service-redis-data:
 
 
 secrets:
-  SECRETS_KAPRIEN_ADMIN_PASSWORD:
+  SECRETS_TRS_ADMIN_PASSWORD:
     external: True
-  SECRETS_KAPRIEN_TOKEN_KEY:
+  SECRETS_TRS_TOKEN_KEY:
     external: True
   # HTTPS (SSL)
   # API_KEY:
@@ -24,7 +24,7 @@ services:
   rabbitmq:
     image: rabbitmq:3-management-alpine
     volumes:
-      - "kaprien-mq-data:/var/lib/rabbitmq"
+      - "tuf-repository-service-mq-data:/var/lib/rabbitmq"
     healthcheck:
       test: "exit 0"
     restart: always
@@ -33,26 +33,26 @@ services:
   redis:
     image: redis:4.0
     volumes:
-      - kaprien-redis-data:/data
+      - tuf-repository-service-redis-data:/data
     healthcheck:
       test: "exit 0"
     restart: always
     tty: true
 
-  kaprien-repo-worker:
-    image: ghcr.io/kaprien/kaprien-repo-worker:dev
+  tuf-repository-service-worker:
+    image: ghcr.io/kaprien/tuf-repository-service-worker:dev
     volumes:
-      - kaprien-repo-worker-data:/data
-      - kaprien-storage:/var/opt/kaprien/storage
-      - kaprien-keystorage:/var/opt/kaprien/keystorage
+      - tuf-repository-service-worker-data:/data
+      - tuf-repository-service-storage:/var/opt/tuf-repository-service/storage
+      - tuf-repository-service-keystorage:/var/opt/tuf-repository-service/keystorage
     environment:
-      KAPRIEN_STORAGE_BACKEND: LocalStorage
-      KAPRIEN_KEYVAULT_BACKEND: LocalKeyVault
-      KAPRIEN_LOCAL_STORAGE_BACKEND_PATH: /var/opt/kaprien/storage
-      KAPRIEN_LOCAL_KEYVAULT_PATH: /var/opt/kaprien/keystorage
-      KAPRIEN_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
-      KAPRIEN_REDIS_SERVER: redis://redis
-      KAPRIEN_WORKER_ID: dev
+      TRS_STORAGE_BACKEND: LocalStorage
+      TRS_KEYVAULT_BACKEND: LocalKeyVault
+      TRS_LOCAL_STORAGE_BACKEND_PATH: /var/opt/tuf-repository-service/storage
+      TRS_LOCAL_KEYVAULT_PATH: /var/opt/tuf-repository-service/keystorage
+      TRS_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
+      TRS_REDIS_SERVER: redis://redis
+      TRS_WORKER_ID: dev
     depends_on:
       - redis
       - rabbitmq
@@ -65,33 +65,33 @@ services:
     image: python:3.10-slim-buster
     command: python -m http.server -d /www 8080
     volumes:
-      - kaprien-storage:/www
+      - tuf-repository-service-storage:/www
     ports:
       - "8080:8080"
 
-  kaprien-rest-api:
-    image: ghcr.io/kaprien/kaprien-rest-api:dev
+  tuf-repository-service-api:
+    image: ghcr.io/kaprien/tuf-repository-service-api:dev
     volumes:
-      - kaprien-rest-api-data:/data
+      - tuf-repository-service-api-data:/data
     ports:
       - 80:80
       - 443:443
     environment:
-      KAPRIEN_BOOTSTRAP_NODE: "true"
-      KAPRIEN_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
-      KAPRIEN_REDIS_SERVER: redis://redis
-      SECRETS_KAPRIEN_TOKEN_KEY: /run/secrets/SECRETS_KAPRIEN_TOKEN_KEY
-      SECRETS_KAPRIEN_ADMIN_PASSWORD: /run/secrets/SECRETS_KAPRIEN_ADMIN_PASSWORD
+      TRS_BOOTSTRAP_NODE: "true"
+      TRS_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
+      TRS_REDIS_SERVER: redis://redis
+      SECRETS_TRS_TOKEN_KEY: /run/secrets/SECRETS_TRS_TOKEN_KEY
+      SECRETS_TRS_ADMIN_PASSWORD: /run/secrets/SECRETS_TRS_ADMIN_PASSWORD
       # HTTP (SSL)
-      # SECRETS_KAPRIEN_SSL_CERT: /run/secrets/API_CRT
-      # SECRETS_KAPRIEN_SSL_KEY: /run/secrets/API_KEY
+      # SECRETS_TRS_SSL_CERT: /run/secrets/API_CRT
+      # SECRETS_TRS_SSL_KEY: /run/secrets/API_KEY
     secrets:
-      - SECRETS_KAPRIEN_ADMIN_PASSWORD
-      - SECRETS_KAPRIEN_TOKEN_KEY
+      - SECRETS_TRS_ADMIN_PASSWORD
+      - SECRETS_TRS_TOKEN_KEY
       # HTTPS (SSL)
       # - API_CRT
       # - API_KEY
     depends_on:
       - rabbitmq
       - redis
-      - kaprien-repo-worker
+      - tuf-repository-service-worker
