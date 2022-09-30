@@ -21,7 +21,11 @@ Features:
 - [x] Automatically version Bump Snapshot Metadata
 - [x] Automatically version Bump Timestamp Metadata
 - [x] Automatically version Bump hash-bins Metadata
+<<<<<<< HEAD
 - [ ] Release CI/CD in all components (`Issue #25 <https://github.com/kaprien/tuf-repository-worker/issues/25>`_)
+=======
+- [x] Release CI/CD in all components (`Issue #25 <https://github.com/kaprien/tuf-repository-worker/issues/25>`_)
+>>>>>>> d0567e7 (Project and Component renaming)
 - [ ] Old Metadata retention (`Issue #29 <https://github.com/kaprien/tuf-repository-worker/issues/29>`_)
 
 Components Milestones:
@@ -61,10 +65,24 @@ Status: TBD
 First Production Deploy
 This release achive the minimum valuable product for users.
 
-- [ ] Support to AWS S3 (Storage) and AWS KMS (Key Vault)
+- [ ] Support to AWS S3 (Storage) and AWS KMS (Key Vault) (`#24 <https://github.com/kaprien/tuf-repository-service/issues/24>`_
 
 Components Milestones:
 
 - `tuf-repository-service-api v0.1.X <https://github.com/kaprien/tuf-repository-service-api/milestone/4>`_
 - `tuf-repository-service-worker v0.1.X <https://github.com/kaprien/tuf-repository-service-worker/milestone/4>`_
 - `tuf-repository-service-cli v0.1.X <https://github.com/kaprien/tuf-repository-service-cli/milestone/4>`_
+
+
+Goal: End-to-End Signing
+========================
+
+Status: TBD
+
+Implement End-to-end signing of packages. Developers or Release Manager can
+sign the artifacts. See `PEP 480 <https://peps.python.org/pep-0480/>` for more
+details.
+
+- tuf-repository-service-api vT.B.D
+- tuf-repository-service-worker vT.B.D
+- tuf-repository-service-cli vT.B.D
