@@ -2,7 +2,7 @@
 All-in-one host installation (Docker)
 =====================================
 
-The All-in-one host installation is the simplest way to Deploy Kaprien Server.
+The All-in-one host installation is the simplest way to Deploy TUF Repository Service Server.
 There are limitations to scaling this installation (limited to the host).
 
 This deployment will use Docker Stack with Docker Compose and Docker Swarn for
@@ -19,17 +19,17 @@ Requirements
 Steps
 =====
 
-1. Prepare the Docker Swarm credentials Kaprien API admin user and a random
+1. Prepare the Docker Swarm credentials TUF Repository Service API admin user and a random
    Token Key.
 
-   -  ``KAPRIEN_ADMIN_PASSWORD`` is the initial password for `admin`
-   -  ``SECRETS_KAPRIEN_TOKEN_KEY`` it the TOKEN KEY used to hash the API Tokens
+   -  ``TRS_ADMIN_PASSWORD`` is the initial password for `admin`
+   -  ``SECRETS_TRS_TOKEN_KEY`` it the TOKEN KEY used to hash the API Tokens
 
     .. code:: shell
 
       $ docker swarm init
-      $ printf "secret password" | docker secret create SECRETS_KAPRIEN_ADMIN_PASSWORD -
-      $ printf $(openssl rand -base64 32) | docker secret create SECRETS_KAPRIEN_TOKEN_KEY -
+      $ printf "secret password" | docker secret create SECRETS_TRS_ADMIN_PASSWORD -
+      $ printf $(openssl rand -base64 32) | docker secret create SECRETS_TRS_TOKEN_KEY -
 
     .. note::
 
@@ -46,8 +46,8 @@ Steps
 2. Create a Docker Compose (functional example above)
 
    - It uses Docker Volume for the persistent data.
-   - It uses Docker Secrets to store/use the ``KAPRIEN_TOKEN_KEY`` (Used to
-     generate API Tokens) and ``KAPRIEN_ADMIN_PASSWORD``.
+   - It uses Docker Secrets to store/use the ``TRS_TOKEN_KEY`` (Used to
+     generate API Tokens) and ``TRS_ADMIN_PASSWORD``.
 
      .. note::
         **HTTPS**
@@ -57,17 +57,17 @@ Steps
 
    - It uses RabbitMQ as a `broker` for the tasks.
    - It uses Redis for the task results and internal tasks.
-   - It adds the ``kaprien-repo-worker`` configuration as environment
+   - It adds the ``tuf-repository-service-worker`` configuration as environment
      variables (storage/key vault type and paths, broker, backend, and repo
      worker id). The volumes for storage and key storage as Docker Volume.
-   - It configures the ``kaprien-rest-api`` using environment variables for
+   - It configures the ``tuf-repository-service-api`` using environment variables for
      the secrets, and the data as Docker Volume.
 
      .. note::
       **HTTPS**
 
       - Uncoment environment variables for the certificate and key (lines 86-87)
-      - Uncoment the in `kaprien-rest-api secrets` section (lines 93-93)
+      - Uncoment the in `tuf-repository-service-api secrets` section (lines 93-93)
       - (Optionally) Comment port 80:80 (line 77)
 
    - Web Server uses a Python container that exposes the docker volume with
@@ -86,27 +86,27 @@ Steps
 
     .. code:: shell
 
-        $ docker stack deploy -c docker-compose.yml kaprien
+        $ docker stack deploy -c docker-compose.yml trs
         Ignoring unsupported options: restart
 
-        Creating network kaprien_default
-        Creating service kaprien_kaprien-repo-worker
-        Creating service kaprien_web-server
-        Creating service kaprien_kaprien-rest-api
-        Creating service kaprien_rabbitmq
-        Creating service kaprien_redis
-
+        Creating network trs_default
+        Creating service trs_tuf-repository-service-worker
+        Creating service trs_web-server
+        Creating service trs_tuf-repository-service-api
+        Creating service trs_rabbitmq
+        Creating service trs_redis
 
 4. Repository Ceremony
 
+    It will require the CLI :ref:`guide/tuf-repository-service-cli/index:Installation`.
 
     Once you have the service running is required to do the
-    :ref:`guide/kaprien-cli/index:Ceremony (``ceremony\`\`)`.
+    :ref:`guide/tuf-repository-service-cli/index:Ceremony (``ceremony\`\`)`.
 
     The Ceremony is the process of creating the initial signed Repository
     Metadata.
 
-    Example of Ceremony process using Kaprien CLI.
+    Example of Ceremony process using TUF Repository Service CLI.
 
     .. raw:: html
 
@@ -122,22 +122,22 @@ Remove the Stack
 
 .. code:: shell
 
-  $ docker stack rm kaprien
-  Removing service kaprien_kaprien-repo-worker
-  Removing service kaprien_kaprien-rest-api
-  Removing service kaprien_rabbitmq
-  Removing service kaprien_redis
-  Removing service kaprien_web-server
-  Removing network kaprien_default
+  $ docker stack rm trs
+  Removing service trs_tuf-repository-service-worker
+  Removing service trs_tuf-repository-service-api
+  Removing service trs_rabbitmq
+  Removing service trs_redis
+  Removing service trs_web-server
+  Removing network trs_default
 
 
 Remove all data
 
 .. code:: shell
 
-  $ docker volume rm kaprien_kaprien-repo-worker-data \
-    kaprien_kaprien-storage \
-    kaprien_kaprien-keystorage \
-    kaprien_kaprien-redis-data \
-    kaprien_kaprien-rest-api-data \
-    kaprien_kaprien-mq-data
+  $ docker volume rm trs_tuf-repository-service-worker-data \
+    trs_tuf-repository-service-storage \
+    trs_tuf-repository-service-keystorage \
+    trs_tuf-repository-service-redis-data \
+    trs_tuf-repository-service-api-data \
+    trs_tuf-repository-service-mq-data

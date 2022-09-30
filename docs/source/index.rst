@@ -1,11 +1,11 @@
-=====================
-Kaprien Documentation
-=====================
+====================================
+TUF Repository Service Documentation
+====================================
 
 .. include:: ../../README.rst
-  :end-before: kaprien-image-high-level
+  :end-before: trs-image-high-level
 
-.. uml::  ../diagrams/1_1_kaprien.puml
+.. uml::  ../diagrams/1_1_trs.puml
 
 
 Documentation List
