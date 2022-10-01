@@ -14,14 +14,6 @@ distributed deployment. As the example below
 Components/Tools
 ================
 
-.. note::
-
-    For more detailed component/tool development information, please check its
-    :ref:`specific documention <devel/development:Components Repositories>`.
-
-.. toctree::
-    :maxdepth: 2
-
-    tuf-repository-service-cli_design
-    tuf-repository-service-api_design
-    tuf-repository-service-worker_design
+- `tuf-repository-service-api <https://docs.kaprien.com/tuf-repository-service/tuf-repository-service-api>`_
+- `tuf-repository-service-worker <https://docs.kaprien.com/tuf-repository-service/tuf-repository-service-worker>`_
+- `tuf-repository-service-cli <https://docs.kaprien.com/tuf-repository-service/tuf-repository-service-cli>`_

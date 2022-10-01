@@ -1,6 +1,6 @@
-================================
-TUF Respository Service REST API
-================================
+===========================
+TUF Respository Service API
+===========================
 
 .. toctree::
    :maxdepth: 1
