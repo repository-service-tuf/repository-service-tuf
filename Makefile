@@ -23,4 +23,4 @@ docs:
 	plantuml -tpng docs/diagrams/1_1_trs.puml
 
 requirements:
-	pipenv lock -r > requirements-docs.txt
+	pipenv lock -r > requirements.txt

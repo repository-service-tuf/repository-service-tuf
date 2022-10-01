@@ -11,6 +11,7 @@ sphinxcontrib-plantuml = "*"
 sphinxcontrib-openapi = "*"
 mistune = "==0.8.4"
 myst-parser = "*"
+pytest = "*"
 
 [dev-packages]
 
