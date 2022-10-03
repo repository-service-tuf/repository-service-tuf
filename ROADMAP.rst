@@ -21,12 +21,7 @@ Features:
 - [x] Automatically version Bump Snapshot Metadata
 - [x] Automatically version Bump Timestamp Metadata
 - [x] Automatically version Bump hash-bins Metadata
-<<<<<<< HEAD
-- [ ] Release CI/CD in all components (`Issue #25 <https://github.com/kaprien/tuf-repository-worker/issues/25>`_)
-=======
 - [x] Release CI/CD in all components (`Issue #25 <https://github.com/kaprien/tuf-repository-worker/issues/25>`_)
->>>>>>> d0567e7 (Project and Component renaming)
-- [ ] Old Metadata retention (`Issue #29 <https://github.com/kaprien/tuf-repository-worker/issues/29>`_)
 
 Components Milestones:
 
@@ -49,6 +44,8 @@ This realease is to evaluate the features and functionality.
 - [x] Implement HTTPS for the Rest API (`Issue #6 <https://github.com/kaprien/tuf-repository-worker/issues/6>`_)
 - [ ] Add TLS/SSL for Broker and Result Backend communication (`Issue #6 <https://github.com/kaprien/tuf-repository-worker/issues/6>`_)
 - [ ] Public online documentation (`Issue #22 <https://github.com/kaprien/tuf-repository-worker/issues/22>`_)
+- [ ] Old Metadata retention (`Issue #29 <https://github.com/kaprien/tuf-repository-worker/issues/29>`_)
+- [ ] Option to Disable the API Authentication/Authorization Feature (`Issue #41 <https://github.com/kaprien/tuf-repository-service/issues/41>`_)
 
 Components Milestones:
 

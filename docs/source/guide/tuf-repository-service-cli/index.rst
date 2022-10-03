@@ -11,9 +11,24 @@ Using pip:
 
 .. code:: shell
 
-    $ pip install tuf_repository_service
+    $ pip install tuf-repository-service
 
+.. code:: shell
 
+    ❯ trs-cli
+                                                                                                                                                 
+     Usage: trs-cli [OPTIONS] COMMAND [ARGS]...                                                                                                  
+                                                                                                                                                 
+     TUF Repository Service Command Line Interface (CLI).                                                                                        
+                                                                                                                                                 
+    ╭─ Options ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │  --config  -c  TEXT  TUF Repository Service config file                                                                                   │
+    │  --help    -h        Show this message and exit.                                                                                          │
+    ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Commands ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │  admin  Administrative Commands                                                                                                           │
+    ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    
 Administration (``admin``)
 ==========================
 
@@ -40,19 +55,20 @@ It executes administrative commands to the TUF Repository Service.
 Login to Server (``login``)
 ---------------------------
 
-This command will log in to TUF Repository Service and give you a token to run other commands such as Ceremony, Token Generation, etc.
+This command will log in to TUF Repository Service and give you a token to run other commands
+such as Ceremony, Token Generation, etc.
 
 .. code:: shell
 
     ❯ trs-cli admin login
-    ╔══════════════════════════════════════════════════════════════════════════════════════╗
-    ║                                     Login to TUF Repository Service Serve            ║
-    ╚══════════════════════════════════════════════════════════════════════════════════════╝
+    ╔══════════════════════════════════════════════════════════════════════════════════════════════════╗
+    ║                                 Login to TUF Repository Service                                  ║
+    ╚══════════════════════════════════════════════════════════════════════════════════════════════════╝
 
-    ┌──────────────────────────────────────────────────────────────────────────────────────┐
-    │         The server and token will generate a token and it will be                    │
-    │         stored in /Users/kairoaraujo/.tuf_repository_service.ini                                    │
-    └──────────────────────────────────────────────────────────────────────────────────────┘
+    ┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+    │         The server and token will generate a token and it will be                                │
+    │         stored in /Users/kairoaraujo/.trs.ini                                                    │
+    └──────────────────────────────────────────────────────────────────────────────────────────────────┘
 
     Server Address: http://192.168.1.199
     Username (admin): admin
