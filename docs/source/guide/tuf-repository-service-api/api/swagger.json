@@ -518,11 +518,13 @@
             },
             "BootstrapGetResponse": {
                 "title": "BootstrapGetResponse",
+                "required": [
+                    "message"
+                ],
                 "type": "object",
                 "properties": {
-                    "bootstrap": {
-                        "title": "Bootstrap",
-                        "type": "boolean"
+                    "data": {
+                        "$ref": "#/components/schemas/GetData"
                     },
                     "message": {
                         "title": "Message",
@@ -530,7 +532,9 @@
                     }
                 },
                 "example": {
-                    "bootstrap": false,
+                    "data": {
+                        "bootstrap": false
+                    },
                     "message": "System available for bootstrap."
                 }
             },
@@ -1280,11 +1284,13 @@
             },
             "BootstrapPostResponse": {
                 "title": "BootstrapPostResponse",
+                "required": [
+                    "message"
+                ],
                 "type": "object",
                 "properties": {
-                    "task_id": {
-                        "title": "Task Id",
-                        "type": "string"
+                    "data": {
+                        "$ref": "#/components/schemas/PostData"
                     },
                     "message": {
                         "title": "Message",
@@ -1292,7 +1298,9 @@
                     }
                 },
                 "example": {
-                    "task_id": "7a634b556f784ae88785d36425f9a218",
+                    "data": {
+                        "task_id": "7a634b556f784ae88785d36425f9a218"
+                    },
                     "message": "Bootstrap accepted."
                 }
             },
@@ -1318,6 +1326,19 @@
                         "config-3.4.1.yaml",
                         "file1.tar.gz"
                     ]
+                }
+            },
+            "GetData": {
+                "title": "GetData",
+                "required": [
+                    "bootstrap"
+                ],
+                "type": "object",
+                "properties": {
+                    "bootstrap": {
+                        "title": "Bootstrap",
+                        "type": "boolean"
+                    }
                 }
             },
             "GetTokenResponse": {
@@ -1377,6 +1398,16 @@
                 "properties": {
                     "blake2b-256": {
                         "title": "Blake2B-256",
+                        "type": "string"
+                    }
+                }
+            },
+            "PostData": {
+                "title": "PostData",
+                "type": "object",
+                "properties": {
+                    "task_id": {
+                        "title": "Task Id",
                         "type": "string"
                     }
                 }
@@ -1861,7 +1892,7 @@
                 "title": "TasksData",
                 "required": [
                     "task_id",
-                    "status"
+                    "state"
                 ],
                 "type": "object",
                 "properties": {
@@ -1870,10 +1901,10 @@
                         "type": "string",
                         "description": "Task ID"
                     },
-                    "status": {
-                        "title": "Status",
+                    "state": {
+                        "title": "State",
                         "type": "string",
-                        "description": "Status according with Celery Tasks"
+                        "description": "State according with Celery Tasks"
                     },
                     "result": {
                         "title": "Result",
@@ -2067,11 +2098,16 @@
                         "tasks": [
                             {
                                 "task_id": "91353735ef7d48099df86d8bfa30316e",
-                                "status": "SUCCESS",
-                                "result": true
+                                "state": "SUCCESS",
+                                "result": {
+                                    "status": "Task finished.",
+                                    "details": {
+                                        "key": "value"
+                                    }
+                                }
                             }
                         ],
-                        "message": "Task details. "
+                        "message": "Task state."
                     }
                 }
             }

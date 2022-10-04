@@ -1,0 +1,76 @@
+name: Functional Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  functional:
+    runs-on: ubuntu-latest
+    services:
+      rabbitmq:
+        image: rabbitmq:3-alpine
+
+      redis:
+        image: redis:4.0
+
+      web-server:
+        image: httpd:latest
+        volumes:
+          - trs-storage:/usr/local/apache2/htdocs
+        ports:
+          - 8080:80
+
+      trs-worker:
+        image: ghcr.io/kaprien/tuf-repository-service-worker:dev
+        credentials:
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GPR_TOKEN }}
+        volumes:
+          - trs-worker-data:/data
+          - trs-storage:/var/opt/tuf-repository-service/storage
+          - trs-keystorage:/var/opt/tuf-repository-service/keystorage
+        env:
+          TRS_STORAGE_BACKEND: LocalStorage
+          TRS_KEYVAULT_BACKEND: LocalKeyVault
+          TRS_LOCAL_STORAGE_BACKEND_PATH: /var/opt/tuf-repository-service/storage
+          TRS_LOCAL_KEYVAULT_PATH: /var/opt/tuf-repository-service/keystorage
+          TRS_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
+          TRS_REDIS_SERVER: redis://redis
+          TRS_WORKER_ID: dev
+
+      trs-api:
+        image: ghcr.io/kaprien/tuf-repository-service-api:dev
+        credentials:
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GPR_TOKEN }}
+        ports:
+          - 80:80
+        env:
+          TRS_BOOTSTRAP_NODE: "true"
+          TRS_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
+          TRS_REDIS_SERVER: redis://redis
+          SECRETS_TRS_TOKEN_KEY: ${{ secrets.ADMIN_SECRET_TESTS }}-token-key
+          SECRETS_TRS_ADMIN_PASSWORD: ${{ secrets.ADMIN_SECRET_TESTS }}
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v2
+
+      - name: Install Python Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install the TRS Command Line Interface
+        run: |
+          wget https://docs.kaprien.com/tuf_repository_service-0.0.1a3-py3-none-any.whl
+          pip install "dynaconf[ini]"
+          pip install ./tuf_repository_service-0.0.1a3-py3-none-any.whl
+
+      - name: Login to TRS using trs-cli
+        run: trs-cli admin login -s http://localhost -u admin -p ${{ secrets.ADMIN_SECRET_TESTS }} -e 1
+
+      - name: Bootstrap TRS (after offline Ceremony to generate Signed Metadata)
+        run: trs-cli admin ceremony -b -u -f tests/functional/data/payload.json
