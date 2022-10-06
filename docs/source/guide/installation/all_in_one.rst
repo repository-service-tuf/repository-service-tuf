@@ -123,8 +123,8 @@ Remove the Stack
 .. code:: shell
 
   $ docker stack rm trs
-  Removing service trs_tuf-repository-service-worker
-  Removing service trs_tuf-repository-service-api
+  Removing service trs_trs-worker
+  Removing service trs_trs-api
   Removing service trs_rabbitmq
   Removing service trs_redis
   Removing service trs_web-server
@@ -136,8 +136,8 @@ Remove all data
 .. code:: shell
 
   $ docker volume rm trs_tuf-repository-service-worker-data \
-    trs_tuf-repository-service-storage \
-    trs_tuf-repository-service-keystorage \
-    trs_tuf-repository-service-redis-data \
-    trs_tuf-repository-service-api-data \
-    trs_tuf-repository-service-mq-data
+    trs_trs-storage \
+    trs_trs-keystorage \
+    trs_trs-redis-data \
+    trs_trs-api-data \
+    trs_trs-mq-data
