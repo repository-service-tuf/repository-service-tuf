@@ -1,12 +1,12 @@
 version: "3.7"
 
 volumes:
-  tuf-repository-service-api-data:
-  tuf-repository-service-worker-data:
-  tuf-repository-service-mq-data:
-  tuf-repository-service-storage:
-  tuf-repository-service-keystorage:
-  tuf-repository-service-redis-data:
+  trs-api-data:
+  trs-worker-data:
+  trs-mq-data:
+  trs-storage:
+  trs-keystorage:
+  trs-redis-data:
 
 
 secrets:
@@ -24,7 +24,7 @@ services:
   rabbitmq:
     image: rabbitmq:3-management-alpine
     volumes:
-      - "tuf-repository-service-mq-data:/var/lib/rabbitmq"
+      - "trs-mq-data:/var/lib/rabbitmq"
     healthcheck:
       test: "exit 0"
     restart: always
@@ -33,18 +33,18 @@ services:
   redis:
     image: redis:4.0
     volumes:
-      - tuf-repository-service-redis-data:/data
+      - trs-redis-data:/data
     healthcheck:
       test: "exit 0"
     restart: always
     tty: true
 
-  tuf-repository-service-worker:
-    image: ghcr.io/kaprien/tuf-repository-service-worker:dev
+  trs-worker:
+    image: ghcr.io/kaprien/tuf-repository-service-worker:latest
     volumes:
-      - tuf-repository-service-worker-data:/data
-      - tuf-repository-service-storage:/var/opt/tuf-repository-service/storage
-      - tuf-repository-service-keystorage:/var/opt/tuf-repository-service/keystorage
+      - trs-worker-data:/data
+      - trs-storage:/var/opt/tuf-repository-service/storage
+      - trs-keystorage:/var/opt/tuf-repository-service/keystorage
     environment:
       TRS_STORAGE_BACKEND: LocalStorage
       TRS_KEYVAULT_BACKEND: LocalKeyVault
@@ -52,7 +52,7 @@ services:
       TRS_LOCAL_KEYVAULT_PATH: /var/opt/tuf-repository-service/keystorage
       TRS_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
       TRS_REDIS_SERVER: redis://redis
-      TRS_WORKER_ID: dev
+      TRS_WORKER_ID: trs_worker_001
     depends_on:
       - redis
       - rabbitmq
@@ -65,14 +65,14 @@ services:
     image: python:3.10-slim-buster
     command: python -m http.server -d /www 8080
     volumes:
-      - tuf-repository-service-storage:/www
+      - trs-storage:/www
     ports:
       - "8080:8080"
 
-  tuf-repository-service-api:
-    image: ghcr.io/kaprien/tuf-repository-service-api:dev
+  trs-api:
+    image: ghcr.io/kaprien/tuf-repository-service-api:latest
     volumes:
-      - tuf-repository-service-api-data:/data
+      - trs-api-data:/data
     ports:
       - 80:80
       - 443:443
@@ -94,4 +94,4 @@ services:
     depends_on:
       - rabbitmq
       - redis
-      - tuf-repository-service-worker
+      - trs-worker

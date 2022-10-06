@@ -90,9 +90,9 @@ Steps
         Ignoring unsupported options: restart
 
         Creating network trs_default
-        Creating service trs_tuf-repository-service-worker
+        Creating service trs_trs-worker
         Creating service trs_web-server
-        Creating service trs_tuf-repository-service-api
+        Creating service trs_trs-api
         Creating service trs_rabbitmq
         Creating service trs_redis
 
