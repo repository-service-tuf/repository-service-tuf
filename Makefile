@@ -1,4 +1,4 @@
-.PHONY: all docs
+.PHONY: all docs lint reformat requirements functional-tests
 
 docs:
 	git submodule update --init --recursive
@@ -23,4 +23,19 @@ docs:
 	plantuml -tpng docs/diagrams/1_1_trs.puml
 
 requirements:
-	pipenv lock -r > requirements.txt
+	pipenv requirements > requirements.txt
+
+reformat:
+	isort -l79 --profile black tests/
+	black -l79 tests/
+
+lint:
+	flake8 tests/
+	isort -l79 --profile black --check --diff tests/
+	black -l79 --check --diff tests/
+	pipenv requirements > requirements.commit
+	diff requirements.txt requirements.commit
+	rm requirements.commit
+
+functional-tests:
+	pytest --gherkin-terminal-reporter tests -vvv

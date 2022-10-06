@@ -2,9 +2,18 @@ name: Functional Tests
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ 'main' ]
+    paths:
+      - 'tests/**'
+      - 'requirements.txt'
+      - '.github/workflows/functional.yml'
+  # Enable PR when make repository public. Issue #50
+  # pull_request:
+  #   branches: [ 'main' ]
+  #   paths:
+  #     - 'tests/**'
+  #     - 'requirements.txt'
+  #     - '.github/workflows/functional.yml'
   workflow_dispatch:
 
 jobs:
@@ -53,15 +62,17 @@ jobs:
           TRS_BOOTSTRAP_NODE: "true"
           TRS_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
           TRS_REDIS_SERVER: redis://redis
-          SECRETS_TRS_TOKEN_KEY: ${{ secrets.ADMIN_SECRET_TESTS }}-token-key
-          SECRETS_TRS_ADMIN_PASSWORD: ${{ secrets.ADMIN_SECRET_TESTS }}
+          SECRETS_TRS_TOKEN_KEY: ${{ secrets.ADMIN_SECRET_PASSWD }}-token-key
+          SECRETS_TRS_ADMIN_PASSWORD: ${{ secrets.ADMIN_SECRET_PASSWD }}
 
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v2
 
       - name: Install Python Dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install pipenv
+          pip install -r requirements.txt
 
       - name: Install the TRS Command Line Interface
         run: |
@@ -69,8 +80,13 @@ jobs:
           pip install "dynaconf[ini]"
           pip install ./tuf_repository_service-0.0.1a3-py3-none-any.whl
 
-      - name: Login to TRS using trs-cli
-        run: trs-cli admin login -s http://localhost -u admin -p ${{ secrets.ADMIN_SECRET_TESTS }} -e 1
+      - name: Functional Tests (BDD)
+        env:
+          ADMIN_SECRET_TESTS: ${{ secrets.ADMIN_SECRET_PASSWD }}
+        run: |
+            retry=1; while [[ ${retry} -lt 4 ]]; do echo Try ${retry}/3; sc=$(curl -s -o /dev/null -w "%{http_code}" http://localhost || true); if [[ ${sc} -ne 200 ]]; then echo Waiting TRS API; sleep 30; let 'retry+=1'; else break; fi; done
+            make functional-tests
 
-      - name: Bootstrap TRS (after offline Ceremony to generate Signed Metadata)
-        run: trs-cli admin ceremony -b -u -f tests/functional/data/payload.json
+      - name: Check Tests Lint and Dependencies
+        run: |
+          make lint

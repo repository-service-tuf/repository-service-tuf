@@ -12,6 +12,11 @@ sphinxcontrib-openapi = "*"
 mistune = "==0.8.4"
 myst-parser = "*"
 pytest = "*"
+pytest-bdd = "*"
+dynaconf = "*"
+isort = "*"
+black = "*"
+flake8 = "*"
 
 [dev-packages]
 
