@@ -1,4 +1,4 @@
-.PHONY: all docs lint reformat requirements functional-tests
+.PHONY: docs lint reformat requirements functional-tests
 
 docs:
 	git submodule update --init --recursive
