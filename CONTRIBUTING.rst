@@ -43,10 +43,10 @@ contribute.
 Check the specific repository CONTRIBUTING documentation for more specific
 details:
 
-* `Umbrella Repository Service for TUF <https://github.com/kaprien/repository-service-tuf/blob/main/CONTRIBUTING.rst>`_
-* `Repository Service for TUF API <https://github.com/kaprien/repository-service-tuf-api/blob/main/CONTRIBUTING.rst>`_
-* `Repository Service for TUF Worker <https://github.com/kaprien/repository-service-tuf-worker/blob/main/CONTRIBUTING.rst>`_
-* `Repository Service for TUF Command Line Interface (CLI) <https://github.com/kaprien/repository-service-tuf-cli/blob/main/CONTRIBUTING.rst>`_
+* `Umbrella Repository Service for TUF <https://github.com/vmware/repository-service-tuf/blob/main/CONTRIBUTING.rst>`_
+* `Repository Service for TUF API <https://github.com/vmware/repository-service-tuf-api/blob/main/CONTRIBUTING.rst>`_
+* `Repository Service for TUF Worker <https://github.com/vmware/repository-service-tuf-worker/blob/main/CONTRIBUTING.rst>`_
+* `Repository Service for TUF Command Line Interface (CLI) <https://github.com/vmware/repository-service-tuf-cli/blob/main/CONTRIBUTING.rst>`_
 
 .. rstuf-contributing-links
 
@@ -56,7 +56,7 @@ Getting the source code
 =======================
 
 `Fork <https://docs.github.com/en/get-started/quickstart/fork-a-repo>`_ the
-repository on `GitHub <https://github.com/kaprien/repository-service-tuf>`_ and
+repository on `GitHub <https://github.com/vmware/repository-service-tuf>`_ and
 `clone <https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository>`_
 it to your local machine:
 
@@ -71,7 +71,7 @@ you stay up-to-date with our repository:
 
 .. code-block:: console
 
-    git remote add upstream https://github.com/kaprien/repository-service-tuf
+    git remote add upstream https://github.com/vmware/repository-service-tuf
     git checkout main
     git fetch upstream
     git merge upstream/main

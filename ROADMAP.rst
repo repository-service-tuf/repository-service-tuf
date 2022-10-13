@@ -21,13 +21,13 @@ Features:
 - [x] Automatically version Bump Snapshot Metadata
 - [x] Automatically version Bump Timestamp Metadata
 - [x] Automatically version Bump hash-bins Metadata
-- [x] Release CI/CD in all components (`Issue #25 <https://github.com/kaprien/tuf-repository-worker/issues/25>`_)
+- [x] Release CI/CD in all components (`Issue #25 <https://github.com/vmware/tuf-repository-worker/issues/25>`_)
 
 Components Milestones:
 
-- `repository-service-tuf-api v0.0.1aX <https://github.com/kaprien/repository-service-tuf-api/milestone/2>`_
-- `repository-service-tuf-worker v0.0.1aX <https://github.com/kaprien/repository-service-tuf-worker/milestone/2>`_
-- `repository-service-tuf-cli v0.0.1aX <https://github.com/kaprien/repository-service-tuf-cli/milestone/2>`_
+- `repository-service-tuf-api v0.0.1aX <https://github.com/vmware/repository-service-tuf-api/milestone/2>`_
+- `repository-service-tuf-worker v0.0.1aX <https://github.com/vmware/repository-service-tuf-worker/milestone/2>`_
+- `repository-service-tuf-cli v0.0.1aX <https://github.com/vmware/repository-service-tuf-cli/milestone/2>`_
 
 
 Goal: Minimum Working Version
@@ -38,20 +38,20 @@ Status: Planning
 Not for a Production Deploy.
 This realease is to evaluate the features and functionality.
 
-- [ ] Token revocation (`Issue #30 <https://github.com/kaprien/tuf-repository-worker/issues/30>`_)
-- [ ] Remove the Targets Key from Ceremony (`Issue #28 <https://github.com/kaprien/tuf-repository-worker/issues/28>`_)
-- [ ] Key(s) Rotation (`Issue #23 <https://github.com/kaprien/tuf-repository-worker/issues/23>`_)
-- [x] Implement HTTPS for the Rest API (`Issue #6 <https://github.com/kaprien/tuf-repository-worker/issues/6>`_)
-- [ ] Add TLS/SSL for Broker and Result Backend communication (`Issue #6 <https://github.com/kaprien/tuf-repository-worker/issues/6>`_)
-- [ ] Public online documentation (`Issue #22 <https://github.com/kaprien/tuf-repository-worker/issues/22>`_)
-- [ ] Old Metadata retention (`Issue #29 <https://github.com/kaprien/tuf-repository-worker/issues/29>`_)
-- [ ] Option to Disable the API Authentication/Authorization Feature (`Issue #41 <https://github.com/kaprien/repository-service-tuf/issues/41>`_)
+- [ ] Token revocation (`Issue #30 <https://github.com/vmware/tuf-repository-worker/issues/30>`_)
+- [ ] Remove the Targets Key from Ceremony (`Issue #28 <https://github.com/vmware/tuf-repository-worker/issues/28>`_)
+- [ ] Key(s) Rotation (`Issue #23 <https://github.com/vmware/tuf-repository-worker/issues/23>`_)
+- [x] Implement HTTPS for the Rest API (`Issue #6 <https://github.com/vmware/tuf-repository-worker/issues/6>`_)
+- [ ] Add TLS/SSL for Broker and Result Backend communication (`Issue #6 <https://github.com/vmware/tuf-repository-worker/issues/6>`_)
+- [ ] Public online documentation (`Issue #22 <https://github.com/vmware/tuf-repository-worker/issues/22>`_)
+- [ ] Old Metadata retention (`Issue #29 <https://github.com/vmware/tuf-repository-worker/issues/29>`_)
+- [ ] Option to Disable the API Authentication/Authorization Feature (`Issue #41 <https://github.com/vmware/repository-service-tuf/issues/41>`_)
 
 Components Milestones:
 
-- `repository-service-tuf-api v0.0.1bX <https://github.com/kaprien/repository-service-tuf-api/milestone/3>`_
-- `repository-service-tuf-worker v0.0.1bX <https://github.com/kaprien/repository-service-tuf-worker/milestone/3>`_
-- `repository-service-tuf-cli v0.0.1bX <https://github.com/kaprien/repository-service-tuf-cli/milestone/3>`_
+- `repository-service-tuf-api v0.0.1bX <https://github.com/vmware/repository-service-tuf-api/milestone/3>`_
+- `repository-service-tuf-worker v0.0.1bX <https://github.com/vmware/repository-service-tuf-worker/milestone/3>`_
+- `repository-service-tuf-cli v0.0.1bX <https://github.com/vmware/repository-service-tuf-cli/milestone/3>`_
 
 
 Goal: Minimum Valuable Product
@@ -62,13 +62,13 @@ Status: TBD
 First Production Deploy
 This release achive the minimum valuable product for users.
 
-- [ ] Support to AWS S3 (Storage) and AWS KMS (Key Vault) (`#24 <https://github.com/kaprien/repository-service-tuf/issues/24>`_
+- [ ] Support to AWS S3 (Storage) and AWS KMS (Key Vault) (`#24 <https://github.com/vmware/repository-service-tuf/issues/24>`_
 
 Components Milestones:
 
-- `repository-service-tuf-api v0.1.X <https://github.com/kaprien/repository-service-tuf-api/milestone/4>`_
-- `repository-service-tuf-worker v0.1.X <https://github.com/kaprien/repository-service-tuf-worker/milestone/4>`_
-- `repository-service-tuf-cli v0.1.X <https://github.com/kaprien/repository-service-tuf-cli/milestone/4>`_
+- `repository-service-tuf-api v0.1.X <https://github.com/vmware/repository-service-tuf-api/milestone/4>`_
+- `repository-service-tuf-worker v0.1.X <https://github.com/vmware/repository-service-tuf-worker/milestone/4>`_
+- `repository-service-tuf-cli v0.1.X <https://github.com/vmware/repository-service-tuf-cli/milestone/4>`_
 
 
 Goal: End-to-End Signing

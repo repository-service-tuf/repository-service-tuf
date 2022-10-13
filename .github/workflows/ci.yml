@@ -8,14 +8,13 @@ on:
       - 'requirements.txt'
       - '.github/workflows/functional.yml'
       - '.github/workflows/ci.yml'
-  # Enable PR when make repository public. Issue #50
-  # pull_request:
-  #   branches: [ 'main' ]
-  #   paths:
-  #     - 'tests/**'
-  #     - 'requirements.txt'
-  #     - '.github/workflows/functional.yml'
-  #     - '.github/workflows/main.yml'
+  pull_request:
+    branches: [ 'main' ]
+    paths:
+      - 'tests/**'
+      - 'requirements.txt'
+      - '.github/workflows/functional.yml'
+      - '.github/workflows/main.yml'
   workflow_dispatch:
 
 jobs:

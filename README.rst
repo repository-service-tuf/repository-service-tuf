@@ -44,7 +44,7 @@ Using
 =====
 
 Please, check the `Repository Service for TUF Guide
-<https://docs.kaprien.com/guide/overview/overview.html>`_  for the
+<https://repository-service-tuf.readthedocs.org/guide/overview/overview.html>`_  for the
 Installations and more details.
 
 Contributing
@@ -57,5 +57,5 @@ Check our `CONTRIBUTING.rst <CONTRIBUTING.rst>`_ for more details on how to
 contribute.
 
 Please, check the `Repository Service for TUF Development
-<https://docs.kaprien.com/devel>`_.
+<https://repository-service-tuf.readthedocs.org/devel>`_.
 

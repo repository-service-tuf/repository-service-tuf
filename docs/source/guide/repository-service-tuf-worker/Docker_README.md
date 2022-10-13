@@ -32,7 +32,7 @@ docker run --env="RSTUF_WORKER_ID=worker1" \
     --env="RSTUF_LOCAL_KEYVAULT_PATH=keyvault" \
     --env="RSTUF_BROKER_SERVER=guest:guest@rabbitmq:5672" \
     --env="RSTUF_REDIS_SERVER=redis://redis" \
-    ghcr.io/kaprien/repository-service-tuf-worker:latest \
+    ghcr.io/vmware/repository-service-tuf-worker:latest \
 ```
 
 

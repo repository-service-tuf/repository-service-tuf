@@ -54,10 +54,10 @@ jobs:
           - 8080:80
 
       rstuf-worker:
-        image: ghcr.io/kaprien/repository-service-tuf-worker:${{ inputs.worker_version }}
+        image: ghcr.io/vmware/repository-service-tuf-worker:${{ inputs.worker_version }}
         credentials:
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GPR_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
         volumes:
           - rstuf-worker-data:/data
           - rstuf-storage:/var/opt/repository-service-tuf/storage
@@ -72,18 +72,18 @@ jobs:
           RSTUF_WORKER_ID: dev
 
       rstuf-api:
-        image: ghcr.io/kaprien/repository-service-tuf-api:${{ inputs.api_version }}
+        image: ghcr.io/vmware/repository-service-tuf-api:${{ inputs.api_version }}
         credentials:
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GPR_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
         ports:
           - 80:80
         env:
           RSTUF_BOOTSTRAP_NODE: "true"
           RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
           RSTUF_REDIS_SERVER: redis://redis
-          SECRETS_RSTUF_TOKEN_KEY: ${{ secrets.ADMIN_SECRET_PASSWD }}-token-key
-          SECRETS_RSTUF_ADMIN_PASSWORD: ${{ secrets.ADMIN_SECRET_PASSWD }}
+          SECRETS_RSTUF_TOKEN_KEY: test-token-key
+          SECRETS_RSTUF_ADMIN_PASSWORD: test-secret
 
     steps:
       - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
@@ -103,12 +103,19 @@ jobs:
 
       - name: Install the RSTUF Command Line Interface (released)
         if: ${{ inputs.cli_version != 'dev' }}
+        # replace the run below after repository-service-tuf is available in
+        # pypi.org
+        # run: |
+        #   pip install "dynaconf[ini]" repository-service-tuf==${{ inputs.cli_version }}
         run: |
-          pip install "dynaconf[ini]" repository-service-tuf==${{ inputs.cli_version }}
+          git submodule update --init repository-service-tuf-cli
+          git submodule foreach git pull origin v${{ inputs.api_version }}
+          pip install -e repository-service-tuf-cli/
+
 
       - name: Functional Tests (BDD)
         env:
-          ADMIN_SECRET_TESTS: ${{ secrets.ADMIN_SECRET_PASSWD }}
+          ADMIN_SECRET_TESTS: test-secret
         # First try to check if the http://localhost responds 200 (OK)
         # Retry for 3x (waiting 30 seconds each)
         # After the retries, it tries to run Functional tests
