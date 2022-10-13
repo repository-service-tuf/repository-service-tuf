@@ -3,6 +3,7 @@
 Development process
 ===================
 
+
 This document, specifically the `file ROADMAP.rst
 <https://github.com/kaprien/repository-service-tuf/blob/main/ROADMAP.rst>`_, defines the
 :ref:`Repository Service for TUF Roadmap <devel/release:Roadmap>`.
