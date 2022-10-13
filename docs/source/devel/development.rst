@@ -5,15 +5,15 @@ Development process
 
 
 This document, specifically the `file ROADMAP.rst
-<https://github.com/kaprien/repository-service-tuf/blob/main/ROADMAP.rst>`_, defines the
+<https://github.com/vmware/repository-service-tuf/blob/main/ROADMAP.rst>`_, defines the
 :ref:`Repository Service for TUF Roadmap <devel/release:Roadmap>`.
 
 Each Roadmap Goal must have a `project in the Repository Service for TUF Organization
 <https://github.com/orgs/repository-service-tuf/projects>`_.
 
 The :ref:`devel/release:Roadmap` contains the desired features. Each
-feature has an issue open in the `kaprien/repository-service-tuf
-<https://github.com/kaprien/repository-service-tuf>`_ (Umbrella repository) issues.
+feature has an issue open in the `vmware/repository-service-tuf
+<https://github.com/vmware/repository-service-tuf>`_ (Umbrella repository) issues.
 
 Working on the Features:
 
@@ -23,7 +23,7 @@ Working on the Features:
 
 The Component specifies the Milestone (release) that will contain the Roadmap
 Goal in the `ROADMAP.rst
-<https://github.com/kaprien/repository-service-tuf/blob/main/ROADMAP.rst>`_ (:ref:`also
+<https://github.com/vmware/repository-service-tuf/blob/main/ROADMAP.rst>`_ (:ref:`also
 visible below <devel/release:Roadmap>`).
 
 It allows the Component Maintainers to combine Repository Service for TUF Features and internal
@@ -145,6 +145,6 @@ The Components have the development instructions.
 Components Repositories
 -----------------------
 
-    - `Repository Service for TUF REST API <https://github.com/kaprien/repository-service-tuf-api>`_ (``repository-service-tuf-api``)
-    - `Repository Service for TUF Worker <https://github.com/kaprien/repository-service-tuf-rworker>`_ (``repository-service-tuf-worker``)
-    - `Repository Service for TUF Command Line Interface <https://github.com/kaprien/repository-service-tuf-cli>`_ (``repository-service-tuf-cli``)
+    - `Repository Service for TUF REST API <https://github.com/vmware/repository-service-tuf-api>`_ (``repository-service-tuf-api``)
+    - `Repository Service for TUF Worker <https://github.com/vmware/repository-service-tuf-rworker>`_ (``repository-service-tuf-worker``)
+    - `Repository Service for TUF Command Line Interface <https://github.com/vmware/repository-service-tuf-cli>`_ (``repository-service-tuf-cli``)

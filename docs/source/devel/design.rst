@@ -14,6 +14,6 @@ distributed deployment. As the example below
 Components/Tools
 ================
 
-- `repository-service-tuf-api <https://docs.kaprien.com/repository-service-tuf-api>`_
-- `repository-service-tuf-worker <https://docs.kaprien.com/repository-service-tuf-worker>`_
-- `repository-service-tuf-cli <https://docs.kaprien.com/repository-service-tuf-cli>`_
+- `repository-service-tuf-api <https://repository-service-tuf.readthedocs.org/repository-service-tuf-api>`_
+- `repository-service-tuf-worker <https://repository-service-tuf.readthedocs.org/repository-service-tuf-worker>`_
+- `repository-service-tuf-cli <https://repository-service-tuf.readthedocs.org/repository-service-tuf-cli>`_

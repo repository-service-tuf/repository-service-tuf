@@ -40,7 +40,7 @@ services:
     tty: true
 
   rstuf-worker:
-    image: ghcr.io/kaprien/repository-service-tuf-worker:latest
+    image: ghcr.io/vmware/repository-service-tuf-worker:latest
     volumes:
       - rstuf-worker-data:/data
       - rstuf-storage:/var/opt/repository-service-tuf/storage
@@ -70,7 +70,7 @@ services:
       - "8080:8080"
 
   rstuf-api:
-    image: ghcr.io/kaprien/repository-service-tuf-api:latest
+    image: ghcr.io/vmware/repository-service-tuf-api:latest
     volumes:
       - rstuf-api-data:/data
     ports:
