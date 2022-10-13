@@ -26,34 +26,33 @@
 !include <awslib/SecurityIdentityAndCompliance/KeyManagementService>
 !include <awslib/Storage/S3Bucket>
 
-sprite $trs [125x125/16z] {
-xPY7Ol8miaQ_QMfMUV-tlOmT8kFW07_BtLrEUYHyD1fLy9Tvy-RDcpTlthnvy-RD6n8DCUMSOb0c_4FOyhWX6-FVeEMYwxMsxjxUQktkL_nzh8xHwkQjotBz
-hOrH_xPUbZ5SD9894m4W5al36pJ68lXxKBn8BkeaT2ZGl9N4FoWJYwdaajCwfBbk0iOU8ZYyDMpXFpIaozZJKX-jZypO8oeg7_eoUXj3yDj8Tf-FQAUtDT6N
-BpjqjuYmA6F5nlW3TYbk7ivIBhZPExKnRd1pK1ObhCYq_-wuwkcwU15BA6CKmZ5mYwQcmjYWnUsCN-KwheeUL2mumCeX6BE8O6-lX9UPNTT74Jp4vUhUdHpK
-BlQ4NqFdk7e8gGW9YGhZ4_Onhx_excrKnYcSbiJuG2wONA2RHxJH2AyZxixqZNiuLpi9UzZCs9Ckze2N8U_pZ7CyesqN63C89CUdz3u8hv8lxe8DbWiCV0bg
-x4UK4A0u44PzFNJrHzFdkdb11NlCqwcNhpaYbTp_9VHHwHSwNR32Aco1MHbV1hBwNEHf1-w5BdW96tL4R8Xe36egWa-eZhPMY8yM4lQAhmO-nucoHXCMrYbn
-vm9dURIGbF5Ylzj-cEWwXo0ovREt7oyaORJNLlYo2zojp4mgSaZuiI4Jsirt6VMbLOvlkf95M9LtassPUPmfs24geifOeHUJRhUDbMsUozvMCQc7ntjTzSzh
-ySXu7by_29-G00IXatu-ffrL90GLaUjoDHOypp96EMxVmdkLOO_TD4T4Kn0nKVe8PLGymLcMX6Ud5nyGTxggJBa4KtokIcdqJY-DDyCDSfFmHdSscRaeNM26
-pCXVs5jE9ySnuITfPtVhF51vjxycbs_MVCDNRByHyNQku2d77v3l4twUTX9YPfAvlXRyGhSJ4VQ4GyAFQG_Nq36tTkhzbLCaVyX9L5LutwhM3drolr1eRg_y
-sacAjkgamkjQTPxmyxJFL-bhQplvrVVZ0cGyDxFyu5ItB-UJvV8nViF-k039F4I46TatKo7SEKUzCjw2xnHCoZOlG8U4FqZxyUXUSf1dt-rOLs-Q5w3Ji2Qd
-dPDzLNAMn_gmtael66ulG64cz47Q0_RJD0t77_f4qxrMpJaSBq1vz97ZIc0SuH1NrbghMdHhDgLyeRf-sizNxYoV2vN8vmKeUj4L-PBiAzqtc3lJLFAZinxr
-cxnkMjdTpFhAF3NjpbLzvNfxKs6Tq_J1P9d7fuI9CA1p9FQsqkSMkPjEry8Yss4cH1MxMH_JgCDmIZu-LbXevrXPTtIwS_gW5JWi789-JjFPn8mJZbl0-GNe
-AgU5zklnX4LK13JbvqUQrxQ0AGyztfUJYdnSs0-BFtydj-Vbb99_tfFFQOedv3Drpyf3hWR0QWu7-Poc98p972ndH-RwhBmADgJHbDzEKnBigTyUuCFSUX_A
-2rO8AFVa40OfzkYyVPubVV2JSi85xeJbhXp2UdZuQSfdLeO-8tUbWhk05joLGmvnFnfHrDnUJBvZkmGKnXAh0EpoFf8ul8ss7Go0rSfu_9OSTzzz7j1T7WoK
-1O35xOsC3LqZs6EmZpsrCxw7qlgM-dTiQpjNR2oyhUtL6HcGiTJ9ACXZVRC-4HuYwQd84GES4E7oVUJr4BdwZoHu2c8vHxUSkqC1Q2NCdEinvzj_M9ZmHvZB
-QpLOdSlhFs3AGRbcme_87GD-Jex_VlbR_fOBxP5_Ap_IXk6V8ADzPJ3-LUXV2VXNi8LRZF7VpnlwGozHXzW8_gKNFluhE8Lwm2bY9lX2QdVir5fldKDds13g
-hNajwgtsY5DCG9Ln3-sbrNjDmZsa6-1oxOos6Qa5v4QmfHguM2uCIZKBA9Kgb9LohGOjDG3PGWg5a1A0s0JabOl0efRWFnUs18JI359gf9rSF-NKikagJreJ
-j9jsuPwjHwIckSEwAL4FTD4ozsZTiBHgqcLBXlPgGEeIlNADt29AGUhG7aoeH-dXAATLNfUQNLvhhuJOKkh6NL4ohurXxZN0DTO9rXarKIu4rA2TSK5oJrIM
-M3fR5o0MDwHAqHEgFQUUZtBnw6bsktP5wCP2tEqYfvfM6OSUNBxrbRYyP01MrnyW83NEHLZM-f1s4ICj5pcxBOZ8RSwvjz8pgATDxjtiOIPBn7qfgosr1PP2
-Do-slXYr9NL5Mm1mxOeBfQNkpGmM4LoEqYEGEwIN4gXMYrFEGTRlqGWK58x_vFKh1d0F5WXGhy4nsbfC8OgN2s2scqpY3_BAKI61rlymeEQ_10PPZ8odyPm_
-nBE15_YZSksHVd0nVVFcpPitR_uF
+sprite $rstuf [125x125/16z] {
+xC610000082W_QaNgG8009WTCz6QL8M1S585A8ha_T_sYavpCdYEtVwptUsRzNUX81N3yejHXZJDESzJ2b3vZI1cCq-EaD-2XiNCQYbRRRfrAwKs_I2_dbZC
+jdBgbdLz_MypAxzQdgjP4x8v4jgyLZ3ErZfajb9-7Jhj8hlq77IqOZxlJ3zHZ76QbvppVAGqoYa0yQWSuEpO2laP82tcsUPgMxKCyR1nwcEnkfbHVXZcfjSo
+kb6tm-ZDB0pX9WW6o44q-mdgN9goDTPbfocte6uOdYEO0lZA0TORzMTvLUTNyL9bCs4PyuoCKsGa8IUwDdN8LtdbrJAcD2W3858A04dnwaNbYz1QNYsKzu08
+JTU9Yswx-YnV8nn94-KJbAHIGK8wQ3aVlgXTDoitfc5UPxWF3P4WLNmJcsqgps7JpdgZRGtqeMlJ1yGpx-f97gCjvbckU4StDp0S_-7OIgscyfIyQoyzc-Yy
+T8Codr5KaI03oShpeJUtJBkT10F54vkTeULpbAxUz2z3jw9V23hb00684I3aaiYXVOlzUd0gVkYKHqGhVKuamvH22AHqjDXsF32zAoHe3puTU0-w466A1E62
+sZHNQQpl2ibYLkG9qQT900CXH8-gY_RxGf9iUrRX5wkcldm06iZ1yA4Z3dNVEwqygdBmeHIG2C4NphNxw2nmC90XG0xqeUdn-yvIkQFqQjx6CZHF0cvcBsPP
+xXdhXqgdoQfGnpYFBhYI55FeyrisM-LpLhDbdBu1BnM7IFdka9mJ6KcLnlmetQyk0M1FHfSGFbHB5mTIf01Tl5Pzb6zHn4Dl-7MML6yxTm0Xk_Y3kUNkuxWQ
+VhKTJPiWAJtipyGf3Y_YekA9VY826GX2lETV5xyn_6gxGW5LzdUE6y_3hZgKoglXVhMOtBhYfQsrFbb5ufkuCZ0GlbVRPfIHwqswie1dAobjZ_SD4Bkw3eRV
+sUuceMUrNTlMzzi6A8AzdNopgXllOoYNdvFDjhu12gHqmqtVBN_IvUApV4kjP403OWfGacyD7sqVb-vBJlpqjEEetXhS1iWDwmON7Ez5jSRwNZvPw_rEb42_
+0KetXdkftaDLFIrlj4O_wVfcLd9EumOeMxKy7IJ82D9qS3mb_ZFLEU-K9j_LRoftffpGRu2cTki5BsOVd8PDupb5W_dTMa-hzrKKRWE4e-a3lshgwwfwO3iO
+pobyFjmldtmb9Dm6Y4lT3cgV8lssv7Npo2ibqnGOIVZgN-xsstbibg0wZODcm4My1LiFf06wpzHryIPbtHHmkm7guhgggySE404KTIE_MT8yc0ASUAgJ4x-U
+Kv34KFnn9nu_5zTvRh-xk8SxaJjoApvQzwbup2Ms1ajEetW_fr2eE8vakLiobq_5Iwy6HQ_Y0XnT44-vNS2dOUgz4r_wMU_InJt4g1tk3ocQwOOFnLLsK5LM
+B-xLmz3uZUKlLony8juaWw1IT7MUUyPnlyietPhw4dd7kGbO8ElKZCTob8-P3PpPvcXN4E9Yxu_aK8zfxPxQn5CKdIaYiMNxhduIZX5ueiHlSsg5tAFpSQH-
+nrdRiSh9YhEsbuPb4ThgdhP5iXs7zRFAMpX_D7APaZJI9EF8op3oO3ipvICK7tWkKeA8X2BIFMSOFJ-lW51vp7rvBL5YSUNrDz35HNF9Adz4l155_fou_Fl5
+_nV_NvpguUyL7zaioc-1jbqnoEyQ-fKalml4z3qHyY_XVm3v7ENpj-ESauh3aIUt_FOmhvCCnABYOLty1In_jJyTYPQ48B28QglS_xW3EZdzrTzrlKHJwT7R
+5CcTjoeTHVQbgoUdd7gI_2QLykOY1mkj-P8Y14wIeedVDPrrpinMANBNYROKA0SnbSV6SjQWR8I7wT4C6WCMleNYMK7vlLlIpJ4RhsUInHDC-MMX2A_ope0l
+3-RqMB5Y0Ocvw4G1lERWiTQ4vXO9dy0fVzBATChtMemvD1g5KgW5QLG4uMbewTYU4wr6Q4sYpfALzEefuZ32CjsmJHcB6rLT6odc40czJUj7-OvvBxSuvIef
+FELbWiw7HhlbXj5fQvNsWGCFURegSqfXpt3OeYBfH9LYGOAeoWa_BcUCyVtolZ0sUQWpnJFglxRvm6miUb8MFSaMIc40HcX-NqdRwdLPFGUd4XfjfDhyb0Te
+ZnvKXOMsIpaheiQ26iWPsfmet2hAZI2jbfgS4xJIh2BiNc4bkPwaKKA88OLwrxZFwMRmURmBiBdSyJVK5V-7X-EJGFsZycRu2rwyUF7YnOiNNm
 }
 
 
 AddContainerTag("webui", $sprite="application_server", $legendText="Web UI Interface", $bgColor=Gray)
 AddContainerTag("key_service", $sprite="lock_with_key_security", $legendText="Key Service", $bgColor=Gray)
 AddContainerTag("storage_service", $sprite="file_server", $legendText="Storage Service", $bgColor=Gray)
-AddContainerTag("tuf_repository_service_worker", $sprite="trs", $legendText="Repository Metadata Worker")
+AddContainerTag("repository_service_tuf_worker", $sprite="rstuf", $legendText="Repository Metadata Worker")
 AddContainerTag("queue", $sprite="queue_viewer", $legendText="Message Queue")
 AddContainerTag("ci_cd", $sprite="application_generic", $legendText="CI/CD, Artfact Management, etc")
 AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed TUF Metadata")
@@ -65,12 +64,12 @@ AddContainerTag("aws_kms", $sprite="KeyManagementService", $legendText="KeyVault
 AddContainerTag("azure_blob", $sprite="AzureBlobStorage", $legendText="Storge")
 AddContainerTag("azure_kv", $sprite="AzureKeyVault", $legendText="KeyVault")
 
-AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=0.75,color=#000000", $legendText="TUF Repository Service CLI")
+AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=0.75,color=#000000", $legendText="Repository Service for TUF CLI")
 AddRelTag("bowser", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="management_console,scale=0.5", $legendText="Browser")
 AddRelTag("download", $textColor="Green", $lineColor="$ARROW_COLOR")
 AddRelTag("share", $textColor="orange", $lineColor="grey", $lineStyle = DashedLine())
 
-Container(tuf_repository_service_worker, "TUF-REPOSITORY-SERVICE-WORKER", "Metadata Repository Worker", $tags="tuf_repository_service_worker")
+Container(repository_service_tuf_worker, "REPOSITORY-SERVICE-TUF-WORKER", "Metadata Repository Worker", $tags="repository_service_tuf_worker")
 ContainerDb(data_dir, "/$DATA_DIR", "File System", "Service settings\nRepository Settings", $tags="storage_service")
 Container_Ext(broker, "Broker/Backend", "RabbitMQ, Redis, etc", $tags="queue") #Grey
 Container_Ext(redis, "Redis", "Redis Server", $tags="redis") #Grey
@@ -84,12 +83,12 @@ Container_Boundary(key_storage, "Key Vault Service"){
     Container_Ext(aws_kms, "AWS KMS", "Storage", $tags="aws_kms") #Grey
     Container_Ext(azure_kv, "Azure Key Vault", "Storage", $tags="azure_kv") #Grey
 }
-Rel_D(broker, tuf_repository_service_worker, "Consumer", "Tasks")
-Rel_U(tuf_repository_service_worker, broker, "Publisher", "Tasks")
-Rel_U(tuf_repository_service_worker, redis, "Repository Configuration", "Consumer")
-Rel_R(tuf_repository_service_worker, data_dir, "Write/Read", "Config settings")
-Rel_D(tuf_repository_service_worker, repository_storage, "Write/Read", "TUF Metadata")
-Rel_D(tuf_repository_service_worker, key_storage, "Write/Read", "Online Keys")
+Rel_D(broker, repository_service_tuf_worker, "Consumer", "Tasks")
+Rel_U(repository_service_tuf_worker, broker, "Publisher", "Tasks")
+Rel_U(repository_service_tuf_worker, redis, "Repository Configuration", "Consumer")
+Rel_R(repository_service_tuf_worker, data_dir, "Write/Read", "Config settings")
+Rel_D(repository_service_tuf_worker, repository_storage, "Write/Read", "TUF Metadata")
+Rel_D(repository_service_tuf_worker, key_storage, "Write/Read", "Online Keys")
 
 
 

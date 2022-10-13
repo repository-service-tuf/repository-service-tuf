@@ -4,23 +4,23 @@ docs:
 	git submodule update --init --recursive
 	git submodule foreach git pull origin main
 
-	# tuf-repository-service-cli
-	cp -r tuf-repository-service-cli/docs/diagrams/* docs/diagrams/
-	rm -rf docs/source/guide/tuf-repository-service-cli/*
-	cp -r tuf-repository-service-cli/docs/source/guide/* docs/source/guide/tuf-repository-service-cli/
+	# repository-service-tuf-cli
+	cp -r repository-service-tuf-cli/docs/diagrams/* docs/diagrams/
+	rm -rf docs/source/guide/repository-service-tuf-cli/*
+	cp -r repository-service-tuf-cli/docs/source/guide/* docs/source/guide/repository-service-tuf-cli/
 
-	# tuf-repository-service-api
-	cp -r tuf-repository-service-api/docs/diagrams/* docs/diagrams/
-	rm -rf docs/source/guide/tuf-repository-service-api/*
-	cp -r tuf-repository-service-api/docs/source/guide/* docs/source/guide/tuf-repository-service-api/
+	# repository-service-tuf-api
+	cp -r repository-service-tuf-api/docs/diagrams/* docs/diagrams/
+	rm -rf docs/source/guide/repository-service-tuf-api/*
+	cp -r repository-service-tuf-api/docs/source/guide/* docs/source/guide/repository-service-tuf-api/
 
-	# tuf-repository-service-worker
-	cp -r tuf-repository-service-worker/docs/diagrams/* docs/diagrams/
-	rm -rf docs/source/guide/tuf-repository-service-worker/*
-	cp -r tuf-repository-service-worker/docs/source/guide/* docs/source/guide/tuf-repository-service-worker/
+	# repository-service-tuf-worker
+	cp -r repository-service-tuf-worker/docs/diagrams/* docs/diagrams/
+	rm -rf docs/source/guide/repository-service-tuf-worker/*
+	cp -r repository-service-tuf-worker/docs/source/guide/* docs/source/guide/repository-service-tuf-worker/
 
 	sphinx-build -E -W -b html docs/source docs/build/html
-	plantuml -tpng docs/diagrams/1_1_trs.puml
+	plantuml -tpng docs/diagrams/1_1_rstuf.puml
 
 requirements:
 	pipenv requirements > requirements.txt

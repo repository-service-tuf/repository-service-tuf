@@ -1,6 +1,6 @@
-======================================
-TUF Repository Service Release process
-======================================
+==========================================
+Repository Service for TUF Release process
+==========================================
 
 Release process
 ===============

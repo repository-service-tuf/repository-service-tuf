@@ -2,31 +2,31 @@
 Introduction
 ============
 
-TUF Repository Service components
-=================================
+Repository Service for TUF components
+=====================================
 
-TUF Repository Service (TRS) have two component services,
-``tuf-repository-service-api`` and ``tuf-repository-service-worker``.
-TRS also have a Command Line Interface that is a Python Application,
-``tuf-repository-service-cli``.
+Repository Service for TUF (RSTUF) have two component services,
+``repository-service-tuf-api`` and ``repository-service-tuf-worker``.
+RSTUF also have a Command Line Interface that is a Python Application,
+``repository-service-tuf-cli``.
 
 * `All represented in blue`
 
-.. uml:: ../../../diagrams/2_1_trs.puml
+.. uml:: ../../../diagrams/2_1_rstuf.puml
 
-TUF Repository Service
-----------------------
+Repository Service for TUF
+--------------------------
 
-The ``tuf-repository-service-api``, and ``tuf-repository-service-worker``
+The ``repository-service-tuf-api``, and ``repository-service-tuf-worker``
 services are provided as Docker Images.
 
-``tuf-repository-service-api`` is the API Service, and the
-``tuf-repository-service-worker``` is a Task Manager Worker that handles the
+``repository-service-tuf-api`` is the API Service, and the
+``repository-service-tuf-worker``` is a Task Manager Worker that handles the
 TUF Metadata.
 
-The TUF Repository Service requires a Broker (``RabbitMQ`` or ``Redis``)
-to be used by the TRS services (``tuf-repository-service-api``,
-``tuf-repository-service-worker``).
+The Repository Service for TUF requires a Broker (``RabbitMQ`` or ``Redis``)
+to be used by the RSTUF services (``repository-service-tuf-api``,
+``repository-service-tuf-worker``).
 
 .. note::
     TUF Metadata Storage and Sorage Keys (Key Vault) use File Systems.
@@ -35,50 +35,49 @@ to be used by the TRS services (``tuf-repository-service-api``,
     The plan is to add support for SaaS Services such as S3 and Cloud Key
     Vaults in the following releases.
 
-The idea of using TUF Repository Service as microservices is the possibility
+The idea of using Repository Service for TUF as microservices is the possibility
 of bringing scalability and reliability in different deployment scenarios.
 
-TUF Repository Service Command Line
------------------------------------
+Repository Service for TUF Command Line
+---------------------------------------
 
-The TUF Repository Service Command Line Interface
-(``tuf-repository-service-cli``) is a Command Line Interface (CLI) Python
-Application to manage the TUF Repository Service.
+The Repository Service for TUF Command Line Interface
+(``repository-service-tuf-cli``) is a Command Line Interface (CLI) Python
+Application to manage the Repository Service for TUF.
 
 The CLI supports the Ceremony (signing the initial Repository Metadata
-and TUF Repository Service setup), generating Tokens to be used by integration
+and Repository Service for TUF setup), generating Tokens to be used by integration
 (i.e. CI/CD tools).
 
 The Repository Metadata
 =======================
 
-TUF Repository Service (TRS) is to secure downloads with signed Repository
+Repository Service for TUF (RSTUF) is to secure downloads with signed Repository
 Metadata.
-TRS implements The Update Framework (TUF) As a Service as part of your release
+RSTUF implements The Update Framework (TUF) As a Service as part of your release
 process.
 
-The TRS has pre-defined TUF Roles and some Roles to protect and enable
+The RSTUF has pre-defined TUF Roles and some Roles to protect and enable
 integration with build systems based on Python PEP 458.
 
-.. uml:: ../../../diagrams/1_1_trs_metadata.puml
+.. uml:: ../../../diagrams/1_1_rstuf_metadata.puml
 
 Some configurations are possible during the
-:ref:`guide/tuf-repository-service-cli/index:Ceremony (``ceremony\`\`)`, such
+:ref:`guide/repository-service-tuf-cli/index:Ceremony (``ceremony\`\`)`, such
 as the number of keys, thresholds, expiration, etc.
 
 New targets (file, package, update, installer) can be added to the signed
 repository metadata using REST API calls, making it easy to integrate into
 CI/CD tools.
 
-You can deploy TUF Repository Service as a single server or a distributed
+You can deploy Repository Service for TUF as a single server or a distributed
 service in edge, private, or cloud environments.
 
-Check out the :ref:`installation guide to see how to deploy.
-<guide/installation/server:TUF Repository Service  Installation>`
+Check out the :ref:`how to deploy <guide/installation/server:Deployment>`.
 
-Below is a diagram of TUF Repository Service in a building environment.
+Below is a diagram of Repository Service for TUF in a building environment.
 
-.. uml:: ../../../diagrams/2_2_trs.puml
+.. uml:: ../../../diagrams/2_2_rstuf.puml
 
 .. note::
 
@@ -101,7 +100,7 @@ When I started implementing the `PEP 458 (Secure PyPI downloads with signed
 repository metadata) <https://peps.python.org/pep-0458/>`_ , I began
 designing how to implement a reusable platform in different flows and infrastructures.
 
-TUF Repository Service goal is to be an easy tool/platform to be used by Developers, DevOps,
+Repository Service for TUF goal is to be an easy tool/platform to be used by Developers, DevOps,
 DevOpsSec in the delivery process.
 
 

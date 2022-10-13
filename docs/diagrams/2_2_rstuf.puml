@@ -32,23 +32,42 @@ AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed
 AddContainerTag("download_target", $sprite="download", $legendText="Download file/target/package", $bgColor=Gray)
 AddContainerTag("terminal", $sprite="terminal,scale=0.5,color=#000000", $legendText="CLI")
 
-AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=0.75,color=#000000", $legendText="TUF Respository Service CLI")
+AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=0.75,color=#438DD5", $legendText="Repository Service for TUF CLI")
 AddRelTag("bowser", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="management_console,scale=0.5", $legendText="Browser")
 AddRelTag("download", $textColor="Green", $lineColor="$ARROW_COLOR")
 AddRelTag("share", $textColor="orange", $lineColor="grey", $lineStyle = DashedLine())
 
 Person(administration_user, "Admin", $tags="admin") #Grey
+Person(repository_user, "User", $tags="user")
 
-Container(trs_rest_api, "TUF-REPOSITORY-SERVICE-API", $tags="rest_api")
-ContainerDb(data_dir, "/$DATA_DIR", "File System", "Service settings\nRepository settings\nUsers db", $tags="storage_service")
-Container_Ext(broker, "Broker/Backend", "RabbitMQ, Redis, etc", $tags="queue") #Grey
-Container_Ext(ci_cd, "Third Part Software", "Jenkis, Github, Gitlab, etc", $tags="ci_cd") #Grey
+System_Boundary(build_systems, "CD/Build Systems") {
+    System_Boundary(rstuf, "Repository Service for TUF ") {
+        Container(rstuf_rest_api, "REPOSITORY-SERVICE-TUF-API", "Docker", $tags="rest_api") #DeepSkyBlue
+        Container(rstuf_repo_worker, "REPOSITORY-SERVICE-TUF-WORKER", "Docker", $tags="repo_worker")
+    }
+    Container(queue, "Broker/Backend", "RabbitMQ, Redis, etc", $tags="queue") #Grey
+    Container(ci_cd, "CI/CD", "Jenkis, Github, Gitlab, etc", $tags="ci_cd") #Grey
+    ContainerDb(key_service, "Key Service", "Local/SaaS Vault", $tags="key_service") #Grey
+    ContainerDb(storage_service, "Storage Service", "Local/SaaS Storage", $tags="storage_service") #Grey
+}
 
-Rel(administration_user, trs_rest_api, "TUF-REPOSITORY-SERVICE-CLI", $tags="terminal")
-Rel_R(ci_cd, trs_rest_api, "HTTPS + Tokens")
-Rel_D(trs_rest_api, broker, "Publisher/Consumer", "Tasks")
-Rel_R(trs_rest_api, data_dir, "Write/Read data")
+System_Boundary(files, "Download / Repository files") {
+    Container(webserver, "Metadata", "Optional", "TUF Metadata (Repository Service for TUF )", $tags="metadata_web") #Grey
+    Container(repository, "Repository", "FTP, HTTP, NPN, PyPI, JFrog Artifactory, etc", "Files/Artificts", $tags="metadata_web") #Grey
+}
 
+Rel(administration_user, rstuf_rest_api, "REPOSITORY-SERVICE-TUF-CLI", $tags="terminal")
+Rel_R(ci_cd, rstuf_rest_api, "HTTPS + Tokens")
+Rel_U(queue, rstuf_repo_worker, "Consumer", "Tasks")
+Rel_D(rstuf_rest_api, queue, "Producer", "Tasks")
+Rel_D(rstuf_repo_worker, key_service, "Read/Write", "Online Keys")
+Rel_D(rstuf_repo_worker, storage_service, "Read/Write", "Repository Metadata")
+
+Rel_D(storage_service, webserver, "Render/Share/View", $tags="share")
+Rel_D(ci_cd, repository, "Upload")
+Rel_L(files, repository_user, "Download")
+
+Lay_R(repository, webserver)
 
 HIDE_STEREOTYPE()
 @enduml

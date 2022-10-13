@@ -7,7 +7,7 @@ Documentation
 Structure
 =========
 
-TUF Repository Service 's main/umbrella Repository maintains the Guide and the Development
+Repository Service for TUF 's main/umbrella Repository maintains the Guide and the Development
 Guide.
 
 The documentation in structure is:
@@ -29,7 +29,7 @@ The documentation in structure is:
 To gives the component's developer the responsibility and the flexibility to
 build their documentation. The component needs to follow a structure.
 
-The TUF Repository Service main/umbrella uses high-level documentation from the components to
+The Repository Service for TUF main/umbrella uses high-level documentation from the components to
 build the Guide and the Development Guide.
 
 The components documentation also follows a required structure:

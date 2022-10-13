@@ -18,7 +18,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'TUF Repository Service '
+project = 'Repository Service for TUF '
 copyright = '2022, Kairo de Araujo'
 author = 'Kairo de Araujo'
 
@@ -68,8 +68,8 @@ html_theme = 'sphinx_rtd_theme'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
-html_logo = '_static/tuf-repository-service-logo.gif'
-html_favicon = '_static/trs-logo.ico'
+html_logo = '_static/repository-service-tuf-logo.gif'
+html_favicon = '_static/rstuf-logo.ico'
 # HTML Theme Options
 html_theme_options = {
     'navigation_depth': 4,

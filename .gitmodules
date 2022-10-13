@@ -1,9 +1,9 @@
-[submodule "tuf-repository-service-cli"]
-	path = tuf-repository-service-cli
-	url = git@github.com:kaprien/tuf-repository-service-cli.git
-[submodule "tuf-repository-service-worker"]
-	path = tuf-repository-service-worker
-	url = git@github.com:kaprien/tuf-repository-service-worker.git
-[submodule "tuf-repository-service-api"]
-	path = tuf-repository-service-api
-	url = git@github.com:kaprien/tuf-repository-service-api.git
+[submodule "repository-service-tuf-api"]
+	path = repository-service-tuf-api
+	url = git@github.com:kaprien/repository-service-tuf-api.git
+[submodule "repository-service-tuf-worker"]
+	path = repository-service-tuf-worker
+	url = git@github.com:kaprien/repository-service-tuf-worker.git
+[submodule "repository-service-tuf-cli"]
+	path = repository-service-tuf-cli
+	url = git@github.com:kaprien/repository-service-tuf-cli.git

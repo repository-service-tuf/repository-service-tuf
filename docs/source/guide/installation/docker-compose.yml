@@ -1,18 +1,18 @@
 version: "3.7"
 
 volumes:
-  trs-api-data:
-  trs-worker-data:
-  trs-mq-data:
-  trs-storage:
-  trs-keystorage:
-  trs-redis-data:
+  rstuf-api-data:
+  rstuf-worker-data:
+  rstuf-mq-data:
+  rstuf-storage:
+  rstuf-keystorage:
+  rstuf-redis-data:
 
 
 secrets:
-  SECRETS_TRS_ADMIN_PASSWORD:
+  SECRETS_RSTUF_ADMIN_PASSWORD:
     external: True
-  SECRETS_TRS_TOKEN_KEY:
+  SECRETS_RSTUF_TOKEN_KEY:
     external: True
   # HTTPS (SSL)
   # API_KEY:
@@ -24,7 +24,7 @@ services:
   rabbitmq:
     image: rabbitmq:3-management-alpine
     volumes:
-      - "trs-mq-data:/var/lib/rabbitmq"
+      - "rstuf-mq-data:/var/lib/rabbitmq"
     healthcheck:
       test: "exit 0"
     restart: always
@@ -33,26 +33,26 @@ services:
   redis:
     image: redis:4.0
     volumes:
-      - trs-redis-data:/data
+      - rstuf-redis-data:/data
     healthcheck:
       test: "exit 0"
     restart: always
     tty: true
 
-  trs-worker:
-    image: ghcr.io/kaprien/tuf-repository-service-worker:latest
+  rstuf-worker:
+    image: ghcr.io/kaprien/repository-service-tuf-worker:latest
     volumes:
-      - trs-worker-data:/data
-      - trs-storage:/var/opt/tuf-repository-service/storage
-      - trs-keystorage:/var/opt/tuf-repository-service/keystorage
+      - rstuf-worker-data:/data
+      - rstuf-storage:/var/opt/repository-service-tuf/storage
+      - rstuf-keystorage:/var/opt/repository-service-tuf/keystorage
     environment:
-      TRS_STORAGE_BACKEND: LocalStorage
-      TRS_KEYVAULT_BACKEND: LocalKeyVault
-      TRS_LOCAL_STORAGE_BACKEND_PATH: /var/opt/tuf-repository-service/storage
-      TRS_LOCAL_KEYVAULT_PATH: /var/opt/tuf-repository-service/keystorage
-      TRS_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
-      TRS_REDIS_SERVER: redis://redis
-      TRS_WORKER_ID: trs_worker_001
+      RSTUF_STORAGE_BACKEND: LocalStorage
+      RSTUF_KEYVAULT_BACKEND: LocalKeyVault
+      RSTUF_LOCAL_STORAGE_BACKEND_PATH: /var/opt/repository-service-tuf/storage
+      RSTUF_LOCAL_KEYVAULT_PATH: /var/opt/repository-service-tuf/keystorage
+      RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
+      RSTUF_REDIS_SERVER: redis://redis
+      RSTUF_WORKER_ID: rstuf_worker_001
     depends_on:
       - redis
       - rabbitmq
@@ -65,33 +65,33 @@ services:
     image: python:3.10-slim-buster
     command: python -m http.server -d /www 8080
     volumes:
-      - trs-storage:/www
+      - rstuf-storage:/www
     ports:
       - "8080:8080"
 
-  trs-api:
-    image: ghcr.io/kaprien/tuf-repository-service-api:latest
+  rstuf-api:
+    image: ghcr.io/kaprien/repository-service-tuf-api:latest
     volumes:
-      - trs-api-data:/data
+      - rstuf-api-data:/data
     ports:
       - 80:80
       - 443:443
     environment:
-      TRS_BOOTSTRAP_NODE: "true"
-      TRS_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
-      TRS_REDIS_SERVER: redis://redis
-      SECRETS_TRS_TOKEN_KEY: /run/secrets/SECRETS_TRS_TOKEN_KEY
-      SECRETS_TRS_ADMIN_PASSWORD: /run/secrets/SECRETS_TRS_ADMIN_PASSWORD
+      RSTUF_BOOTSTRAP_NODE: "true"
+      RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
+      RSTUF_REDIS_SERVER: redis://redis
+      SECRETS_RSTUF_TOKEN_KEY: /run/secrets/SECRETS_RSTUF_TOKEN_KEY
+      SECRETS_RSTUF_ADMIN_PASSWORD: /run/secrets/SECRETS_RSTUF_ADMIN_PASSWORD
       # HTTP (SSL)
-      # SECRETS_TRS_SSL_CERT: /run/secrets/API_CRT
-      # SECRETS_TRS_SSL_KEY: /run/secrets/API_KEY
+      # SECRETS_RSTUF_SSL_CERT: /run/secrets/API_CRT
+      # SECRETS_RSTUF_SSL_KEY: /run/secrets/API_KEY
     secrets:
-      - SECRETS_TRS_ADMIN_PASSWORD
-      - SECRETS_TRS_TOKEN_KEY
+      - SECRETS_RSTUF_ADMIN_PASSWORD
+      - SECRETS_RSTUF_TOKEN_KEY
       # HTTPS (SSL)
       # - API_CRT
       # - API_KEY
     depends_on:
       - rabbitmq
       - redis
-      - trs-worker
+      - rstuf-worker

@@ -11,13 +11,13 @@ Features:
 
 - [x] Authentication using Token
 - [x] Authorization defined by Scope
-- [x] Bootstrap the TUF Repository Service (Initial TUF Metadata)
+- [x] Bootstrap the Repository Service for TUF (Initial TUF Metadata)
 - [x] Storage Service: Local file system
 - [x] Key Vault Service: Local file system
 - [x] Add targets
 - [x] Delete targets
 - [x] Generate Token
-- [x] Retrieves the TUF Repository Service settings
+- [x] Retrieves the Repository Service for TUF settings
 - [x] Automatically version Bump Snapshot Metadata
 - [x] Automatically version Bump Timestamp Metadata
 - [x] Automatically version Bump hash-bins Metadata
@@ -25,9 +25,9 @@ Features:
 
 Components Milestones:
 
-- `tuf-repository-service-api v0.0.1aX <https://github.com/kaprien/tuf-repository-service-api/milestone/2>`_
-- `tuf-repository-service-worker v0.0.1aX <https://github.com/kaprien/tuf-repository-service-worker/milestone/2>`_
-- `tuf-repository-service-cli v0.0.1aX <https://github.com/kaprien/tuf-repository-service-cli/milestone/2>`_
+- `repository-service-tuf-api v0.0.1aX <https://github.com/kaprien/repository-service-tuf-api/milestone/2>`_
+- `repository-service-tuf-worker v0.0.1aX <https://github.com/kaprien/repository-service-tuf-worker/milestone/2>`_
+- `repository-service-tuf-cli v0.0.1aX <https://github.com/kaprien/repository-service-tuf-cli/milestone/2>`_
 
 
 Goal: Minimum Working Version
@@ -45,13 +45,13 @@ This realease is to evaluate the features and functionality.
 - [ ] Add TLS/SSL for Broker and Result Backend communication (`Issue #6 <https://github.com/kaprien/tuf-repository-worker/issues/6>`_)
 - [ ] Public online documentation (`Issue #22 <https://github.com/kaprien/tuf-repository-worker/issues/22>`_)
 - [ ] Old Metadata retention (`Issue #29 <https://github.com/kaprien/tuf-repository-worker/issues/29>`_)
-- [ ] Option to Disable the API Authentication/Authorization Feature (`Issue #41 <https://github.com/kaprien/tuf-repository-service/issues/41>`_)
+- [ ] Option to Disable the API Authentication/Authorization Feature (`Issue #41 <https://github.com/kaprien/repository-service-tuf/issues/41>`_)
 
 Components Milestones:
 
-- `tuf-repository-service-api v0.0.1bX <https://github.com/kaprien/tuf-repository-service-api/milestone/3>`_
-- `tuf-repository-service-worker v0.0.1bX <https://github.com/kaprien/tuf-repository-service-worker/milestone/3>`_
-- `tuf-repository-service-cli v0.0.1bX <https://github.com/kaprien/tuf-repository-service-cli/milestone/3>`_
+- `repository-service-tuf-api v0.0.1bX <https://github.com/kaprien/repository-service-tuf-api/milestone/3>`_
+- `repository-service-tuf-worker v0.0.1bX <https://github.com/kaprien/repository-service-tuf-worker/milestone/3>`_
+- `repository-service-tuf-cli v0.0.1bX <https://github.com/kaprien/repository-service-tuf-cli/milestone/3>`_
 
 
 Goal: Minimum Valuable Product
@@ -62,13 +62,13 @@ Status: TBD
 First Production Deploy
 This release achive the minimum valuable product for users.
 
-- [ ] Support to AWS S3 (Storage) and AWS KMS (Key Vault) (`#24 <https://github.com/kaprien/tuf-repository-service/issues/24>`_
+- [ ] Support to AWS S3 (Storage) and AWS KMS (Key Vault) (`#24 <https://github.com/kaprien/repository-service-tuf/issues/24>`_
 
 Components Milestones:
 
-- `tuf-repository-service-api v0.1.X <https://github.com/kaprien/tuf-repository-service-api/milestone/4>`_
-- `tuf-repository-service-worker v0.1.X <https://github.com/kaprien/tuf-repository-service-worker/milestone/4>`_
-- `tuf-repository-service-cli v0.1.X <https://github.com/kaprien/tuf-repository-service-cli/milestone/4>`_
+- `repository-service-tuf-api v0.1.X <https://github.com/kaprien/repository-service-tuf-api/milestone/4>`_
+- `repository-service-tuf-worker v0.1.X <https://github.com/kaprien/repository-service-tuf-worker/milestone/4>`_
+- `repository-service-tuf-cli v0.1.X <https://github.com/kaprien/repository-service-tuf-cli/milestone/4>`_
 
 
 Goal: End-to-End Signing
@@ -80,6 +80,6 @@ Implement End-to-end signing of packages. Developers or Release Manager can
 sign the artifacts. See `PEP 480 <https://peps.python.org/pep-0480/>` for more
 details.
 
-- tuf-repository-service-api vT.B.D
-- tuf-repository-service-worker vT.B.D
-- tuf-repository-service-cli vT.B.D
+- repository-service-tuf-api vT.B.D
+- repository-service-tuf-worker vT.B.D
+- repository-service-tuf-cli vT.B.D

@@ -1,6 +1,6 @@
-==============================================
-TUF Respository Service REST API Documentation
-==============================================
+=================================================
+Repository Service for TUF REST API Documentation
+=================================================
 
 API Authentication and Authorization
 ====================================
@@ -42,11 +42,11 @@ Rest API endpoint ``api/v1/token/new``.
 
 .. note::
 
-    Please check the TUF Respository Service CLI
+    Please check the Repository Service for TUF CLI
 
     .. code:: shell
 
-        $ tuf-repository-service admin token
+        $ repository-service-tuf admin token
 
 API Endpoints
 =============

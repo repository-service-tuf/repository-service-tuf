@@ -2,7 +2,7 @@
 All-in-one host installation (Docker)
 =====================================
 
-The All-in-one host installation is the simplest way to Deploy TUF Repository Service Server.
+The All-in-one host installation is the simplest way to Deploy Repository Service for TUF Server.
 There are limitations to scaling this installation (limited to the host).
 
 This deployment will use Docker Stack with Docker Compose and Docker Swarn for
@@ -19,17 +19,17 @@ Requirements
 Steps
 =====
 
-1. Prepare the Docker Swarm credentials TUF Repository Service API admin user and a random
+1. Prepare the Docker Swarm credentials Repository Service for TUF API admin user and a random
    Token Key.
 
-   -  ``TRS_ADMIN_PASSWORD`` is the initial password for `admin`
-   -  ``SECRETS_TRS_TOKEN_KEY`` it the TOKEN KEY used to hash the API Tokens
+   -  ``RSTUF_ADMIN_PASSWORD`` is the initial password for `admin`
+   -  ``SECRETS_RSTUF_TOKEN_KEY`` it the TOKEN KEY used to hash the API Tokens
 
     .. code:: shell
 
       $ docker swarm init
-      $ printf "secret password" | docker secret create SECRETS_TRS_ADMIN_PASSWORD -
-      $ printf $(openssl rand -base64 32) | docker secret create SECRETS_TRS_TOKEN_KEY -
+      $ printf "secret password" | docker secret create SECRETS_RSTUF_ADMIN_PASSWORD -
+      $ printf $(openssl rand -base64 32) | docker secret create SECRETS_RSTUF_TOKEN_KEY -
 
     .. note::
 
@@ -46,8 +46,8 @@ Steps
 2. Create a Docker Compose (functional example above)
 
    - It uses Docker Volume for the persistent data.
-   - It uses Docker Secrets to store/use the ``TRS_TOKEN_KEY`` (Used to
-     generate API Tokens) and ``TRS_ADMIN_PASSWORD``.
+   - It uses Docker Secrets to store/use the ``RSTUF_TOKEN_KEY`` (Used to
+     generate API Tokens) and ``RSTUF_ADMIN_PASSWORD``.
 
      .. note::
         **HTTPS**
@@ -57,17 +57,17 @@ Steps
 
    - It uses RabbitMQ as a `broker` for the tasks.
    - It uses Redis for the task results and internal tasks.
-   - It adds the ``tuf-repository-service-worker`` configuration as environment
+   - It adds the ``repository-service-tuf-worker`` configuration as environment
      variables (storage/key vault type and paths, broker, backend, and repo
      worker id). The volumes for storage and key storage as Docker Volume.
-   - It configures the ``tuf-repository-service-api`` using environment variables for
+   - It configures the ``repository-service-tuf-api`` using environment variables for
      the secrets, and the data as Docker Volume.
 
      .. note::
       **HTTPS**
 
       - Uncoment environment variables for the certificate and key (lines 86-87)
-      - Uncoment the in `tuf-repository-service-api secrets` section (lines 93-93)
+      - Uncoment the in `repository-service-tuf-api secrets` section (lines 93-93)
       - (Optionally) Comment port 80:80 (line 77)
 
    - Web Server uses a Python container that exposes the docker volume with
@@ -86,27 +86,27 @@ Steps
 
     .. code:: shell
 
-        $ docker stack deploy -c docker-compose.yml trs
+        $ docker stack deploy -c docker-compose.yml rstuf
         Ignoring unsupported options: restart
 
-        Creating network trs_default
-        Creating service trs_trs-worker
-        Creating service trs_web-server
-        Creating service trs_trs-api
-        Creating service trs_rabbitmq
-        Creating service trs_redis
+        Creating network rstuf_default
+        Creating service rstuf_rstuf-worker
+        Creating service rstuf_web-server
+        Creating service rstuf_rstuf-api
+        Creating service rstuf_rabbitmq
+        Creating service rstuf_redis
 
 4. Repository Ceremony
 
-    It will require the CLI :ref:`guide/tuf-repository-service-cli/index:Installation`.
+    It will require the CLI :ref:`guide/repository-service-tuf-cli/index:Installation`.
 
     Once you have the service running is required to do the
-    :ref:`guide/tuf-repository-service-cli/index:Ceremony (``ceremony\`\`)`.
+    :ref:`guide/repository-service-tuf-cli/index:Ceremony (``ceremony\`\`)`.
 
     The Ceremony is the process of creating the initial signed Repository
     Metadata.
 
-    Example of Ceremony process using TUF Repository Service CLI.
+    Example of Ceremony process using Repository Service for TUF CLI.
 
     .. raw:: html
 
@@ -122,22 +122,22 @@ Remove the Stack
 
 .. code:: shell
 
-  $ docker stack rm trs
-  Removing service trs_trs-worker
-  Removing service trs_trs-api
-  Removing service trs_rabbitmq
-  Removing service trs_redis
-  Removing service trs_web-server
-  Removing network trs_default
+  $ docker stack rm rstuf
+  Removing service rstuf_rstuf-worker
+  Removing service rstuf_rstuf-api
+  Removing service rstuf_rabbitmq
+  Removing service rstuf_redis
+  Removing service rstuf_web-server
+  Removing network rstuf_default
 
 
 Remove all data
 
 .. code:: shell
 
-  $ docker volume rm trs_tuf-repository-service-worker-data \
-    trs_trs-storage \
-    trs_trs-keystorage \
-    trs_trs-redis-data \
-    trs_trs-api-data \
-    trs_trs-mq-data
+  $ docker volume rm rstuf_repository-service-tuf-worker-data \
+    rstuf_rstuf-storage \
+    rstuf_rstuf-keystorage \
+    rstuf_rstuf-redis-data \
+    rstuf_rstuf-api-data \
+    rstuf_rstuf-mq-data
