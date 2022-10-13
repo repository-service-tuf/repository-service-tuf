@@ -1,11 +1,11 @@
-====================================
-TUF Repository Service Documentation
-====================================
+========================================
+Repository Service for TUF Documentation
+========================================
 
 .. include:: ../../README.rst
-  :end-before: trs-image-high-level
+  :end-before: rstuf-image-high-level
 
-.. uml::  ../diagrams/1_1_trs.puml
+.. uml::  ../diagrams/1_1_rstuf.puml
 
 
 Documentation List

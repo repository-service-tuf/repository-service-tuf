@@ -22,26 +22,26 @@ AddContainerTag("webui", $sprite="application_server", $legendText="Web UI Inter
 AddContainerTag("key_service", $sprite="lock_with_key_security", $legendText="Key Service", $bgColor=Gray)
 AddContainerTag("storage_service", $sprite="file_server", $legendText="Storage Service", $bgColor=Gray)
 AddContainerTag("rest_api", $sprite="web_server", $legendText="Repository REST API")
-AddContainerTag("tuf_repository_service_worker", $sprite="service_application", $legendText="Repository Metadata Worker")
+AddContainerTag("repository_service_tuf_worker", $sprite="service_application", $legendText="Repository Metadata Worker")
 AddContainerTag("queue", $sprite="queue_viewer", $legendText="Message Queue")
 AddContainerTag("ci_cd", $sprite="application_generic", $legendText="CI/CD, Artfact Management, etc")
 AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed TUF Metadata")
 AddContainerTag("download_target", $sprite="download", $legendText="Download file/target/package", $bgColor=Gray)
 AddContainerTag("terminal", $sprite="terminal,scale=0.5,color=#000000", $legendText="CLI")
 
-AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=0.75,color=#000000", $legendText="TUF Repository Service CLI")
+AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=0.75,color=#000000", $legendText="Repository Service for TUF CLI")
 AddRelTag("bowser", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="management_console,scale=0.5", $legendText="Browser")
 AddRelTag("download", $textColor="Green", $lineColor="$ARROW_COLOR")
 AddRelTag("share", $textColor="orange", $lineColor="grey", $lineStyle = DashedLine())
 
 
-System_Boundary(tuf_repository_service_worker, "TUF Repository Service Worker") #APPLICATION {
+System_Boundary(repository_service_tuf_worker, "Repository Service for TUF Worker") #APPLICATION {
     Container_Boundary(app, "app.py") #DeepSkyBlue{
         Container(metadata_repository, "MetadataRepository", "File System")
 
     }
 
-    Container_Boundary(trs_worker, "tuf_repository_service_worker")  #LightSkyBlue {
+    Container_Boundary(rstuf_worker, "repository_service_tuf_worker")  #LightSkyBlue {
         Container_Ext(celery, "Celery()")
         Container_Ext(dynaconf, "Dynaconf()")
         Container(repository, "repository")

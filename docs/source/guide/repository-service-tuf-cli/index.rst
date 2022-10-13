@@ -1,8 +1,8 @@
-==========================
-TUF Repository Service CLI
-==========================
+==============================
+Repository Service for TUF CLI
+==============================
 
-``tuf-repository-service`` is a Command Line Interface for TUF Repository Service.
+``repository-service-tuf`` is a Command Line Interface for the Repository Service for TUF.
 
 Installation
 ============
@@ -11,18 +11,18 @@ Using pip:
 
 .. code:: shell
 
-    $ pip install tuf-repository-service
+    $ pip install repository-service-tuf
 
 .. code:: shell
 
-    ❯ trs-cli
+    ❯ rstuf-cli
                                                                                                                                                  
-     Usage: trs-cli [OPTIONS] COMMAND [ARGS]...                                                                                                  
+     Usage: rstuf-cli [OPTIONS] COMMAND [ARGS]...                                                                                                  
                                                                                                                                                  
-     TUF Repository Service Command Line Interface (CLI).                                                                                        
+     Repository Service for TUF Command Line Interface (CLI).                                                                                        
                                                                                                                                                  
     ╭─ Options ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │  --config  -c  TEXT  TUF Repository Service config file                                                                                   │
+    │  --config  -c  TEXT  Repository Service for TUF config file                                                                                   │
     │  --help    -h        Show this message and exit.                                                                                          │
     ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
     ╭─ Commands ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
@@ -32,13 +32,13 @@ Using pip:
 Administration (``admin``)
 ==========================
 
-It executes administrative commands to the TUF Repository Service.
+It executes administrative commands to the Repository Service for TUF.
 
 .. code:: shell
 
-    ❯ trs-cli admin
+    ❯ rstuf-cli admin
 
-    Usage: trs-cli admin [OPTIONS] COMMAND [ARGS]...
+    Usage: rstuf-cli admin [OPTIONS] COMMAND [ARGS]...
 
     Administrative Commands
 
@@ -47,7 +47,7 @@ It executes administrative commands to the TUF Repository Service.
     ╰──────────────────────────────────────────────────────────────────────────────────────╯
     ╭─ Commands ───────────────────────────────────────────────────────────────────────────╮
     │  ceremony  Start a new Metadata Ceremony.                                            │
-    │  login     Login to TUF Repository Service (API).                                            │
+    │  login     Login to Repository Service for TUF (API).                                            │
     │  token     Token Management.                                                         │
     ╰──────────────────────────────────────────────────────────────────────────────────────╯
 
@@ -55,67 +55,67 @@ It executes administrative commands to the TUF Repository Service.
 Login to Server (``login``)
 ---------------------------
 
-This command will log in to TUF Repository Service and give you a token to run other commands
+This command will log in to Repository Service for TUF and give you a token to run other commands
 such as Ceremony, Token Generation, etc.
 
 .. code:: shell
 
-    ❯ trs-cli admin login
+    ❯ rstuf-cli admin login
     ╔══════════════════════════════════════════════════════════════════════════════════════════════════╗
-    ║                                 Login to TUF Repository Service                                  ║
+    ║                                 Login to Repository Service for TUF                                  ║
     ╚══════════════════════════════════════════════════════════════════════════════════════════════════╝
 
     ┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
     │         The server and token will generate a token and it will be                                │
-    │         stored in /Users/kairoaraujo/.trs.ini                                                    │
+    │         stored in /Users/kairoaraujo/.rstuf.ini                                                    │
     └──────────────────────────────────────────────────────────────────────────────────────────────────┘
 
     Server Address: http://192.168.1.199
     Username (admin): admin
     Password:
     Expire (in hours): 2
-    Token stored in /Users/kairoaraujo/.tuf_repository_service.ini
+    Token stored in /Users/kairoaraujo/.repository_service_tuf.ini
 
-    Login successfuly.
+    Login successful.
 
 
 Ceremony (``ceremony``)
 -----------------------
 
-The TUF Repository Service Metadata uses the following Roles: ``Root``, ``Timestamp``,
-``Snapshot``, ``Targets``, ``bin``, and ``bins`` to build the Repository
-Metadata. (For more details, check out TUF Specification and PEP 458)
+The Repository Service for TUF Metadata uses the following Roles: ``root``, ``timestamp``,
+``snapshot``, ``targets``, ``bin``, and ``bins`` to build the Repository
+Metadata (for more details, check out TUF Specification and PEP 458).
 
-The Ceremony is a complex process that TUF Repository Service CLI tries to simplify.
-You can do the Ceremony offline. It means on a disconnected computer
+The Ceremony is a complex process that Repository Service for TUF CLI tries to simplify.
+You can do the Ceremony offline. This means on a disconnected computer
 (recommended once you will manage the keys).
 
 
 .. code:: shell
 
-    ❯ trs-cli admin ceremony --help
+    ❯ rstuf-cli admin ceremony --help
                                                                                                                             
-    Usage: trs-cli admin ceremony [OPTIONS]                                                                                  
+    Usage: rstuf-cli admin ceremony [OPTIONS]                                                                                  
                                                                                                                             
     Start a new Metadata Ceremony.                                                                                           
                                                                                                                             
     ╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │  --bootstrap  -b        Bootstrap a TUF Repository Service using the Repository Metadata after Ceremony                │
-    │  --file       -f  TEXT  Generate specific JSON Payload compatible with TUF Repository Service bootstrap after Ceremony │
+    │  --bootstrap  -b        Bootstrap a Repository Service for TUF using the Repository Metadata after Ceremony                │
+    │  --file       -f  TEXT  Generate specific JSON Payload compatible with Repository Service for TUF bootstrap after Ceremony │
     │                         [default: payload.json]                                                                        │
     │  --upload     -u        Upload existent payload 'file'. Requires '-b/--bootstrap'. Optional '-f/--file' to use non     │
     │                         default file.                                                                                  │
-    │  --save       -s        Save a copy of the metadata localy. This option saves the metadata files (json) in the         │
+    │  --save       -s        Save a copy of the metadata locally. This option saves the metadata files (json) in the         │
     │                         'metadata' dir.                                                                                │
     │                         [default: False]                                                                               │
     │  --help       -h        Show this message and exit.                                                                    │
     ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
-There are three steps in the Ceremony
+There are three steps in the Ceremony.
 
 .. note::
 
-    We recommend running the ``trs-cli admin ceremony`` to simulate and check
+    We recommend running the ``rstuf-cli admin ceremony`` to simulate and check
     the details of the instructions. It is more detailed.
 
 
@@ -124,7 +124,7 @@ Step 1: Configure the Roles
 
 .. code:: shell
 
-    ❯ trs-cli admin ceremony
+    ❯ rstuf-cli admin ceremony
 
     (...)
     Do you want start the ceremony? [y/n]: y
@@ -132,19 +132,19 @@ Step 1: Configure the Roles
     ║                         STEP 1: Configure the Roles                          ║
     ╚══════════════════════════════════════════════════════════════════════════════╝
 
-    The TUF roles supports multiple keys and the threshold (quorun trust) defines   
-    the minimal number of the keys required to take actions using specific Role.    
+    The TUF roles support multiple keys and the threshold (quorum trust) defines
+    the minimal number of keys required to take actions using a specific Role.
 
     Reference: TUF                                                                  
 
-    What Metadata expiration for root role?(Days) (356):  
-    What is the number of keys for root role? (2): 
-    What is the key threshold for root role signing? (1): 
+    What is the Metadata expiration for the root role?(Days) (356):
+    What is the number of keys for the root role? (2):
+    What is the key threshold for the root role signing? (1):
 
-    What Metadata expiration for targets role?(Days) (365): 
-    What is the number of keys for targets role? (2): 
-    What is the key threshold for targets role signing? (1): 
-    The role targets delegates paths to bin role. See TUF Specification about Path Pattern for the paths
+    What is the Metadata expiration for the targets role?(Days) (365):
+    What is the number of keys for the targets role? (2):
+    What is the key threshold for the targets role signing? (1):
+    The role targets delegates paths to the bin role. See TUF Specification about Path Pattern for the paths
     pattern and the example.                                                                            
     Show example [y/n] (y): y
 
@@ -153,9 +153,9 @@ Step 1: Configure the Roles
     The Organization Example (https://example.com) has all files downloaded /downloads path, meaning    
     https://example.com/downloads/.                                                                     
 
-    Additionally it has two sub-folders, productA and productB where the clients can find all files     
-    (i.e.: productA-v1.0.tar, productB-1.0.tar), for productBit has even a sub-folder, updates where    
-    clients can find update files (i.e.: servicepack-1.tar, servicepack-2.tar)                          
+    Additionally, it has two sub-folders, productA and productB where the clients can find all files
+    (i.e.: productA-v1.0.tar, productB-1.0.tar), for productB it even has a sub-folder, updates where
+    clients can find update files (i.e.: servicepack-1.tar, servicepack-2.tar).
 
     In that case mapping all targets files paths as:                                                    
 
@@ -172,35 +172,35 @@ Step 1: Configure the Roles
 
     What paths targets delegates? (*, */*): *, */*, */*/*
 
-    What Metadata expiration for snapshot role?(Days) (1): 
-    What is the number of keys for snapshot role? (1): 
+    What is the Metadata expiration for the snapshot role?(Days) (1):
+    What is the number of keys for the snapshot role? (1):
     The threshold for snapshot is 1 (one) based on the number of keys (1).
 
-    What Metadata expiration for timestamp role?(Days) (1): 
+    What is the Metadata expiration for timestamp role?(Days) (1):
     What is the number of keys for timestamp role? (1): 
     The threshold for timestamp is 1 (one) based on the number of keys (1).
 
-    What Metadata expiration for bin role?(Days) (365): 
-    What is the number of keys for bin role? (1): 
+    What is the Metadata expiration for the bin role?(Days) (365):
+    What is the number of keys for the bin role? (1):
     The threshold for bin is 1 (one) based on the number of keys (1).
 
-    What Metadata expiration for bins role?(Days) (1): 
-    What is the number of keys for bins role? (1): 
+    What is the Metadata expiration for the bins role?(Days) (1):
+    What is the number of keys for the bins role? (1):
     The threshold for bins is 1 (one) based on the number of keys (1).
     Number of hashed bins for bins? (8): 
 
 
-1. Root ``expiration``, ``number of keys``, and ``threshold``
-2. Targets ``expiration``, ``number of keys``,  ``threshold``, the ``base URL``
+1. root ``expiration``, ``number of keys``, and ``threshold``
+2. targets ``expiration``, ``number of keys``,  ``threshold``, the ``base URL``
    for the files (target files), and the ``paths``
-3. Snapshot ``expiration``, ``number of keys``, and ``threshold``
-4. Timestamp ``expiration``, ``number of keys``, and ``threshold``
-5. Bin ``expiration``, ``number of keys``, and ``threshold``
-6. Bins ``expiration``, ``number of keys``, ``threshold``, and ``number of hash bins``
+3. snapshot ``expiration``, ``number of keys``, and ``threshold``
+4. timestamp ``expiration``, ``number of keys``, and ``threshold``
+5. bin ``expiration``, ``number of keys``, and ``threshold``
+6. bins ``expiration``, ``number of keys``, ``threshold``, and ``number of hash bins``
 
-- ``expiration`` is the number of days that Metatada will expire
+- ``expiration`` is the number of days in which the Metadata will expire
 - ``number of keys`` Metadata will have
-- ``threshold`` is number of keys needed to sign the Metadata
+- ``threshold`` is the number of keys needed to sign the Metadata
 - ``base URL`` for the artifacts, example: http://www.example.com/download/
 - ``paths`` is the delegated paths, example:
   http://www.example.com/download/productA/* will be ``*, */*``
@@ -221,12 +221,12 @@ load the keys.
     ║                                     STEP 2: Load roles keys                                      ║
     ╚══════════════════════════════════════════════════════════════════════════════════════════════════╝
 
-    The keys must to have a password and the file must to be accessible.                                
+    The keys must have a password and the file must be accessible.
 
-    Depending of the Organization, each key has an owner. During the the key loading process is         
-    important that the owner of the key insert the password.                                            
+    Depending on the Organization, each key has an owner. During the key loading process, it is
+    important that the owner of the key inserts the password.
 
-    The password or the key content is not shown in the screen.                                         
+    The password or the key content is not shown on the screen.
 
     Ready to start loading the keys? Passwords will be required for keys [y/n]: y
 
@@ -276,7 +276,7 @@ complete (without the offline keys).
     ╚══════════════════════════════════════════════════════════════════════════════════════════════════╝
 
     The information below is the configuration done in the preview steps. Check the number of keys, the 
-    threshold/quorun and type of key.                                                                   
+    threshold/quorum and type of key.
     ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
     ┃       ROLE SUMMARY        ┃                                 KEYS                                 ┃
     ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
@@ -355,13 +355,13 @@ Finishing
 .........
 
 If you choose ``-b/--bootstrap`` it will automatically send the bootstrap to
-``tuf-repository-service-api``, no actions necessary
+``repository-service-tuf-api``, no actions necessary.
 
-If you did the ceremony in a disconnected computer.
-Using another computer with access to ``tuf-repository-service-api``.
-1.  Get the generated ``payload.json`` (or the custom name you choose).
-2.  Install ``tuf-repository-service``
-3.  Run ``trs-cli admin ceremony -b [-u filename]``
+If you did the ceremony in a disconnected computer:
+Using another computer with access to ``repository-service-tuf-api``
+1.  Get the generated ``payload.json`` (or the custom name you chose)
+2.  Install ``repository-service-tuf``
+3.  Run ``rstuf-cli admin ceremony -b [-u filename]``
 
 Token (``token``)
 -----------------
@@ -370,9 +370,9 @@ Token Management
 
 .. code:: shell
 
-    ❯ trs-cli admin token
+    ❯ rstuf-cli admin token
                                                                                                                             
-    Usage: trs-cli admin token [OPTIONS] COMMAND [ARGS]...                                                                   
+    Usage: rstuf-cli admin token [OPTIONS] COMMAND [ARGS]...                                                                   
                                                                                                                             
     Token Management.                                                                                                        
                                                                                                                             
@@ -386,15 +386,15 @@ Token Management
 
 ``generate``
 ............
-Generate tokens to use in integrations
+Generate tokens to use in integrations.
 
 .. code:: shell
 
-    ❯ trs-cli admin token generate -h
+    ❯ rstuf-cli admin token generate -h
                                                                                                         
-    Usage: trs-cli admin token generate [OPTIONS]                                                      
+    Usage: rstuf-cli admin token generate [OPTIONS]                                                      
                                                                                                         
-    Generate new token.                                                                                
+    Generate a new token.
                                                                                                         
     ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
     │     --expires  -e  INTEGER  Expires in hours. Default: 24 [default: 24]                          │
@@ -408,7 +408,7 @@ Example of usage:
 
 .. code:: shell
 
-    ❯ trs-cli admin token generate -s write:targets
+    ❯ rstuf-cli admin token generate -s write:targets
     {
         "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyX
         zFfNTNiYTY4MzAwNTk3NGY2NWIxMDQ5NzczMjIiwicGFzc3dvcmQiOiJiJyQyYiQxMiRxT0
@@ -417,7 +417,7 @@ Example of usage:
         -zVgGgRfliKgUgHZrZzeJDeAw9mQJrYLz8"
     }
 
-This token can be use with Github Secrets, Jenkins Secrets, CircleCI, shell
+This token can be used with GitHub Secrets, Jenkins Secrets, CircleCI, shell
 script, etc
 
 ``inspect``
@@ -427,9 +427,9 @@ Show token detailed information.
 
 .. code:: shell
 
-    ❯ trs-cli admin token inspect -h
+    ❯ rstuf-cli admin token inspect -h
                                                                                                                             
-    Usage: trs-cli admin token inspect [OPTIONS] TOKEN                                                                       
+    Usage: rstuf-cli admin token inspect [OPTIONS] TOKEN                                                                       
                                                                                                                             
     Show token information details.                                                                                          
                                                                                                                             
@@ -437,7 +437,7 @@ Show token detailed information.
     │  --help  -h    Show this message and exit.                                                                             │
     ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
-    ❯ trs-cli admin token inspect eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1...PDwwY
+    ❯ rstuf-cli admin token inspect eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1...PDwwY
     {
     "data": {
         "scopes": [

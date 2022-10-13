@@ -8,7 +8,7 @@ AddRelTag("download", $textColor="orange", $lineColor="Blue")
 Person(admin, "Repository Admin")
 Person(user, "Downloader User") #Grey
 
-System(repository, "TUF Repository Service ", "Signed Metadata")
+System(repository, "Repository Service for TUF ", "Signed Metadata")
 System(automation, "CI/CD, Artifact Systems", "Third part sofware") #Grey
 System(files_repository, "Repository", "Targets/Artifacts") #Grey
 

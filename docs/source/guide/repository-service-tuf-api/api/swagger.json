@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.2",
     "info": {
-        "title": "TUF Respository Service Rest API",
-        "description": "TUF Respository Service Rest API for TUF Repository Server",
+        "title": "Repository Service for TUF API",
+        "description": "Repository Service for TUF Rest API",
         "version": "0.1.0"
     },
     "paths": {
@@ -105,7 +105,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/tuf_repository_service_api__config__Response"
+                                    "$ref": "#/components/schemas/repository_service_tuf_api__config__Response"
                                 }
                             }
                         }
@@ -148,7 +148,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/tuf_repository_service_api__targets__Response"
+                                    "$ref": "#/components/schemas/repository_service_tuf_api__targets__Response"
                                 }
                             }
                         }
@@ -199,7 +199,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/tuf_repository_service_api__targets__Response"
+                                    "$ref": "#/components/schemas/repository_service_tuf_api__targets__Response"
                                 }
                             }
                         }
@@ -387,8 +387,8 @@
                     "v1",
                     "v1"
                 ],
-                "summary": "Get task status. Scope: read:tasks",
-                "description": "Get Repository Metadata task status. The status is according with Celery tasks: `PENDING` the task still not processed or unknown/inexistent task. `RECEIVED` task is reveived by the broker server. `PRE_RUN` the task will start by tuf-repository-service-worker. `RUNNING` the task is in execution. `FAILURE` the task failed to executed. `SUCCESS` the task execution is finished.",
+                "summary": "Get task state. Scope: read:tasks",
+                "description": "Get Repository Metadata task state. The state is according with Celery tasks: `PENDING` the task still not processed or unknown/inexistent task. `RECEIVED` task is reveived by the broker server. `PRE_RUN` the task will start by repository-service-tuf-worker. `RUNNING` the task is in execution. `FAILURE` the task failed to executed. `SUCCESS` the task execution is finished.",
                 "operationId": "get_api_v1_task__get",
                 "security": [
                     {
@@ -417,7 +417,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/tuf_repository_service_api__tasks__Response"
+                                    "$ref": "#/components/schemas/repository_service_tuf_api__tasks__Response"
                                 }
                             }
                         }
@@ -2006,7 +2006,7 @@
                     }
                 }
             },
-            "tuf_repository_service_api__config__Response": {
+            "repository_service_tuf_api__config__Response": {
                 "title": "Response",
                 "required": [
                     "data",
@@ -2054,7 +2054,7 @@
                     "message": "Current Settings"
                 }
             },
-            "tuf_repository_service_api__targets__Response": {
+            "repository_service_tuf_api__targets__Response": {
                 "title": "Response",
                 "type": "object",
                 "properties": {
@@ -2078,7 +2078,7 @@
                     "message": "New Target(s) successfully submitted."
                 }
             },
-            "tuf_repository_service_api__tasks__Response": {
+            "repository_service_tuf_api__tasks__Response": {
                 "title": "Response",
                 "required": [
                     "data"
@@ -2095,20 +2095,16 @@
                 },
                 "example": {
                     "data": {
-                        "tasks": [
-                            {
-                                "task_id": "91353735ef7d48099df86d8bfa30316e",
-                                "state": "SUCCESS",
-                                "result": {
-                                    "status": "Task finished.",
-                                    "details": {
-                                        "key": "value"
-                                    }
-                                }
+                        "task_id": "91353735ef7d48099df86d8bfa30316e",
+                        "state": "SUCCESS",
+                        "result": {
+                            "status": "Task finished.",
+                            "details": {
+                                "key": "value"
                             }
-                        ],
-                        "message": "Task state."
-                    }
+                        }
+                    },
+                    "message": "Task state."
                 }
             }
         },

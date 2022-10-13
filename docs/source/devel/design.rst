@@ -1,19 +1,19 @@
 
-The TUF Repository Service has two main services (``trs-rest-api``,
-``trs-repo-worker``) and one tool (``trs-cli``)
+The Repository Service for TUF has two main services (``rstuf-rest-api``,
+``rstuf-repo-worker``) and one tool (``rstuf-cli``)
 
-.. uml:: ../../diagrams/2_2_trs.puml
+.. uml:: ../../diagrams/2_2_rstuf.puml
 
 By design, it helps scalability and reliability for complex and
 distributed deployment. As the example below
 
 
-.. uml:: ../../diagrams/2_3_trs.puml
+.. uml:: ../../diagrams/2_3_rstuf.puml
 
 
 Components/Tools
 ================
 
-- `tuf-repository-service-api <https://docs.kaprien.com/tuf-repository-service-api>`_
-- `tuf-repository-service-worker <https://docs.kaprien.com/tuf-repository-service-worker>`_
-- `tuf-repository-service-cli <https://docs.kaprien.com/tuf-repository-service-cli>`_
+- `repository-service-tuf-api <https://docs.kaprien.com/repository-service-tuf-api>`_
+- `repository-service-tuf-worker <https://docs.kaprien.com/repository-service-tuf-worker>`_
+- `repository-service-tuf-cli <https://docs.kaprien.com/repository-service-tuf-cli>`_

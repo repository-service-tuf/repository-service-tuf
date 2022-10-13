@@ -4,15 +4,15 @@ Development process
 ===================
 
 This document, specifically the `file ROADMAP.rst
-<https://github.com/kaprien/tuf-repository-service/blob/main/ROADMAP.rst>`_, defines the
-:ref:`TUF Repository Service Roadmap <devel/release:Roadmap>`.
+<https://github.com/kaprien/repository-service-tuf/blob/main/ROADMAP.rst>`_, defines the
+:ref:`Repository Service for TUF Roadmap <devel/release:Roadmap>`.
 
-Each Roadmap Goal must have a `project in the TUF Repository Service Organization
-<https://github.com/orgs/tuf-repository-service/projects>`_.
+Each Roadmap Goal must have a `project in the Repository Service for TUF Organization
+<https://github.com/orgs/repository-service-tuf/projects>`_.
 
 The :ref:`devel/release:Roadmap` contains the desired features. Each
-feature has an issue open in the `kaprien/tuf-repository-service
-<https://github.com/kaprien/tuf-repository-service>`_ (Umbrella repository) issues.
+feature has an issue open in the `kaprien/repository-service-tuf
+<https://github.com/kaprien/repository-service-tuf>`_ (Umbrella repository) issues.
 
 Working on the Features:
 
@@ -22,10 +22,10 @@ Working on the Features:
 
 The Component specifies the Milestone (release) that will contain the Roadmap
 Goal in the `ROADMAP.rst
-<https://github.com/kaprien/tuf-repository-service/blob/main/ROADMAP.rst>`_ (:ref:`also
+<https://github.com/kaprien/repository-service-tuf/blob/main/ROADMAP.rst>`_ (:ref:`also
 visible below <devel/release:Roadmap>`).
 
-It allows the Component Maintainers to combine TUF Repository Service Features and internal
+It allows the Component Maintainers to combine Repository Service for TUF Features and internal
 Component projects during a release.
 
 Working on the Component Issues:
@@ -43,22 +43,22 @@ Working on the Component Issues:
                 Goal 02
         }
 
-        package "tuf-repository-service" {
+        package "repository-service-tuf" {
             json ROADMAP.rst {
                 "Goal 01": {
                     "features": ["Feature A", "Feature B"],
                     "milestones": {
-                        "tuf-repository-service-api": "v1.2.0",
-                        "tuf-repository-service-worker": "v1.1.0",
-                        "tuf-repository-service-cli": "v1.4.0"
+                        "repository-service-tuf-api": "v1.2.0",
+                        "repository-service-tuf-worker": "v1.1.0",
+                        "repository-service-tuf-cli": "v1.4.0"
                     }
                 },
                 "Goal 02": {
                     "features": ["Feature C", "Feature D"],
                     "milestones": {
-                        "tuf-repository-service-api": "v1.3.0",
-                        "tuf-repository-service-worker": "v1.1.0",
-                        "tuf-repository-service-cli": "v2.0.0"
+                        "repository-service-tuf-api": "v1.3.0",
+                        "repository-service-tuf-worker": "v1.1.0",
+                        "repository-service-tuf-cli": "v2.0.0"
                     }
                 }
             }
@@ -72,7 +72,7 @@ Working on the Component Issues:
 
         }
 
-        package "tuf-repository-service-api" {
+        package "repository-service-tuf-api" {
             json "Issues" as api_issues {
                 "issue#12": {
                     "milestone": "v1.1.3",
@@ -99,7 +99,7 @@ Working on the Component Issues:
 
             api_issues -> api_milestones
         }
-        package "tuf-repository-service-worker" {
+        package "repository-service-tuf-worker" {
             json "Issues" as repo_issues {
                 "issue#31": {
                     "milestone": "v1.1.0",
@@ -144,6 +144,6 @@ The Components have the development instructions.
 Components Repositories
 -----------------------
 
-    - `TUF Repository Service REST API <https://github.com/kaprien/tuf-repository-service-api>`_ (``tuf-repository-service-api``)
-    - `TUF Repository Service Worker <https://github.com/kaprien/tuf-repository-service-rworker>`_ (``tuf-repository-service-worker``)
-    - `TUF Repository Service Command Line Interface <https://github.com/kaprien/tuf-repository-service-cli>`_ (``tuf-repository-service-cli``)
+    - `Repository Service for TUF REST API <https://github.com/kaprien/repository-service-tuf-api>`_ (``repository-service-tuf-api``)
+    - `Repository Service for TUF Worker <https://github.com/kaprien/repository-service-tuf-rworker>`_ (``repository-service-tuf-worker``)
+    - `Repository Service for TUF Command Line Interface <https://github.com/kaprien/repository-service-tuf-cli>`_ (``repository-service-tuf-cli``)

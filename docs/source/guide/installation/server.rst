@@ -1,17 +1,17 @@
-===================================
-TUF Repository Service Installation
-===================================
+==========
+Deployment
+==========
 
-TUF Repository Service (TRS) is a combination of micro-services:
+Repository Service for TUF (RSTUF) is a combination of micro-services:
 
- - TUF Repository Service API (``tuf-repository-service-api``)
- - TUF Repository Service Worker (``tuf-repository-service-worker``)
+ - Repository Service for TUF API (``repository-service-tuf-api``)
+ - Repository Service for TUF Worker (``repository-service-tuf-worker``)
 
 Both services require a Broker server, Redis server and a Web server to
 publish the signed Repository Metadata.
 
-To manage your TRS deploy, you use TUF Repository Service Command Line
-Interface (CLI) ``tuf-repositoru-service-cli`` -- Command: ``trs-cli``
+To manage your RSTUF deploy, you use Repository Service for TUF Command Line
+Interface (CLI) ``tuf-repositoru-service-cli`` -- Command: ``rstuf-cli``
 
 .. toctree::
    :maxdepth: 1
