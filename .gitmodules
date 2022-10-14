@@ -1,9 +1,9 @@
-[submodule "repository-service-tuf-api"]
-	path = repository-service-tuf-api
-	url = git@github.com:vmware/repository-service-tuf-api.git
 [submodule "repository-service-tuf-worker"]
 	path = repository-service-tuf-worker
-	url = git@github.com:vmware/repository-service-tuf-worker.git
+	url = https://github.com/vmware/repository-service-tuf-worker.git
+[submodule "repository-service-tuf-api"]
+	path = repository-service-tuf-api
+	url = https://github.com/vmware/repository-service-tuf-api.git
 [submodule "repository-service-tuf-cli"]
 	path = repository-service-tuf-cli
-	url = git@github.com:vmware/repository-service-tuf-cli.git
+	url = https://github.com/vmware/repository-service-tuf-cli.git
