@@ -20,7 +20,8 @@ on:
 jobs:
   functional-tests:
     uses: ./.github/workflows/functional.yml
-    secrets: inherit
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     with:
       api_version: dev
       worker_version: dev
