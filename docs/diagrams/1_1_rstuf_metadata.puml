@@ -1,4 +1,4 @@
-@startuml Context
+@startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
 Container(root, "Root" , "offline Key") #Red
@@ -16,6 +16,7 @@ ContainerDb(targets_bins_2, "Hash Bins Targets 2", "file11, file12, file13, ..."
 ContainerDb(targets_bins_3, "Hash Bins Targets 3", "file21, file22, file23, ...")
 ContainerDb(targets_bins_N, "Hash Bins Targets N", "fileN1, fileN2, fileN3, ...")
 
+Rel_U(root, root, "sign")
 Rel_D(root, timestamp, "sign")
 Rel_D(root, snapshot, "sign")
 Rel_D(root, targets, "sign")

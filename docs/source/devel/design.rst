@@ -2,13 +2,13 @@
 The Repository Service for TUF has two main services (``rstuf-rest-api``,
 ``rstuf-repo-worker``) and one tool (``rstuf-cli``)
 
-.. uml:: ../../diagrams/2_2_rstuf.puml
+.. image:: _static/2_2_rstuf.png
 
 By design, it helps scalability and reliability for complex and
 distributed deployment. As the example below
 
 
-.. uml:: ../../diagrams/2_3_rstuf.puml
+.. image:: _static/2_3_rstuf.png
 
 
 Components/Tools

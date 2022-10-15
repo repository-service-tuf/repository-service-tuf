@@ -12,7 +12,7 @@ RSTUF also have a Command Line Interface that is a Python Application,
 
 * `All represented in blue`
 
-.. uml:: ../../../diagrams/2_1_rstuf.puml
+.. image:: /_static/2_1_rstuf.png
 
 Repository Service for TUF
 --------------------------
@@ -60,7 +60,7 @@ process.
 The RSTUF has pre-defined TUF Roles and some Roles to protect and enable
 integration with build systems based on Python PEP 458.
 
-.. uml:: ../../../diagrams/1_1_rstuf_metadata.puml
+.. image:: /_static/1_1_rstuf_metadata.png
 
 Some configurations are possible during the
 :ref:`guide/repository-service-tuf-cli/index:Ceremony (``ceremony\`\`)`, such
@@ -77,7 +77,7 @@ Check out the :ref:`how to deploy <guide/installation/server:Deployment>`.
 
 Below is a diagram of Repository Service for TUF in a building environment.
 
-.. uml:: ../../../diagrams/2_2_rstuf.puml
+.. image:: /_static/2_2_rstuf.png
 
 .. note::
 
