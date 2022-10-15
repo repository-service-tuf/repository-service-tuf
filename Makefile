@@ -2,7 +2,8 @@
 
 docs:
 	git submodule sync
-	git submodule update --init --force repository-service-tuf-worker repository-service-tuf-api repository-service-tuf-cli
+	git submodule update --init --force --recursive
+	git submodule foreach git pull origin main
 
 	# repository-service-tuf-cli
 	cp -r repository-service-tuf-cli/docs/diagrams/* docs/diagrams/
