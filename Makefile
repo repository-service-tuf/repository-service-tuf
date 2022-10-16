@@ -1,7 +1,8 @@
 .PHONY: docs lint reformat requirements functional-tests
 
 docs:
-	git submodule update --init --recursive
+	git submodule sync
+	git submodule update --init --force --recursive
 	git submodule foreach git pull origin main
 
 	# repository-service-tuf-cli
@@ -19,8 +20,8 @@ docs:
 	rm -rf docs/source/guide/repository-service-tuf-worker/*
 	cp -r repository-service-tuf-worker/docs/source/guide/* docs/source/guide/repository-service-tuf-worker/
 
-	sphinx-build -E -W -b html docs/source docs/build/html
-	plantuml -tpng docs/diagrams/1_1_rstuf.puml
+	plantuml -o ../source/_static/ -tpng docs/diagrams/*rstuf.puml
+	sphinx-build -T -E -b html docs/source docs/build/html
 
 requirements:
 	pipenv requirements > requirements.txt

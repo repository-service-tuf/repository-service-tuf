@@ -5,7 +5,7 @@ Repository Service for TUF Documentation
 .. include:: ../../README.rst
   :end-before: rstuf-image-high-level
 
-.. uml::  ../diagrams/1_1_rstuf.puml
+.. image:: /_static/1_1_rstuf.png
 
 
 Documentation List

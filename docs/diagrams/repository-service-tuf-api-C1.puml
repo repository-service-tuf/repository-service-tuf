@@ -1,4 +1,4 @@
-@startuml Context
+@startuml repository-service-tuf-api-C1
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
 
 sprite $rstuf [125x125/16z] {

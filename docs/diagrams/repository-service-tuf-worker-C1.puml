@@ -1,4 +1,4 @@
-@startuml Context
+@startuml repository-service-tuf-worker-C1
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
 
 AddRelTag("validate", $textColor="orange", $lineColor="Blue", $lineStyle = DashedLine())

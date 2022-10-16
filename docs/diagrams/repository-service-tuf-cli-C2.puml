@@ -1,4 +1,4 @@
-@startuml General View (Container level)
+@startuml repository-service-tuf-cli-C2
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
 !define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master

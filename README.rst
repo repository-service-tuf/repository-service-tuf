@@ -3,8 +3,8 @@ Repository Service for TUF
 
 .. note::
 
-    The Repository Service for TUF is a tool still under development and is not
-    ready for production.
+    The Repository Service for TUF is a tool still under development.
+    Current state is Experimental.
 
 Repository Service for TUF (RSTUF) is a system for securing software downloads
 with signed repository metadata that helps clients be sure they are retrieving
@@ -15,7 +15,7 @@ updating content from an artifact repository, such as a web server, JFrog
 Artifactory, GitHub packages, etc.
 
 RSTUF implements a Repository Server with a signed Metadata Repository using
-`The Update Framework <http://theupdateframework.io/>`_ (TUF) as a Service.
+`The Update Framework <https://theupdateframework.io/>`_ (TUF) as a Service.
 It is designed to be deployed as part of an existing content delivery solution
 and can be deployed and used in the edge or public/private cloud alongside
 artifact production systems (i.e., build systems including Jenkins, GitHub
@@ -27,25 +27,26 @@ using the REST API Service.
 
 Repository Service for TUF compared to other solutions:
 
-Rugged: Repository Service for TUF is a collection of services to deploy
-scalable and distributed TUF Repository. It also provides an easy interface to
-integrate (through Rest API) and a tool for managing the Metadata Repository.
+`Rugged <https://rugged.works>`_: Repository Service for TUF is a collection
+of services to deploy scalable and distributed TUF Repository. It also
+provides an easy interface to integrate (through Rest API) and a tool for
+managing the Metadata Repository.
 
-PyPI/PEP 458: Repository Service for TUF is a generalization of the design in
-PEP 458 that can be integrated into a variety of content repository
-architectures.
+`PyPI/PEP 458 <https://peps.python.org/pep-0458/>`_: Repository Service for
+TUF is a generalization of the design in PEP 458 that can be integrated into
+a variety of content repository architectures.
 
 .. rstuf-image-high-level
 
-.. image:: docs/diagrams/1_1_rstuf.png
+.. image:: docs/source/_static/1_1_rstuf.png
     :align: center
 
 Using
 =====
 
 Please, check the `Repository Service for TUF Guide
-<https://repository-service-tuf.readthedocs.org/guide/overview/overview.html>`_  for the
-Installations and more details.
+<https://repository-service-tuf.readthedocs.org/guide/overview/overview.html>`_
+for the deployment instructions and more details.
 
 Contributing
 ============
@@ -56,6 +57,6 @@ integrations.
 Check our `CONTRIBUTING.rst <CONTRIBUTING.rst>`_ for more details on how to
 contribute.
 
-Please, check the `Repository Service for TUF Development
+Please, check the `Repository Service for TUF Development Guide
 <https://repository-service-tuf.readthedocs.org/devel>`_.
 

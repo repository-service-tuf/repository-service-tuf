@@ -1,4 +1,4 @@
-@startuml 1_1_rstuf.puml
+@startuml 1_1_rstuf
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
 !define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
