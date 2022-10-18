@@ -45,7 +45,7 @@ Using
 =====
 
 Please, check the `Repository Service for TUF Guide
-<https://repository-service-tuf.readthedocs.org/guide/overview/overview.html>`_
+<https://repository-service-tuf.readthedocs.io/en/latest/guide/overview/overview.html>`_
 for the deployment instructions and more details.
 
 Contributing
