@@ -5,60 +5,57 @@ Introduction
 Repository Service for TUF components
 =====================================
 
-Repository Service for TUF (RSTUF) have two component services,
+The Repository Service for TUF (RSTUF) consists of two primary components,
 ``repository-service-tuf-api`` and ``repository-service-tuf-worker``.
-RSTUF also have a Command Line Interface that is a Python Application,
+We also provide a Command Line Interface (CLI) for interacting with RSTUF,
 ``repository-service-tuf-cli``.
 
-* `All represented in blue`
+`Each of the RSTUF components are represented in blue in this diagram of a
+typical service deployment:`
 
 .. image:: /_static/2_1_rstuf.png
 
 Repository Service for TUF
 --------------------------
 
+Repository Service for TUF implements the microservices pattern for scalability
+and reliability in different deployment scenarios.
+
 The ``repository-service-tuf-api``, and ``repository-service-tuf-worker``
 services are provided as Docker Images.
 
 ``repository-service-tuf-api`` is the API Service, and the
-``repository-service-tuf-worker``` is a Task Manager Worker that handles the
-TUF Metadata.
+``repository-service-tuf-worker``` is a worker that manages TUF Metadata.
 
 The Repository Service for TUF requires a Broker (``RabbitMQ`` or ``Redis``)
 to be used by the RSTUF services (``repository-service-tuf-api``,
 ``repository-service-tuf-worker``).
 
 .. note::
-    TUF Metadata Storage and Sorage Keys (Key Vault) use File Systems.
-    To use persistent data and share this volume, Docker Volumes are supported.
+    TUF Metadata Storage and Key Storage (Key Vault) use the filesystem for
+    storage. To use persistent data and share this volume, Docker Volumes
+    are supported.
 
-    The plan is to add support for SaaS Services such as S3 and Cloud Key
-    Vaults in the following releases.
-
-The idea of using Repository Service for TUF as microservices is the possibility
-of bringing scalability and reliability in different deployment scenarios.
+    We plan to add support for SaaS Services such as S3 and Cloud Key Vaults
+    in the future milestones.
 
 Repository Service for TUF Command Line
 ---------------------------------------
 
 The Repository Service for TUF Command Line Interface
-(``repository-service-tuf-cli``) is a Command Line Interface (CLI) Python
-Application to manage the Repository Service for TUF.
+(``repository-service-tuf-cli``) is a CLI Python application to manage the
+Repository Service for TUF.
 
-The CLI supports the Ceremony (signing the initial Repository Metadata
-and Repository Service for TUF setup), generating Tokens to be used by integration
-(i.e. CI/CD tools).
+The CLI supports the initial setup, termed a ceremony, where initial repository
+metadata is signed and the service is configured, generating Tokens to be used
+by integration (i.e. CI/CD tools).
 
 The Repository Metadata
 =======================
 
-Repository Service for TUF (RSTUF) is to secure downloads with signed Repository
-Metadata.
-RSTUF implements The Update Framework (TUF) As a Service as part of your release
-process.
-
-The RSTUF has pre-defined TUF Roles and some Roles to protect and enable
-integration with build systems based on Python PEP 458.
+Repository Service for TUF (RSTUF) secures downloads with signed repository
+metadata using a design based on Python's `PEP 458 – Secure PyPI downloads
+with signed repository metadata <https://peps.python.org/pep-0458/>`.
 
 .. image:: /_static/1_1_rstuf_metadata.png
 
@@ -71,7 +68,8 @@ repository metadata using REST API calls, making it easy to integrate into
 CI/CD tools.
 
 You can deploy Repository Service for TUF as a single server or a distributed
-service in edge, private, or cloud environments.
+service (to scale for more active repositories) at the edge, on-premises, or
+in cloud environments.
 
 Check out the :ref:`how to deploy <guide/installation/server:Deployment>`.
 
@@ -81,27 +79,32 @@ Below is a diagram of Repository Service for TUF in a building environment.
 
 .. note::
 
-    If you provide users with download or update tools, you need to add to your
-    tools the functionality to check the signed metadata.
+    If you provide users with download or update tools, you need to add
+    functionality to your tools to check the signed metadata.
 
 
-About the project and motivation
-================================
+Project background and motivation
+=================================
 
-`TUF`_ provides a flexible framework and specification that developers can adopt
-and an excellent Python Library (`python-tuf`_) that provides two APIs for
-low-level Metadata management and client implementation.
+`TUF`_ provides a flexible framework and specification that developers can
+adopt and an excellent Python Library (`python-tuf`_) that provides two APIs
+for low-level Metadata management and client implementation.
 
-Implementing `TUF`_ to be used in building infrastructure and repository
-infrastructure may require deep knowledge of the `TUF`_ and hours of engineering
-implementation.
+Implementing `TUF`_ requires sufficient knowledge of `TUF`_ to design how to
+integrate the framework into your repository and hours of engineering work to
+implement.
 
-When I started implementing the `PEP 458 (Secure PyPI downloads with signed
-repository metadata) <https://peps.python.org/pep-0458/>`_ , I began
-designing how to implement a reusable platform in different flows and infrastructures.
+RSTUF was born as a consequence of working on the implementation of `PEP 458
+<https://peps.python.org/pep-0458/>`_ in the `Warehouse 
+<https://warehouse.pypa.io>` project which powers the `Python Package Index
+(PyPI) <https://pypi.org>`.
 
-Repository Service for TUF goal is to be an easy tool/platform to be used by Developers, DevOps,
-DevOpsSec in the delivery process.
+Due to oyr experience of the complexity and fragility of deep integration into
+a complex platform, we began designing how to implement a reusable TUF platform
+which is flexible to integration in different flows and infrastructure.
+
+Repository Service for TUF's goal is to be an easy to use tool for Developers,
+DevOps, and DevOpsSec teams working on the delivery process.
 
 
 .. _TUF: https://theupdateframework.io
