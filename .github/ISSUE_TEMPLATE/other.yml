@@ -1,0 +1,31 @@
+name: 📃 Other
+description: File a general report
+title: "Other: "
+labels: ["other"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this general report!
+  - type: textarea
+    id: description
+    attributes:
+      label: What do you want to share with us?
+      description: Use this template in case none of other ones match your intentions. Please provide a detailed description of what you want to share with us.
+    validations:
+      required: true
+  - type: textarea
+    id: other
+    attributes:
+      label: References
+      description: Please provide any references that are related to your report.
+    validations:
+      required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this report, you agree to follow our [Code of Conduct](CODE_OF_CONDUCT.rst)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

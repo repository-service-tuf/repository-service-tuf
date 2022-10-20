@@ -1,0 +1,38 @@
+name: 🔨 Task
+description: File a task report
+title: "Task: "
+labels: ["task"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this task report!
+  - type: textarea
+    id: description
+    attributes:
+      label: What is the task about?
+      description: Please provide a detailed description of the task.
+    validations:
+      required: true
+  - type: textarea
+    id: feature
+    attributes:
+      label: Parent feature
+      description: Please provide a reference to the parent feature that this task is about.
+    validations:
+      required: false
+  - type: textarea
+    id: other
+    attributes:
+      label: References
+      description: Please provide any other references that are related to this task.
+    validations:
+      required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this report, you agree to follow our [Code of Conduct](CODE_OF_CONDUCT.rst)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

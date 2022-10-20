@@ -1,0 +1,50 @@
+name: 🏠 Feature
+description: File a feature report
+title: "Feature: "
+labels: ["feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this feature report!
+  - type: textarea
+    id: description
+    attributes:
+      label: What is the feature about?
+      description: Please provide a detailed description of the feature.
+    validations:
+      required: true
+ - type: dropdown
+    id: services
+    attributes:
+      label: Please select which services do you think will be impacted.
+      multiple: true
+      options:
+        - repository-service-for-tuf
+        - repository-service-for-tuf-cli
+        - repository-service-for-tuf-api
+        - repository-service-for-tuf-worker
+    validations:
+      required: true
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Related tasks
+      description: Please provide a reference to the tasks that need to completed for that feature.
+    validations:
+      required: false
+  - type: textarea
+    id: other
+    attributes:
+      label: References
+      description: Please provide any other references that are related to this feature.
+    validations:
+      required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](CODE_OF_CONDUCT.rst)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
