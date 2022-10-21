@@ -13,31 +13,33 @@ def test_bootstrap_using_rstuf_command_line_interface_cli():
 
 @given("the repository-service-tuf (rstuf) is installed")
 def the_tufrepositoryservice_rstufcli_is_installed(rstuf_cli):
-    output = rstuf_cli("-h")
-    assert "Repository Service Command Line Interface" in output
+    rc, _ = rstuf_cli("-h")
+    assert rc == 0
 
 
 @given("the admin login to RSTUF using rstuf", target_fixture="login")
 def the_administrator_login_to_rstuf(get_admin_pwd, rstuf_cli):
-    output = rstuf_cli(
+    rc, output = rstuf_cli(
         f"admin login -s http://localhost -u admin -p {get_admin_pwd} -e 1"
     )
 
-    return output
+    return rc, output
 
 
 @given("the admin is logged in")
 def the_admin_is_logged(login):
-    assert "Login successfuly." in login or "Already logged to " in login
+    rc, output = login
+    assert rc == 0
+    assert "Login successfuly." in output or "Already logged to " in output
 
 
 @when(
     "the admin run rstuf for ceremony bootstrap", target_fixture="bootstrap"
 )
 def the_administrator_uses_rstufcli_bootstrap(rstuf_cli):
-    output = rstuf_cli("admin ceremony -b -u -f tests/data/payload.json")
-
-    return output
+    rc, output = rstuf_cli("admin ceremony -b -u -f tests/data/payload.json")
+    breakpoint()
+    return rc, output
 
 
 @then(
@@ -45,10 +47,13 @@ def the_administrator_uses_rstufcli_bootstrap(rstuf_cli):
     '"Already has metadata"'
 )
 def the_admin_gets(bootstrap):
-    assert "SUCCESS" or "System already has a Metadata." in bootstrap
+    rc, output = bootstrap
+
+    assert rc == 0
+    assert "SUCCESS" or "System already has a Metadata." in output
     assert (
-        "Bootstrap finished." in bootstrap
-        or "System already has a Metadata." in bootstrap
+        "Bootstrap finished." in output
+        or "System already has a Metadata." in output
     )
 
 
@@ -65,11 +70,13 @@ def test_bootstrap_using_rstuf_command_line_interface_cli_with_invalid_payload()
     target_fixture="invalid_payload",
 )
 def the_administrator_uses_rstufcli_bootstrap_invalid_payload(rstuf_cli):
-    output = rstuf_cli("admin ceremony -b -u -f tests/data/payload-invalid.json")
+    rc, output = rstuf_cli("admin ceremony -b -u -f tests/data/payload-invalid.json")
 
-    return output
+    return rc, output
 
 
 @then('the admin gets "Error 422"')
 def then_admin_gets_error_422(invalid_payload):
-    assert "Error \x1b[1;36m422" in invalid_payload
+    rc, output = invalid_payload
+    assert rc == 1
+    assert "422" in output

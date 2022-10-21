@@ -18,6 +18,6 @@ def rstuf_cli():
             ["rstuf"] + params.split(), capture_output=True
         )
 
-        return result.stdout.decode("utf-8")
+        return result.returncode, result.stdout.decode("utf-8")
 
     return _run_rstuf_cli
