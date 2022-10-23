@@ -1,0 +1,43 @@
+name: 🤔 Enhancement
+description: File an enhancement report
+title: "Enhancement: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this enhancement report!
+  - type: textarea
+    id: description
+    attributes:
+      label: What is your proposal?
+      description: Please provide a detailed description of your idea.
+    validations:
+      required: true
+ - type: dropdown
+    id: services
+    attributes:
+      label: Please select which services do you think will be impacted.
+      multiple: true
+      options:
+        - repository-service-for-tuf
+        - repository-service-for-tuf-cli
+        - repository-service-for-tuf-api
+        - repository-service-for-tuf-worker
+    validations:
+      required: true
+  - type: textarea
+    id: other
+    attributes:
+      label: References
+      description: Please provide any other references that are related to your proposal.
+    validations:
+      required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](CODE_OF_CONDUCT.rst)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
