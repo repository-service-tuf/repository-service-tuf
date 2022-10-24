@@ -55,9 +55,6 @@ jobs:
 
       rstuf-worker:
         image: ghcr.io/vmware/repository-service-tuf-worker:${{ inputs.worker_version }}
-        credentials:
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
         volumes:
           - rstuf-worker-data:/data
           - rstuf-storage:/var/opt/repository-service-tuf/storage
@@ -73,9 +70,6 @@ jobs:
 
       rstuf-api:
         image: ghcr.io/vmware/repository-service-tuf-api:${{ inputs.api_version }}
-        credentials:
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
         ports:
           - 80:80
         env:
@@ -86,8 +80,13 @@ jobs:
           SECRETS_RSTUF_ADMIN_PASSWORD: test-secret
 
     steps:
-      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
-      - uses: actions/setup-python@13ae5bb136fac2878aff31522b9efb785519f984
+      - name: Checkout release tag
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+
+      - name: Set up Python
+        uses: actions/setup-python@13ae5bb136fac2878aff31522b9efb785519f984
+        with:
+          python-version: '3.10'
 
       - name: Install Python Dependencies
         run: |
@@ -99,9 +98,23 @@ jobs:
         run: |
           git submodule update --init repository-service-tuf-cli
           git submodule foreach git pull origin main
-          pip install -e repository-service-tuf-cli/
+          pip install repository-service-tuf-cli/
 
-      - name: Install the RSTUF Command Line Interface (released)
+      - name: Install the RSTUF Command Line Interface (latest)
+        if: ${{ inputs.cli_version == 'latest' }}
+        # replace the run below after repository-service-tuf is available in
+        # pypi.org
+        # run: |
+        #   pip install "dynaconf[ini]" repository-service-tuf
+        run: |
+          git submodule update --init repository-service-tuf-cli
+          git submodule foreach git pull origin main
+          cd repository-service-tuf-cli
+          git checkout $(git tag -l --sort=version:refname | tail -1 && cd ..)
+          pip install .
+          cd ..
+
+      - name: Install the RSTUF Command Line Interface (${{ inputs.cli_version }})
         if: ${{ inputs.cli_version != 'dev' }}
         # replace the run below after repository-service-tuf is available in
         # pypi.org
@@ -109,9 +122,11 @@ jobs:
         #   pip install "dynaconf[ini]" repository-service-tuf==${{ inputs.cli_version }}
         run: |
           git submodule update --init repository-service-tuf-cli
-          git submodule foreach git pull origin v${{ inputs.api_version }}
-          pip install -e repository-service-tuf-cli/
-
+          git submodule foreach git pull origin main
+          cd repository-service-tuf-cli
+          git checkout ${{ inputs.cli_version }}
+          pip install .
+          cd ..
 
       - name: Functional Tests (BDD)
         env:
