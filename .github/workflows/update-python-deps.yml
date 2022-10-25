@@ -1,0 +1,32 @@
+name: Update Python dependencies
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * *"
+jobs:
+  update-dep:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-versions: ["3.10"]
+    steps:
+      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+      - uses: actions/setup-python@13ae5bb136fac2878aff31522b9efb785519f984
+        with:
+          python-version: ${{ matrix.python-versions }}
+      - name: Install prerequisites
+        run: |
+          pip install pipenv
+      - name: Update dependencies
+        run: |
+          pipenv update -d
+          make requirements
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@b4d51739f96fca8047ad065eccef63442d8e99f7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "build: Update Python dependencies"
+          title: "build: Update Python dependencies"
+          body: >
+            The following PR updates the Python dependencies and generates new pipfile and requirements file.
+          labels: report, automated pr, python
