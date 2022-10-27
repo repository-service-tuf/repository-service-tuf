@@ -13,8 +13,8 @@ def test_bootstrap_using_rstuf_command_line_interface_cli():
 
 @given("the repository-service-tuf (rstuf) is installed")
 def the_tufrepositoryservice_rstufcli_is_installed(rstuf_cli):
-    rc, _ = rstuf_cli("-h")
-    assert rc == 0
+    rc, output = rstuf_cli("-h")
+    assert rc == 0, output
 
 
 @given("the admin login to RSTUF using rstuf", target_fixture="login")
@@ -29,7 +29,7 @@ def the_administrator_login_to_rstuf(get_admin_pwd, rstuf_cli):
 @given("the admin is logged in")
 def the_admin_is_logged(login):
     rc, output = login
-    assert rc == 0
+    assert rc == 0, output
     assert "Login successfuly." in output or "Already logged to " in output
 
 
@@ -38,7 +38,6 @@ def the_admin_is_logged(login):
 )
 def the_administrator_uses_rstufcli_bootstrap(rstuf_cli):
     rc, output = rstuf_cli("admin ceremony -b -u -f tests/data/payload.json")
-    breakpoint()
     return rc, output
 
 
@@ -47,9 +46,8 @@ def the_administrator_uses_rstufcli_bootstrap(rstuf_cli):
     '"Already has metadata"'
 )
 def the_admin_gets(bootstrap):
-    rc, output = bootstrap
+    _, output = bootstrap
 
-    assert rc == 0
     assert "SUCCESS" or "System already has a Metadata." in output
     assert (
         "Bootstrap finished." in output
@@ -78,5 +76,5 @@ def the_administrator_uses_rstufcli_bootstrap_invalid_payload(rstuf_cli):
 @then('the admin gets "Error 422"')
 def then_admin_gets_error_422(invalid_payload):
     rc, output = invalid_payload
-    assert rc == 1
+    assert rc == 1, output
     assert "422" in output

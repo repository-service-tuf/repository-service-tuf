@@ -90,7 +90,7 @@ jobs:
 
       - name: Install Python Dependencies
         run: |
-          pip install pipenv
+          pip install pipenv dynaconf[ini]
           pip install -r requirements.txt
 
       - name: Install the RSTUF Command Line Interface (dev)
@@ -114,8 +114,8 @@ jobs:
           pip install .
           cd ..
 
-      - name: Install the RSTUF Command Line Interface (${{ inputs.cli_version }})
-        if: ${{ inputs.cli_version != 'dev' }}
+      - name: Install the RSTUF Command Line Interface (vX.Y.Z)
+        if: ${{ startsWith(inputs.cli_version, 'v') }}
         # replace the run below after repository-service-tuf is available in
         # pypi.org
         # run: |
@@ -147,6 +147,7 @@ jobs:
                 break; \
               fi; \
             done
+            rstuf -c rstuf.ini admin login -s http://localhost -u admin -p test-secret -e 1
             make functional-tests
 
       - name: Check Tests Lint and Dependencies

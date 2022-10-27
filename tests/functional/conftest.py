@@ -15,7 +15,7 @@ def rstuf_cli():
     def _run_rstuf_cli(params: List):
 
         result = subprocess.run(
-            ["rstuf"] + params.split(), capture_output=True
+            ["rstuf", "-c", "rstuf.ini"] + params.split(), capture_output=True
         )
 
         return result.returncode, result.stdout.decode("utf-8")
