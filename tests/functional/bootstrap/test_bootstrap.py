@@ -33,9 +33,7 @@ def the_admin_is_logged(login):
     assert "Login successfuly." in output or "Already logged to " in output
 
 
-@when(
-    "the admin run rstuf for ceremony bootstrap", target_fixture="bootstrap"
-)
+@when("the admin run rstuf for ceremony bootstrap", target_fixture="bootstrap")
 def the_administrator_uses_rstufcli_bootstrap(rstuf_cli):
     rc, output = rstuf_cli("admin ceremony -b -u -f tests/data/payload.json")
     return rc, output
@@ -59,7 +57,7 @@ def the_admin_gets(bootstrap):
     "../../features/bootstrap/bootstrap.feature",
     "Bootstrap using RSTUF Command Line Interface (CLI) with invalid payload",
 )
-def test_bootstrap_using_rstuf_command_line_interface_cli_with_invalid_payload():
+def test_bootstrap_using_rstuf_cli_with_invalid_payload():
     ...
 
 
@@ -68,7 +66,9 @@ def test_bootstrap_using_rstuf_command_line_interface_cli_with_invalid_payload()
     target_fixture="invalid_payload",
 )
 def the_administrator_uses_rstufcli_bootstrap_invalid_payload(rstuf_cli):
-    rc, output = rstuf_cli("admin ceremony -b -u -f tests/data/payload-invalid.json")
+    rc, output = rstuf_cli(
+        "admin ceremony -b -u -f tests/data/payload-invalid.json"
+    )
 
     return rc, output
 

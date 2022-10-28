@@ -14,7 +14,7 @@ on:
       - 'tests/**'
       - 'requirements.txt'
       - '.github/workflows/functional.yml'
-      - '.github/workflows/main.yml'
+      - '.github/workflows/ci.yml'
   workflow_dispatch:
 
 jobs:

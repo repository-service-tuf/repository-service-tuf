@@ -149,7 +149,3 @@ jobs:
             done
             rstuf -c rstuf.ini admin login -s http://localhost -u admin -p test-secret -e 1
             make functional-tests
-
-      - name: Check Tests Lint and Dependencies
-        run: |
-          make lint
