@@ -14,10 +14,11 @@ body:
       description: Please provide a detailed description of your idea.
     validations:
       required: true
- - type: dropdown
+  - type: dropdown
     id: services
     attributes:
-      label: Please select which services do you think will be impacted.
+      label: Services it relates to
+      description: Please select which services do you think will be impacted.
       multiple: true
       options:
         - repository-service-for-tuf
