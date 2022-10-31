@@ -1,7 +1,7 @@
 Feature: Bootstrap Repository Service for TUF (RSTUF)
-    As a admin,
-    Admin have done the offline Ceremony to generate the payload.json,
-    Admin want to bootstrap the RSTUF uploading the file
+    As an admin,
+    Admin has done the offline Ceremony to generate the payload.json,
+    Admin wants to bootstrap the RSTUF uploading the file
 
     Scenario: Bootstrap using RSTUF Command Line Interface (CLI)
         Given the repository-service-tuf (rstuf) is installed
