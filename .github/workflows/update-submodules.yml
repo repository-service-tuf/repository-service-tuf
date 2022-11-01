@@ -1,0 +1,25 @@
+name: Sync submodules
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * *"
+jobs:
+  sync-submodules:
+    name: "Sync submodules"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+      - name: Sync git submodules
+        run: |
+          git submodule sync
+          git submodule update --init --force --recursive
+          git submodule foreach git pull origin main
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@b4d51739f96fca8047ad065eccef63442d8e99f7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: sync git submodules"
+          title: "chore: sync git submodules"
+          body: >
+            The following PR updates the submodule references in the umbrella repository for repository-service-tuf-api, repository-service-tuf-cli and repository-service-tuf-worker.
+          labels: automated pr
