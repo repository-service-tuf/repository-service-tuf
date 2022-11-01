@@ -94,7 +94,9 @@ jobs:
 
       - name: Update make functional tests target variable
         if: ${{ github.GITHUB_REPOSITORY != 'vmware/repository-service-tuf' }} 
-        run: echo "MAKE_FT_TARGET=-C rstuf-umbrella/ functional-tests" >> $GITHUB_ENV
+        run: |
+          echo "MAKE_FT_TARGET=-C rstuf-umbrella/ functional-tests" >> $GITHUB_ENV
+          pip install -r rstuf-umbrella/requirements.txt
         
       - name: Set up Python
         uses: actions/setup-python@13ae5bb136fac2878aff31522b9efb785519f984
