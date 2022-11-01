@@ -2,26 +2,30 @@ name: CI
 
 on:
   push:
-    branches: [ 'main' ]
+    branches: ["main"]
     paths:
-      - 'tests/**'
-      - 'requirements.txt'
-      - '.github/workflows/functional.yml'
-      - '.github/workflows/ci.yml'
+      - "tests/**"
+      - "requirements.txt"
+      - ".github/workflows/functional.yml"
+      - ".github/workflows/ci.yml"
+      - "repository-service-tuf-api/**"
+      - "repository-service-tuf-cli/**"
+      - "repository-service-tuf-worker/**"
   pull_request:
-    branches: [ 'main' ]
+    branches: ["main"]
     paths:
-      - 'tests/**'
-      - 'requirements.txt'
-      - '.github/workflows/functional.yml'
-      - '.github/workflows/ci.yml'
+      - "tests/**"
+      - "requirements.txt"
+      - ".github/workflows/functional.yml"
+      - ".github/workflows/ci.yml"
+      - "repository-service-tuf-api/**"
+      - "repository-service-tuf-cli/**"
+      - "repository-service-tuf-worker/**"
   workflow_dispatch:
 
 jobs:
   functional-tests:
     uses: ./.github/workflows/functional.yml
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     with:
       api_version: dev
       worker_version: dev
