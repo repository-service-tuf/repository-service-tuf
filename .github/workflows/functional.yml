@@ -93,17 +93,28 @@ jobs:
           pip install pipenv dynaconf[ini]
           pip install -r requirements.txt
 
+      - name: Checkout the Repository Service for TUF CLI
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+        if: ${{ inputs.cli_version == 'dev' }}
+        with:
+          repository: vmware/repository-service-tuf-cli
+          path: rstuf-cli
+          ref: main
+          
+      - name: Checkout the Repository Service for TUF CLI
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+        with:
+          repository: vmware/repository-service-tuf-cli
+          path: rstuf-cli
+       
       - name: Install the RSTUF Command Line Interface (dev)
         if: ${{ inputs.cli_version == 'dev' }}
-        run: |
-          git clone git@github.com:vmware/repository-service-tuf-cli.git rstuf-cli
-          cd rstuf-cli
-          git fetch
-          git pull
-          git checkout main          
-          cd ..
-          pip install rstuf-cli/
-
+        # replace the run below after repository-service-tuf is available in
+        # pypi.org
+        # run: |
+        #   pip install "dynaconf[ini]" repository-service-tuf
+        run: pip install rstuf-cli/    
+          
       - name: Install the RSTUF Command Line Interface (latest)
         if: ${{ inputs.cli_version == 'latest' }}
         # replace the run below after repository-service-tuf is available in
@@ -111,7 +122,6 @@ jobs:
         # run: |
         #   pip install "dynaconf[ini]" repository-service-tuf
         run: |
-          git clone git@github.com:vmware/repository-service-tuf-cli.git rstuf-cli
           cd rstuf-cli
           git fetch
           git pull
@@ -126,7 +136,6 @@ jobs:
         # run: |
         #   pip install "dynaconf[ini]" repository-service-tuf==${{ inputs.cli_version }}
         run: |
-          git clone git@github.com:vmware/repository-service-tuf-cli.git rstuf-cli
           cd rstuf-cli
           git fetch
           git pull
