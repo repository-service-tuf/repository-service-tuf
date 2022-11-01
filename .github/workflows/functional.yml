@@ -37,6 +37,7 @@ on:
         required: False
 env:
   MAKE_FT_TARGET: functional-tests
+  REQUIREMENTS_PATH: requirements.txt
   
 jobs:
   functional:
@@ -92,11 +93,11 @@ jobs:
            path: rstuf-umbrella
            ref: main
 
-      - name: Update make functional tests target variable
+      - name: Update environment variables
         if: github.repository != 'vmware/repository-service-tuf'
         run: |
           echo "MAKE_FT_TARGET=-C rstuf-umbrella/ functional-tests" >> $GITHUB_ENV
-          pip install -r rstuf-umbrella/requirements.txt
+          echo "REQUIREMENTS_PATH=rstuf-umbrella/requirements.txt" >> $GITHUB_ENV
         
       - name: Set up Python
         uses: actions/setup-python@13ae5bb136fac2878aff31522b9efb785519f984
@@ -106,7 +107,7 @@ jobs:
       - name: Install Python Dependencies
         run: |
           pip install pipenv dynaconf[ini]
-          pip install -r requirements.txt
+          pip install -r ${{ env.REQUIREMENTS_PATH }}
 
       - name: Checkout the Repository Service for TUF CLI
         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
