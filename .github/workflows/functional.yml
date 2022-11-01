@@ -35,7 +35,9 @@ on:
         default: "latest"
         type: string
         required: False
-
+env:
+  MAKE_FT_TARGET: functional-tests
+  
 jobs:
   functional:
     runs-on: ubuntu-latest
@@ -78,11 +80,22 @@ jobs:
           RSTUF_REDIS_SERVER: redis://redis
           SECRETS_RSTUF_TOKEN_KEY: test-token-key
           SECRETS_RSTUF_ADMIN_PASSWORD: test-secret
-
     steps:
       - name: Checkout release tag
         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+    
+      - name: Checkout release tag if not umbrella
+        if: ${{ github.GITHUB_REPOSITORY != 'vmware/repository-service-tuf' }} 
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+        with:
+           repository: vmware/repository-service-tuf
+           path: rstuf-umbrella
+           ref: main
 
+      - name: Update make functional tests target variable
+        if: ${{ github.GITHUB_REPOSITORY != 'vmware/repository-service-tuf' }} 
+        run: echo "MAKE_FT_TARGET=-C rstuf-umbrella/ functional-tests" >> $GITHUB_ENV
+        
       - name: Set up Python
         uses: actions/setup-python@13ae5bb136fac2878aff31522b9efb785519f984
         with:
@@ -95,17 +108,10 @@ jobs:
 
       - name: Checkout the Repository Service for TUF CLI
         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
-        if: ${{ inputs.cli_version == 'dev' }}
         with:
           repository: vmware/repository-service-tuf-cli
           path: rstuf-cli
           ref: main
-          
-      - name: Checkout the Repository Service for TUF CLI
-        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
-        with:
-          repository: vmware/repository-service-tuf-cli
-          path: rstuf-cli
        
       - name: Install the RSTUF Command Line Interface (dev)
         if: ${{ inputs.cli_version == 'dev' }}
@@ -163,4 +169,4 @@ jobs:
               fi; \
             done
             rstuf -c rstuf.ini admin login -s http://localhost -u admin -p test-secret -e 1
-            make functional-tests
+            make ${{ env.MAKE_FT_TARGET }}
