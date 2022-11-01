@@ -85,7 +85,7 @@ jobs:
         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
     
       - name: Checkout release tag if not umbrella
-        if: github.repository != 'vmware/repository-service-tuf
+        if: github.repository != 'vmware/repository-service-tuf'
         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
         with:
            repository: vmware/repository-service-tuf
@@ -93,7 +93,7 @@ jobs:
            ref: main
 
       - name: Update make functional tests target variable
-        if: github.repository != 'vmware/repository-service-tuf 
+        if: github.repository != 'vmware/repository-service-tuf'
         run: |
           echo "MAKE_FT_TARGET=-C rstuf-umbrella/ functional-tests" >> $GITHUB_ENV
           pip install -r rstuf-umbrella/requirements.txt
