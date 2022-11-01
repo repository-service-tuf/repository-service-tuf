@@ -96,9 +96,13 @@ jobs:
       - name: Install the RSTUF Command Line Interface (dev)
         if: ${{ inputs.cli_version == 'dev' }}
         run: |
-          git submodule update --init repository-service-tuf-cli
-          git submodule foreach git pull origin main
-          pip install repository-service-tuf-cli/
+          git clone git@github.com:vmware/repository-service-tuf-cli.git rstuf-cli
+          cd rstuf-cli
+          git fetch
+          git pull
+          git checkout main          
+          cd ..
+          pip install rstuf-cli/
 
       - name: Install the RSTUF Command Line Interface (latest)
         if: ${{ inputs.cli_version == 'latest' }}
@@ -107,12 +111,13 @@ jobs:
         # run: |
         #   pip install "dynaconf[ini]" repository-service-tuf
         run: |
-          git submodule update --init repository-service-tuf-cli
-          git submodule foreach git pull origin main
-          cd repository-service-tuf-cli
-          git checkout $(git tag -l --sort=version:refname | tail -1 && cd ..)
-          pip install .
+          git clone git@github.com:vmware/repository-service-tuf-cli.git rstuf-cli
+          cd rstuf-cli
+          git fetch
+          git pull
+          git checkout $(git tag -l --sort=version:refname | tail -1)          
           cd ..
+          pip install rstuf-cli/        
 
       - name: Install the RSTUF Command Line Interface (vX.Y.Z)
         if: ${{ startsWith(inputs.cli_version, 'v') }}
@@ -121,12 +126,13 @@ jobs:
         # run: |
         #   pip install "dynaconf[ini]" repository-service-tuf==${{ inputs.cli_version }}
         run: |
-          git submodule update --init repository-service-tuf-cli
-          git submodule foreach git pull origin main
-          cd repository-service-tuf-cli
+          git clone git@github.com:vmware/repository-service-tuf-cli.git rstuf-cli
+          cd rstuf-cli
+          git fetch
+          git pull
           git checkout ${{ inputs.cli_version }}
-          pip install .
           cd ..
+          pip install rstuf-cli/        
 
       - name: Functional Tests (BDD)
         env:
