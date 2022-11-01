@@ -35,7 +35,10 @@ on:
         default: "latest"
         type: string
         required: False
-
+env:
+  MAKE_FT_TARGET: functional-tests
+  REQUIREMENTS_PATH: requirements.txt
+  
 jobs:
   functional:
     runs-on: ubuntu-latest
@@ -78,11 +81,24 @@ jobs:
           RSTUF_REDIS_SERVER: redis://redis
           SECRETS_RSTUF_TOKEN_KEY: test-token-key
           SECRETS_RSTUF_ADMIN_PASSWORD: test-secret
-
     steps:
       - name: Checkout release tag
         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+    
+      - name: Checkout release tag if not umbrella
+        if: github.repository != 'vmware/repository-service-tuf'
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+        with:
+           repository: vmware/repository-service-tuf
+           path: rstuf-umbrella
+           ref: main
 
+      - name: Update environment variables
+        if: github.repository != 'vmware/repository-service-tuf'
+        run: |
+          echo "MAKE_FT_TARGET=-C rstuf-umbrella/ functional-tests" >> $GITHUB_ENV
+          echo "REQUIREMENTS_PATH=rstuf-umbrella/requirements.txt" >> $GITHUB_ENV
+        
       - name: Set up Python
         uses: actions/setup-python@13ae5bb136fac2878aff31522b9efb785519f984
         with:
@@ -91,15 +107,23 @@ jobs:
       - name: Install Python Dependencies
         run: |
           pip install pipenv dynaconf[ini]
-          pip install -r requirements.txt
+          pip install -r ${{ env.REQUIREMENTS_PATH }}
 
+      - name: Checkout the Repository Service for TUF CLI
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+        with:
+          repository: vmware/repository-service-tuf-cli
+          path: rstuf-cli
+          ref: main
+       
       - name: Install the RSTUF Command Line Interface (dev)
         if: ${{ inputs.cli_version == 'dev' }}
-        run: |
-          git submodule update --init repository-service-tuf-cli
-          git submodule foreach git pull origin main
-          pip install repository-service-tuf-cli/
-
+        # replace the run below after repository-service-tuf is available in
+        # pypi.org
+        # run: |
+        #   pip install "dynaconf[ini]" repository-service-tuf
+        run: pip install rstuf-cli/    
+          
       - name: Install the RSTUF Command Line Interface (latest)
         if: ${{ inputs.cli_version == 'latest' }}
         # replace the run below after repository-service-tuf is available in
@@ -107,12 +131,12 @@ jobs:
         # run: |
         #   pip install "dynaconf[ini]" repository-service-tuf
         run: |
-          git submodule update --init repository-service-tuf-cli
-          git submodule foreach git pull origin main
-          cd repository-service-tuf-cli
-          git checkout $(git tag -l --sort=version:refname | tail -1 && cd ..)
-          pip install .
+          cd rstuf-cli
+          git fetch
+          git pull
+          git checkout $(git tag -l --sort=version:refname | tail -1)          
           cd ..
+          pip install rstuf-cli/        
 
       - name: Install the RSTUF Command Line Interface (vX.Y.Z)
         if: ${{ startsWith(inputs.cli_version, 'v') }}
@@ -121,12 +145,12 @@ jobs:
         # run: |
         #   pip install "dynaconf[ini]" repository-service-tuf==${{ inputs.cli_version }}
         run: |
-          git submodule update --init repository-service-tuf-cli
-          git submodule foreach git pull origin main
-          cd repository-service-tuf-cli
+          cd rstuf-cli
+          git fetch
+          git pull
           git checkout ${{ inputs.cli_version }}
-          pip install .
           cd ..
+          pip install rstuf-cli/        
 
       - name: Functional Tests (BDD)
         env:
@@ -148,4 +172,4 @@ jobs:
               fi; \
             done
             rstuf -c rstuf.ini admin login -s http://localhost -u admin -p test-secret -e 1
-            make functional-tests
+            make ${{ env.MAKE_FT_TARGET }}
