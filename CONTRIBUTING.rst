@@ -63,6 +63,8 @@ it to your local machine:
 .. code-block:: console
 
     git clone git@github.com:YOUR-USERNAME/repository-service-tuf.git
+    cd repository-service-tuf
+    git submodule update --init --recursive
 
 Add a `remote
 <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-for-a-fork>`_ and
