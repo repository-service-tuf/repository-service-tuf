@@ -26,6 +26,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "build: Update Python dependencies"
+          branch: "rstuf-bot/update-python-dependencies"
+          delete-branch: true
           title: "build: Update Python dependencies"
           body: >
             The following PR updates the Python dependencies and generates new pipfile and requirements file.
