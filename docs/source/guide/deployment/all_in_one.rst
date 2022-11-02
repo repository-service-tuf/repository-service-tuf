@@ -99,7 +99,7 @@ Steps
 
 4. Repository Ceremony
 
-    It will require the CLI :ref:`guide/repository-service-tuf-cli/index:Installation`.
+    It will require the :ref:`guide/repository-service-tuf-cli/index:Repository Service for TUF CLI`.
 
     Once you have the service running is required to do the
     :ref:`guide/repository-service-tuf-cli/index:Ceremony (``ceremony\`\`)`.
