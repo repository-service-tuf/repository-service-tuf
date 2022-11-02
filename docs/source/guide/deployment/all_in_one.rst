@@ -1,9 +1,10 @@
-=====================================
-All-in-one host installation (Docker)
-=====================================
+===================================
+All-in-one host deployment (Docker)
+===================================
 
-The All-in-one host installation is the simplest way to Deploy Repository Service for TUF Server.
-There are limitations to scaling this installation (limited to the host).
+The All-in-one host deployment is the simplest way to Deploy Repository Service
+for TUF Server.
+There are limitations to scaling this deployment (limited to the host).
 
 This deployment will use Docker Stack with Docker Compose and Docker Swarn for
 the Token and Admin user password.
