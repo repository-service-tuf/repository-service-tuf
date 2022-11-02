@@ -19,6 +19,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore: sync git submodules"
+          branch: "rstuf-bot/update-submodules"
+          delete-branch: true
           title: "chore: sync git submodules"
           body: >
             The following PR updates the submodule references in the umbrella repository for repository-service-tuf-api, repository-service-tuf-cli and repository-service-tuf-worker.
