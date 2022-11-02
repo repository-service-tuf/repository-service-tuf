@@ -55,7 +55,7 @@ The Repository Metadata
 
 Repository Service for TUF (RSTUF) secures downloads with signed repository
 metadata using a design based on Python's `PEP 458 – Secure PyPI downloads
-with signed repository metadata <https://peps.python.org/pep-0458/>`.
+with signed repository metadata <https://peps.python.org/pep-0458/>`_.
 
 .. image:: /_static/1_1_rstuf_metadata.png
 
@@ -71,7 +71,7 @@ You can deploy Repository Service for TUF as a single server or a distributed
 service (to scale for more active repositories) at the edge, on-premises, or
 in cloud environments.
 
-Check out the :ref:`how to deploy <guide/installation/server:Deployment>`.
+Check out the :ref:`how to deploy <guide/deployment/server:Deployment>`.
 
 Below is a diagram of Repository Service for TUF in a building environment.
 
@@ -95,9 +95,9 @@ integrate the framework into your repository and hours of engineering work to
 implement.
 
 RSTUF was born as a consequence of working on the implementation of `PEP 458
-<https://peps.python.org/pep-0458/>`_ in the `Warehouse 
-<https://warehouse.pypa.io>` project which powers the `Python Package Index
-(PyPI) <https://pypi.org>`.
+<https://peps.python.org/pep-0458/>`_ in the `Warehouse
+<https://warehouse.pypa.io>`_ project which powers the `Python Package Index
+(PyPI) <https://pypi.org>`_.
 
 Due to oyr experience of the complexity and fragility of deep integration into
 a complex platform, we began designing how to implement a reusable TUF platform
