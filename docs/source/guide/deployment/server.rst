@@ -17,4 +17,4 @@ Interface (CLI) ``tuf-repositoru-service-cli`` -- Command: ``rstuf-cli``
    :maxdepth: 1
 
    all_in_one
-   custom_installation
+   custom_deployment

@@ -138,7 +138,7 @@ Step 1: Configure the Roles
 
     Reference: TUF                                                                  
 
-    What is the Metadata expiration for the root role?(Days) (356):
+    What is the Metadata expiration for the root role?(Days) (365):
     What is the number of keys for the root role? (2):
     What is the key threshold for the root role signing? (1):
 
@@ -285,7 +285,7 @@ complete (without the offline keys).
     │     Number of Keys: 2     │              path │                 id                  │ verified   │
     │       Threshold: 1        │ ╶─────────────────┼─────────────────────────────────────┼──────────╴ │
     │    Keys Type: offline     │   JanisJoplin.key │ 1cebe343e35f0213f6136758e6c3a8f8e1… │    ✅      │
-    │ Role Expiration: 356 days │   JimiHendrix.key │ 800dfb5a1982b82b7893e58035e19f414f… │    ✅      │
+    │ Role Expiration: 365 days │   JimiHendrix.key │ 800dfb5a1982b82b7893e58035e19f414f… │    ✅      │
     │                           │                   ╵                                     ╵            │
     └───────────────────────────┴──────────────────────────────────────────────────────────────────────┘
     Configuration correct for root? [y/n]: y

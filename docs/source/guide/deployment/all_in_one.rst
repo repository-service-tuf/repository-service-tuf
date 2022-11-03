@@ -1,9 +1,10 @@
-=====================================
-All-in-one host installation (Docker)
-=====================================
+===================================
+All-in-one host deployment (Docker)
+===================================
 
-The All-in-one host installation is the simplest way to Deploy Repository Service for TUF Server.
-There are limitations to scaling this installation (limited to the host).
+The All-in-one host deployment is the simplest way to Deploy Repository Service
+for TUF Server.
+There are limitations to scaling this deployment (limited to the host).
 
 This deployment will use Docker Stack with Docker Compose and Docker Swarn for
 the Token and Admin user password.
@@ -98,7 +99,7 @@ Steps
 
 4. Repository Ceremony
 
-    It will require the CLI :ref:`guide/repository-service-tuf-cli/index:Installation`.
+    It will require the :ref:`guide/repository-service-tuf-cli/index:Repository Service for TUF CLI`.
 
     Once you have the service running is required to do the
     :ref:`guide/repository-service-tuf-cli/index:Ceremony (``ceremony\`\`)`.

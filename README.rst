@@ -24,7 +24,7 @@ Artifactory, GitHub packages, etc.
 RSTUF security properties are achieved through implementing
 `The Update Framework <https://theupdateframework.io/>`_ (TUF) as a service.
 
-RSTUF simplifies adoption of TUF by removing the need to design a repository 
+RSTUF simplifies adoption of TUF by removing the need to design a repository
 integration -- RSTUF encapsulates that design.
 
 Integrating RSTUF into your existing content delivery solutions is simple
@@ -32,11 +32,16 @@ thanks to the REST API. Furthermore, RSTUF is designed for scalability and can
 support very active repositories with multiple repository workers.
 
 At present, RSTUF implements a streamlined variant of the Python Package Index
-(PyPI)'s `PEP 458 – Secure PyPI downloads with signed repository metadata 
+(PyPI)'s `PEP 458 – Secure PyPI downloads with signed repository metadata
 <https://peps.python.org/pep-0458/>`_. In future, RSTUF will grow to provide
 additional protections through supporting end-to-end signing of packages,
 comparable to PyPI's `PEP 480 – Surviving a Compromise of PyPI: End-to-end
 signing of packages <https://peps.python.org/pep-0480/>`_.
+
+Questions, feedback, and suggestions are welcomed on the
+`#repository-service-for-tuf <https://cloud-native.slack.com/archives/C047L55314N>`_
+channel on `CNCF Slack <https://slack.cncf.io/>`_.
+
 
 How does Repository Service for TUF compare to other solutions?
 
@@ -58,7 +63,7 @@ Using
 =====
 
 Please, check the `Repository Service for TUF Guide
-<https://repository-service-tuf.readthedocs.io/en/latest/guide/overview/overview.html>`_
+<https://repository-service-tuf.readthedocs.io/en/latest/guide/introduction/introduction.html>`_
 for the deployment instructions and more details.
 
 Contributing
