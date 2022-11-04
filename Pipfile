@@ -17,6 +17,7 @@ dynaconf = "*"
 isort = "*"
 black = "*"
 flake8 = "*"
+pretend = "*"
 
 [dev-packages]
 
