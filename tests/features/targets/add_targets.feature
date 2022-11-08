@@ -8,14 +8,18 @@ Feature: Adding targets in Repository Service for TUF (RSTUF)
         Given the API requester has a token
         And the token has a scope write for targets
         When the API requester adds a new target
-        Then the API requester gets "New Target(s) successfully submitted"
+        Then the API requester gets "New Target(s) successfully submitted" with "task_id"
+        Then the API requester gets from endpoint "GET /api/v1/task" state "SUCCESS" and status "Task finished" within 1 minute
+        Then the user can fetch the new target from the metadata
 
     Scenario: Adding the same target twice using RSTUF API
         Given the API requester has a token
         And the token has a scope write for targets
         And the API requester adds a new target with <length>, <hashes>, <custom> and <path>
         When the API requester adds a new target with <length>, <hashes>, <custom> and <path>
-        Then the API requester gets "New Target(s) successfully submitted"
+        Then the API requester gets "New Target(s) successfully submitted" with "task_id"
+        Then the API requester gets from endpoint "GET /api/v1/task" state "SUCCESS" and status "Task finished" within 1 minute
+        Then the user can fetch the new target from the metadata
 
         Examples:
             | length | hashes | custom | path |
