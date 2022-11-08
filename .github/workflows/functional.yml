@@ -38,7 +38,7 @@ on:
 env:
   MAKE_FT_TARGET: functional-tests
   REQUIREMENTS_PATH: requirements.txt
-  
+
 jobs:
   functional:
     runs-on: ubuntu-latest
@@ -84,7 +84,7 @@ jobs:
     steps:
       - name: Checkout release tag
         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
-    
+
       - name: Checkout release tag if not umbrella
         if: github.repository != 'vmware/repository-service-tuf'
         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
@@ -98,7 +98,7 @@ jobs:
         run: |
           echo "MAKE_FT_TARGET=-C rstuf-umbrella/ functional-tests" >> $GITHUB_ENV
           echo "REQUIREMENTS_PATH=rstuf-umbrella/requirements.txt" >> $GITHUB_ENV
-        
+
       - name: Set up Python
         uses: actions/setup-python@13ae5bb136fac2878aff31522b9efb785519f984
         with:
@@ -115,15 +115,16 @@ jobs:
           repository: vmware/repository-service-tuf-cli
           path: rstuf-cli
           ref: main
-       
+          fetch-depth: 0
+
       - name: Install the RSTUF Command Line Interface (dev)
         if: ${{ inputs.cli_version == 'dev' }}
         # replace the run below after repository-service-tuf is available in
         # pypi.org
         # run: |
         #   pip install "dynaconf[ini]" repository-service-tuf
-        run: pip install rstuf-cli/    
-          
+        run: pip install rstuf-cli/
+
       - name: Install the RSTUF Command Line Interface (latest)
         if: ${{ inputs.cli_version == 'latest' }}
         # replace the run below after repository-service-tuf is available in
@@ -132,11 +133,9 @@ jobs:
         #   pip install "dynaconf[ini]" repository-service-tuf
         run: |
           cd rstuf-cli
-          git fetch
-          git pull
-          git checkout $(git tag -l --sort=version:refname | tail -1)          
+          git checkout $(git tag -l --sort=version:refname | tail -1)
           cd ..
-          pip install rstuf-cli/        
+          pip install rstuf-cli/
 
       - name: Install the RSTUF Command Line Interface (vX.Y.Z)
         if: ${{ startsWith(inputs.cli_version, 'v') }}
@@ -146,30 +145,21 @@ jobs:
         #   pip install "dynaconf[ini]" repository-service-tuf==${{ inputs.cli_version }}
         run: |
           cd rstuf-cli
-          git fetch
-          git pull
           git checkout ${{ inputs.cli_version }}
           cd ..
-          pip install rstuf-cli/        
+          pip install rstuf-cli/
+
+      - name: Login to RSTUF service
+        run: rstuf -c rstuf.ini admin login -s http://localhost -u admin -p test-secret -e 1
+
+      - name: Run the Offline Ceremony using RSTUF saving payload.json
+        run: 'pytest -vv rstuf-cli/tests/unit/cli/admin/test_ceremony.py::TestCeremonyGroupCLI::test_ceremony_start_default_values'
+
+      - name: Run RSTUF Ceremony Bootstrap Upload
+        run: 'rstuf -c rstuf.ini admin ceremony -b -u -f payload.json'
 
       - name: Functional Tests (BDD)
         env:
           ADMIN_SECRET_TESTS: test-secret
-        # First try to check if the http://localhost responds 200 (OK)
-        # Retry for 3x (waiting 30 seconds each)
-        # After the retries, it tries to run Functional tests
         run: |
-            retry=1; \
-            while [[ ${retry} -lt 4 ]]; do \
-              echo Try ${retry}/3; \
-              sc=$(curl -s -o /dev/null -w "%{http_code}" http://localhost || true); \
-              if [[ ${sc} -ne 200 ]]; then \
-                echo Waiting RSTUF API; \
-                sleep 30; \
-                let 'retry+=1'; \
-              else \
-                break; \
-              fi; \
-            done
-            rstuf -c rstuf.ini admin login -s http://localhost -u admin -p test-secret -e 1
             make ${{ env.MAKE_FT_TARGET }}
