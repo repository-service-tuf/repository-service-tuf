@@ -735,11 +735,11 @@
         },
         "pytest-bdd": {
             "hashes": [
-                "sha256:36fb2d025f7b9ca163d5f27499952c837ac95216db0a2a98c6728be82388c5a1",
-                "sha256:552b709ca630c7a718758f2ef39b12d6cecafa81771301731a8b2814bff8ca9d"
+                "sha256:138af3592bcce5d4684b0d690777cf199b39ce45d423ca28086047ffe6111010",
+                "sha256:57eba5878d77036f356a85fb1d108cb061d8af4fb4d032b1a424fa9abe9e498b"
             ],
             "index": "pypi",
-            "version": "==6.1.0"
+            "version": "==6.1.1"
         },
         "python-dateutil": {
             "hashes": [
