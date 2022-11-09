@@ -21,6 +21,7 @@ on:
       - "repository-service-tuf-api/**"
       - "repository-service-tuf-cli/**"
       - "repository-service-tuf-worker/**"
+      - ".git/modules/**"
   workflow_dispatch:
 
 jobs:
