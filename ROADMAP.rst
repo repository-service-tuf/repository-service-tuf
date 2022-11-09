@@ -43,7 +43,7 @@ This realease is to evaluate the features and functionality.
 - [ ] Key(s) Rotation (`Issue #23 <https://github.com/vmware/tuf-repository-worker/issues/23>`_)
 - [x] Implement HTTPS for the Rest API (`Issue #6 <https://github.com/vmware/tuf-repository-worker/issues/6>`_)
 - [ ] Add TLS/SSL for Broker and Result Backend communication (`Issue #6 <https://github.com/vmware/tuf-repository-worker/issues/6>`_)
-- [ ] Public online documentation (`Issue #22 <https://github.com/vmware/tuf-repository-worker/issues/22>`_)
+- [x] Public online documentation (`Issue #22 <https://github.com/vmware/tuf-repository-worker/issues/22>`_)
 - [ ] Old Metadata retention (`Issue #29 <https://github.com/vmware/tuf-repository-worker/issues/29>`_)
 - [ ] Option to Disable the API Authentication/Authorization Feature (`Issue #41 <https://github.com/vmware/repository-service-tuf/issues/41>`_)
 
