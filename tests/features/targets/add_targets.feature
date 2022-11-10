@@ -44,11 +44,11 @@ Feature: Adding targets in Repository Service for TUF (RSTUF)
         Then the API requester gets "Error 422"
 
         Examples:
-            | length | hashes | custom | path |
-            | "a" | "716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a" | {"key": "value"} | "file1.tar.gz" |
-            | 630 | "a"                                                                | {"key": "value"} | "file1.tar.gz" |
-            | 630 | "716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a" | "a"              | "file1.tar.gz" |
-            | 630 | "716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a" | {"key": "value"} | None           |
-            |     | "716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a" | {"key": "value"} | "file1.tar.gz" |
-            | 630 |                                                                    | {"key": "value"} | "file1.tar.gz" |
-            | 630 | "716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a" | {"key": "value"} |                |
+            | length | hashes                                                             | custom           | path           |
+            | "a"    | "716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a" | {"key": "value"} | "file1.tar.gz" |
+            | 630    | "a"                                                                | {"key": "value"} | "file1.tar.gz" |
+            | 630    | "716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a" | "a"              | "file1.tar.gz" |
+            | 630    | "716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a" | {"key": "value"} | None           |
+            |        | "716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a" | {"key": "value"} | "file1.tar.gz" |
+            | 630    |                                                                    | {"key": "value"} | "file1.tar.gz" |
+            | 630    | "716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a" | {"key": "value"} |                |
