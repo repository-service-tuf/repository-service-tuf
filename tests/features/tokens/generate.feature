@@ -2,13 +2,14 @@ Feature: Generate HTTP Token for Repository Service for TUF (RSTUF)
     As an admin,
     Admin has deployed and bootstrapped RSTUF
 
-    Scenario Outline: Admin uses HTTP API Request using POST method to "/api/v1/token/new"
-        Given the API requester has the admin password
-        And the API requester has generated the admin "access_token" after login "/api/v1/token"
-        And the API requester prepare the request with Method POST
-        And Authorization Bearer "access_token" in the Headers
-        When the API requester send the request to "/api/v1/token/new" with <scopes> and the <expires> in the payload
-        Then the API requester gets status code "200" with "access_token" and token
++
+    Scenario Outline: Admin uses HTTP API to generate Token
+        Given the admin has the admin password
+        And the admin has generated the admin "access_token" after login "/api/v1/token"
+        And the admin prepare the request with Method POST
+        And the admin Authorization Bearer "access_token" in the Headers
+        When the admin send the request to "/api/v1/token/new" with <scopes> and the <expires> in the payload
+        Then the admin gets status code "200" with "access_token" and token
 
         Examples:
             | scope                                           | expires |
@@ -22,12 +23,12 @@ Feature: Generate HTTP Token for Repository Service for TUF (RSTUF)
             | ['write:targets', 'read:targets', 'read:tasks'] | 380     |
 
 
-   Scenario Outline: Admin cannot generate HTTP API Request using POST method to "/api/v1/token/new" with "write:token" as scope
-        Given the API requester has the admin password
-        And the API requester has generated the admin "access_token" after login "/api/v1/token"
-        And the API requester prepare the request with Method POST
-        And Authorization Bearer "access_token" in the Headers
-        When the API requester send the request to "/api/v1/token/new" with <scopes> and the <expires> in the payload
+   Scenario Outline: Admin cannot generate token with "write:token" as scope using HTTP Rest API
+        Given the admin has the admin password
+        And the admin has generated the admin "access_token" after login "/api/v1/token"
+        And the admin prepare the request with Method POST
+        And the admin Authorization Bearer "access_token" in the Headers
+        When the admin send the request to "/api/v1/token/new" with <scopes> and the <expires> in the payload
         Then the admin gets "Error 422" with "given: read:tokens"
 
         Examples:
@@ -36,7 +37,17 @@ Feature: Generate HTTP Token for Repository Service for TUF (RSTUF)
             | ['write:token', 'read:targets']                 | 240     |
             | ['read:bootstrap','write:token']                | 24      |
 
-    Scenario Outline: Admin generates new token using RSTUF Command Line Interface
+
+   Scenario: Admin is Unauthorized to generate using HTTP Rest API with expired token
+        Given the admin has the admin password
+        And the admin has an expired or invalid 'access_token'
+        And the admin prepare the request with Method POST
+        And the admin Authorization Bearer "access_token" in the Headers
+        And the admin adds the JSON payload
+        When the admin send the request to "/api/v1/token/new" with payload
+        Then the admin gets "Error 401" with "Failed to validate token"
+
+    Scenario Outline: Admin uses RSTUF Command Line Interface to generate Token
         Given the admin is logged in using RSTUF Command Line Interface
         When the admin runs "rstuf -c rstuf.ini admin token generate '<scopes_param>' '<expires_param>'"
         Then the admin gets "access_token" with the token
@@ -53,7 +64,7 @@ Feature: Generate HTTP Token for Repository Service for TUF (RSTUF)
             | -e write:targets -e read:targets -e read:tasks | -e 380        |
 
 
-    Scenario: Admin cannot generate token with scope "write:token" using RSTUF Command Line Interface
+    Scenario: Admin cannot generate token with "write:token" as scope using RSTUF Command Line Interface
         Given the admin is logged in using RSTUF Command Line Interface
         When the admin runs "rstuf -c rstuf.ini admin token generate -e write:scope"
         Then the admin gets "Error 422" with "given: read:tokens"
