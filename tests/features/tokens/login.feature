@@ -1,6 +1,6 @@
 Feature: Login to Repository Service for TUF (RSTUF) and receive a access token
     As an admin,
-    Admin has deployed RSTUF
+    Admin has deployed and bootstrapped RSTUF
 
     Scenario Outline: Login using RSTUF API /api/v1/token method POST
         Given the API requester has the admin password
