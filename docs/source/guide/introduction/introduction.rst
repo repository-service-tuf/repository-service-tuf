@@ -10,7 +10,7 @@ The Repository Service for TUF (RSTUF) consists of two primary components,
 We also provide a Command Line Interface (CLI) for interacting with RSTUF,
 ``repository-service-tuf-cli``.
 
-`Each of the RSTUF components are represented in blue in this diagram of a
+`Each of the RSTUF components is represented in blue in this diagram of a
 typical service deployment:`
 
 .. image:: /_static/2_1_rstuf.png
@@ -25,7 +25,7 @@ The ``repository-service-tuf-api``, and ``repository-service-tuf-worker``
 services are provided as Docker Images.
 
 ``repository-service-tuf-api`` is the API Service, and the
-``repository-service-tuf-worker``` is a worker that manages TUF Metadata.
+``repository-service-tuf-worker`` is a worker that manages TUF Metadata.
 
 The Repository Service for TUF requires a Broker (``RabbitMQ`` or ``Redis``)
 to be used by the RSTUF services (``repository-service-tuf-api``,
@@ -46,9 +46,9 @@ The Repository Service for TUF Command Line Interface
 (``repository-service-tuf-cli``) is a CLI Python application to manage the
 Repository Service for TUF.
 
-The CLI supports the initial setup, termed a ceremony, where initial repository
-metadata is signed and the service is configured, generating Tokens to be used
-by integration (i.e. CI/CD tools).
+The CLI supports the initial setup, termed a ceremony, where the first repository
+metadata are signed and the service is configured, generating Tokens to be used
+by integration (i.e., CI/CD tools).
 
 The Repository Metadata
 =======================
@@ -99,11 +99,11 @@ RSTUF was born as a consequence of working on the implementation of `PEP 458
 <https://warehouse.pypa.io>`_ project which powers the `Python Package Index
 (PyPI) <https://pypi.org>`_.
 
-Due to oyr experience of the complexity and fragility of deep integration into
-a complex platform, we began designing how to implement a reusable TUF platform
-which is flexible to integration in different flows and infrastructure.
+Due to our experience with the complexity and fragility of deep integration into
+an intricate platform, we began designing how to implement a reusable TUF platform
+that is flexible to integrate into different flows and infrastructures.
 
-Repository Service for TUF's goal is to be an easy to use tool for Developers,
+Repository Service for TUF's goal is to be an easy-to-use tool for Developers,
 DevOps, and DevOpsSec teams working on the delivery process.
 
 
