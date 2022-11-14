@@ -14,12 +14,6 @@ jobs:
           git submodule sync
           git submodule update --init --force --recursive
           git submodule foreach git pull origin main
-      - name: Run functional tests
-        uses: ./.github/workflows/functional.yml
-        with:
-          api_version: dev
-          worker_version: dev
-          cli_version: dev
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@b4d51739f96fca8047ad065eccef63442d8e99f7
         with:
