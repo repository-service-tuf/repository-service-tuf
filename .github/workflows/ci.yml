@@ -3,20 +3,8 @@ name: CI
 on:
   push:
     branches: ["main"]
-    paths:
-      - "tests/**"
-      - "requirements.txt"
-      - ".github/workflows/functional.yml"
-      - ".github/workflows/ci.yml"
-      - ".git/modules/**"
   pull_request:
     branches: ["main"]
-    paths:
-      - "tests/**"
-      - "requirements.txt"
-      - ".github/workflows/functional.yml"
-      - ".github/workflows/ci.yml"
-      - ".git/modules/**"
   workflow_dispatch:
 
 jobs:
