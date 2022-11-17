@@ -1,15 +1,15 @@
-Feature: Generate HTTP Token for Repository Service for TUF (RSTUF)
+Feature: Generate HTTP token for Repository Service for TUF (RSTUF)
     As an admin,
     Admin has deployed and bootstrapped RSTUF
 
-+
-    Scenario Outline: Admin uses HTTP API to generate Token
+
+    Scenario Outline: Admin uses HTTP API to generate a token
         Given the admin has the admin password
-        And the admin has generated the admin "access_token" after login "/api/v1/token"
+        And the admin has generated an "access_token" after login "/api/v1/token" with a "write:token" scope
         And the admin prepare the request with Method POST
         And the admin Authorization Bearer "access_token" in the Headers
         When the admin send the request to "/api/v1/token/new" with <scopes> and the <expires> in the payload
-        Then the admin gets status code "200" with "access_token" and token
+        Then the admin gets status code "200" with "access_token" with a new token
 
         Examples:
             | scope                                           | expires |
