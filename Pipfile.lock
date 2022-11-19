@@ -335,9 +335,9 @@
         },
         "m2r": {
             "hashes": [
-                "sha256:bf90bad66cda1164b17e5ba4a037806d2443f2a4d5ddc9f6a5554a0322aaed99"
+                "sha256:aafb67fc49cfb1d89e46a3443ac747e15f4bb42df20ed04f067ad9efbee256ab"
             ],
-            "version": "==0.2.1"
+            "version": "==0.3.1"
         },
         "mako": {
             "hashes": [
@@ -805,11 +805,11 @@
         },
         "setuptools": {
             "hashes": [
-                "sha256:d0b9a8433464d5800cbe05094acf5c6d52a91bfac9b52bcfc4d41382be5d5d31",
-                "sha256:e197a19aa8ec9722928f2206f8de752def0e4c9fc6953527360d1c36d94ddb2f"
+                "sha256:6211d2f5eddad8757bd0484923ca7c0a6302ebc4ab32ea5e94357176e0ca0840",
+                "sha256:d1eebf881c6114e51df1664bc2c9133d022f78d12d5f4f665b9191f084e2862d"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==65.5.1"
+            "version": "==65.6.0"
         },
         "six": {
             "hashes": [
@@ -906,10 +906,10 @@
         },
         "sphinxcontrib-plantuml": {
             "hashes": [
-                "sha256:cf65db7358f785a6498ee03e7198b6680c625d28e55b33475fc3f6c94351451d"
+                "sha256:39d2e4bc40d5e093126129a144f56b6ee15f58cfa5048b5948e63a11aff3b586"
             ],
             "index": "pypi",
-            "version": "==0.24"
+            "version": "==0.24.1"
         },
         "sphinxcontrib-qthelp": {
             "hashes": [
