@@ -150,7 +150,7 @@ jobs:
           pip install rstuf-cli/
 
       - name: Login to RSTUF service
-        run: rstuf -c rstuf.ini admin login -s http://localhost -u admin -p test-secret -e 1
+        run: rstuf -c rstuf.ini admin login -s http://localhost -u admin -p secret -e 1
 
       - name: Run the Offline Ceremony using RSTUF saving payload.json
         run: 'pytest -vv rstuf-cli/tests/unit/cli/admin/test_ceremony.py::TestCeremonyGroupCLI::test_ceremony_start_default_values'
