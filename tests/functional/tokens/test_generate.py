@@ -37,13 +37,19 @@ def the_admin_has_generated_an_access_token_with_write_token(
 
 
 @given(
-    "the admin adds Authorization Bearer 'access_token' in the 'headers'",
+    parse(
+        "the admin adds Authorization Bearer {token} in the 'headers'"
+    ),
     target_fixture="headers",
 )
-def the_admin_authorization_bearer_access_token_in_the_headers(access_token):
-    headers = {"Authorization": f"Bearer {access_token}"}
-
+def the_admin_adds_authorization_token_in_the_headers(access_token, token):
+    if access_token == "access_token":
+        header_token = f"Bearer {token}"
+    else:
+        header_token = f"Bearer {access_token}"
+    headers = {"Authorization": header_token}
     return headers
+
 
 
 @given(
@@ -159,29 +165,18 @@ def test_admin_is_unauthorized_to_generate_invalid_token():
     """Admin is Unauthorized to generate using HTTP API with invalid token."""
 
 
-@given(
-    parse(
-        "the admin adds Authorization Bearer {access_token} in the 'headers'"
-    ),
-    target_fixture="parsed_headers",
-)
-def the_admin_adds_authorization_token_in_the_headers(access_token):
-    headers = {"Authorization": f"Bearer {access_token}"}
-    return headers
-
-
 @when(
     "the admin sends a POST request to '/api/v1/token/new' with invalid "
     "'access_token' in the headers",
     target_fixture="response",
 )
 def the_admin_sends_a_invalid_access_token_in_headers(
-    http_request, parsed_headers, payload
+    http_request, headers, payload
 ):
     response = http_request(
         method="POST",
         url="/api/v1/token/new",
-        headers=parsed_headers,
+        headers=headers,
         json=payload,
     )
     return response

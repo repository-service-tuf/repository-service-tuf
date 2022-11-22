@@ -56,17 +56,17 @@ Feature: Generate HTTP token for Repository Service for TUF (RSTUF)
             | ['']                                 | 24      |
 
    Scenario Outline: Admin is Unauthorized to generate using HTTP API with invalid token
-        Given the admin adds Authorization Bearer <access_token> in the 'headers'
+        Given the admin adds Authorization Bearer <token> in the 'headers'
         And the admin adds JSON payload with scopes: <scopes> and expires: <expires>
         When the admin sends a POST request to '/api/v1/token/new' with invalid 'access_token' in the headers
         Then the admin should get status code '401'
         And the admin should get 'Failed to validate token' in body
 
         Examples:
-            | access_token | scopes             | expires |
-            | invalid      | ['write:targets']  | 1       |
-            | eyJhbiJIUzI  | ['read:bootstrap'] | 1       |
-            | ''           | ['read:bootstrap'] | 1       |
+            | token       | scopes             | expires |
+            | invalid     | ['write:targets']  | 1       |
+            | eyJhbiJIUzI | ['read:bootstrap'] | 1       |
+            | ''          | ['read:bootstrap'] | 1       |
 
     Scenario Outline: Admin uses RSTUF Command Line Interface to generate Token
         Given the admin has repository-service-tuf (rstuf) installed
