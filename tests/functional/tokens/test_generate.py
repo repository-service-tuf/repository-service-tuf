@@ -71,7 +71,7 @@ def the_admin_sends_request(http_request, headers, payload):
 
 @then("the admin should get status code '200'")
 def the_admin_gets_status_code_200(response):
-    assert response.status_code == 200, response.json()
+    assert response.status_code == 200, response.text
 
 
 @then("the admin should get 'access_token' with a new token")
@@ -103,7 +103,7 @@ def the_admin_sends_with_invalid_expires_in_payload(
 
 @then("the admin should get status code '422'")
 def the_admin_should_get_status_code_422_invalid_expires(response):
-    assert response.status_code == 422
+    assert response.status_code == 422, response.text
 
 
 @then("the admin should get not allowed scope as a given context detail")
@@ -135,7 +135,7 @@ def the_admin_sends_request_with_invalid_scopes(
 
 @then("the admin should get status code '422'")
 def the_admin_should_get_status_code_422_scopes(response):
-    assert response.status_code == 422, response.json()
+    assert response.status_code == 422, response.text
 
 
 @then("the admin should get not allowed scope as a given context detail")
@@ -171,7 +171,7 @@ def the_admin_sends_a_invalid_access_token_in_headers(
 
 @then("the admin should get status code '401'")
 def the_admin_should_get_status_code_401(response):
-    assert response.status_code == 401
+    assert response.status_code == 401, response.text
 
 
 @then("the admin should get 'Failed to validate token' in body")
@@ -190,8 +190,8 @@ def test_admin_uses_rstuf_command_line_interface_to_generate_token():
 @given("the admin has repository-service-tuf (rstuf) installed")
 def the_admin_has_repositoryservicetuf_rstuf_installed(rstuf_cli):
     """the admin has repository-service-tuf (rstuf) installed."""
-    rc, _ = rstuf_cli("-h")
-    assert rc == 0
+    rc, stdout = rstuf_cli("-h")
+    assert rc == 0, stdout
 
 
 @given("the admin is logged in using RSTUF Command Line Interface")
@@ -201,7 +201,7 @@ def the_admin_is_logged_in_using_rstuf_command_line_interface(rstuf_cli):
         "admin login -f -s http://localhost -u admin -p secret -e 1"
     )
 
-    assert rc == 0
+    assert rc == 0, stdout
     assert "Login successful" in stdout
 
 
@@ -227,5 +227,5 @@ def the_user_enter_the_login_command(rstuf_cli, cli_parameters):
 
 @then("the admin gets 'access_token' with the token")
 def the_admin_gets_access_token_with_the_token(cli_response):
-    assert cli_response[0] == 0
+    assert cli_response[0] == 0, cli_response
     assert "access_token" in cli_response[1]
