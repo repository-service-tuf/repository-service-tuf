@@ -163,7 +163,7 @@ def test_admin_is_unauthorized_to_generate_invalid_token():
     parse(
         "the admin adds Authorization Bearer {access_token} in the 'headers'"
     ),
-    target_fixture="headers",
+    target_fixture="parsed_headers",
 )
 def the_admin_adds_authorization_token_in_the_headers(access_token):
     headers = {"Authorization": f"Bearer {access_token}"}
@@ -176,10 +176,13 @@ def the_admin_adds_authorization_token_in_the_headers(access_token):
     target_fixture="response",
 )
 def the_admin_sends_a_invalid_access_token_in_headers(
-    http_request, headers, payload
+    http_request, parsed_headers, payload
 ):
     response = http_request(
-        method="POST", url="/api/v1/token/new", headers=headers, json=payload
+        method="POST",
+        url="/api/v1/token/new",
+        headers=parsed_headers,
+        json=payload,
     )
     return response
 
