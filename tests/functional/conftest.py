@@ -30,14 +30,25 @@ def rstuf_cli():
 @pytest.fixture
 def http_request():
     def _run_requests(
-        method, host="http://localhost", url="/", data=None, json=None
+        method,
+        headers=None,
+        host="http://localhost",
+        url="/",
+        data=None,
+        json=None,
     ):
         if method == "POST":
-            response = requests.post(url=f"{host}{url}", data=data, json=json)
+            response = requests.post(
+                url=f"{host}{url}", data=data, json=json, headers=headers
+            )
         elif method == "GET":
-            response = requests.post(url=f"{host}{url}", data=data, json=json)
+            response = requests.post(
+                url=f"{host}{url}", data=data, json=json, headers=headers
+            )
         elif method == "DELETE":
-            response = requests.post(url=f"{host}{url}", data=data, json=json)
+            response = requests.post(
+                url=f"{host}{url}", data=data, json=json, headers=headers
+            )
         else:
             raise TypeError(f"method {method} not supported")
 
