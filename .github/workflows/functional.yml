@@ -80,7 +80,7 @@ jobs:
           RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
           RSTUF_REDIS_SERVER: redis://redis
           SECRETS_RSTUF_TOKEN_KEY: test-token-key
-          SECRETS_RSTUF_ADMIN_PASSWORD: test-secret
+          SECRETS_RSTUF_ADMIN_PASSWORD: secret
     steps:
       - name: Checkout release tag
         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
@@ -150,7 +150,7 @@ jobs:
           pip install rstuf-cli/
 
       - name: Login to RSTUF service
-        run: rstuf -c rstuf.ini admin login -s http://localhost -u admin -p test-secret -e 1
+        run: rstuf -c rstuf.ini admin login -s http://localhost -u admin -p secret -e 1
 
       - name: Run the Offline Ceremony using RSTUF saving payload.json
         run: 'pytest -vv rstuf-cli/tests/unit/cli/admin/test_ceremony.py::TestCeremonyGroupCLI::test_ceremony_start_default_values'
@@ -160,6 +160,6 @@ jobs:
 
       - name: Functional Tests (BDD)
         env:
-          ADMIN_SECRET_TESTS: test-secret
+          ADMIN_SECRET_TESTS: secret
         run: |
             make ${{ env.MAKE_FT_TARGET }}
