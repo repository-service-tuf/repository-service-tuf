@@ -55,3 +55,16 @@ def http_request():
         return response
 
     return _run_requests
+
+
+@pytest.fixture
+def access_token(http_request, get_admin_pwd):
+    data = {
+        "username": "admin",
+        "password": get_admin_pwd,
+        "scope": "write:token",
+        "expires": 1,
+    }
+    response = http_request(method="POST", url="/api/v1/token", data=data)
+
+    return response.json()["access_token"]

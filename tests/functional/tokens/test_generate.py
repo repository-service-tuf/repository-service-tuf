@@ -22,34 +22,21 @@ def the_admin_has_the_admin_password(get_admin_pwd):
     "'write:token' scope",
     target_fixture="access_token",
 )
-def the_admin_has_generated_an_access_token_with_write_token(
-    http_request, admin_passwd
-):
-    data = {
-        "username": "admin",
-        "password": admin_passwd,
-        "scope": "write:token",
-        "expires": 1,
-    }
-    response = http_request(method="POST", url="/api/v1/token", data=data)
-
-    return response.json()["access_token"]
+def the_admin_has_generated_an_access_token_with_write_token(access_token):
+    return access_token
 
 
 @given(
-    parse(
-        "the admin adds Authorization Bearer {token} in the 'headers'"
-    ),
+    parse("the admin adds Authorization Bearer {token} in the 'headers'"),
     target_fixture="headers",
 )
 def the_admin_adds_authorization_token_in_the_headers(access_token, token):
-    if access_token == "access_token":
-        header_token = f"Bearer {token}"
-    else:
+    if token == "'access_token'":
         header_token = f"Bearer {access_token}"
+    else:
+        header_token = f"Bearer {token}"
     headers = {"Authorization": header_token}
     return headers
-
 
 
 @given(
