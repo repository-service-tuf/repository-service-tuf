@@ -46,7 +46,7 @@ def the_administrator_uses_rstufcli_bootstrap(rstuf_cli):
 def the_admin_gets(bootstrap):
     _, output = bootstrap
 
-    assert "SUCCESS" or "System already has a Metadata." in output
+    assert "SUCCESS" in output or "System already has a Metadata." in output
     assert (
         "Bootstrap finished." in output
         or "System already has a Metadata." in output
