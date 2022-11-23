@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: "0 8 * * *"
 jobs:
+  functional-tests:
+    uses: ./.github/workflows/functional.yml
+    with:
+      api_version: dev
+      worker_version: dev
+      cli_version: dev
   sync-submodules:
     name: "Sync submodules"
     runs-on: ubuntu-latest
