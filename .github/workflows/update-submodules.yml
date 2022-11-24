@@ -22,7 +22,7 @@ jobs:
           git submodule update --init --force --recursive
           git submodule foreach git pull origin main
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@b4d51739f96fca8047ad065eccef63442d8e99f7
+        uses: peter-evans/create-pull-request@331d02c7e2104af23ad5974d4d5cbc58a3e6dc77
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore: sync git submodules"
