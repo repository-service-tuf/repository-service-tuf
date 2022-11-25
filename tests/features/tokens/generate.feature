@@ -78,11 +78,10 @@ Feature: Generate HTTP token for Repository Service for TUF (RSTUF)
         Examples:
             | scopes_params                         | expires_params |
             | write:targets                         | 1              |
-            | write:targets read:targets            | 240            |
             | read:bootstrap                        | 1              |
             | read:bootstrap read:settings          | 24             |
             | read:settings                         | 3              |
             | read:token                            | 5              |
-            | write:targets read:targets read:tasks | 380            |
+            | write:targets read:tasks              | 380            |
 
     # All other scenarios using CLI are covered by the API as CLI uses it
