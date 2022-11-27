@@ -47,7 +47,7 @@ The Repository Service for TUF Command Line Interface
 Repository Service for TUF.
 
 The CLI supports the initial setup, termed a ceremony, where the first repository
-metadata are signed and the service is configured, generating Tokens to be used
+metadata are signed and the service is configured, generating tokens to be used
 by integration (i.e., CI/CD tools).
 
 The Repository Metadata
