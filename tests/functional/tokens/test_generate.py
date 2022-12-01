@@ -213,7 +213,7 @@ def the_admin_is_logged_in_using_rstuf_command_line_interface(rstuf_cli):
     target_fixture="cli_parameters",
 )
 def the_admin_types_rstuf_cli_command(scopes_params, expires_params):
-    expires_params = expires_params.replace('"', "")
+    expires_params = int(expires_params.replace("'", ""))
     scopes_params = " -s ".join(scopes_params.split())
     command = f"admin token generate -s {scopes_params} -e {expires_params}"
     return command
