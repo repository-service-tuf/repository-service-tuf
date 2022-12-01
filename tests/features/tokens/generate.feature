@@ -71,7 +71,7 @@ Feature: Generate HTTP token for Repository Service for TUF (RSTUF)
     Scenario Outline: Admin uses RSTUF Command Line Interface to generate Token
         Given the admin has repository-service-tuf (rstuf) installed
         And the admin is logged in using RSTUF Command Line Interface
-        And the admin types 'rstuf -c rstuf.ini admin token generate -s <scopes_params> -e <expires_params>"
+        And the admin types 'rstuf -c rstuf.ini admin token generate -s <scopes_params> -e <expires_params>'
         When the user 'enter' the login command
         Then the admin gets 'access_token' with the token
 
