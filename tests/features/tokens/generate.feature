@@ -23,7 +23,7 @@ Feature: Generate HTTP token for Repository Service for TUF (RSTUF)
             | ['write:targets', 'read:settings', 'read:tasks'] | 380     |
 
 
-   Scenario Outline: Admin cannot generate Token using HTTP API with invalid expires
+   Scenario Outline: Admin cannot generate Token using HTTP API with an invalid expires
         Given the admin has the admin password
         And the admin gets an 'access_token' by logging in to '/api/v1/token' with a 'write:token' scope
         And the admin adds Authorization Bearer 'access_token' in the 'headers'
@@ -55,12 +55,12 @@ Feature: Generate HTTP token for Repository Service for TUF (RSTUF)
             | []                                   | 24      |
             | ['']                                 | 24      |
 
-   Scenario Outline: Admin is Unauthorized to generate using HTTP API with invalid token
+   Scenario Outline: Admin is Unauthorized to generate using HTTP API with an invalid token
         Given the admin adds Authorization Bearer <token> in the 'headers'
         And the admin adds JSON payload with scopes: <scopes> and expires: <expires>
         When the admin sends a POST request to '/api/v1/token/new' with invalid 'access_token' in the headers
         Then the admin should get status code '401'
-        And the admin should get 'Failed to validate token' in body
+        And the admin should get 'Failed to validate token' in the body
 
         Examples:
             | token       | scopes             | expires |
@@ -68,7 +68,7 @@ Feature: Generate HTTP token for Repository Service for TUF (RSTUF)
             | eyJhbiJIUzI | ['read:bootstrap'] | 1       |
             | ''          | ['read:bootstrap'] | 1       |
 
-    Scenario Outline: Admin uses RSTUF Command Line Interface to generate Token
+    Scenario Outline: Admin uses RSTUF Command Line Interface to generate token
         Given the admin has repository-service-tuf (rstuf) installed
         And the admin is logged in using RSTUF Command Line Interface
         And the admin types 'rstuf -c rstuf.ini admin token generate -s <scopes_params> -e <expires_params>'

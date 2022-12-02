@@ -47,12 +47,11 @@ def the_admin_adds_authorization_token_in_the_headers(access_token, token):
     target_fixture="payload",
 )
 def the_admin_adds_payload(scopes, expires):
-    # convert string "None" to None
-    # convert list string "['str', 'str']" to python list['str', 'str']
     if scopes == "None":
         scopes = None
         payload = {"scopes": scopes, "expires": expires}
     else:
+        # convert list string "['str', 'str']" to python list['str', 'str']
         payload = {"scopes": ast.literal_eval(scopes), "expires": expires}
 
     return payload
@@ -81,10 +80,10 @@ def the_admin_gets_access_token(response):
 
 @scenario(
     "../../features/tokens/generate.feature",
-    "Admin cannot generate Token using HTTP API with invalid expires",
+    "Admin cannot generate Token using HTTP API with an invalid expires",
 )
 def test_admin_cannot_generate_token_using_api_with_invalid_expires():
-    """Admin cannot generate Token using HTTP API with invalid expires."""
+    """Admin cannot generate Token using HTTP API with an invalid expires"""
 
 
 @when(
@@ -135,10 +134,12 @@ def the_admin_should_get_status_code_422_scopes(response):
 
 @scenario(
     "../../features/tokens/generate.feature",
-    "Admin is Unauthorized to generate using HTTP API with invalid token",
+    "Admin is Unauthorized to generate using HTTP API with an invalid token",
 )
 def test_admin_is_unauthorized_to_generate_invalid_token():
-    """Admin is Unauthorized to generate using HTTP API with invalid token."""
+    """
+    Admin is Unauthorized to generate using HTTP API with an invalid token.
+    """
 
 
 @when(
@@ -163,17 +164,17 @@ def the_admin_should_get_status_code_401(response):
     assert response.status_code == 401, response.text
 
 
-@then("the admin should get 'Failed to validate token' in body")
+@then("the admin should get 'Failed to validate token' in the body")
 def the_admin_should_get_failed_to_validate_token(response):
     assert response.json()["detail"]["error"] == "Failed to validate token"
 
 
 @scenario(
     "../../features/tokens/generate.feature",
-    "Admin uses RSTUF Command Line Interface to generate Token",
+    "Admin uses RSTUF Command Line Interface to generate token",
 )
 def test_admin_uses_rstuf_command_line_interface_to_generate_token():
-    """Admin uses RSTUF Command Line Interface to generate Token."""
+    """Admin uses RSTUF Command Line Interface to generate token."""
 
 
 @given("the admin has repository-service-tuf (rstuf) installed")
