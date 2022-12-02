@@ -132,6 +132,7 @@ def the_admin_sends_request_with_invalid_scopes(
 def the_admin_should_get_status_code_422_scopes(response):
     assert response.status_code == 422, response.text
 
+
 @scenario(
     "../../features/tokens/generate.feature",
     "Admin is Unauthorized to generate using HTTP API with invalid token",
