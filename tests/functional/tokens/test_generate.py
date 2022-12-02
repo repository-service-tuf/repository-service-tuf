@@ -47,12 +47,12 @@ def the_admin_adds_authorization_token_in_the_headers(access_token, token):
     target_fixture="payload",
 )
 def the_admin_adds_payload(scopes, expires):
+    # convert string "None" to None
+    # convert list string "['str', 'str']" to python list['str', 'str']
     if scopes == "None":
         scopes = None
-        # convert "None" to None
         payload = {"scopes": scopes, "expires": expires}
     else:
-        # convert "['str', 'str']" to ['str', 'str']
         payload = {"scopes": ast.literal_eval(scopes), "expires": expires}
 
     return payload
@@ -106,11 +106,6 @@ def the_admin_should_get_status_code_422_invalid_expires(response):
     assert response.status_code == 422, response.text
 
 
-@then("the admin should get not allowed scope as a given context detail")
-def the_admin_should_get_not_allowed_scope_as_a_given_context_detail(response):
-    assert response.json() == {}
-
-
 @scenario(
     "../../features/tokens/generate.feature",
     "Admin cannot generate Token using HTTP API for certain scopes",
@@ -136,13 +131,6 @@ def the_admin_sends_request_with_invalid_scopes(
 @then("the admin should get status code '422'")
 def the_admin_should_get_status_code_422_scopes(response):
     assert response.status_code == 422, response.text
-
-
-@then("the admin should get not allowed scope as a given context detail")
-def the_admin_should_get_scope_in_given_context_detail(response):
-    not_allowed_scopes = ["write:token", "write:bootstrap"]
-    assert response.json()["detail"][0]["ctx"]["given"] in not_allowed_scopes
-
 
 @scenario(
     "../../features/tokens/generate.feature",
