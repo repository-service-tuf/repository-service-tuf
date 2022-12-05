@@ -42,11 +42,11 @@ def http_request():
                 url=f"{host}{url}", data=data, json=json, headers=headers
             )
         elif method == "GET":
-            response = requests.post(
+            response = requests.get(
                 url=f"{host}{url}", data=data, json=json, headers=headers
             )
         elif method == "DELETE":
-            response = requests.post(
+            response = requests.delete(
                 url=f"{host}{url}", data=data, json=json, headers=headers
             )
         else:
