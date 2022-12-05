@@ -62,7 +62,7 @@ def access_token(http_request, get_admin_pwd):
     data = {
         "username": "admin",
         "password": get_admin_pwd,
-        "scope": "write:token",
+        "scope": "write:token read:tasks write:targets",
         "expires": 1,
     }
     response = http_request(method="POST", url="/api/v1/token", data=data)
