@@ -458,11 +458,11 @@
         },
         "mdit-py-plugins": {
             "hashes": [
-                "sha256:3fc13298497d6e04fe96efdd41281bfe7622152f9caa1815ea99b5c893de9441",
-                "sha256:606a7f29cf56dbdfaf914acb21709b8f8ee29d857e8f29dcc33d8cb84c57bfa1"
+                "sha256:36d08a29def19ec43acdcd8ba471d3ebab132e7879d442760d963f19913e04b9",
+                "sha256:5cfd7e7ac582a594e23ba6546a2f406e94e42eb33ae596d0734781261c251260"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==0.3.1"
+            "version": "==0.3.3"
         },
         "mdurl": {
             "hashes": [
