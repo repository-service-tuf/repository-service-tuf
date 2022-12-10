@@ -1,10 +1,13 @@
 import os
 import re
+import shutil
 import subprocess
+import tempfile
 from typing import List
 
 import pytest
 import requests
+from tuf.ngclient import Updater, UpdaterConfig
 
 
 @pytest.fixture
@@ -68,3 +71,23 @@ def access_token(http_request, get_admin_pwd):
     response = http_request(method="POST", url="/api/v1/token", data=data)
 
     return response.json()["access_token"]
+
+
+@pytest.fixture
+def get_target_info():
+    def _run_get_target_info(target_path):
+        temp_md_dir = tempfile.TemporaryDirectory()
+        path = temp_md_dir.name
+        shutil.copy(
+            f"{os.path.abspath(os.getcwd())}/tests/data/root.json", path
+        )
+
+        updater = Updater(
+            metadata_dir=temp_md_dir.name,
+            metadata_base_url="http://localhost:8080",
+            config=UpdaterConfig(prefix_targets_with_hash=False),
+        )
+        updater.refresh()
+        return updater.get_targetinfo(target_path)
+
+    return _run_get_target_info
