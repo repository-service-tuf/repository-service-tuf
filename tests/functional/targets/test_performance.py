@@ -99,8 +99,10 @@ def get_tasks(headers, multiple_requests, http_request, timeout):
     while len(tasks) > 0:
         time.sleep(3)
         for task in tasks:
-            total_time_now = datetime.utcnow() - dateutil.parser.parse(task["last_update"])
-            assert  total_time_now.total_seconds() <= int(timeout)
+            total_time_now = datetime.utcnow() - dateutil.parser.parse(
+                task["last_update"]
+            )
+            assert total_time_now.total_seconds() <= int(timeout)
             response = http_request(
                 "GET",
                 headers=headers,

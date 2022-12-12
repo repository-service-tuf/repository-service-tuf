@@ -50,7 +50,7 @@ jobs:
         image: redis:4.0
 
       sql:
-        image: postgres:5.1
+        image: postgres:15.1
         env:
           POSTGRES_PASSWORD: secret
 
