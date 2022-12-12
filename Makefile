@@ -39,4 +39,4 @@ lint:
 	rm requirements.commit
 
 functional-tests:
-	pytest --gherkin-terminal-reporter tests -vvv
+	pytest --gherkin-terminal-reporter tests -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html

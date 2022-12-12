@@ -18,6 +18,10 @@ isort = "*"
 black = "*"
 flake8 = "*"
 pretend = "*"
+pyblake2 = "*"
+names-generator = "*"
+pytest-bdd-html = "*"
+pytest-html = "*"
 
 [dev-packages]
 

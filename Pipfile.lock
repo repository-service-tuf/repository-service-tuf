@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "94050dd9bce62cdcda3630eded19e331c25edbafe04fd9605d9517d326080fa5"
+            "sha256": "39748b7b932ba3b2545c6acc24cf1022ed5486e5b76ba387d47273112867f321"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -80,6 +80,13 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==8.1.3"
+        },
+        "cmdkit": {
+            "hashes": [
+                "sha256:406e81df5d738dd89921c2bfefff1094638d5eccd42b0388e62490cf15dd596a",
+                "sha256:ea93d987d749a8cf3c89e9b053d30dfd8736985f94fdc63eb42c86f074d11c86"
+            ],
+            "version": "==2.6.1"
         },
         "contourpy": {
             "hashes": [
@@ -486,6 +493,14 @@
             "index": "pypi",
             "version": "==0.18.1"
         },
+        "names-generator": {
+            "hashes": [
+                "sha256:03d0deb20e4c179688018103eaee4004ac2b8d8ccc1f8152272f75168b6a0b41",
+                "sha256:8fec2903c71204b64bbb12f2cce0fdabdcde2aa83ebea29025c7b6f62b55832b"
+            ],
+            "index": "pypi",
+            "version": "==0.1.0"
+        },
         "numpy": {
             "hashes": [
                 "sha256:0044f7d944ee882400890f9ae955220d29b33d809a038923d88e4e01d652acd9",
@@ -642,6 +657,29 @@
             "index": "pypi",
             "version": "==1.0.9"
         },
+        "py": {
+            "hashes": [
+                "sha256:51c75c4126074b472f746a24399ad32f6053d1b34b68d2fa41e558e6f4a98719",
+                "sha256:607c53218732647dff4acdfcd50cb62615cedf612e72d1724fb1a0cc6405b378"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
+            "version": "==1.11.0"
+        },
+        "pyblake2": {
+            "hashes": [
+                "sha256:3757f7ad709b0e1b2a6b3919fa79fe3261f166fc375cd521f2be480f8319dde9",
+                "sha256:407e02c7f8f36fcec1b7aa114ddca0c1060c598142ea6f6759d03710b946a7e3",
+                "sha256:4d47b4a2c1d292b1e460bde1dda4d13aa792ed2ed70fcc263b6bc24632c8e902",
+                "sha256:5ccc7eb02edb82fafb8adbb90746af71460fbc29aa0f822526fc976dff83e93f",
+                "sha256:8043267fbc0b2f3748c6920591cd0b8b5609dcce60c504c32858aa36206386f2",
+                "sha256:982295a87907d50f4723db6bc724660da76b6547826d52160171d54f95b919ac",
+                "sha256:baa2190bfe549e36163aa44664d4ee3a9080b236fc5d42f50dc6fd36bbdc749e",
+                "sha256:c53417ee0bbe77db852d5fd1036749f03696ebc2265de359fe17418d800196c4",
+                "sha256:fbc9fcde75713930bc2a91b149e97be2401f7c9c56d735b46a109210f58d7358"
+            ],
+            "index": "pypi",
+            "version": "==1.1.2"
+        },
         "pycodestyle": {
             "hashes": [
                 "sha256:347187bdb476329d98f695c213d7295a846d1152ff4fe9bacb8a9590b8ee7053",
@@ -722,6 +760,30 @@
             ],
             "index": "pypi",
             "version": "==6.1.1"
+        },
+        "pytest-bdd-html": {
+            "hashes": [
+                "sha256:5137e7ae30d139e4370065a35226010899561337a8062381e5b35377c412969e",
+                "sha256:e32e1ca26f54a783fcdc31749067bc5c55912f9b574f84e92ee360dadb58311f"
+            ],
+            "index": "pypi",
+            "version": "==0.1.14a0"
+        },
+        "pytest-html": {
+            "hashes": [
+                "sha256:868c08564a68d8b2c26866f1e33178419bb35b1e127c33784a28622eb827f3f3",
+                "sha256:c4e2f4bb0bffc437f51ad2174a8a3e71df81bbc2f6894604e604af18fbe687c3"
+            ],
+            "index": "pypi",
+            "version": "==3.2.0"
+        },
+        "pytest-metadata": {
+            "hashes": [
+                "sha256:acb739f89fabb3d798c099e9e0c035003062367a441910aaaf2281bc1972ee14",
+                "sha256:fcc653f65fe3035b478820b5284fbf0f52803622ee3f60a2faed7a7d3ba1f41e"
+            ],
+            "markers": "python_version >= '3.7' and python_version < '4.0'",
+            "version": "==2.0.4"
         },
         "python-dateutil": {
             "hashes": [
