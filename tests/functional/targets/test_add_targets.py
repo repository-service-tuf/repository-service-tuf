@@ -17,7 +17,8 @@ def test_adding_a_target_using_rstuf_api():
 
 
 @given(
-    "the API requester has a token with a scope write for targets ('write:targets') and read for tasks ('read:tasks')",
+    "the API requester has a token with a scope write for targets "
+    "('write:targets') and read for tasks ('read:tasks')",
     target_fixture="access_token",
 )
 def the_api_requester_has_a_token_with_scope_specific_scope(access_token):
@@ -36,7 +37,8 @@ def the_admin_adds_authorization_token_in_the_headers(access_token):
 
 @when(
     parse(
-        "the API requester adds a new target with {length}, {hashes}, {custom} and {path}"
+        "the API requester adds a new target with {length}, {hashes}, {custom}"
+        " and {path}"
     ),
     target_fixture="response",
 )
@@ -49,7 +51,7 @@ def the_api_requester_adds_a_new_target(
     if path == "None":
         path = None
 
-    # remove extra quotes; example "['str', 'str']" -> to python list['str', 'str']
+    # remove quotes; example "['str', 'str']" -> to python list['str', 'str']
     hashes = ast.literal_eval(hashes)
     path = ast.literal_eval(path)
 
@@ -84,7 +86,8 @@ def the_api_requester_gets_successful_message(response):
 
 
 @then(
-    "the API requester gets from endpoint 'GET /api/v1/task' status 'Task finished' within 90 seconds"
+    "the API requester gets from endpoint 'GET /api/v1/task' status "
+    "'Task finished' within 90 seconds"
 )
 def the_api_requester_gets_task_status_task_finished_within_threshold(
     http_request, headers, response_json

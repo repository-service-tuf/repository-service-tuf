@@ -77,10 +77,9 @@ def access_token(http_request, get_admin_pwd):
 def get_target_info():
     def _run_get_target_info(target_path):
         temp_md_dir = tempfile.TemporaryDirectory()
-        path = temp_md_dir.name
-        shutil.copy(
-            f"{os.path.abspath(os.getcwd())}/tests/data/root.json", path
-        )
+        # rename 1.root.json to root.json
+        path = os.path.join(temp_md_dir.name, "root.json")
+        shutil.copy(os.path.join("metadata", "1.root"), path)
 
         updater = Updater(
             metadata_dir=temp_md_dir.name,
