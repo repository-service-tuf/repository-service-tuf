@@ -7,6 +7,7 @@
 
 !include <office/Servers/file_server>
 !include <office/Servers/application_server>
+!include <office/Servers/database_server>
 !include <office/Services/web_services>
 !include <office/Concepts/application_generic>
 !include <office/Concepts/service_application>
@@ -31,6 +32,7 @@ AddContainerTag("ci_cd", $sprite="application_generic", $legendText="CI/CD, Artf
 AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed TUF Metadata")
 AddContainerTag("download_target", $sprite="download", $legendText="Download file/target/package", $bgColor=Gray)
 AddContainerTag("terminal", $sprite="terminal,scale=0.5,color=#000000", $legendText="CLI")
+AddContainerTag("sql_db", $sprite="database_server", $legendText="SQL Server")
 
 AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=0.75,color=#438DD5", $legendText="Repository Service for TUF CLI")
 AddRelTag("bowser", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="management_console,scale=0.5", $legendText="Browser")
@@ -42,11 +44,12 @@ Person(repository_user, "User", $tags="user")
 
 System_Boundary(build_systems, "CD/Build Systems") {
     System_Boundary(rstuf, "Repository Service for TUF ") {
-        Container(rstuf_rest_api, "REPOSITORY-SERVICE-TUF-API", "Docker", $tags="rest_api") #DeepSkyBlue
-        Container(rstuf_repo_worker, "REPOSITORY-SERVICE-TUF-WORKER", "Docker", $tags="repo_worker")
+        Container(rstuf_rest_api, "REPOSITORY-SERVICE-TUF-API", "Docker", $tags="rest_api") #DodgerBlue
+        Container(rstuf_repo_worker, "REPOSITORY-SERVICE-TUF-WORKER", "Docker", $tags="repo_worker") #DodgerBlue
     }
     Container(queue, "Broker/Backend", "RabbitMQ, Redis, etc", $tags="queue") #Grey
     Container(ci_cd, "CI/CD", "Jenkis, Github, Gitlab, etc", $tags="ci_cd") #Grey
+    ContainerDb(sql, "SQL Server", "SQL Server", $tags="sql_db") #Grey
     ContainerDb(key_service, "Key Service", "Local/SaaS Vault", $tags="key_service") #Grey
     ContainerDb(storage_service, "Storage Service", "Local/SaaS Storage", $tags="storage_service") #Grey
 }
@@ -60,6 +63,7 @@ Rel(administration_user, rstuf_rest_api, "REPOSITORY-SERVICE-TUF-CLI", $tags="te
 Rel_R(ci_cd, rstuf_rest_api, "HTTPS + Tokens")
 Rel_U(queue, rstuf_repo_worker, "Consumer", "Tasks")
 Rel_D(rstuf_rest_api, queue, "Producer", "Tasks")
+Rel_R(rstuf_repo_worker, sql, "SQL", "TargetFiles")
 Rel_D(rstuf_repo_worker, key_service, "Read/Write", "Online Keys")
 Rel_D(rstuf_repo_worker, storage_service, "Read/Write", "Repository Metadata")
 
