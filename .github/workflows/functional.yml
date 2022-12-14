@@ -83,11 +83,11 @@ jobs:
           SECRETS_RSTUF_ADMIN_PASSWORD: secret
     steps:
       - name: Checkout release tag
-        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b
 
       - name: Checkout release tag if not umbrella
         if: github.repository != 'vmware/repository-service-tuf'
-        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b
         with:
            repository: vmware/repository-service-tuf
            path: rstuf-umbrella
@@ -110,7 +110,7 @@ jobs:
           pip install -r ${{ env.REQUIREMENTS_PATH }}
 
       - name: Checkout the Repository Service for TUF CLI
-        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b
         with:
           repository: vmware/repository-service-tuf-cli
           path: rstuf-cli
