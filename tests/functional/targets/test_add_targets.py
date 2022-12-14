@@ -17,7 +17,7 @@ def test_adding_a_target_using_rstuf_api():
 
 
 @given(
-    "the API requester has a token with a scope write for targets "
+    "the API requester has a token with scopes write for targets "
     "('write:targets') and read for tasks ('read:tasks')",
     target_fixture="access_token",
 )
@@ -120,7 +120,12 @@ def the_api_requester_gets_task_status_task_finished_within_threshold(
         raise TimeoutError(f"Task should be completed in {THRESHOLD} seconds.")
 
 
-@then(parse("the user can fetch the new target with {path} from the metadata"))
+@then(
+    parse(
+        "the user downloads the new target {path} using TUF client from the "
+        "metadata repository"
+    )
+)
 def the_user_can_fetch_the_new_target_from_the_metadata(get_target_info, path):
     # convert "'str'"to "str"
     path = ast.literal_eval(path)
