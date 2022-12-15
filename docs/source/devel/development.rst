@@ -191,7 +191,7 @@ component <devel/development:Components Repositories>`.
 Functional Tests using Behavior Development Driven (BDD)
 --------------------------------------------------------
 
-DBB Feature file
+BDD Feature file
 ................
 
 For RSTUF Features level, we write the `Gherkin
