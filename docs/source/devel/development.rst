@@ -144,7 +144,7 @@ Repository Service for TUF API or Repository Service for TUF Worker). These
 features don’t impact the entire RSTUF platform, such as performance,
 breaking/improving API contracts, user usage/deployment, etc.
 
-We recommend for this type of feature open a new issue in the :ref:`specific
+We recommend for this type of feature to open a new issue in the :ref:`specific
 component <devel/development:Components Repositories>`.
 
 RSTUF Feature
