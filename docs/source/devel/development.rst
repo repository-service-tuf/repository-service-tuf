@@ -163,7 +163,7 @@ We recommend for these changes the following:
 
 * After discussing and receiving enough feedback, propose a :ref:`BDD Feature file
   <devel/development:Functional Tests using Behavior Development Driven (BDD)>`
-  (ask for a feature brach).
+  (ask for a feature branch).
 * Once the BDD Feature file is approved and merged to a feature branch, open
   the related issues for the component(s)
 
@@ -219,9 +219,9 @@ We use `pytest <https://docs.pytest.org/>`_ and
 All BDD tests are in the `Umbrella repository, inside
 tests/functional <http://github.com/vmware/repository-service-tuf>`_ .
 
-The BDD tests has the workflow also in the `Umbrella repository
+The BDD tests have the workflow also in the `Umbrella repository
 <http://github.com/vmware/repository-service-tuf>`_ , as a reusable
-Github Workflow, and it is triggered by other worflows/components i.e.,
+GitHub Workflow, and it is triggered by other workflows/components i.e.,
 before releasing.
 
 
@@ -229,7 +229,7 @@ Project organization
 ====================
 
 The project uses the microservices approach.
-Each RSTUF components have the own development instructions.
+Each RSTUF components have its own development instructions.
 
 Components Repositories
 -----------------------
