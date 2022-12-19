@@ -45,12 +45,6 @@ def the_admin_adds_authorization_token_in_the_headers(access_token):
 def the_api_requester_adds_a_new_target(
     http_request, headers, length, hashes, custom, path
 ):
-    if custom == "None":
-        custom = None
-
-    if path == "None":
-        path = None
-
     # remove quotes; example "['str', 'str']" -> to python list['str', 'str']
     hashes = ast.literal_eval(hashes)
     path = ast.literal_eval(path)
@@ -67,7 +61,7 @@ def the_api_requester_adds_a_new_target(
         ]
     }
 
-    if custom is not None:
+    if custom != "None":
         custom = ast.literal_eval(custom)
         payload["targets"][0]["info"].update({"custom": custom})
 
@@ -118,6 +112,7 @@ def the_api_requester_gets_task_status_task_finished_within_threshold(
 
     if ((datetime.utcnow() - task_submitted).total_seconds()) > THRESHOLD:
         raise TimeoutError(f"Task should be completed in {THRESHOLD} seconds.")
+
 
 
 @then(
