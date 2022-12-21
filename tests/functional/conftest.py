@@ -3,8 +3,10 @@ import re
 import shutil
 import subprocess
 import tempfile
+from datetime import datetime
 from typing import List
 
+import dateutil.parser
 import pytest
 import requests
 from tuf.ngclient import Updater, UpdaterConfig
@@ -90,3 +92,41 @@ def get_target_info():
         return updater.get_targetinfo(target_path)
 
     return _run_get_target_info
+
+
+@pytest.fixture
+def task_completed_within_threshold():
+    def _run_task_completion_check(
+        http_request, headers, response_json, threshold
+    ):
+        """Validates that a task has finished within a threshold of seconds."""
+        task_id = response_json["data"]["task_id"]
+        task_submitted = dateutil.parser.parse(
+            response_json["data"]["last_update"]
+        )
+        while (
+            (datetime.utcnow() - task_submitted).total_seconds()
+        ) <= threshold:
+            response = http_request(
+                method="GET",
+                url=f"/api/v1/task/?task_id={task_id}",
+                headers=headers,
+            )
+            assert response.status_code == 200, response.text
+            rp_json = response.json()
+            # "result" is missing when the task is still "PENDING"
+            status = ""
+            result = rp_json["data"].get("result")
+            if result is not None:
+                # "status" is missing when the task is in its earliest stage
+                status = result.get("status")
+
+            if status == "Task finished.":
+                break
+
+        if ((datetime.utcnow() - task_submitted).total_seconds()) > threshold:
+            raise TimeoutError(
+                f"Task should be completed in {threshold} seconds."
+            )
+
+    return _run_task_completion_check

@@ -1,9 +1,7 @@
 """Adding targets in Repository Service for TUF (RSTUF) feature tests."""
 
 import ast
-from datetime import datetime
 
-import dateutil.parser
 from pytest_bdd import given, scenario, then, when
 from pytest_bdd.parsers import parse
 
@@ -84,35 +82,12 @@ def the_api_requester_gets_successful_message(response):
     "'Task finished' within 90 seconds"
 )
 def the_api_requester_gets_task_status_task_finished_within_threshold(
-    http_request, headers, response_json
+    http_request, headers, task_completed_within_threshold, response_json
 ):
-
-    THRESHOLD = 90
-    task_id = response_json["data"]["task_id"]
-    task_submitted = dateutil.parser.parse(
-        response_json["data"]["last_update"]
+    threshold = 90
+    task_completed_within_threshold(
+        http_request, headers, response_json, threshold
     )
-    while ((datetime.utcnow() - task_submitted).total_seconds()) <= THRESHOLD:
-        response = http_request(
-            method="GET",
-            url=f"/api/v1/task/?task_id={task_id}",
-            headers=headers,
-        )
-        assert response.status_code == 200, response.text
-        rp_json = response.json()
-        # "result" is missing when the task is still "PENDING"
-        status = ""
-        result = rp_json["data"].get("result")
-        if result is not None:
-            # "status" is missing when the task is in its earliest stage
-            status = result.get("status")
-
-        if status == "Task finished.":
-            break
-
-    if ((datetime.utcnow() - task_submitted).total_seconds()) > THRESHOLD:
-        raise TimeoutError(f"Task should be completed in {THRESHOLD} seconds.")
-
 
 
 @then(
