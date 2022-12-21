@@ -1,0 +1,35 @@
+Feature: Adding targets in Repository Service for TUF (RSTUF)
+    As an admin,
+    Admin has deployed RSTUF,
+    Admin has run the ceremony and completed bootstrap successfully,
+    Admin has provided a token to the API requester
+
+    Scenario Outline: Removing targets using RSTUF api
+        Given the API requester has a token with scopes delete for targets and read for tasks
+        And the admin adds authorization Bearer 'access_token' in the 'headers'
+        And there are targets <paths> available for download using TUF client from the metadata repository
+        When the API requester deletes all of the following targets <paths>
+        Then the API requester should get status code '202' with 'task_id'
+        Then the API requester gets from endpoint 'GET /api/v1/task' status 'Task finished' within 90 seconds
+        Then all of the targets <paths> should not be available for download using TUF client from the metadata repository
+
+        Examples:
+            | paths                                                  |
+            | ["file1.tar.gz"]                                       |
+            | ["file1.tar.gz", "a/file2.tar.gz"]                     |
+            | ["file1.tar.gz", "a/file2.tar.gz", "a/b/file3.tar.gz"] |
+
+    Scenario Outline: Removing targets that does exist and ignoring the rest
+        Given the API requester has a token with scopes delete for targets and read for tasks
+        And the admin adds authorization Bearer 'access_token' in the 'headers'
+        And there are targets <paths> available for download using TUF client from the metadata repository
+        When the API requester tries to delete all of the following targets <paths> and <non_existing_paths>
+        Then the API requester should get status code '202' with 'task_id'
+        Then the API requester gets from endpoint 'GET /api/v1/task' status 'Task finished' within 90 seconds
+        Then the API requester should get a lists of deleted targets containing <paths> and of not found targets containing <non_existing_paths>
+        Then all of the targets <paths> should not be available for download using TUF client from the metadata repository
+
+        Examples:
+            | paths                              | non_existing_paths    |
+            | ["file1.tar.gz"]                   | ["foo"]               |
+            | ["file1.tar.gz", "a/file2.tar.gz"] | ["foo", "bar"]        |
