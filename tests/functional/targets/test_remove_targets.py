@@ -102,13 +102,14 @@ def the_api_requester_gets_successful_message(response):
 
 @then(
     "the API requester gets from endpoint 'GET /api/v1/task' status "
-    "'Task finished' within 90 seconds"
+    "'Task finished' within 90 seconds",
+    target_fixture="api_response",
 )
 def the_api_requester_gets_task_status_finished_within_threshold(
     http_request, headers, task_completed_within_threshold, response_json
 ):
     threshold = 90
-    task_completed_within_threshold(
+    return task_completed_within_threshold(
         http_request, headers, response_json, threshold
     )
 
@@ -155,46 +156,19 @@ def the_api_requester_tries_to_delete_all_targets(
 
 
 @then(
-    "the API requester gets from endpoint 'GET /api/v1/task' status "
-    "'Task finished' within 90 seconds",
-    target_fixture="targets_dict",
-)
-def the_api_requester_gets_task_status_finished_and_get_task_details(
-    http_request, headers, task_completed_within_threshold, response_json
-):
-    threshold = 90
-    task_completed_within_threshold(
-        http_request, headers, response_json, threshold
-    )
-
-    task_id = response_json["data"]["task_id"]
-    response = http_request(
-        method="GET",
-        url=f"/api/v1/task/?task_id={task_id}",
-        headers=headers,
-    )
-    rp_json = response.json()
-
-    return {
-        "deleted": rp_json["data"]["result"]["details"]["deleted_targets"],
-        "not_found": rp_json["data"]["result"]["details"]["not_found_targets"],
-    }
-
-
-@then(
     parse(
         "the API requester should get a lists of deleted targets containing "
         "{paths} and of not found targets containing {non_existing_paths}"
     )
 )
 def the_api_requester_gets_deleted_and_not_found_lists(
-    paths,
-    non_existing_paths,
-    targets_dict,
+    paths, non_existing_paths, api_response
 ):
+    deleted = api_response["data"]["result"]["details"]["deleted_targets"]
+    not_found = api_response["data"]["result"]["details"]["not_found_targets"]
     # remove quotes; example "[str, str]" -> [str, str]
     paths = ast.literal_eval(paths)
     non_existing_paths = ast.literal_eval(non_existing_paths)
     # Sort lists, so that order doesn't lead to unwanted differences
-    assert sorted(paths) == sorted(targets_dict["deleted"])
-    assert sorted(non_existing_paths) == sorted(targets_dict["not_found"])
+    assert sorted(paths) == sorted(deleted)
+    assert sorted(non_existing_paths) == sorted(not_found)

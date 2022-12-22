@@ -104,6 +104,7 @@ def task_completed_within_threshold():
         task_submitted = dateutil.parser.parse(
             response_json["data"]["last_update"]
         )
+        rp_json = None
         while (
             datetime.utcnow() - task_submitted
         ).total_seconds() <= threshold:
@@ -128,5 +129,7 @@ def task_completed_within_threshold():
             raise TimeoutError(
                 f"Task should be completed in {threshold} seconds."
             )
+
+        return rp_json
 
     return _run_task_completion_check
