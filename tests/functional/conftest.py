@@ -105,8 +105,8 @@ def task_completed_within_threshold():
             response_json["data"]["last_update"]
         )
         while (
-            (datetime.utcnow() - task_submitted).total_seconds()
-        ) <= threshold:
+            datetime.utcnow() - task_submitted
+        ).total_seconds() <= threshold:
             response = http_request(
                 method="GET",
                 url=f"/api/v1/task/?task_id={task_id}",
@@ -124,7 +124,7 @@ def task_completed_within_threshold():
             if status == "Task finished.":
                 break
 
-        if ((datetime.utcnow() - task_submitted).total_seconds()) > threshold:
+        if (datetime.utcnow() - task_submitted).total_seconds() > threshold:
             raise TimeoutError(
                 f"Task should be completed in {threshold} seconds."
             )
