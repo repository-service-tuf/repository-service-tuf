@@ -29,7 +29,6 @@ def token(access_token):
 )
 def generate_headers(token):
     header_token = {"Authorization": f"Bearer {token}"}
-
     return header_token
 
 
@@ -112,8 +111,8 @@ def get_tasks(headers, multiple_requests, http_request, timeout):
             data = response.json()["data"]
             state = data.get("state", None)
             if state == "SUCCESS":
-                result = data["result"]
-                if result["status"] == "Task finished.":
+                result = data.get("result", {})
+                if result.get("status", "") == "Task finished.":
                     tasks_result.append(task)
                     tasks.remove(task)
 
