@@ -17,7 +17,7 @@ Feature: Adding targets in Repository Service for TUF (RSTUF)
             | paths                                                  |
             | ["file1.tar.gz"]                                       |
             | ["file1.tar.gz", "a/file2.tar.gz"]                     |
-            | ["file1.tar.gz", "a/file2.tar.gz", "a/b/file3.tar.gz"] |
+            | ["file1.tar.gz", "a/file2.tar.gz", "c/d/file3.tar.gz"] |
 
     Scenario Outline: Removing targets that does exist and ignoring the rest
         Given the API requester has a token with scopes delete for targets and read for tasks
