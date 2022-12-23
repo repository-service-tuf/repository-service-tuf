@@ -104,7 +104,7 @@ def task_completed_within_threshold():
         task_submitted = dateutil.parser.parse(
             response_json["data"]["last_update"]
         )
-        rp_json = None
+        task_response_json = None
         while (
             datetime.utcnow() - task_submitted
         ).total_seconds() <= threshold:
@@ -114,10 +114,10 @@ def task_completed_within_threshold():
                 headers=headers,
             )
             assert response.status_code == 200, response.text
-            rp_json = response.json()
+            task_response_json = response.json()
             # "result" is missing when the task is still "PENDING"
             status = ""
-            result = rp_json["data"].get("result")
+            result = task_response_json["data"].get("result")
             if result is not None:
                 # "status" is missing when the task is in its earliest stage
                 status = result.get("status")
@@ -130,6 +130,6 @@ def task_completed_within_threshold():
                 f"Task should be completed in {threshold} seconds."
             )
 
-        return rp_json
+        return task_response_json
 
     return _run_task_completion_check
