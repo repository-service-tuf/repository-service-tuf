@@ -21,7 +21,7 @@ Features:
 - [x] Automatically version Bump Snapshot Metadata
 - [x] Automatically version Bump Timestamp Metadata
 - [x] Automatically version Bump hash-bins Metadata
-- [x] Release CI/CD in all components (`Issue #25 <https://github.com/vmware/tuf-repository-worker/issues/25>`_)
+- [x] Release CI/CD in all components (`Issue #25 <https://github.com/vmware/repository-service-tuf/issues/25>`_)
 
 Components Milestones:
 
@@ -38,13 +38,13 @@ Status: Planning
 Not for a Production Deploy.
 This realease is to evaluate the features and functionality.
 
-- [ ] Token revocation (`Issue #30 <https://github.com/vmware/tuf-repository-worker/issues/30>`_)
-- [ ] Remove the Targets Key from Ceremony (`Issue #28 <https://github.com/vmware/tuf-repository-worker/issues/28>`_)
-- [ ] Key(s) Rotation (`Issue #23 <https://github.com/vmware/tuf-repository-worker/issues/23>`_)
-- [x] Implement HTTPS for the Rest API (`Issue #6 <https://github.com/vmware/tuf-repository-worker/issues/6>`_)
-- [ ] Add TLS/SSL for Broker and Result Backend communication (`Issue #6 <https://github.com/vmware/tuf-repository-worker/issues/6>`_)
-- [x] Public online documentation (`Issue #22 <https://github.com/vmware/tuf-repository-worker/issues/22>`_)
-- [ ] Old Metadata retention (`Issue #29 <https://github.com/vmware/tuf-repository-worker/issues/29>`_)
+- [ ] Token revocation (`Issue #30 <https://github.com/vmware/repository-service-tuf/issues/30>`_)
+- [ ] Remove the Targets Key from Ceremony (`Issue #28 <https://github.com/vmware/repository-service-tuf/issues/28>`_)
+- [ ] Key(s) Rotation (`Issue #23 <https://github.com/vmware/repository-service-tuf/issues/23>`_)
+- [x] Implement HTTPS for the Rest API (`Issue #6 <https://github.com/vmware/repository-service-tuf/issues/6>`_)
+- [ ] Add TLS/SSL for Broker and Result Backend communication (`Issue #6 <https://github.com/vmware/repository-service-tuf/issues/6>`_)
+- [x] Public online documentation (`Issue #22 <https://github.com/vmware/repository-service-tuf/issues/22>`_)
+- [ ] Old Metadata retention (`Issue #29 <https://github.com/vmware/repository-service-tuf/issues/29>`_)
 - [ ] Option to Disable the API Authentication/Authorization Feature (`Issue #41 <https://github.com/vmware/repository-service-tuf/issues/41>`_)
 
 Components Milestones:
