@@ -7,6 +7,7 @@
 
 !include <office/Servers/file_server>
 !include <office/Servers/application_server>
+!include <office/Servers/database_server>
 !include <office/Services/web_services>
 !include <office/Concepts/application_generic>
 !include <office/Concepts/service_application>
@@ -24,6 +25,7 @@ AddContainerTag("storage_service", $sprite="file_server", $legendText="Storage S
 AddContainerTag("rest_api", $sprite="web_server", $legendText="Repository REST API")
 AddContainerTag("repository_service_tuf_worker", $sprite="service_application", $legendText="Repository Metadata Worker")
 AddContainerTag("queue", $sprite="queue_viewer", $legendText="Message Queue")
+AddContainerTag("sql_db", $sprite="database_server", $legendText="SQL Server")
 AddContainerTag("ci_cd", $sprite="application_generic", $legendText="CI/CD, Artfact Management, etc")
 AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed TUF Metadata")
 AddContainerTag("download_target", $sprite="download", $legendText="Download file/target/package", $bgColor=Gray)
@@ -44,8 +46,12 @@ System_Boundary(repository_service_tuf_worker, "Repository Service for TUF Worke
     Container_Boundary(rstuf_worker, "repository_service_tuf_worker")  #LightSkyBlue {
         Container_Ext(celery, "Celery()")
         Container_Ext(dynaconf, "Dynaconf()")
+        Container_Ext(sqlalchemy, "SQLAlchemy()")
         Container(repository, "repository")
 
+        Container_Boundary(models, "models") #PowderBlue {
+            Container(TargetsFiles, "TargetFiles")
+        }
         Container_Boundary(interfaces, "interfaces") #CornflowerBlue {
             Container(IStorage, "Storage Interface")
             Container(IKeyVault, "Key Vault Interface")
@@ -65,6 +71,7 @@ System_Boundary(repository_service_tuf_worker, "Repository Service for TUF Worke
 
 Container_Ext(broker, "Broker", "RabbitMQ, Redis, etc", $tags="queue") #Grey
 Container_Ext(redis, "Redis", "Redis Server", $tags="queue") #Grey
+Container_Ext(sql, "SQL", "SQL Server", $tags="sql_db") #Grey
 Container_Ext(ext_storage, "Metadata Storage", "specific technology", $tags="key_service") #Grey
 Container_Ext(ext_key_storage, "Key Vault Storage", "specific technology", $tags="storage_service") #Grey
 
@@ -77,7 +84,10 @@ Rel(metadata_repository, IKeyVault, " ")
 Rel(metadata_repository, celery, " ")
 Rel(metadata_repository, repository, " ")
 Rel(metadata_repository, dynaconf, " ")
+Rel(metadata_repository, models, " ")
+Rel(models, sqlalchemy, " ")
 Rel_U(dynaconf, redis, "Write data")
+Rel(sqlalchemy, sql, "Write data")
 Rel_D(celery, broker, "Publisher")
 Rel(broker, celery, "Consumer")
 Rel_L(dynaconf, data_dir, "Write data")

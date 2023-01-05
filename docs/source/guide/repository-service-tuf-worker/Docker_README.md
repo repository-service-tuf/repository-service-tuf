@@ -32,6 +32,7 @@ docker run --env="RSTUF_WORKER_ID=worker1" \
     --env="RSTUF_LOCAL_KEYVAULT_PATH=keyvault" \
     --env="RSTUF_BROKER_SERVER=guest:guest@rabbitmq:5672" \
     --env="RSTUF_REDIS_SERVER=redis://redis" \
+    --env="RSTUF_SQL_SERVER=postgresql://postgres:secret@postgres:5432" \
     ghcr.io/vmware/repository-service-tuf-worker:latest \
 ```
 
@@ -55,6 +56,16 @@ The result backend must to be compatible with Celery. See
 [Celery Task result backend settings](https://docs.celeryq.dev/en/stable/userguide/configuration.html#task-result-backend-settings)
 
 Example: `redis://redis`
+
+#### (Required) `RSTUF_SQL_SERVER`
+
+SQL server address.
+
+The SQL Server must to be compatible with
+[SQLAlchemy](https://www.sqlalchemy.org). RSTUF recomends
+[PostgreSQL](https://www.postgresql.org).
+
+Example: `postgresql://postgres:secret@postgres:5432`
 
 #### (Optional) `RSTUF_REDIS_SERVER_PORT`
 
