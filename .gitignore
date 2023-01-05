@@ -1,3 +1,11 @@
+# RSTUF Specifics
+test-report.html
+test-report.json
+metadata/
+payload.json
+rstuf.ini
+assets/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
