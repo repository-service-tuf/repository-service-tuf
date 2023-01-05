@@ -1,11 +1,9 @@
 """Performance and Consistence adding and removing targets feature tests."""
-import random
 import time
 from datetime import datetime
 
 import dateutil.parser
 import names_generator
-from pyblake2 import blake2b
 from pytest_bdd import given, scenario, then, when
 from pytest_bdd.parsers import parse
 
@@ -48,11 +46,12 @@ def send_requests_with_targets(
             filename = f"test/{names_generator.generate_name()}-{count}.tar.gz"
             target = {
                 "info": {
-                    "length": random.randint(999, 99999),
+                    "length": 54321,
                     "hashes": {
-                        "blake2b-256": blake2b(
-                            filename.encode(), digest_size=32
-                        ).hexdigest()
+                        "blake2b-256": (
+                            "716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c6151"
+                            "0bfc4751384ea7a"
+                        )
                     },
                 },
                 "path": filename,
