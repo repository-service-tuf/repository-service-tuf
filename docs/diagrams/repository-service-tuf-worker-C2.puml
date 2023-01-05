@@ -8,6 +8,7 @@
 !include <office/Servers/file_server>
 !include <office/Servers/application_server>
 !include <office/Services/web_services>
+!include <office/Servers/database_server>
 !include <office/Concepts/application_generic>
 !include <office/Concepts/service_application>
 !include <office/Servers/web_server>
@@ -56,6 +57,7 @@ AddContainerTag("repository_service_tuf_worker", $sprite="rstuf", $legendText="R
 AddContainerTag("queue", $sprite="queue_viewer", $legendText="Message Queue")
 AddContainerTag("ci_cd", $sprite="application_generic", $legendText="CI/CD, Artfact Management, etc")
 AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed TUF Metadata")
+AddContainerTag("sql_db", $sprite="database_server", $legendText="SQL Server")
 AddContainerTag("download_target", $sprite="download", $legendText="Download file/target/package", $bgColor=Gray)
 AddContainerTag("terminal", $sprite="terminal,scale=0.5,color=#000000", $legendText="CLI")
 AddContainerTag("redis", $sprite="redis", $legendText="CLI")
@@ -69,10 +71,11 @@ AddRelTag("bowser", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprit
 AddRelTag("download", $textColor="Green", $lineColor="$ARROW_COLOR")
 AddRelTag("share", $textColor="orange", $lineColor="grey", $lineStyle = DashedLine())
 
-Container(repository_service_tuf_worker, "REPOSITORY-SERVICE-TUF-WORKER", "Metadata Repository Worker", $tags="repository_service_tuf_worker")
+Container(repository_service_tuf_worker, "REPOSITORY-SERVICE-TUF-WORKER", "Metadata Repository Worker", $tags="repository_service_tuf_worker") #DodgerBlue
 ContainerDb(data_dir, "/$DATA_DIR", "File System", "Service settings\nRepository Settings", $tags="storage_service")
 Container_Ext(broker, "Broker/Backend", "RabbitMQ, Redis, etc", $tags="queue") #Grey
 Container_Ext(redis, "Redis", "Redis Server", $tags="redis") #Grey
+Container_Ext(sql, "SQL", "SQL Server", $tags="sql_db") #Grey
 Container_Boundary(repository_storage, "Storage Service"){
     Container_Ext(stg_fs, "Filesystem", "Storage", $tags="storage_service") #Grey
     Container_Ext(aws_s3, "AWS S3", "Storage", $tags="aws_s3") #Grey
@@ -86,6 +89,7 @@ Container_Boundary(key_storage, "Key Vault Service"){
 Rel_D(broker, repository_service_tuf_worker, "Consumer", "Tasks")
 Rel_U(repository_service_tuf_worker, broker, "Publisher", "Tasks")
 Rel_U(repository_service_tuf_worker, redis, "Repository Configuration", "Consumer")
+Rel_U(repository_service_tuf_worker, sql, "Targets SQL", "")
 Rel_R(repository_service_tuf_worker, data_dir, "Write/Read", "Config settings")
 Rel_D(repository_service_tuf_worker, repository_storage, "Write/Read", "TUF Metadata")
 Rel_D(repository_service_tuf_worker, key_storage, "Write/Read", "Online Keys")

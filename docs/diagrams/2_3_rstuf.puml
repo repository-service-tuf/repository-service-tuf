@@ -7,6 +7,7 @@
 
 !include <office/Servers/file_server>
 !include <office/Servers/application_server>
+!include <office/Servers/database_server>
 !include <office/Services/web_services>
 !include <office/Concepts/application_generic>
 !include <office/Concepts/service_application>
@@ -32,6 +33,7 @@ AddContainerTag("ci_cd", $sprite="application_generic", $legendText="CI/CD, Artf
 AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed TUF Metadata")
 AddContainerTag("download_target", $sprite="download", $legendText="Download file/target/package", $bgColor=Gray)
 AddContainerTag("queue_cluster", $sprite="cluster_server", $legendText="Broker Cluster")
+AddContainerTag("sql_db", $sprite="database_server", $legendText="SQL Server")
 
 AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=1.0,color=#438DD5", $legendText="CLI")
 AddRelTag("bowser", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="management_console,scale=0.5", $legendText="Browser")
@@ -55,8 +57,8 @@ Boundary(tenant, "Tenant"){
         }
         Boundary(apis_r1, "REPOSITORY-SERVICE-TUF-API"){
             Container(api_gateway_r1, "API Gateway", "Local/SaaS API Gateway", "Security, Authentication, etc") #Grey
-            Container(rstuf_rest_api_1, "REPOSITORY-SERVICE-TUF-API", "Python", $tags="rstuf_rest_api")
-            Container(rstuf_rest_api_2, "REPOSITORY-SERVICE-TUF-API", "Python", $tags="rstuf_rest_api")
+            Container(rstuf_rest_api_1, "REPOSITORY-SERVICE-TUF-API", "Python", $tags="rstuf_rest_api") #DodgerBlue
+            Container(rstuf_rest_api_2, "REPOSITORY-SERVICE-TUF-API", "Python", $tags="rstuf_rest_api") #DodgerBlue
             Lay_R(api_gateway_r1, rstuf_rest_api_1)
             Lay_R(rstuf_rest_api_1, rstuf_rest_api_2)
             Rel(api_gateway_r1, rstuf_rest_api_1,)
@@ -64,8 +66,8 @@ Boundary(tenant, "Tenant"){
         }
         Container(queue_service_r1, "Broker", "Region 1 Cluster", $tags="queue_cluster")  #Grey
         Boundary(repository_workers_r1, "Repository Workers") {
-            Container(rstuf_repo_worker_1, "REPOSITORY-SERVICE-TUF-WORKER 1", "consumer", $tags="rstuf_repo_worker")
-            Container(rstuf_repo_worker_2, "REPOSITORY-SERVICE-TUF-WORKER 2", "consumer", $tags="rstuf_repo_worker")
+            Container(rstuf_repo_worker_1, "REPOSITORY-SERVICE-TUF-WORKER 1", "consumer", $tags="rstuf_repo_worker") #DodgerBlue
+            Container(rstuf_repo_worker_2, "REPOSITORY-SERVICE-TUF-WORKER 2", "consumer", $tags="rstuf_repo_worker") #DodgerBlue
             Lay_R(rstuf_repo_worker_1, rstuf_repo_worker_2)
         }
 
@@ -90,8 +92,8 @@ Boundary(tenant, "Tenant"){
         }
         Boundary(apis_r2, "REPOSITORY-SERVICE-TUF-API"){
             Container(api_gateway_r2, "API Gateway", "Local/SaaS API Gateway", "Security, Authentication, etc") #Grey
-            Container(rstuf_rest_api_3, "REPOSITORY-SERVICE-TUF-API", "Python", $tags="rstuf_rest_api")
-            Container(rstuf_rest_api_4, "REPOSITORY-SERVICE-TUF-API", "Python", $tags="rstuf_rest_api")
+            Container(rstuf_rest_api_3, "REPOSITORY-SERVICE-TUF-API", "Python", $tags="rstuf_rest_api") #DodgerBlue
+            Container(rstuf_rest_api_4, "REPOSITORY-SERVICE-TUF-API", "Python", $tags="rstuf_rest_api") #DodgerBlue
             Lay_R(api_gateway_r2, rstuf_rest_api_3)
             Lay_R(rstuf_rest_api_3, rstuf_rest_api_4)
             Rel(api_gateway_r2, rstuf_rest_api_3,)
@@ -99,8 +101,8 @@ Boundary(tenant, "Tenant"){
         }
         Container(queue_service_r2, "Broker", "Region 1 Cluster", $tags="queue_cluster")  #Grey
         Boundary(repository_workers_r2, "Repository Workers") {
-            Container(rstuf_repo_worker_3, "REPOSITORY-SERVICE-TUF-WORKER 1", "consumer", $tags="rstuf_repo_worker")
-            Container(rstuf_repo_worker_4, "REPOSITORY-SERVICE-TUF-WORKER 2", "consumer", $tags="rstuf_repo_worker")
+            Container(rstuf_repo_worker_3, "REPOSITORY-SERVICE-TUF-WORKER 1", "consumer", $tags="rstuf_repo_worker") #DodgerBlue
+            Container(rstuf_repo_worker_4, "REPOSITORY-SERVICE-TUF-WORKER 2", "consumer", $tags="rstuf_repo_worker") #DodgerBlue
             Lay_R(rstuf_repo_worker_3, rstuf_repo_worker_4)
         }
 

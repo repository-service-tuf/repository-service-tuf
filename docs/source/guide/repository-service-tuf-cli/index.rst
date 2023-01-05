@@ -400,7 +400,7 @@ Generate tokens to use in integrations.
     ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
     │     --expires  -e  INTEGER  Expires in hours. Default: 24 [default: 24]                          │
     │  *  --scope    -s  TEXT     Scope to grant. Multiple is accepted. Ex: -s write:targets -s        │
-    │                             read:targets                                                         │
+    │                             read:settings                                                         │
     │                             [required]                                                           │
     │     --help     -h           Show this message and exit.                                          │
     ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
