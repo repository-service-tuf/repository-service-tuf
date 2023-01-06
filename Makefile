@@ -1,10 +1,11 @@
-.PHONY: docs lint reformat requirements functional-tests
+.PHONY: docs lint reformat requirements functional-tests sync-submodules
 
-docs:
+sync-submodules:
 	git submodule sync
 	git submodule update --init --force --recursive
 	git submodule foreach git pull origin main
 
+docs:
 	# repository-service-tuf-cli
 	cp -r repository-service-tuf-cli/docs/diagrams/* docs/diagrams/
 	rm -rf docs/source/guide/repository-service-tuf-cli/*
