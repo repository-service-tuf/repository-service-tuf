@@ -1,4 +1,4 @@
-name: Sync submodules
+name: Sync submodules and RSTUF docs
 on:
   workflow_dispatch:
   schedule:
@@ -11,24 +11,35 @@ jobs:
       worker_version: dev
       cli_version: dev
   sync-submodules:
-    name: "Sync submodules"
+    name: "Sync submodules and RSTUF docs"
     runs-on: ubuntu-latest
     needs: functional-tests
     steps:
       - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
+      # Install the dependencies and update plantuml.
+      # The Ubuntu's plantuml version is old and doesn't support some features
+      # used by RSTUF.
+      - name: Install Dependencies and update plantuml
+        run: |
+          pip install pipenv
+          pipenv install -d
+          sudo apt update
+          sudo apt install plantuml -y
+          sudo wget -O /usr/share/plantuml/plantuml.jar https://github.com/plantuml/plantuml/releases/download/v1.2022.14/plantuml-1.2022.14.jar
       - name: Sync git submodules
         run: |
-          git submodule sync
-          git submodule update --init --force --recursive
-          git submodule foreach git pull origin main
+          make sync-submodules
+      - name: Build docs
+        run: |
+          pipenv run make docs
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@2b011faafdcbc9ceb11414d64d0573f37c774b04
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore: sync git submodules"
-          branch: "rstuf-bot/update-submodules"
+          commit-message: "chore: sync git submodules and docs"
+          branch: "rstuf-bot/update-submodules-docs"
           delete-branch: true
-          title: "chore: sync git submodules"
+          title: "chore: sync git submodules and docs"
           body: >
-            The following PR updates the submodule references in the umbrella repository for repository-service-tuf-api, repository-service-tuf-cli and repository-service-tuf-worker.
+            The following PR updates the submodule and RSTUF documentation references in the umbrella repository for repository-service-tuf-api, repository-service-tuf-cli and repository-service-tuf-worker.
           labels: automated pr
