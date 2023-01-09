@@ -62,7 +62,7 @@ Status: TBD
 First Production Deploy
 This release achive the minimum valuable product for users.
 
-- [ ] Support to AWS S3 (Storage) and AWS KMS (Key Vault) (`#24 <https://github.com/vmware/repository-service-tuf/issues/24>`_
+- [ ] Support to AWS S3 (Storage) and AWS KMS (Key Vault) (`Issue #24 <https://github.com/vmware/repository-service-tuf/issues/24>`_)
 
 Components Milestones:
 
@@ -77,7 +77,7 @@ Goal: End-to-End Signing
 Status: TBD
 
 Implement End-to-end signing of packages. Developers or Release Manager can
-sign the artifacts. See `PEP 480 <https://peps.python.org/pep-0480/>` for more
+sign the artifacts. See `PEP 480 <https://peps.python.org/pep-0480/>`_ for more
 details.
 
 - repository-service-tuf-api vT.B.D
