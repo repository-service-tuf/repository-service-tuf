@@ -6,7 +6,7 @@ The All-in-one host deployment is the simplest way to Deploy Repository Service
 for TUF Server.
 There are limitations to scaling this deployment (limited to the host).
 
-This deployment will use Docker Stack with Docker Compose and Docker Swarn for
+This deployment will use Docker Stack with Docker Compose and Docker Swarm for
 the Token and Admin user password.
 
 Requirements
@@ -20,11 +20,11 @@ Requirements
 Steps
 =====
 
-1. Prepare the Docker Swarm credentials Repository Service for TUF API admin user and a random
+1. Prepare the Docker Swarm credentials Repository Service for the TUF API admin user and a random
    Token Key.
 
-   -  ``RSTUF_ADMIN_PASSWORD`` is the initial password for `admin`
-   -  ``SECRETS_RSTUF_TOKEN_KEY`` it the TOKEN KEY used to hash the API Tokens
+   -  ``SECRETS_RSTUF_ADMIN_PASSWORD`` is the initial password for `admin`
+   -  ``SECRETS_RSTUF_TOKEN_KEY`` is the Token Key used to hash the API Tokens
 
     .. code:: shell
 
@@ -44,11 +44,11 @@ Steps
         $ docker secret create API_CRT /path/to/api.crt
 
 
-2. Create a Docker Compose (functional example above)
+2. Create a Docker Compose (functional example below)
 
    - It uses Docker Volume for the persistent data.
-   - It uses Docker Secrets to store/use the ``RSTUF_TOKEN_KEY`` (Used to
-     generate API Tokens) and ``RSTUF_ADMIN_PASSWORD``.
+   - It uses Docker Secrets to store/use the ``SECRETS_RSTUF_TOKEN_KEY`` (used to
+     generate API Tokens) and ``SECRETS_RSTUF_ADMIN_PASSWORD``.
 
      .. note::
         **HTTPS**
