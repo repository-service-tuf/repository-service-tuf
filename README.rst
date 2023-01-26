@@ -1,6 +1,12 @@
 Repository Service for TUF (RSTUF)
 ==================================
 
+|OpenSSF Best Practices|
+
+.. |OpenSSF Best Practices| image:: https://bestpractices.coreinfrastructure.org/projects/6587/badge
+  :target: https://bestpractices.coreinfrastructure.org/projects/6587
+
+
 .. note::
 
     Repository Service for TUF is a *work in progress*.
