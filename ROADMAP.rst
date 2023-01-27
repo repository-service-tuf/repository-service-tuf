@@ -2,7 +2,7 @@
 Goal: Experimental version
 ==========================
 
-Status: Work in Progress
+Status: Done
 
 Not for a Production Deploy.
 This release is for PoV/PoC of the project.
@@ -33,25 +33,28 @@ Components Milestones:
 Goal: Minimum Working Version
 =============================
 
-Status: Planning
+Status: Work In Progress
 
 Not for a Production Deploy.
 This realease is to evaluate the features and functionality.
 
-- [ ] Token revocation (`Issue #30 <https://github.com/vmware/repository-service-tuf/issues/30>`_)
-- [ ] Remove the Targets Key from Ceremony (`Issue #28 <https://github.com/vmware/repository-service-tuf/issues/28>`_)
-- [ ] Key(s) Rotation (`Issue #23 <https://github.com/vmware/repository-service-tuf/issues/23>`_)
-- [x] Implement HTTPS for the Rest API (`Issue #6 <https://github.com/vmware/repository-service-tuf/issues/6>`_)
-- [ ] Add TLS/SSL for Broker and Result Backend communication (`Issue #6 <https://github.com/vmware/repository-service-tuf/issues/6>`_)
+
 - [x] Public online documentation (`Issue #22 <https://github.com/vmware/repository-service-tuf/issues/22>`_)
-- [ ] Old Metadata retention (`Issue #29 <https://github.com/vmware/repository-service-tuf/issues/29>`_)
-- [ ] Option to Disable the API Authentication/Authorization Feature (`Issue #41 <https://github.com/vmware/repository-service-tuf/issues/41>`_)
+- [x] Implement HTTPS for the Rest API (`Issue #6 <https://github.com/vmware/repository-service-tuf/issues/6>`_)
+- [ ] Data load for migrations (`Issue #188 <https://github.com/vmware/repository-service-tuf/issues/188>`_)
+- [ ] Remove the BIN Keys from Ceremony/Bootstrap Process [Roles simplification] (`Issue #28 <https://github.com/vmware/repository-service-tuf/issues/28>`_)
+- [ ] Remove from the bootstrap the online keys [Roles simplification] (`Issue #207 <https://github.com/vmware/repository-service-tuf/issues/207>`_)
+- [ ] Simplify the metadata bootstrap process [Roles simplification] (`Issue #208 <https://github.com/vmware/repository-service-tuf/issues/208>`_)
+- [ ] Key(s) Rotation (`Issue #23 <https://github.com/vmware/repository-service-tuf/issues/23>`_)
+- [ ] Option to Disable the API Authentication/Authorization (`Issue #41 <https://github.com/vmware/repository-service-tuf/issues/41>`_)
+
+(*Priority order*)
 
 Components Milestones:
 
-- `repository-service-tuf-api v0.0.1bX <https://github.com/vmware/repository-service-tuf-api/milestone/3>`_
-- `repository-service-tuf-worker v0.0.1bX <https://github.com/vmware/repository-service-tuf-worker/milestone/3>`_
-- `repository-service-tuf-cli v0.0.1bX <https://github.com/vmware/repository-service-tuf-cli/milestone/3>`_
+- `repository-service-tuf-api v1.0.0bX <https://github.com/vmware/repository-service-tuf-api/milestone/3>`_
+- `repository-service-tuf-worker v1.0.0bX <https://github.com/vmware/repository-service-tuf-worker/milestone/3>`_
+- `repository-service-tuf-cli v1..0bX <https://github.com/vmware/repository-service-tuf-cli/milestone/3>`_
 
 
 Goal: Minimum Valuable Product
@@ -62,13 +65,15 @@ Status: TBD
 First Production Deploy
 This release achive the minimum valuable product for users.
 
+- [ ] Old Metadata retention (`Issue #29 <https://github.com/vmware/repository-service-tuf/issues/29>`_)
 - [ ] Support to AWS S3 (Storage) and AWS KMS (Key Vault) (`Issue #24 <https://github.com/vmware/repository-service-tuf/issues/24>`_)
+- [ ] Token revocation (`Issue #30 <https://github.com/vmware/repository-service-tuf/issues/30>`_)
 
 Components Milestones:
 
-- `repository-service-tuf-api v0.1.X <https://github.com/vmware/repository-service-tuf-api/milestone/4>`_
-- `repository-service-tuf-worker v0.1.X <https://github.com/vmware/repository-service-tuf-worker/milestone/4>`_
-- `repository-service-tuf-cli v0.1.X <https://github.com/vmware/repository-service-tuf-cli/milestone/4>`_
+- `repository-service-tuf-api v1.0.X <https://github.com/vmware/repository-service-tuf-api/milestone/4>`_
+- `repository-service-tuf-worker v1.0.X <https://github.com/vmware/repository-service-tuf-worker/milestone/4>`_
+- `repository-service-tuf-cli v1.0.X <https://github.com/vmware/repository-service-tuf-cli/milestone/4>`_
 
 
 Goal: End-to-End Signing
