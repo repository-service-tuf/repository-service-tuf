@@ -454,6 +454,10 @@
                         "items": {
                             "$ref": "#/components/schemas/Targets"
                         }
+                    },
+                    "add_task_id_to_custom": {
+                        "title": "Add Task Id To Custom",
+                        "type": "boolean"
                     }
                 },
                 "description": "POST method required Payload.",
@@ -476,9 +480,6 @@
                                 "length": 630,
                                 "hashes": {
                                     "blake2b-256": "69217a3079908094e11121d042354a7c1f55b6482ca1a51e1b250dfd1ed0eef9"
-                                },
-                                "custom": {
-                                    "key": "value"
                                 }
                             },
                             "path": "file2.tar.gz"
