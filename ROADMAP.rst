@@ -66,6 +66,7 @@ First Production Deploy
 This release achive the minimum valuable product for users.
 
 - [ ] Old Metadata retention (`Issue #29 <https://github.com/vmware/repository-service-tuf/issues/29>`_)
+- [ ] Deployment Design Document (`Issue #227 <https://github.com/vmware/repository-service-tuf/issues/227>`_)
 - [ ] Support to AWS S3 (Storage) and AWS KMS (Key Vault) (`Issue #24 <https://github.com/vmware/repository-service-tuf/issues/24>`_)
 - [ ] Token revocation (`Issue #30 <https://github.com/vmware/repository-service-tuf/issues/30>`_)
 
