@@ -20,5 +20,5 @@ Feature: Import targets directly to RSTUF SQL Database
 
     Scenario: Admin imports a large number of targets to RSTUF without publishing to TUF metadata
         Given admin has multiple CSV files with targets 'tests/data/targets-1of2.csv' and 'tests/data/targets-2of2.csv'
-        When admin runs 'rstuf -c rstuf.ini admin import-targets -csv tests/data/targets-1of2.csv -csv tests/data/targets-2of2.csv -metadata-url http://127.0.0.1:8080 -db-uri postgresql://postgres:secret@127.0.0.1:543'
+        When admin runs 'rstuf -c rstuf.ini admin import-targets --skip-publish-targets -csv tests/data/targets-1of2.csv -csv tests/data/targets-2of2.csv -metadata-url http://127.0.0.1:8080 -db-uri postgresql://postgres:secret@127.0.0.1:543'
         Then the admin expects to get confirmation 'CSV data was imported successfully, publish target skipped.'.
