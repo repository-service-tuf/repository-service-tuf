@@ -5,7 +5,6 @@ Container(root, "Root" , "offline Key") #Red
 Container(timestamp, "Timestamp", "online Key") #Green
 Container(snapshot, "Snapshot", "online Key") #Green
 Container(targets, "Targets",  "offline Key") #Red
-Container(bin, "bin", "offline Key") #Red
 Container(bins_1, "bins-1", "online [bins] Key") #Green
 Container(bins_2, "bins-2", "online [bins] Key") #Green
 Container(bins_3, "bins-3", "online [bins] Key") #Green
@@ -20,14 +19,13 @@ Rel_U(root, root, "sign")
 Rel_D(root, timestamp, "sign")
 Rel_D(root, snapshot, "sign")
 Rel_D(root, targets, "sign")
-Rel_D(targets, bin, "delegates")
-Rel_D(bin, bins_1, "delegates")
+Rel_D(targets, bins_1, "delegates")
 Rel_D(bins_1, targets_bins_1, " ")
-Rel_D(bin, bins_2, "delegates")
+Rel_D(targets, bins_2, "delegates")
 Rel_D(bins_2, targets_bins_2, " ")
-Rel_D(bin, bins_3, "delegates")
+Rel_D(targets, bins_3, "delegates")
 Rel_D(bins_3, targets_bins_3, " ")
-Rel_D(bin, bins_N, "delegates")
+Rel_D(targets, bins_N, "delegates")
 Rel_D(bins_N, targets_bins_N, " ")
 
 
