@@ -42,7 +42,7 @@ This realease is to evaluate the features and functionality.
 - [x] Public online documentation (`Issue #22 <https://github.com/vmware/repository-service-tuf/issues/22>`_)
 - [x] Implement HTTPS for the Rest API (`Issue #6 <https://github.com/vmware/repository-service-tuf/issues/6>`_)
 - [ ] Data load for migrations (`Issue #188 <https://github.com/vmware/repository-service-tuf/issues/188>`_)
-- [ ] Remove the BIN Keys from Ceremony/Bootstrap Process [Roles simplification] (`Issue #28 <https://github.com/vmware/repository-service-tuf/issues/28>`_)
+- [x] Remove the BIN Keys from Ceremony/Bootstrap Process [Roles simplification] (`Issue #28 <https://github.com/vmware/repository-service-tuf/issues/28>`_)
 - [ ] Remove from the bootstrap the online keys [Roles simplification] (`Issue #207 <https://github.com/vmware/repository-service-tuf/issues/207>`_)
 - [ ] Simplify the metadata bootstrap process [Roles simplification] (`Issue #208 <https://github.com/vmware/repository-service-tuf/issues/208>`_)
 - [ ] Key(s) Rotation (`Issue #23 <https://github.com/vmware/repository-service-tuf/issues/23>`_)
