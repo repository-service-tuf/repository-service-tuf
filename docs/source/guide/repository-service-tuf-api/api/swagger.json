@@ -381,6 +381,39 @@
                 ]
             }
         },
+        "/api/v1/targets/publish/": {
+            "post": {
+                "tags": [
+                    "v1",
+                    "v1"
+                ],
+                "summary": "Submit a task to publish targets.Scope: write:targets",
+                "description": "Trigger a task to publish targets not yet published from the RSTUF Database",
+                "operationId": "post_publish_targets_api_v1_targets_publish__post",
+                "responses": {
+                    "202": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/repository_service_tuf_api__targets__Response"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": [
+                            "write:targets"
+                        ]
+                    }
+                ]
+            }
+        },
         "/api/v1/task/": {
             "get": {
                 "tags": [
