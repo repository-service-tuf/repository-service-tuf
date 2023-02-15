@@ -490,7 +490,15 @@
                     },
                     "add_task_id_to_custom": {
                         "title": "Add Task Id To Custom",
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Whether to add the id of the task in custom",
+                        "default": false
+                    },
+                    "publish_targets": {
+                        "title": "Publish Targets",
+                        "type": "boolean",
+                        "description": "Whether to publish the targets",
+                        "default": true
                     }
                 },
                 "description": "POST method required Payload.",
@@ -1366,6 +1374,12 @@
                         "items": {
                             "type": "string"
                         }
+                    },
+                    "publish_targets": {
+                        "title": "Publish Targets",
+                        "type": "boolean",
+                        "description": "Whether to publish the targets changes",
+                        "default": true
                     }
                 },
                 "description": "DELETE method required Payload.",
