@@ -82,6 +82,6 @@ Check our `CONTRIBUTING.rst <CONTRIBUTING.rst>`_ for more details on how to
 contribute.
 
 Please, check the `Repository Service for TUF Development Guide
-<https://repository-service-tuf.readthedocs.io/>`_.
+<https://repository-service-tuf.readthedocs.io/en/latest/devel/>`_.
 
 .. _ROADMAP: ROADMAP.rst
