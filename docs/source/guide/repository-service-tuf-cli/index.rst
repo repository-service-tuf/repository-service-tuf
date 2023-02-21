@@ -449,3 +449,77 @@ Show token detailed information.
     },
     "message": "Token information"
     }
+
+
+Import Targets (``import-targets``)
+-----------------------------------
+
+This feature imports a large number of targets directly to RSTUF Database.
+RSTUF doesn't recommend using this feature for regular flow, but in case you're
+onboarding an existent repository that contains a large number of targets.
+
+This feature requires extra dependencies:
+
+.. code:: shell
+
+    pip install repository-service-tuf[psycopg2,sqlachemy]
+
+To use this feature, you need to create CSV files with the content to be imported
+by RSTUF CLI.
+
+This content requires the following data:
+
+- `path <https://theupdateframework.github.io/specification/latest/#targetpath>`_: The target path
+- `size <https://theupdateframework.github.io/specification/latest/#targets-obj-length>`_: The target size
+- `hash-type <https://theupdateframework.github.io/specification/latest/#targets-obj-length>`_: The defined hash as a metafile. Example: blak2b-256
+- `hash <https://theupdateframework.github.io/specification/latest/#targets-obj-length>`_: The hash
+
+The CSV must use a semicolon as the separator, following the format
+``path;size;hash-type;hash`` without a header.
+
+See the below CSV file example:
+
+.. code::
+
+    relaxed_germainv1.tar.gz;12345;blake2b-256;716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a
+    vigilant_keldyshv2.tar.gz;12345;blake2b-256;716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a
+    adoring_teslav3.tar.gz;12345;blake2b-256;716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a
+    funny_greiderv4.tar.gz;12345;blake2b-256;716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a
+    clever_ardinghelliv5.tar.gz;12345;blake2b-256;716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a
+    pbeat_galileov6.tar.gz;12345;blake2b-256;716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a
+    wonderful_gangulyv7.tar.gz;12345;blake2b-256;716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a
+    sweet_ardinghelliv8.tar.gz;12345;blake2b-256;716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a
+    brave_mendelv9.tar.gz;12345;blake2b-256;716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a
+    nice_ridev10.tar.gz;12345;blake2b-256;716f6e863f744b9ac22c97ec7b76ea5f5908bc5b2f67c61510bfc4751384ea7a
+
+
+.. code:: shell
+
+    ❯ rstuf admin import-targets -h
+
+     Usage: rstuf admin import-targets [OPTIONS]
+
+     Import targets to RSTUF from exported CSV file.
+
+    ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │ *                          --metadata-url  TEXT  RSTUF Metadata URL i.e.: http://127.0.0.1 . [required]                                                         │
+    │ *                          --db-uri        TEXT  RSTUF DB URI. i.e.: postgresql://postgres:secret@127.0.0.1:5433 [required]                                     │
+    │ *                          --csv           TEXT  CSV file to import. Multiple --csv parameters are allowed. See rstuf CLI guide for more details. [required]    │
+    │    --skip-publish-targets                       Skip publishing targets in TUF Metadata.                                                                        │
+    │    --help                  -h                   Show this message and exit.                                                                                     │
+    ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+    ❯ rstuf admin import-targets --db-uri postgresql://postgres:secret@127.0.0.1:5433 --csv targets-1of2.csv --csv targets-2of2.csv --metadata-url http://127.0.0.1:8080/
+    Import status: Loading data from ../repository-service-tuf/tests/data/targets-1of2.csv
+    Import status: Importing ../repository-service-tuf/tests/data/targets-1of2.csv data
+    Import status: ../repository-service-tuf/tests/data/targets-1of2.csv imported
+    Import status: Loading data from ../repository-service-tuf/tests/data/targets-2of2.csv
+    Import status: Importing ../repository-service-tuf/tests/data/targets-2of2.csv data
+    Import status: ../repository-service-tuf/tests/data/targets-2of2.csv imported
+    Import status: Commiting all data to the RSTUF database
+    Import status: All data imported to RSTUF DB
+    Import status: Submitting action publish targets
+    Import status: Publish targets task id is dd1cbf2320ad4df6bda9ca62cdc0ef82
+    Import status: task STARTED
+    Import status: task SUCCESS
+    Import status: Finished.
