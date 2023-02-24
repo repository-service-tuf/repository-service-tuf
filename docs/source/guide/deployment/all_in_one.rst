@@ -116,6 +116,11 @@ Steps
       </div>
 
 
+5. Importing existent repository targets
+
+  If you want to import a huge existent data,
+  see :ref:`guide/deployment/importing-targets:Importing existent targets`
+
 Uninstall All-in-one
 ====================
 
