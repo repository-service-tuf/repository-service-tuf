@@ -9,9 +9,11 @@ the "import targets" feature.
 If you decide, you can send all the existing targets using the REST API, but it
 will be slower than using the " import targets"  feature.
 
-The "import targets"  feature will add to the RSTUF database targets skipping
-the API add targets, which creates tasks. Then it processes this data to the
-RSTUF database updating the TUF Metadata.
+The "import targets" feature can be used to add targets directly to the RSTUF
+database skipping the standard processing of the API.
+Normally, when you add a target through the API there will be an overhead of
+multiple additional operations which for a large number of targets can prove
+to be significant.
 
 Here are some benchmarks of the "import targets" feature:
 
