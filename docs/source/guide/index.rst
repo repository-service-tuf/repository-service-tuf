@@ -7,6 +7,7 @@ Repository Service for TUF Guide
 
     introduction/introduction
     deployment/server
+    deployment/importing-targets
     repository-service-tuf-api/index
     repository-service-tuf-worker/index
     repository-service-tuf-cli/index
