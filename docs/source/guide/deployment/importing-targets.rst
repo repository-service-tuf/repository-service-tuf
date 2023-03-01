@@ -6,8 +6,8 @@ If you're adopting Repository Service for TUF (RSTUF), and you already have a
 large number of targets (artifacts/packages/files/etc.), we recommend you use
 the "import targets" feature.
 
-If you decide, you can send all the existing targets using the REST API, but it
-will be slower than using the " import targets"  feature.
+If you decide, you can send all of the existing targets using the REST API, but it
+will be slower than using the "import targets" feature.
 
 The "import targets" feature can be used to add targets directly to the RSTUF
 database skipping the standard processing of the API.
