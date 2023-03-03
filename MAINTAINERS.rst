@@ -21,3 +21,17 @@ Radoslav Dimitrov
 Email: dimitrovr@vmware.com
 
 GitHub username: @rdimitrov
+
+Lukas Pühringer
+-------------------------
+
+Email: lukas.puehringer@nyu.edu
+
+GitHub username: @lukpueh
+
+Konstantinos Papadopoulos
+-------------------------
+
+Email: konpap1996@yahoo.com
+
+GitHub username: @KAUTH
