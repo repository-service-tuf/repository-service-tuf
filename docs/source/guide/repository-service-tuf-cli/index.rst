@@ -32,6 +32,8 @@ Using pip:
 Administration (``admin``)
 ==========================
 
+.. rstuf-cli-admin
+
 It executes administrative commands to the Repository Service for TUF.
 
 .. code:: shell
@@ -54,6 +56,8 @@ It executes administrative commands to the Repository Service for TUF.
 
 Login to Server (``login``)
 ---------------------------
+
+.. rstuf-cli-admin-login
 
 This command will log in to Repository Service for TUF and give you a token to run other commands
 such as Ceremony, Token Generation, etc.
@@ -81,6 +85,8 @@ such as Ceremony, Token Generation, etc.
 
 Ceremony (``ceremony``)
 -----------------------
+
+.. rstuf-cli-admin-ceremony
 
 The Repository Service for TUF Metadata uses the following Roles: ``root``, ``timestamp``,
 ``snapshot``, ``targets``, ``bin``, and ``bins`` to build the Repository
@@ -367,6 +373,8 @@ Using another computer with access to ``repository-service-tuf-api``
 Token (``token``)
 -----------------
 
+.. rstuf-cli-admin-token
+
 Token Management
 
 .. code:: shell
@@ -387,6 +395,9 @@ Token Management
 
 ``generate``
 ............
+
+.. rstuf-cli-admin-token-generate
+
 Generate tokens to use in integrations.
 
 .. code:: shell
@@ -424,6 +435,8 @@ script, etc
 ``inspect``
 ...........
 
+.. rstuf-cli-admin-token-inspect
+
 Show token detailed information.
 
 .. code:: shell
@@ -453,6 +466,8 @@ Show token detailed information.
 
 Import Targets (``import-targets``)
 -----------------------------------
+
+.. rstuf-cli-admin-import-targets
 
 This feature imports a large number of targets directly to RSTUF Database.
 RSTUF doesn't recommend using this feature for regular flow, but in case you're
