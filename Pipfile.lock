@@ -267,11 +267,11 @@
         },
         "dynaconf": {
             "hashes": [
-                "sha256:87e0b3b12b5db9e8fb465e1f8c7fdb926cd2ec5b6d88aa7f821f316df93fb165",
-                "sha256:d9cfb50fd4a71a543fd23845d4f585b620b6ff6d9d3cc1825c614f7b2097cb39"
+                "sha256:11a60bcd735f82b8a47b288f99e4ffbbd08c6c130a7be93c5d03e93fc260a5e1",
+                "sha256:a79d7b3ad4a35af9b576c49f11cd3b23a1b04b87b63a4e9f92cc82f2b0cafeeb"
             ],
             "index": "pypi",
-            "version": "==3.1.11"
+            "version": "==3.1.12"
         },
         "exceptiongroup": {
             "hashes": [
@@ -553,11 +553,11 @@
         },
         "mdit-py-plugins": {
             "hashes": [
-                "sha256:3278aab2e2b692539082f05e1243f24742194ffd92481f48844f057b51971283",
-                "sha256:4f1441264ac5cb39fa40a5901921c2acf314ea098d75629750c138f80d552cdf"
+                "sha256:ca9a0714ea59a24b2b044a1831f48d817dd0c817e84339f20e7889f392d77c4e",
+                "sha256:eee0adc7195e5827e17e02d2a258a2ba159944a0748f59c5099a4a27f78fcf6a"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==0.3.4"
+            "version": "==0.3.5"
         },
         "mdurl": {
             "hashes": [
