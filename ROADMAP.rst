@@ -36,7 +36,7 @@ Goal: Minimum Working Version
 Status: Work In Progress
 
 Not for a Production Deploy.
-This realease is to evaluate the features and functionality.
+This release is to evaluate the features and functionality.
 
 
 - [x] Public online documentation (`Issue #22 <https://github.com/vmware/repository-service-tuf/issues/22>`_)
@@ -48,13 +48,13 @@ This realease is to evaluate the features and functionality.
 - [ ] Key(s) Rotation (`Issue #23 <https://github.com/vmware/repository-service-tuf/issues/23>`_)
 - [ ] Option to Disable the API Authentication/Authorization (`Issue #41 <https://github.com/vmware/repository-service-tuf/issues/41>`_)
 
-(*Priority order*)
+`Minimum Working Version (MWV) Board <https://github.com/orgs/vmware/projects/13/views/1>`_.
 
 Components Milestones:
 
 - `repository-service-tuf-api v1.0.0bX <https://github.com/vmware/repository-service-tuf-api/milestone/3>`_
 - `repository-service-tuf-worker v1.0.0bX <https://github.com/vmware/repository-service-tuf-worker/milestone/3>`_
-- `repository-service-tuf-cli v1..0bX <https://github.com/vmware/repository-service-tuf-cli/milestone/3>`_
+- `repository-service-tuf-cli v1.0.0bX <https://github.com/vmware/repository-service-tuf-cli/milestone/3>`_
 
 
 Goal: Minimum Valuable Product
