@@ -71,7 +71,7 @@ You can deploy Repository Service for TUF as a single server or a distributed
 service (to scale for more active repositories) at the edge, on-premises, or
 in cloud environments.
 
-Check out the :ref:`how to deploy <guide/deployment/server:Deployment>`.
+Check out the :ref:`how to deploy <guide/deployment/index:Deployment>`.
 
 Below is a diagram of Repository Service for TUF in a building environment.
 
