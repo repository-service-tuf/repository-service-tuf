@@ -2,35 +2,77 @@
 All-in-one host deployment (Docker)
 ===================================
 
-The All-in-one host deployment is the simplest way to Deploy Repository Service
-for TUF Server.
-There are limitations to scaling this deployment (limited to the host).
+.. note::
 
-This deployment will use Docker Stack with Docker Compose and Docker Swarm for
-the Token and Admin user password.
+  There are limitations to scaling this deployment strategy, as all nodes are
+  running in the same host.
+
+  This deployment is recommended for Tests, Development, POC and POV.
+
+The All-in-one host deployment Repository Service for TUF (RSTUF) uses Docker
+Engine and Docker Compose yaml file to deploy RSTUF and all the services as
+containers.
 
 Requirements
 ============
 
-    - Docker Engine (with docker-compose)
-    - Python >= 3.10
-    - pip
+Software and tools
+------------------
 
+  * Docker Engine (with docker-compose)
+  * Python >= 3.10
+  * pip
+
+
+Key management
+--------------
+
+As introduced before by the :ref:`guide/deployment/index:RSTUF and TUF key management`,
+this deployment requires the online key. Make sure you have generated and have
+the online key ready.
 
 Steps
 =====
 
-1. Prepare the Docker Swarm credentials Repository Service for the TUF API admin user and a random
-   Token Key.
+1. Create a folder ``local-keyvault`` and add your online key
 
-   -  ``SECRETS_RSTUF_ADMIN_PASSWORD`` is the initial password for `admin`
-   -  ``SECRETS_RSTUF_TOKEN_KEY`` is the Token Key used to hash the API Tokens
+  .. code:: shell
+
+    $ make local-keyvault
+    $ cp path/my/online.key local-keyvault/
+
+2. Prepare the Docker Swarm to store RSTUF credentials:
+
+
+   * ``SECRETS_RSTUF_ADMIN_PASSWORD`` is the `admin`, user used to manage the
+     RSTUF API Tokens.
+   * ``SECRETS_RSTUF_TOKEN_KEY`` is the Token key used to hash the API Tokens.
+   * ``SECRETS_RSTUF_ONLINE_KEY_PASSWORD`` is the online key password used by
+     Workers for signing the TUF Metadata.
+
+    Initiating the Docker Swarm
 
     .. code:: shell
 
       $ docker swarm init
-      $ printf "secret password" | docker secret create SECRETS_RSTUF_ADMIN_PASSWORD -
+
+    RSTUF admin password
+
+    .. code:: shell
+
+      $ printf "secret-password" | docker secret create SECRETS_RSTUF_ADMIN_PASSWORD -
+
+    RSTUF API token key
+
+    .. code:: shell
+
       $ printf $(openssl rand -base64 32) | docker secret create SECRETS_RSTUF_TOKEN_KEY -
+
+    RSTUF Worker online key password
+
+    .. code:: shell
+
+      $ printf "strongPass" | docker secret create SECRETS_RSTUF_ONLINE_KEY_PASSWORD -
 
     .. note::
 
@@ -44,31 +86,35 @@ Steps
         $ docker secret create API_CRT /path/to/api.crt
 
 
-2. Create a Docker Compose (functional example below)
+3. Create a Docker Compose (functional example below)
 
-   - It uses Docker Volume for the persistent data.
-   - It uses Docker Secrets to store/use the ``SECRETS_RSTUF_TOKEN_KEY`` (used to
-     generate API Tokens) and ``SECRETS_RSTUF_ADMIN_PASSWORD``.
+  The general explanation about this Docker Compose yaml file:
+
+   * It uses Docker Volume for the persistent data.
+   * It uses Docker Secrets to store/use the ``SECRETS_RSTUF_TOKEN_KEY``,
+     ``SECRETS_RSTUF_ADMIN_PASSWORD`` and ``SECRETS_RSTUF_ONLINE_KEY_PASSWORD``.
 
      .. note::
         **HTTPS**
 
         Uncoment ``API_KEY`` and ``API_CRT`` in the `secrets` section
-        (lines 18-21).
+        (lines 18-22).
 
-   - It uses RabbitMQ as a `broker` for the tasks.
-   - It uses Redis for the task results and internal tasks.
-   - It adds the ``repository-service-tuf-worker`` configuration as environment
+   * It uses RabbitMQ as a `broker` for the tasks.
+   * It uses Redis for the task results and internal tasks.
+   * It adds the ``repository-service-tuf-worker`` configuration as environment
      variables (storage/key vault type and paths, broker, backend, and repo
      worker id). The volumes for storage and key storage as Docker Volume.
-   - It configures the ``repository-service-tuf-api`` using environment variables for
+   * It configures the ``repository-service-tuf-api`` using environment variables for
      the secrets, and the data as Docker Volume.
 
      .. note::
       **HTTPS**
 
-      - Uncoment environment variables for the certificate and key (lines 86-87)
-      - Uncoment the in `repository-service-tuf-api secrets` section (lines 93-93)
+      - Uncoment `repository-service-tuf-api environment`
+        for the certificate and key (lines 103-106)
+      - Uncoment the in `repository-service-tuf-api secrets` section (lines
+        110-112)
       - (Optionally) Comment port 80:80 (line 77)
 
    - Web Server uses a Python container that exposes the docker volume with
@@ -91,11 +137,12 @@ Steps
         Ignoring unsupported options: restart
 
         Creating network rstuf_default
+        Creating service rstuf_redis
+        Creating service rstuf_postgres
         Creating service rstuf_rstuf-worker
         Creating service rstuf_web-server
         Creating service rstuf_rstuf-api
         Creating service rstuf_rabbitmq
-        Creating service rstuf_redis
 
 4. Repository Ceremony
 
@@ -104,8 +151,8 @@ Steps
     Once you have the service running is required to do the
     :ref:`guide/repository-service-tuf-cli/index:Ceremony (``ceremony\`\`)`.
 
-    The Ceremony is the process of creating the initial signed Repository
-    Metadata.
+    The Ceremony is the process of creating the initial TUF Root Metadata
+    signed.
 
     Example of Ceremony process using Repository Service for TUF CLI.
 

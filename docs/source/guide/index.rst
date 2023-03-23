@@ -6,7 +6,7 @@ Repository Service for TUF Guide
     :maxdepth: 4
 
     introduction/introduction
-    deployment/server
+    deployment/index
     deployment/importing-targets
     repository-service-tuf-api/index
     repository-service-tuf-worker/index
