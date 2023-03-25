@@ -146,24 +146,37 @@ Steps
 
 4. Repository Ceremony
 
-    It will require the :ref:`guide/repository-service-tuf-cli/index:Repository Service for TUF CLI`.
+  This will generate the ``payload.json`` which containes the initial root
+  TUF Metadata and RSTUF settings.
 
-    Once you have the service running is required to do the
-    :ref:`guide/repository-service-tuf-cli/index:Ceremony (``ceremony\`\`)`.
+  References:
+    * :ref:`guide/deployment/index:RSTUF and TUF key management`,
+    * :ref:`guide/deployment/index:TUF Metadata signing Ceremony`
 
-    The Ceremony is the process of creating the initial TUF Root Metadata
-    signed.
+  Install the RSTUF CLI, using pip
 
-    Example of Ceremony process using Repository Service for TUF CLI.
+  .. code:: shell
 
-    .. raw:: html
+    $ pip install repository-service-tuf
 
-      <div style="position: relative; padding-bottom: 56.25%; height: 0; margin-bottom: 2em; overflow: hidden; max-width: 100%; height: auto;">
-        <iframe src="https://www.youtube.com/embed/1SK703ZTTwM" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
-      </div>
+  Run the RSTUF Ceremony
+
+  .. code:: shell
+
+    $ rstuf admin ceremony
 
 
-5. Importing existing repository targets
+5. TUF Bootstrap
+
+  To bootstrap your RSTUF deployment using the `payload.json` from previous
+  step.
+
+  .. code:: shell
+
+    $ rstuf admin login
+    $ rstuf admin ceremony -b -u -f payload.json
+
+6. Importing existing repository targets
 
   If you want to import a huge existing data,
   see :ref:`guide/deployment/importing-targets:Importing existing targets`
