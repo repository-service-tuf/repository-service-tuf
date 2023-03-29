@@ -44,7 +44,7 @@ services:
     image: postgres:15.1
     ports:
       - "5433:5432"
-    # do not use it in production, check the Postgres best practices
+    # DO NOT USE IT IN PRODUCTION. Check the Postgres best practices
     environment:
       - POSTGRES_PASSWORD=secret
     volumes:

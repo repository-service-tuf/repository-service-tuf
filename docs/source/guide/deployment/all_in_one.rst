@@ -27,9 +27,9 @@ Software and tools
 Key management
 --------------
 
-As introduced before by the :ref:`guide/deployment/index:RSTUF and TUF key management`,
-this deployment requires the online key. Make sure you have generated and have
-the online key ready.
+As introduced before by :ref:`guide/deployment/index:RSTUF and TUF key management`,
+this deployment requires an online key. You need to make sure
+you have generated it and you can use it.
 
 Steps
 =====
@@ -48,7 +48,7 @@ Steps
      RSTUF API Tokens.
    * ``SECRETS_RSTUF_TOKEN_KEY`` is the Token key used to hash the API Tokens.
    * ``SECRETS_RSTUF_ONLINE_KEY_PASSWORD`` is the online key password used by
-     Workers for signing the TUF Metadata.
+workers for signing the TUF metadata.
 
     Initiating the Docker Swarm
 
@@ -147,7 +147,7 @@ Steps
 4. Repository Ceremony
 
   This will generate the ``payload.json`` which containes the initial root
-  TUF Metadata and RSTUF settings.
+  TUF metadata and RSTUF settings.
 
   References:
     * :ref:`guide/deployment/index:RSTUF and TUF key management`,
@@ -166,7 +166,7 @@ Steps
     $ rstuf admin ceremony
 
 
-5. TUF Bootstrap
+5. RSTUF Bootstrap
 
   To bootstrap your RSTUF deployment using the `payload.json` from previous
   step.
