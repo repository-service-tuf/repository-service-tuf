@@ -2,7 +2,7 @@
 Deployment
 ==========
 
-RSTUF Services and tools
+RSTUF Services and Tools
 ========================
 
 Repository Service for TUF (RSTUF) is a combination of micro-services provided
@@ -29,7 +29,7 @@ RSTUF and TUF key management
 RSTUF deployment will require some keys as defined by The Update Framework
 (TUF).
 
-The Root key(s)
+The root key(s)
 `should be stored secured offline <https://theupdateframework.github.io/specification/latest/#key-management-and-migration>`_.
 
 The online key will be provided during the deployment configuration and used in
@@ -43,13 +43,13 @@ See :ref:`guide/repository-service-tuf-cli/index:Repository Service for TUF CLI`
 The deployment will require the online key to deploy and start RSTUF Worker
 service(s).
 
-The Update Framework requires all these keys (root and online keys) to generate
-the initial Metadata. This process is the Ceremony of signing the TUF Metadata.
+The Update Framework requires all these keys (root and online key) to generate
+the initial metadata. This process is the ceremony of signing the TUF metadata.
 
-TUF Metadata signing Ceremony
+TUF Metadata Signing Ceremony
 =============================
 
-This process generates the initial Metadata and defines some settings of your
+This process generates the initial metadata and defines some settings of your
 TUF service (such as metadata expiration, root signing threshold, etc.).
 
 To make this process easier,
