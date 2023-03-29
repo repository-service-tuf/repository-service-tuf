@@ -58,7 +58,7 @@ services:
     volumes:
       - rstuf-worker-data:/data
       - rstuf-storage:/var/opt/repository-service-tuf/storage
-      - ./local-keyvault/:/var/opt/repository-service-tuf/keyvault/ # map the path where is your keys
+      - ./local-keyvault/:/var/opt/repository-service-tuf/keyvault/ # map the path where is your key
     environment:
       RSTUF_STORAGE_BACKEND: LocalStorage
       RSTUF_KEYVAULT_BACKEND: LocalKeyVault

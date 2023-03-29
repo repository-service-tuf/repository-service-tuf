@@ -54,7 +54,7 @@ TUF service (such as metadata expiration, root signing threshold, etc.).
 
 To make this process easier,
 the :ref:`guide/repository-service-tuf-cli/index:Repository Service for TUF CLI`
-provides an interactive guided process to perform the Ceremony.
+provides an interactive guided process to perform the ceremony.
 
 We have a video to show this process.
 
