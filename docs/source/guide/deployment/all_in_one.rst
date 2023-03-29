@@ -45,10 +45,10 @@ Steps
 
 
    * ``SECRETS_RSTUF_ADMIN_PASSWORD`` is the `admin`, user used to manage the
-     RSTUF API Tokens.
-   * ``SECRETS_RSTUF_TOKEN_KEY`` is the Token key used to hash the API Tokens.
+     RSTUF API tokens.
+   * ``SECRETS_RSTUF_TOKEN_KEY`` is the token key used to hash the API tokens.
    * ``SECRETS_RSTUF_ONLINE_KEY_PASSWORD`` is the online key password used by
-workers for signing the TUF metadata.
+     workers for signing the TUF metadata.
 
     Initiating the Docker Swarm
 
