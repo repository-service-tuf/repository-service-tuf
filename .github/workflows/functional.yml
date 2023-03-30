@@ -191,6 +191,7 @@ jobs:
 
       - name: Run the Offline Ceremony using RSTUF saving payload.json
         run: |
+          cp -r rstuf-cli/tests/files tests/
           pytest -vv rstuf-cli/tests/unit/cli/admin/test_ceremony.py::TestCeremonyInteraction::test_ceremony_start_default_values
           if [[ -d rstuf-umbrella ]]; then cp -r metadata/ payload.json rstuf-umbrella/; fi
 
