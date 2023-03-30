@@ -106,6 +106,12 @@ jobs:
           SECRETS_RSTUF_TOKEN_KEY: test-token-key
           SECRETS_RSTUF_ADMIN_PASSWORD: secret
     steps:
+      - name: Get RSTUF Container logs
+        run: |
+          docker logs "${{ job.services.rstuf-worker-1.id }}"
+          docker logs "${{ job.services.rstuf-worker-2.id }}"
+          docker logs "${{ job.services.rstuf-api.id }}"
+
       - name: Checkout release tag
         uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
 
