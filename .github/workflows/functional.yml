@@ -196,6 +196,7 @@ jobs:
           if [[ -d rstuf-umbrella ]]; then cp -r metadata/ payload.json rstuf-umbrella/; fi
 
       - name: Run RSTUF Ceremony Bootstrap Upload
+        timeout-minutes: 2
         run: 'rstuf -c rstuf.ini admin ceremony -b -u -f payload.json'
 
       - name: Functional Tests (BDD)
