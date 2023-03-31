@@ -139,7 +139,7 @@ jobs:
       - name: Update environment variables
         if: github.repository != 'vmware/repository-service-tuf'
         run: |
-          echo "MAKE_FT_TARGET=-C rstuf-umbrella/ functional-tests" >> $GITHUB_ENV
+          echo "MAKE_FT_TARGET=-C rstuf-umbrella/ functional-tests-exitfirst" >> $GITHUB_ENV
           echo "REQUIREMENTS_PATH=rstuf-umbrella/requirements.txt" >> $GITHUB_ENV
 
       - name: Set up Python
