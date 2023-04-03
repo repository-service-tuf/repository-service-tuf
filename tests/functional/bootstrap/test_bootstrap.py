@@ -30,7 +30,7 @@ def the_administrator_login_to_rstuf(get_admin_pwd, rstuf_cli):
 def the_admin_is_logged(login):
     rc, output = login
     assert rc == 0, output
-    assert "Login successfuly." in output or "Already logged to " in output
+    assert "Login successful." in output or "Already logged to " in output
 
 
 @when("the admin run rstuf for ceremony bootstrap", target_fixture="bootstrap")
