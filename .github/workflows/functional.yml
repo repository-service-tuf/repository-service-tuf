@@ -196,6 +196,11 @@ jobs:
         run: rstuf -c rstuf.ini admin login -s http://localhost -u admin -p secret -e 1
 
       - name: Run the Offline Ceremony using RSTUF saving payload.json
+        # Notes:
+        # * We copy the rstuf-cli/tests/files because the UT
+        #   `test_ceremony_start_default_values` uses the key files
+        # TODO: Remove this unit tests, using a more clear way to generate the
+        #       payload.json using the rstuf-cli for the FT
         run: |
           cp -r rstuf-cli/tests/files tests/
           pytest -vv rstuf-cli/tests/unit/cli/admin/test_ceremony.py::TestCeremonyInteraction::test_ceremony_start_default_values
