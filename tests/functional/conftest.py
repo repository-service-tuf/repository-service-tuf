@@ -81,7 +81,7 @@ def get_target_info():
         temp_md_dir = tempfile.TemporaryDirectory()
         # rename 1.root.json to root.json
         path = os.path.join(temp_md_dir.name, "root.json")
-        shutil.copy(os.path.join("metadata", "1.root"), path)
+        shutil.copy(os.path.join("metadata", "1.root.json"), path)
 
         updater = Updater(
             metadata_dir=temp_md_dir.name,

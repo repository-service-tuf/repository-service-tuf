@@ -71,7 +71,8 @@ jobs:
           RSTUF_STORAGE_BACKEND: LocalStorage
           RSTUF_KEYVAULT_BACKEND: LocalKeyVault
           RSTUF_LOCAL_STORAGE_BACKEND_PATH: /var/opt/repository-service-tuf/storage
-          RSTUF_LOCAL_KEYVAULT_PATH: /var/opt/repository-service-tuf/keystorage
+          RSTUF_LOCAL_KEYVAULT_PATH: /var/opt/repository-service-tuf/keystorage/online.key
+          RSTUF_LOCAL_KEYVAULT_PASSWORD: strongPass  # using clear string
           RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
           RSTUF_REDIS_SERVER: redis://redis
           RSTUF_WORKER_ID: dev-1
@@ -87,7 +88,8 @@ jobs:
           RSTUF_STORAGE_BACKEND: LocalStorage
           RSTUF_KEYVAULT_BACKEND: LocalKeyVault
           RSTUF_LOCAL_STORAGE_BACKEND_PATH: /var/opt/repository-service-tuf/storage
-          RSTUF_LOCAL_KEYVAULT_PATH: /var/opt/repository-service-tuf/keystorage
+          RSTUF_LOCAL_KEYVAULT_PATH: /var/opt/repository-service-tuf/keystorage/online.key
+          RSTUF_LOCAL_KEYVAULT_PASSWORD: ${{ secrets.RSTUF_ONLINE_KEY_PASSWORD }}  # using secrets
           RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
           RSTUF_REDIS_SERVER: redis://redis
           RSTUF_WORKER_ID: dev-2
@@ -104,6 +106,12 @@ jobs:
           SECRETS_RSTUF_TOKEN_KEY: test-token-key
           SECRETS_RSTUF_ADMIN_PASSWORD: secret
     steps:
+      - name: Get RSTUF Container logs
+        run: |
+          docker logs "${{ job.services.rstuf-worker-1.id }}"
+          docker logs "${{ job.services.rstuf-worker-2.id }}"
+          docker logs "${{ job.services.rstuf-api.id }}"
+
       - name: Checkout release tag
         uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
 
@@ -115,10 +123,23 @@ jobs:
            path: rstuf-umbrella
            ref: main
 
+      - name: Deploy online.key to Docker Volume
+        # This is an workaround for the issue https://github.com/vmware/repository-service-tuf-worker/issues/241
+        # Once solving it:
+        # 1. Change workers to use secrets with the online key
+        # 2. Remove this step
+        run: docker cp tests/files/key_storage/online.key "${{ job.services.rstuf-worker-1.id }}:/var/opt/repository-service-tuf/keystorage/"
+
+      - name: Get RSTUF Container logs
+        run: |
+          docker logs "${{ job.services.rstuf-worker-1.id }}"
+          docker logs "${{ job.services.rstuf-worker-2.id }}"
+          docker logs "${{ job.services.rstuf-api.id }}"
+
       - name: Update environment variables
         if: github.repository != 'vmware/repository-service-tuf'
         run: |
-          echo "MAKE_FT_TARGET=-C rstuf-umbrella/ functional-tests" >> $GITHUB_ENV
+          echo "MAKE_FT_TARGET=-C rstuf-umbrella/ functional-tests-exitfirst" >> $GITHUB_ENV
           echo "REQUIREMENTS_PATH=rstuf-umbrella/requirements.txt" >> $GITHUB_ENV
 
       - name: Set up Python
@@ -175,11 +196,18 @@ jobs:
         run: rstuf -c rstuf.ini admin login -s http://localhost -u admin -p secret -e 1
 
       - name: Run the Offline Ceremony using RSTUF saving payload.json
+        # Notes:
+        # * We copy the rstuf-cli/tests/files because the UT
+        #   `test_ceremony_start_default_values` uses the key files
+        # TODO: Remove this unit tests, using a more clear way to generate the
+        #       payload.json using the rstuf-cli for the FT
         run: |
-          pytest -vv rstuf-cli/tests/unit/cli/admin/test_ceremony.py::TestCeremonyGroupCLI::test_ceremony_start_default_values
+          cp -r rstuf-cli/tests/files tests/
+          pytest -vv rstuf-cli/tests/unit/cli/admin/test_ceremony.py::TestCeremonyInteraction::test_ceremony_start_default_values
           if [[ -d rstuf-umbrella ]]; then cp -r metadata/ payload.json rstuf-umbrella/; fi
 
       - name: Run RSTUF Ceremony Bootstrap Upload
+        timeout-minutes: 2
         run: 'rstuf -c rstuf.ini admin ceremony -b -u -f payload.json'
 
       - name: Functional Tests (BDD)
