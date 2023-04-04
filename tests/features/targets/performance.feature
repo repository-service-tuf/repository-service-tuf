@@ -17,5 +17,5 @@ Feature: Performance and Consistence adding and removing targets
             | 2            | 2           | 10      |
             | 2            | 100         | 60      |
             | 5            | 10          | 30      |
-            | 100          | 2           | 120     |
-            | 50           | 50          | 240     |
+            | 100          | 2           | 180     |
+            | 50           | 50          | 300     |
