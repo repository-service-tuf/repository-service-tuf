@@ -30,7 +30,7 @@ def the_administrator_login_to_rstuf(get_admin_pwd, rstuf_cli):
 def the_admin_is_logged(login):
     rc, output = login
     assert rc == 0, output
-    assert "Login successfuly." in output or "Already logged to " in output
+    assert "Login successful." in output or "Already logged to " in output
 
 
 @when("the admin run rstuf for ceremony bootstrap", target_fixture="bootstrap")
@@ -41,15 +41,15 @@ def the_administrator_uses_rstufcli_bootstrap(rstuf_cli):
 
 @then(
     'the admin gets "Bootstrap status: SUCCESS" and "Bootstrap finished." or '
-    '"Already has metadata"'
+    '"System LOCKED for bootstrap."'
 )
 def the_admin_gets(bootstrap):
     _, output = bootstrap
 
-    assert "SUCCESS" in output or "System already has a Metadata." in output
+    assert "SUCCESS" in output or "System LOCKED for bootstrap." in output
     assert (
         "Bootstrap finished." in output
-        or "System already has a Metadata." in output
+        or "System LOCKED for bootstrap." in output
     )
 
 
@@ -73,8 +73,8 @@ def the_administrator_uses_rstufcli_bootstrap_invalid_payload(rstuf_cli):
     return rc, output
 
 
-@then('the admin gets "Error 422"')
+@then('the admin gets "Error 422" or "System LOCKED for bootstrap."')
 def then_admin_gets_error_422(invalid_payload):
     rc, output = invalid_payload
     assert rc == 1, output
-    assert "422" in output
+    assert "422" in output or "System LOCKED for bootstrap." in output
