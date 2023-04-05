@@ -1,3 +1,4 @@
+
 ==============================
 Repository Service for TUF CLI
 ==============================
@@ -16,19 +17,21 @@ Using pip:
 .. code:: shell
 
     ❯ rstuf
-                                                                                                                                                 
-     Usage: rstuf [OPTIONS] COMMAND [ARGS]...                                                                                                  
-                                                                                                                                                 
-     Repository Service for TUF Command Line Interface (CLI).                                                                                        
-                                                                                                                                                 
-    ╭─ Options ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │  --config  -c  TEXT  Repository Service for TUF config file                                                                                   │
-    │  --help    -h        Show this message and exit.                                                                                          │
-    ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-    ╭─ Commands ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │  admin  Administrative Commands                                                                                                           │
-    ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-    
+
+    Usage: rstuf [OPTIONS] COMMAND [ARGS]...
+
+    Repository Service for TUF Command Line Interface (CLI).
+
+    ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │ --config   -c  TEXT  Repository Service for TUF config file                                                                      │
+    │ --version            Show the version and exit.                                                                                  │
+    │ --help     -h        Show this message and exit.                                                                                 │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │ admin                      Administrative Commands                                                                               │
+    │ key                        Cryptographic Key Commands                                                                            │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
 Administration (``admin``)
 ==========================
 
@@ -44,14 +47,15 @@ It executes administrative commands to the Repository Service for TUF.
 
     Administrative Commands
 
-    ╭─ Options ────────────────────────────────────────────────────────────────────────────╮
-    │  --help  -h    Show this message and exit.                                           │
-    ╰──────────────────────────────────────────────────────────────────────────────────────╯
-    ╭─ Commands ───────────────────────────────────────────────────────────────────────────╮
-    │  ceremony  Start a new Metadata Ceremony.                                            │
-    │  login     Login to Repository Service for TUF (API).                                            │
-    │  token     Token Management.                                                         │
-    ╰──────────────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │ --help  -h    Show this message and exit.                                                                                        │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │ ceremony                        Start a new Metadata Ceremony.                                                                   │
+    │ import-targets                  Import targets to RSTUF from exported CSV file.                                                  │
+    │ login                           Login to Repository Service for TUF (API).                                                       │
+    │ token                           Token Management.                                                                                │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
 
 Login to Server (``login``)
@@ -89,7 +93,7 @@ Ceremony (``ceremony``)
 .. rstuf-cli-admin-ceremony
 
 The Repository Service for TUF Metadata uses the following Roles: ``root``, ``timestamp``,
-``snapshot``, ``targets``, ``bin``, and ``bins`` to build the Repository
+``snapshot``, ``targets``, and ``bins`` to build the Repository
 Metadata (for more details, check out TUF Specification and PEP 458).
 
 The Ceremony is a complex process that Repository Service for TUF CLI tries to simplify.
@@ -100,25 +104,22 @@ You can do the Ceremony offline. This means on a disconnected computer
 .. code:: shell
 
     ❯ rstuf admin ceremony --help
-                                                                                                                            
-    Usage: rstuf admin ceremony [OPTIONS]                                                                                  
-                                                                                                                            
-    Start a new Metadata Ceremony.                                                                                           
-                                                                                                                            
-    ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │  --bootstrap  -b        Bootstrap a Repository Service for TUF using the Repository Metadata after Ceremony     │
-    │  --file       -f  TEXT  Generate specific JSON Payload compatible with Repository Service for TUF bootstrap     │
-                              after Ceremony                                                                          │
-    │                         [default: payload.json]                                                                 │
-    │  --upload     -u        Upload existent payload 'file'. Requires '-b/--bootstrap'. Optional '-f/--file' to use  │
-    │                         non default file.                                                                       │
-    │  --save       -s        Save a copy of the metadata locally. This option saves the metadata files (json) in the │
-    │                         'metadata' dir.                                                                         │
-    │                         [default: False]                                                                        │
-    │  --help       -h        Show this message and exit.                                                             │
-    ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
-There are three steps in the Ceremony.
+    Usage: rstuf admin ceremony [OPTIONS]
+
+    Start a new Metadata Ceremony.
+
+    ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │ --bootstrap  -b        Bootstrap a Repository Service for TUF using the Repository Metadata after Ceremony                       │
+    │ --file       -f  TEXT  Generate specific JSON Payload compatible with TUF Repository Service bootstrap after Ceremony            │
+    │                        [default: payload.json]                                                                                   │
+    │ --upload     -u        Upload existent payload 'file'. Requires '-b/--bootstrap'. Optional '-f/--file' to use non default file.  │
+    │ --save       -s        Save a copy of the metadata locally. This option saves the JSON metadata files in the 'metadata' folder   │
+    │                        in the current directory.                                                                                 │
+    │ --help       -h        Show this message and exit.                                                                               │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+There are four steps in the ceremony.
 
 .. note::
 
@@ -134,229 +135,233 @@ Step 1: Configure the Roles
     ❯ rstuf admin ceremony
 
     (...)
-    Do you want start the ceremony? [y/n]: y
-    ╔══════════════════════════════════════════════════════════════════════════════╗
-    ║                         STEP 1: Configure the Roles                          ║
-    ╚══════════════════════════════════════════════════════════════════════════════╝
+    Do you want to start the ceremony? [y/n]: y
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃                         STEP 1: Configure the Roles                          ┃
+    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-    The TUF roles support multiple keys and the threshold (quorum trust) defines
-    the minimal number of keys required to take actions using a specific Role.
+    The TUF root role supports multiple keys and the threshold (quorum of trust)
+    defines the minimal number of keys required to take actions using the root role.
 
-    Reference: TUF                                                                  
+    Reference: TUF Goals for PKI
 
-    What is the Metadata expiration for the root role?(Days) (365):
+    The TUF roles have an expiration, clients must not trust expired metadata.
+
+    Reference: TUF expires
+
+                                            root configuration
+
+    What is the metadata expiration for the root role?(Days) (365):
     What is the number of keys for the root role? (2):
     What is the key threshold for the root role signing? (1):
 
-    What is the Metadata expiration for the targets role?(Days) (365):
-    What is the number of keys for the targets role? (2):
-    What is the key threshold for the targets role signing? (1):
-    The role targets delegates paths to the bin role. See TUF Specification about Path Pattern for the paths
-    pattern and the example.                                                                            
-    Show example [y/n] (y): y
+                                        targets configuration
 
-                                                Example:                                              
+    What is the metadata expiration for the targets role?(Days) (365):
 
-    The Organization Example (https://example.com) has all files downloaded /downloads path, meaning    
-    https://example.com/downloads/.                                                                     
 
-    Additionally, it has two sub-folders, productA and productB where the clients can find all files
-    (i.e.: productA-v1.0.tar, productB-1.0.tar), for productB it even has a sub-folder, updates where
-    clients can find update files (i.e.: servicepack-1.tar, servicepack-2.tar).
+    The target metadata file might contain a large number of target files.
+    That is why the targets role
+    delegates trust to the hash bin roles to reduce the metadata overhead for
+    clients.
 
-    In that case mapping all targets files paths as:                                                    
+    See: TUF Specification about succinct hash bin delegation.
+    Show example? [y/n] (y): y
 
-    • https://example.com/downloads/ is *                                                              
-    • https://example.com/downloads/productA/ is */*                                                   
-    • https://example.com/downloads/productB/ is */* (same as above)                                   
-    • https://example.com/downloads/productB/updates/ is */*/*                                         
+    Choose the number of delegated hash bin roles [2/4/8/16/32/64/128/256/512/1024/2048/4096/8192/16384] (256): 16
 
-    Specific paths that role targets delegates are: */productA/*, */productB/*, * /productB/updates/*   
+    What is the targets base URL? (i.e.: https://www.example.com/downloads/): http://www.example.com/downloads/
 
-    Generic paths that role targets delegates are: *, */*, */*/*                                        
+                                        snapshot configuration
 
-    What is the Base URL (i.e.: https://www.example.com/downloads/): https://www.example.com/downloads/
+    What is the metadata expiration for the snapshot role?(Days) (1):
 
-    What paths targets delegates? (*, */*): *, */*, */*/*
+                                        timestamp configuration
 
-    What is the Metadata expiration for the snapshot role?(Days) (1):
-    What is the number of keys for the snapshot role? (1):
-    The threshold for snapshot is 1 (one) based on the number of keys (1).
+    What is the metadata expiration for the timestamp role?(Days) (1):
 
-    What is the Metadata expiration for timestamp role?(Days) (1):
-    What is the number of keys for timestamp role? (1): 
-    The threshold for timestamp is 1 (one) based on the number of keys (1).
+                                            bins configuration
 
-    What is the Metadata expiration for the bin role?(Days) (365):
-    What is the number of keys for the bin role? (1):
-    The threshold for bin is 1 (one) based on the number of keys (1).
+    What is the metadata expiration for the bins role?(Days) (1):
 
-    What is the Metadata expiration for the bins role?(Days) (1):
-    What is the number of keys for the bins role? (1):
-    The threshold for bins is 1 (one) based on the number of keys (1).
-    Number of hashed bins for bins? (8): 
 
 
 1. root ``expiration``, ``number of keys``, and ``threshold``
-2. targets ``expiration``, ``number of keys``,  ``threshold``, the ``base URL``
-   for the files (target files), and the ``paths``
-3. snapshot ``expiration``, ``number of keys``, and ``threshold``
-4. timestamp ``expiration``, ``number of keys``, and ``threshold``
-5. bin ``expiration``, ``number of keys``, and ``threshold``
-6. bins ``expiration``, ``number of keys``, ``threshold``, and ``number of hash bins``
+2. targets ``expiration``, the ``base URL`` for the files (target files), and the
+   ``number of delegated hash bins``
+3. snapshot ``expiration``
+4. timestamp ``expiration``
+5. bins ``expiration``
 
-- ``expiration`` is the number of days in which the Metadata will expire
-- ``number of keys`` Metadata will have
-- ``threshold`` is the number of keys needed to sign the Metadata
+- ``expiration`` is the number of days in which the metadata will expire
+- ``number of keys`` the metadata will have
+- ``threshold`` is the number of keys needed to sign the metadata
 - ``base URL`` for the artifacts, example: http://www.example.com/download/
-- ``paths`` is the delegated paths, example:
-  http://www.example.com/download/productA/* will be ``*, */*``
-- ``number of hash bins`` is the number of hash bins between 1 and 32. How many
+- ``number of delegated hash bins`` is the number of hash bin roles, How many
   delegated roles (``bins-X``) will it create?
 
-Step 2: Loading the Keys
-........................
+Step 2: Load the Online Key
+...........................
 
-It is essential to define the Key Owners. There is a suggestion in the CLI.
+.. code::
 
-The owners will need to be present to share the key and use their password to
-load the keys.
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃                                   STEP 2: Load the Online Key                                    ┃
+    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-.. code:: shell
 
-    ╔══════════════════════════════════════════════════════════════════════════════════════════════════╗
-    ║                                     STEP 2: Load roles keys                                      ║
-    ╚══════════════════════════════════════════════════════════════════════════════════════════════════╝
+                                            The Online Key
 
-    The keys must have a password and the file must be accessible.
+    The online key is the same one provided to the Repository Service for TUF Workers (RSTUF Worker).
+    This key is responsible for signing the snapshot, timestamp, targets, and delegated targets (hash
+    bin) roles.
 
-    Depending on the Organization, each key has an owner. During the key loading process, it is
-    important that the owner of the key inserts the password.
+    The RSTUF Worker uses this key during the process of managing the metadata.
 
-    The password or the key content is not shown on the screen.
+    Note: the ceremony process won't show any password or key content.
 
-    Ready to start loading the keys? Passwords will be required for keys [y/n]: y
+    Choose 1/1 ONLINE key type [ed25519/ecdsa/rsa] (ed25519):
+    Enter 1/1 the ONLINE`s private key path: tests/files/online.key
+    Enter 1/1 the ONLINE`s private key password:
+    ✅ Key 1/1 Verified
 
-    Enter 1/2 the root`s Key path: tests/files/JanisJoplin.key
-    Enter 1/2 the root`s Key password: 
+    Step 3: Validate the information/settings
+    .........................................
+
+    After confirming all details, the initial payload for bootstrap will be
+    complete (without the offline keys).
+
+
+Step 3: Load Root Keys
+......................
+
+It is essential to define the key owners. There is a suggestion in the CLI.
+
+The owners will need to be present to insert their keys and passwords
+to load their keys.
+
+.. code::
+
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃                                      STEP 3: Load Root Keys                                      ┃
+    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+
+                                                Root Keys
+
+    The keys must have a password, and the file must be accessible.
+
+    Depending on the organization, each key has an owner, and each owner should insert their password
+    personally.
+
+    Note: the ceremony process won't show any password or key content.
+
+    Choose 1/2 root key type [ed25519/ecdsa/rsa] (ed25519):
+    Enter 1/2 the root`s private key path: tests/files/JanisJoplin.key
+    Enter 1/2 the root`s private key password:
     ✅ Key 1/2 Verified
 
-    Enter 2/2 the root`s Key path: tests/files/JimiHendrix.key
-    Enter 2/2 the root`s Key password: 
+    Choose 2/2 root key type [ed25519/ecdsa/rsa] (ed25519):
+    Enter 2/2 the root`s private key path: tests/files/JimiHendrix.key
+    Enter 2/2 the root`s private key password:
     ✅ Key 2/2 Verified
 
-    Enter 1/2 the targets`s Key path: tests/files/KurtCobain.key
-    Enter 1/2 the targets`s Key password: 
-    ✅ Key 1/2 Verified
+Step 4: Validate Configuration
+..............................
 
-    Enter 2/2 the targets`s Key path: tests/files/ChrisCornel.key
-    Enter 2/2 the targets`s Key password: 
-    ✅ Key 2/2 Verified
+.. code::
 
-    Enter 1/1 the snapshot`s Key path: tests/files/snapshot1.key
-    Enter 1/1 the snapshot`s Key password: 
-    ✅ Key 1/1 Verified
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃                                  STEP 4: Validate Configuration                                  ┃
+    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-    Enter 1/1 the timestamp`s Key path: tests/files/timestamp1.key
-    Enter 1/1 the timestamp`s Key password: 
-    ✅ Key 1/1 Verified
-
-    Enter 1/1 the bin`s Key path: tests/files/JoeCocker.key
-    Enter 1/1 the bin`s Key password: 
-    ✅ Key 1/1 Verified
-
-    Enter 1/1 the bins`s Key path: tests/files/bins1.key
-    Enter 1/1 the bins`s Key password: 
-    ✅ Key 1/1 Verified
+    The information below is the configuration done in the previous steps. Check the number of keys, the
+    threshold/quorum, and the key details.
 
 
-Step 3: Validate the information/settings
-.........................................
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃ ONLINE KEY SUMMARY                                                                                                ┃
+    ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+    │                          ╷        ╷          ╷                                                                    │
+    │                     path │  type  │ verified │                                id                                  │
+    │ ╶────────────────────────┼────────┼──────────┼──────────────────────────────────────────────────────────────────╴ │
+    │   tests/files/online.key │ Online │    ✅    │ f7a6872f297634219a80141caa2ec9ae8802098b07b67963272603e36cc19fd8   │
+    │                          ╵        ╵          ╵                                                                    │
+    └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
-After confirming all details, the initial payload for bootstrap will be
-complete (without the offline keys).
+    Is the online key configuration correct? [y/n]: y
 
-.. code:: shell
 
-    ╔══════════════════════════════════════════════════════════════════════════════════════════════════╗
-    ║                                  STEP 3: Validate configuration                                  ║
-    ╚══════════════════════════════════════════════════════════════════════════════════════════════════╝
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃ ROLE SUMMARY              ┃                                                 KEYS                                                 ┃
+    ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+    │                           │                               ╷         ╷          ╷                                                 │
+    │ Role: root                │                          path │  type   │ verified │                      id                         │
+    │ Number of Keys: 2         │ ╶─────────────────────────────┼─────────┼──────────┼───────────────────────────────────────────────╴ │
+    │ Threshold: 1              │   tests/files/JanisJoplin.key │ Offline │    ✅    │ 1cebe343e35f0213f6136758e6c3a8f8e1f9eeb7e47a…   │
+    │ Role Expiration: 365 days │   tests/files/JimiHendrix.key │ Offline │    ✅    │ 800dfb5a1982b82b7893e58035e19f414f553fc08cbb…   │
+    │                           │                               ╵         ╵          ╵                                                 │
+    └───────────────────────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
-    The information below is the configuration done in the preview steps. Check the number of keys, the
-    threshold/quorum and type of key.
-    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-    ┃       ROLE SUMMARY        ┃                                 KEYS                                 ┃
-    ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-    │        Role: root         │                   ╷                                     ╷            │
-    │     Number of Keys: 2     │              path │                 id                  │ verified   │
-    │       Threshold: 1        │ ╶─────────────────┼─────────────────────────────────────┼──────────╴ │
-    │    Keys Type: offline     │   JanisJoplin.key │ 1cebe343e35f0213f6136758e6c3a8f8e1… │    ✅      │
-    │ Role Expiration: 365 days │   JimiHendrix.key │ 800dfb5a1982b82b7893e58035e19f414f… │    ✅      │
-    │                           │                   ╵                                     ╵            │
-    └───────────────────────────┴──────────────────────────────────────────────────────────────────────┘
-    Configuration correct for root? [y/n]: y
-    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-    ┃              ROLE SUMMARY               ┃                          KEYS                          ┃
-    ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-    │              Role: targets              │                   ╷                       ╷            │
-    │            Number of Keys: 2            │              path │          id           │ verified   │
-    │              Threshold: 1               │ ╶─────────────────┼───────────────────────┼──────────╴ │
-    │           Keys Type: offline            │    KurtCobain.key │ 208fc4139cf7482abbe8… │    ✅      │
-    │        Role Expiration: 365 days        │   ChrisCornel.key │ c2e9ee4a292e5d08bc0d… │    ✅      │
-    │                                         │                   ╵                       ╵            │
-    │                                         │                                                        │
-    │                                         │                                                        │
-    │               DELEGATIONS               │                                                        │
-    │             targets -> bin              │                                                        │
-    │   https://www.example.com/downloads/*   │                                                        │
-    │  https://www.example.com/downloads/*/*  │                                                        │
-    │ https://www.example.com/downloads/*/*/* │                                                        │
-    └─────────────────────────────────────────┴────────────────────────────────────────────────────────┘
-    Configuration correct for targets? [y/n]: y
-    ┏━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-    ┃      ROLE SUMMARY       ┃                                  KEYS                                  ┃
-    ┡━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-    │     Role: snapshot      │                 ╷                                         ╷            │
-    │    Number of Keys: 1    │            path │                   id                    │ verified   │
-    │      Threshold: 1       │ ╶───────────────┼─────────────────────────────────────────┼──────────╴ │
-    │    Keys Type: online    │   snapshot1.key │ 139c406ac6150598fb9f7cafd1463bc07e0318… │    ✅      │
-    │ Role Expiration: 1 days │                 ╵                                         ╵            │
-    └─────────────────────────┴────────────────────────────────────────────────────────────────────────┘
-    Configuration correct for snapshot? [y/n]: y
-    ┏━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-    ┃      ROLE SUMMARY       ┃                                  KEYS                                  ┃
-    ┡━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-    │     Role: timestamp     │                  ╷                                        ╷            │
-    │    Number of Keys: 1    │             path │                   id                   │ verified   │
-    │      Threshold: 1       │ ╶────────────────┼────────────────────────────────────────┼──────────╴ │
-    │    Keys Type: online    │   timestamp1.key │ 19f5992640ab71f49fb64d5b5d198ee0115c3… │    ✅      │
-    │ Role Expiration: 1 days │                  ╵                                        ╵            │
-    └─────────────────────────┴────────────────────────────────────────────────────────────────────────┘
-    Configuration correct for timestamp? [y/n]: y
-    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-    ┃       ROLE SUMMARY        ┃                                 KEYS                                 ┃
-    ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-    │         Role: bin         │                 ╷                                       ╷            │
-    │     Number of Keys: 1     │            path │                  id                   │ verified   │
-    │       Threshold: 1        │ ╶───────────────┼───────────────────────────────────────┼──────────╴ │
-    │    Keys Type: offline     │   JoeCocker.key │ be95ae808ff4f17e248470c941700247d8c7… │    ✅      │
-    │ Role Expiration: 365 days │                 ╵                                       ╵            │
-    └───────────────────────────┴──────────────────────────────────────────────────────────────────────┘
-    Configuration correct for bin? [y/n]: y
-    ┏━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-    ┃      ROLE SUMMARY       ┃                                  KEYS                                  ┃
-    ┡━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-    │       Role: bins        │             ╷                                             ╷            │
-    │    Number of Keys: 1    │        path │                     id                      │ verified   │
-    │      Threshold: 1       │ ╶───────────┼─────────────────────────────────────────────┼──────────╴ │
-    │    Keys Type: online    │   bins1.key │ 9b2a880bd470e8373e24efb0dc54df3909e180e445… │    ✅      │
-    │ Role Expiration: 1 days │             ╵                                             ╵            │
-    │                         │                                                                        │
-    │                         │                                                                        │
-    │       DELEGATIONS       │                                                                        │
-    │      bins -> bins       │                                                                        │
-    │     Number bins: 8      │                                                                        │
-    └─────────────────────────┴────────────────────────────────────────────────────────────────────────┘
+    Is the root configuration correct? [y/n]: y
+
+
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃ ROLE SUMMARY                                ┃                                        KEYS                                        ┃
+    ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+    │                                             │          ╷          ╷                                                              │
+    │ Role: targets                               │    type  │ verified │                             id                               │
+    │ Role Expiration: 365 days                   │ ╶────────┼──────────┼────────────────────────────────────────────────────────────╴ │
+    │                                             │   Online │    ✅    │ f7a6872f297634219a80141caa2ec9ae8802098b07b67963272603e36…   │
+    │                                             │          ╵          ╵                                                              │
+    │                                             │                                                                                    │
+    │ Base URL: http://www.example.com/downloads/ │                                                                                    │
+    │                                             │                                                                                    │
+    │ DELEGATIONS                                 │                                                                                    │
+    │ targets -> bins                             │                                                                                    │
+    │ Number of bins: 16                          │                                                                                    │
+    └─────────────────────────────────────────────┴────────────────────────────────────────────────────────────────────────────────────┘
+
+    Is the targets configuration correct? [y/n]: y
+
+
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃ ROLE SUMMARY            ┃                                           KEYS                                           ┃
+    ┡━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+    │                         │          ╷          ╷                                                                    │
+    │ Role: snapshot          │    type  │ verified │                                id                                  │
+    │ Role Expiration: 1 days │ ╶────────┼──────────┼──────────────────────────────────────────────────────────────────╴ │
+    │                         │   Online │    ✅    │ f7a6872f297634219a80141caa2ec9ae8802098b07b67963272603e36cc19fd8   │
+    │                         │          ╵          ╵                                                                    │
+    └─────────────────────────┴──────────────────────────────────────────────────────────────────────────────────────────┘
+
+    Is the snapshot configuration correct? [y/n]: y
+
+
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃ ROLE SUMMARY            ┃                                           KEYS                                           ┃
+    ┡━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+    │                         │          ╷          ╷                                                                    │
+    │ Role: timestamp         │    type  │ verified │                                id                                  │
+    │ Role Expiration: 1 days │ ╶────────┼──────────┼──────────────────────────────────────────────────────────────────╴ │
+    │                         │   Online │    ✅    │ f7a6872f297634219a80141caa2ec9ae8802098b07b67963272603e36cc19fd8   │
+    │                         │          ╵          ╵                                                                    │
+    └─────────────────────────┴──────────────────────────────────────────────────────────────────────────────────────────┘
+
+    Is the timestamp configuration correct? [y/n]: y
+
+
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃ ROLE SUMMARY            ┃                                           KEYS                                           ┃
+    ┡━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+    │                         │          ╷          ╷                                                                    │
+    │ Role: bins              │    type  │ verified │                                id                                  │
+    │ Role Expiration: 1 days │ ╶────────┼──────────┼──────────────────────────────────────────────────────────────────╴ │
+    │                         │   Online │    ✅    │ f7a6872f297634219a80141caa2ec9ae8802098b07b67963272603e36cc19fd8   │
+    │                         │          ╵          ╵                                                                    │
+    └─────────────────────────┴──────────────────────────────────────────────────────────────────────────────────────────┘
+
+    Is the bins configuration correct? [y/n]: y
 
 Finishing
 .........
@@ -366,9 +371,10 @@ If you choose ``-b/--bootstrap`` it will automatically send the bootstrap to
 
 If you did the ceremony in a disconnected computer:
 Using another computer with access to ``repository-service-tuf-api``
-1.  Get the generated ``payload.json`` (or the custom name you chose)
-2.  Install ``repository-service-tuf``
-3.  Run ``rstuf admin ceremony -b [-u filename]``
+
+  1.  Get the generated ``payload.json`` (or the custom name you chose)
+  2.  Install ``repository-service-tuf``
+  3.  Run ``rstuf admin ceremony -b -u [-f filename]``
 
 Token (``token``)
 -----------------
@@ -377,14 +383,14 @@ Token (``token``)
 
 Token Management
 
-.. code:: shell
+.. code::
 
     ❯ rstuf admin token
-                                                                                                                            
-    Usage: rstuf admin token [OPTIONS] COMMAND [ARGS]...                                                                   
-                                                                                                                            
-    Token Management.                                                                                                        
-                                                                                                                            
+
+    Usage: rstuf admin token [OPTIONS] COMMAND [ARGS]...
+
+    Token Management.
+
     ╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
     │  --help  -h    Show this message and exit.                                                                             │
     ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
@@ -400,18 +406,18 @@ Token Management
 
 Generate tokens to use in integrations.
 
-.. code:: shell
+.. code::
 
     ❯ rstuf admin token generate -h
-                                                                                                        
-    Usage: rstuf admin token generate [OPTIONS]                                                      
-                                                                                                        
+
+    Usage: rstuf admin token generate [OPTIONS]
+
     Generate a new token.
-                                                                                                        
+
     ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
     │     --expires  -e  INTEGER  Expires in hours. Default: 24 [default: 24]                          │
     │  *  --scope    -s  TEXT     Scope to grant. Multiple is accepted. Ex: -s write:targets -s        │
-    │                             read:settings                                                         │
+    │                             read:settings                                                        │
     │                             [required]                                                           │
     │     --help     -h           Show this message and exit.                                          │
     ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
@@ -442,11 +448,11 @@ Show token detailed information.
 .. code:: shell
 
     ❯ rstuf admin token inspect -h
-                                                                                                                            
-    Usage: rstuf admin token inspect [OPTIONS] TOKEN                                                                       
-                                                                                                                            
-    Show token information details.                                                                                          
-                                                                                                                            
+
+    Usage: rstuf admin token inspect [OPTIONS] TOKEN
+
+    Show token information details.
+
     ╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
     │  --help  -h    Show this message and exit.                                                                             │
     ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
@@ -538,3 +544,57 @@ See the below CSV file example:
     Import status: task STARTED
     Import status: task SUCCESS
     Import status: Finished.
+
+
+Key Management (``key``)
+========================
+
+.. rstuf-cli-key
+
+It executes commands related to cryptographic key management and may be used
+for managing keys in the Repository Service for TUF.
+
+.. code:: shell
+
+    ❯ rstuf key
+
+    Usage: rstuf key [OPTIONS] COMMAND [ARGS]...
+
+    Cryptographic Key Commands
+
+    ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │ --help  -h    Show this message and exit.                                                                                        │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │ generate                        Generate cryptographic keys using the `securesystemslib` library                                 │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Key Generation (``generate``)
+-----------------------------
+
+.. rstuf-cli-key-generate
+
+This command will generate cryptographic keys using the ``securesystemslib`` library.
+The user is requested to provide:
+
+1. the key type, from the supported list of encryption algorithms
+
+2. the key's filename, whose path will be the current working directory
+
+3. a password, to encrypt the private key file
+
+After the above procedure, two files, the private and public key
+(e.g., ``id_ed25519`` and ``id_ed25519.pub``), will be generated in the current
+working directory.
+
+The generated keys may be used in the Repository Service for TUF Ceremony
+process, for the online key or the TUF roles' keys (``root``, ``targets``, etc. keys).
+
+.. code::
+
+    ❯ rstuf key generate
+
+    Choose key type [ed25519/ecdsa/rsa] (ed25519): ed25519
+    Enter the key's filename: (id_ed25519): id_ed25519
+    Enter password to encrypt private key file 'id_ed25519':
+    Confirm:
