@@ -6,19 +6,34 @@ repository-service-tuf-worker is part of Repository Service for TUF (RSTUF)
 
 ## Getting Started
 
-These instructions will cover usage information and for the docker container
+These instructions will cover usage information and for the docker container.
 
 ## Prerequisities
 
 
 In order to run this container you'll need docker installed.
 
-Some required services:
+Other requirements include:
 
-* repository-service-tuf-api
-* Compatible Borker and Result Backend Service with
+* repository-service-tuf-api service
+* Compatible broker and result backend service with
   [Celery](https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers/index.html).
   Recomended: [RabbitMQ](https://www.rabbitmq.com) or [Redis](https://redis.com)
+* PostgreSQL server
+* Online key (see Online Key details below)
+
+### Online Key
+The RSTUF Worker requires an online key which is used for signing the TUF
+metadata when a target is added or removed.
+
+Here are some things you need to know:
+* The key must be compatible with
+  [Secure Systems Library](https://github.com/secure-systems-lab/securesystemslib).
+  If you do not have a key we suggest you use the [RSTUF CLI tool to generate the key](https://repository-service-tuf.readthedocs.io/en/latest/guide/repository-service-tuf-cli/index.html).
+* This key must be the same one used during the [RSTUF CLI ceremony](https://repository-service-tuf.readthedocs.io/en/latest/guide/repository-service-tuf-cli/index.html#ceremony-ceremony).
+* This key must be available to RSTUF Worker using the `RSTUF_KEYVAULT_BACKEND`.
+
+For more information read the [Deployment documentation](https://repository-service-tuf.readthedocs.io/en/latest/guide/deployment/index.html).
 
 ## Usage
 
@@ -29,7 +44,7 @@ docker run --env="RSTUF_WORKER_ID=worker1" \
     --env="RSTUF_STORAGE_BACKEND=LocalStorage" \
     --env="RSTUF_LOCAL_STORAGE_BACKEND_PATH=storage" \
     --env="RSTUF_KEYVAULT_BACKEND=LocalKeyVault" \
-    --env="RSTUF_LOCAL_KEYVAULT_PATH=keyvault" \
+    --env="RSTUF_LOCAL_KEYVAULT_PASSWORD=mypass" \
     --env="RSTUF_BROKER_SERVER=guest:guest@rabbitmq:5672" \
     --env="RSTUF_REDIS_SERVER=redis://redis" \
     --env="RSTUF_SQL_SERVER=postgresql://postgres:secret@postgres:5432" \
@@ -101,8 +116,17 @@ Select a supported type of Key Vault Service.
 Available types:
 
 * LocalKeyVault (local file system)
-  - Requires variable ``RSTUF_LOCAL_KEYVAULT_PATH``
-    - Define the directory where the data will be saved, example: `keyvault`
+  - Required variables:
+    - ``RSTUF_LOCAL_KEYVAULT_PASSWORD``
+      - password used to load the online key
+  - Optional variables:
+    - ``RSTUF_LOCAL_KEYVAULT_PATH``
+      - file name of the online key
+      - Default: `online.key`
+    - ``RSTUF_LOCAL_KEYVAULT_TYPE``
+      - cryptographic type of the online key, example: `ed25519`.
+      - Default: `ed25519`
+      - [Note: At the moment RSTUF Worker supports only `ed25519`
 
 
 #### (Optional) `DATA_DIR`
