@@ -4,7 +4,7 @@
 Container(root, "Root" , "offline Key") #Red
 Container(timestamp, "Timestamp", "online Key") #Green
 Container(snapshot, "Snapshot", "online Key") #Green
-Container(targets, "Targets",  "offline Key") #Red
+Container(targets, "Targets",  "online Key") #Green
 Container(bins_1, "bins-1", "online [bins] Key") #Green
 Container(bins_2, "bins-2", "online [bins] Key") #Green
 Container(bins_3, "bins-3", "online [bins] Key") #Green

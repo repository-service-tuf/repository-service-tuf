@@ -43,3 +43,4 @@ CLI usage
 
 .. include:: ../repository-service-tuf-cli/index.rst
     :start-after: rstuf-cli-admin-import-targets
+    :end-before: rstuf-cli-key
