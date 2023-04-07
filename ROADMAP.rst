@@ -43,8 +43,8 @@ This release is to evaluate the features and functionality.
 - [x] Implement HTTPS for the Rest API (`Issue #6 <https://github.com/vmware/repository-service-tuf/issues/6>`_)
 - [x] Data load for migrations (`Issue #188 <https://github.com/vmware/repository-service-tuf/issues/188>`_)
 - [x] Remove the BIN Keys from Ceremony/Bootstrap Process [Roles simplification] (`Issue #28 <https://github.com/vmware/repository-service-tuf/issues/28>`_)
-- [ ] Remove from the bootstrap the online keys [Roles simplification] (`Issue #207 <https://github.com/vmware/repository-service-tuf/issues/207>`_)
-- [ ] Simplify the metadata bootstrap process [Roles simplification] (`Issue #208 <https://github.com/vmware/repository-service-tuf/issues/208>`_)
+- [x] Remove from the bootstrap the online keys [Roles simplification] (`Issue #207 <https://github.com/vmware/repository-service-tuf/issues/207>`_)
+- [x] Simplify the metadata bootstrap process [Roles simplification] (`Issue #208 <https://github.com/vmware/repository-service-tuf/issues/208>`_)
 - [ ] Key(s) Rotation (`Issue #23 <https://github.com/vmware/repository-service-tuf/issues/23>`_)
 - [ ] Option to Disable the API Authentication/Authorization (`Issue #41 <https://github.com/vmware/repository-service-tuf/issues/41>`_)
 
