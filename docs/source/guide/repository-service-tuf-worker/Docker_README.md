@@ -126,8 +126,7 @@ Available types:
     - ``RSTUF_LOCAL_KEYVAULT_TYPE``
       - cryptographic type of the online key, example: `ed25519`.
       - Default: `ed25519`
-      - [Note: At the moment RSTUF Worker supports only `ed25519`
-
+      - [Note: At the moment RSTUF Worker supports `ed25519`, `rsa`, `ecdsa`]
 
 #### (Optional) `DATA_DIR`
 
