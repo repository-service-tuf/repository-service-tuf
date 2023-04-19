@@ -24,6 +24,7 @@ Using pip:
 
     ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
     │ --config   -c  TEXT  Repository Service for TUF config file                                                                      │
+    │ --no-auth            Skips the use of RSTUF built-in authentication.                                                             │
     │ --version            Show the version and exit.                                                                                  │
     │ --help     -h        Show this message and exit.                                                                                 │
     ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯

@@ -5,6 +5,12 @@ Repository Service for TUF REST API Documentation
 API Authentication and Authorization
 ====================================
 
+.. note::
+    The build-in feature authentication and authorization can be disabled.
+
+    For disabling see the `Docker Image RSTUF_AUTH environment variable
+    <Docker_README.html#optional-rstuf-auth>`_
+
 The ``admin`` user can request a token using the Authentication endpoint
 ``api/v1/token/``. The API will give the token with expiration (in hours).
 The Default is 1 (hour).
