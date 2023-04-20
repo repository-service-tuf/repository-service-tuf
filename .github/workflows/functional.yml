@@ -124,7 +124,7 @@ jobs:
            ref: main
 
       - name: Deploy online.key to Docker Volume
-        # This is an workaround for the issue https://github.com/vmware/repository-service-tuf-worker/issues/241
+        # This is an workaround for the issue https://github.com/repository-service-tuf/repository-service-tuf-worker/issues/241
         # Once solving it:
         # 1. Change workers to use secrets with the online key
         # 2. Remove this step

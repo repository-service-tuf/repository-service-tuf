@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
   - name: I need help
-    url: https://github.com/vmware/repository-service-tuf
+    url: https://github.com/repository-service-tuf/repository-service-tuf
     about: If you have questions or need help
