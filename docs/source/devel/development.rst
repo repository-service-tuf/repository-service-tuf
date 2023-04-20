@@ -5,7 +5,7 @@ Development process
 
 
 This document, specifically the `file ROADMAP.rst
-<https://github.com/vmware/repository-service-tuf/blob/main/ROADMAP.rst>`_, defines the
+<https://github.com/repository-service-tuf/repository-service-tuf/blob/main/ROADMAP.rst>`_, defines the
 :ref:`Repository Service for TUF Roadmap <devel/release:Roadmap>`.
 
 Each Roadmap Goal must have a `project in the Repository Service for TUF Organization
@@ -13,12 +13,12 @@ Each Roadmap Goal must have a `project in the Repository Service for TUF Organiz
 
 The :ref:`devel/release:Roadmap` contains the desired Repository Service for
 TUF (RSTUF) features. Each feature has an issue open in the
-`vmware/repository-service-tuf <https://github.com/vmware/repository-service-tuf>`_
+`vmware/repository-service-tuf <https://github.com/repository-service-tuf/repository-service-tuf>`_
 (Umbrella repository) issues.
 
 The Component specifies the Milestone (release) that will contain the Roadmap
 Goal in the `ROADMAP.rst
-<https://github.com/vmware/repository-service-tuf/blob/main/ROADMAP.rst>`_ (:ref:`also
+<https://github.com/repository-service-tuf/repository-service-tuf/blob/main/ROADMAP.rst>`_ (:ref:`also
 visible below <devel/release:Roadmap>`).
 
 It allows the Component Maintainers to combine Repository Service for TUF Features and internal
@@ -157,7 +157,7 @@ cross-components or even user usage change.
 We recommend for these changes the following:
 
 * Always design/document the feature in a `new issue
-  <https://github.com/vmware/repository-service-tuf/issues/new?assignees=&labels=feature&template=feature.yml&title=Feature%3A+>`_.
+  <https://github.com/repository-service-tuf/repository-service-tuf/issues/new?assignees=&labels=feature&template=feature.yml&title=Feature%3A+>`_.
 
   - Use as many diagrams as possible (PlantUML or Mermaid in the issues). ❤️
 
@@ -197,7 +197,7 @@ BDD Feature file
 For RSTUF Features level, we write the `Gherkin
 <https://cucumber.io/docs/gherkin/reference/>`_ feature file in the
 `test features
-<https://github.com/vmware/repository-service-tuf/tree/main/tests/features>`_.
+<https://github.com/repository-service-tuf/repository-service-tuf/tree/main/tests/features>`_.
 
 The goal is to describe the Scenarios and Behavior for our feature clearly.
 We try to have clear requirements for implementing, maintaining, and changing
@@ -217,10 +217,10 @@ We use `pytest <https://docs.pytest.org/>`_ and
 `pytest-bdd <https://pytest-bdd.readthedocs.io/en/stable/>`_ as the framework.
 
 All BDD tests are in the `Umbrella repository, inside
-tests/functional <http://github.com/vmware/repository-service-tuf>`_ .
+tests/functional <http://github.com/repository-service-tuf/repository-service-tuf>`_ .
 
 The BDD tests have the workflow also in the `Umbrella repository
-<http://github.com/vmware/repository-service-tuf>`_ , as a reusable
+<http://github.com/repository-service-tuf/repository-service-tuf>`_ , as a reusable
 GitHub Workflow, and it is triggered by other workflows/components i.e.,
 before releasing.
 
@@ -234,8 +234,8 @@ Each RSTUF components have its own development instructions.
 Components Repositories
 -----------------------
 
-    - `Repository Service for TUF REST API <https://github.com/vmware/repository-service-tuf-api>`_ (``repository-service-tuf-api``)
-    - `Repository Service for TUF Worker <https://github.com/vmware/repository-service-tuf-rworker>`_ (``repository-service-tuf-worker``)
-    - `Repository Service for TUF Command Line Interface <https://github.com/vmware/repository-service-tuf-cli>`_ (``repository-service-tuf-cli``)
+    - `Repository Service for TUF REST API <https://github.com/repository-service-tuf/repository-service-tuf-api>`_ (``repository-service-tuf-api``)
+    - `Repository Service for TUF Worker <https://github.com/repository-service-tuf/repository-service-tuf-rworker>`_ (``repository-service-tuf-worker``)
+    - `Repository Service for TUF Command Line Interface <https://github.com/repository-service-tuf/repository-service-tuf-cli>`_ (``repository-service-tuf-cli``)
 
 
