@@ -48,7 +48,7 @@ This release is to evaluate the features and functionality.
 - [ ] Key(s) Rotation (`Issue #23 <https://github.com/repository-service-tuf/repository-service-tuf/issues/23>`_)
 - [ ] Option to Disable the API Authentication/Authorization (`Issue #41 <https://github.com/repository-service-tuf/repository-service-tuf/issues/41>`_)
 
-`Minimum Working Version (MWV) Board <https://github.com/orgs/vmware/projects/13/views/1>`_.
+`Minimum Working Version (MWV) Board <https://github.com/orgs/repository-service-tuf/projects/2>`_.
 
 Components Milestones:
 
