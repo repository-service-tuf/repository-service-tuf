@@ -62,7 +62,7 @@ jobs:
           - 8080:80
 
       rstuf-worker-1:
-        image: ghcr.io/vmware/repository-service-tuf-worker:${{ inputs.worker_version }}
+        image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:${{ inputs.worker_version }}
         volumes:
           - rstuf-worker-data:/data
           - rstuf-storage:/var/opt/repository-service-tuf/storage
@@ -79,7 +79,7 @@ jobs:
           RSTUF_SQL_SERVER: postgresql://postgres:secret@sql:5432
 
       rstuf-worker-2:
-        image: ghcr.io/vmware/repository-service-tuf-worker:${{ inputs.worker_version }}
+        image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:${{ inputs.worker_version }}
         volumes:
           - rstuf-worker-data:/data
           - rstuf-storage:/var/opt/repository-service-tuf/storage
@@ -96,7 +96,7 @@ jobs:
           RSTUF_SQL_SERVER: postgresql://postgres:secret@sql:5432
 
       rstuf-api:
-        image: ghcr.io/vmware/repository-service-tuf-api:${{ inputs.api_version }}
+        image: ghcr.io/repository-service-tuf/repository-service-tuf-api:${{ inputs.api_version }}
         ports:
           - 80:80
         env:
@@ -116,10 +116,10 @@ jobs:
         uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
 
       - name: Checkout release tag if not umbrella
-        if: github.repository != 'vmware/repository-service-tuf'
+        if: github.repository != 'repository-service-tuf/repository-service-tuf'
         uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
         with:
-           repository: vmware/repository-service-tuf
+           repository: repository-service-tuf/repository-service-tuf
            path: rstuf-umbrella
            ref: main
 
@@ -137,7 +137,7 @@ jobs:
           docker logs "${{ job.services.rstuf-api.id }}"
 
       - name: Update environment variables
-        if: github.repository != 'vmware/repository-service-tuf'
+        if: github.repository != 'repository-service-tuf/repository-service-tuf'
         run: |
           echo "MAKE_FT_TARGET=-C rstuf-umbrella/ functional-tests-exitfirst" >> $GITHUB_ENV
           echo "REQUIREMENTS_PATH=rstuf-umbrella/requirements.txt" >> $GITHUB_ENV
@@ -155,7 +155,7 @@ jobs:
       - name: Checkout the Repository Service for TUF CLI
         uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
         with:
-          repository: vmware/repository-service-tuf-cli
+          repository: repository-service-tuf/repository-service-tuf-cli
           path: rstuf-cli
           ref: main
           fetch-depth: 0

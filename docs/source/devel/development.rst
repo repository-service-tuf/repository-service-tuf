@@ -9,11 +9,11 @@ This document, specifically the `file ROADMAP.rst
 :ref:`Repository Service for TUF Roadmap <devel/release:Roadmap>`.
 
 Each Roadmap Goal must have a `project in the Repository Service for TUF Organization
-<https://github.com/orgs/vmware/projects>`_.
+<https://github.com/orgs/repository-service-tuf/projects>`_.
 
 The :ref:`devel/release:Roadmap` contains the desired Repository Service for
 TUF (RSTUF) features. Each feature has an issue open in the
-`vmware/repository-service-tuf <https://github.com/repository-service-tuf/repository-service-tuf>`_
+`repository-service-tuf/repository-service-tuf <https://github.com/repository-service-tuf/repository-service-tuf>`_
 (Umbrella repository) issues.
 
 The Component specifies the Milestone (release) that will contain the Roadmap
