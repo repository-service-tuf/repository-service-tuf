@@ -48,7 +48,7 @@ docker run --env="RSTUF_WORKER_ID=worker1" \
     --env="RSTUF_BROKER_SERVER=guest:guest@rabbitmq:5672" \
     --env="RSTUF_REDIS_SERVER=redis://redis" \
     --env="RSTUF_SQL_SERVER=postgresql://postgres:secret@postgres:5432" \
-    ghcr.io/vmware/repository-service-tuf-worker:latest \
+    ghcr.io/repository-service-tuf/repository-service-tuf-worker:latest \
 ```
 
 

@@ -277,6 +277,59 @@
                 ]
             }
         },
+        "/api/v1/metadata/": {
+            "post": {
+                "tags": [
+                    "v1",
+                    "v1"
+                ],
+                "summary": "Rotate role metadata. Scope: write:metadata",
+                "description": "Rotate a role metadata that requires offline signing.",
+                "operationId": "post_api_v1_metadata__post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MetadataPostPayload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MetadataPostResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": [
+                            "write:metadata"
+                        ]
+                    }
+                ]
+            }
+        },
         "/api/v1/targets/": {
             "post": {
                 "tags": [
@@ -550,7 +603,7 @@
                     "scope": {
                         "title": "Scope",
                         "type": "string",
-                        "description": "Add scopes separeted by space. Available scopes: `read:bootstrap`, `read:settings`, `read:tasks`, `read:token`, `write:bootstrap`, `write:targets`, `write:token`, `delete:targets`"
+                        "description": "Add scopes separeted by space. Available scopes: `read:bootstrap`, `read:settings`, `read:tasks`, `read:token`, `write:bootstrap`, `write:metadata`, `write:targets`, `write:token`, `delete:targets`"
                     },
                     "expires": {
                         "title": "Expires",
@@ -698,7 +751,7 @@
                 "type": "object",
                 "properties": {
                     "data": {
-                        "$ref": "#/components/schemas/PostData"
+                        "$ref": "#/components/schemas/repository_service_tuf_api__bootstrap__PostData"
                     },
                     "message": {
                         "title": "Message",
@@ -779,6 +832,7 @@
                             "read:tasks",
                             "read:token",
                             "write:bootstrap",
+                            "write:metadata",
                             "write:targets",
                             "write:token",
                             "delete:targets"
@@ -802,6 +856,125 @@
                     }
                 }
             },
+            "MetadataPostPayload": {
+                "title": "MetadataPostPayload",
+                "required": [
+                    "metadata"
+                ],
+                "type": "object",
+                "properties": {
+                    "metadata": {
+                        "title": "Metadata",
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/TUFMetadata"
+                        }
+                    }
+                },
+                "example": {
+                    "metadata": {
+                        "root": {
+                            "signatures": [
+                                {
+                                    "keyid": "1cebe343e35f0213f6136758e6c3a8f8e1f9eeb7e47a07d5cb336462ed31dcb7",
+                                    "sig": "c471d9376651ed68bf5b0ce61bd21ba0bef7c38f293f8a4cfb3d56934e1c2f9106d58a9d57fafdd559d1e66e2581c21755b1ef5a6cdef59c40fcdc7bb158c80b"
+                                },
+                                {
+                                    "keyid": "7feb22ed6a1139913ebdbfac85513890814e661d94084212972ba0c0a5c8ce27",
+                                    "sig": "5558cdf391cc1feaeacf2a25e26b2042e50d286296c2a0c4bc3421788e8e11465b6956c3dc0e7ada29672e3740fa003b518e9d9c2a8411b5b279be94a40f750f"
+                                }
+                            ],
+                            "signed": {
+                                "_type": "root",
+                                "consistent_snapshot": true,
+                                "expires": "2024-04-17T08:51:40Z",
+                                "keys": {
+                                    "1cebe343e35f0213f6136758e6c3a8f8e1f9eeb7e47a07d5cb336462ed31dcb7": {
+                                        "keytype": "ed25519",
+                                        "keyval": {
+                                            "public": "ad1709b3cb419b99c5cd7427d6411522e5a93aec6767453e91af921a73d22a3c"
+                                        },
+                                        "scheme": "ed25519"
+                                    },
+                                    "7feb22ed6a1139913ebdbfac85513890814e661d94084212972ba0c0a5c8ce27": {
+                                        "keytype": "ed25519",
+                                        "keyval": {
+                                            "public": "664d366b6838648405e1e18e9ef5b4e326713b0c0338935e2f715b9f02a05313"
+                                        },
+                                        "scheme": "ed25519"
+                                    },
+                                    "800dfb5a1982b82b7893e58035e19f414f553fc08cbb1130cfbae302a7b7fee5": {
+                                        "keytype": "ed25519",
+                                        "keyval": {
+                                            "public": "7098f769f6ab8502b50f3b58686b8a042d5d3bb75d8b3a48a2fcbc15a0223501"
+                                        },
+                                        "scheme": "ed25519"
+                                    },
+                                    "f7a6872f297634219a80141caa2ec9ae8802098b07b67963272603e36cc19fd8": {
+                                        "keytype": "ed25519",
+                                        "keyval": {
+                                            "public": "9fe7ddccb75b977a041424a1fdc142e01be4abab918dc4c611fbfe4a3360a9a8"
+                                        },
+                                        "scheme": "ed25519"
+                                    }
+                                },
+                                "roles": {
+                                    "root": {
+                                        "keyids": [
+                                            "1cebe343e35f0213f6136758e6c3a8f8e1f9eeb7e47a07d5cb336462ed31dcb7",
+                                            "800dfb5a1982b82b7893e58035e19f414f553fc08cbb1130cfbae302a7b7fee5",
+                                            "7feb22ed6a1139913ebdbfac85513890814e661d94084212972ba0c0a5c8ce27"
+                                        ],
+                                        "threshold": 1
+                                    },
+                                    "snapshot": {
+                                        "keyids": [
+                                            "f7a6872f297634219a80141caa2ec9ae8802098b07b67963272603e36cc19fd8"
+                                        ],
+                                        "threshold": 1
+                                    },
+                                    "targets": {
+                                        "keyids": [
+                                            "f7a6872f297634219a80141caa2ec9ae8802098b07b67963272603e36cc19fd8"
+                                        ],
+                                        "threshold": 1
+                                    },
+                                    "timestamp": {
+                                        "keyids": [
+                                            "f7a6872f297634219a80141caa2ec9ae8802098b07b67963272603e36cc19fd8"
+                                        ],
+                                        "threshold": 1
+                                    }
+                                },
+                                "spec_version": "1.0.30",
+                                "version": 2
+                            }
+                        }
+                    }
+                }
+            },
+            "MetadataPostResponse": {
+                "title": "MetadataPostResponse",
+                "required": [
+                    "message"
+                ],
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "$ref": "#/components/schemas/repository_service_tuf_api__metadata__PostData"
+                    },
+                    "message": {
+                        "title": "Message",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "data": {
+                        "task_id": "7a634b556f784ae88785d36425f9a218"
+                    },
+                    "message": "Bootstrap accepted."
+                }
+            },
             "PayloadTargetsHashes": {
                 "title": "PayloadTargetsHashes",
                 "required": [
@@ -811,16 +984,6 @@
                 "properties": {
                     "blake2b-256": {
                         "title": "Blake2B-256",
-                        "type": "string"
-                    }
-                }
-            },
-            "PostData": {
-                "title": "PostData",
-                "type": "object",
-                "properties": {
-                    "task_id": {
-                        "title": "Task Id",
                         "type": "string"
                     }
                 }
@@ -1337,6 +1500,16 @@
                     }
                 }
             },
+            "repository_service_tuf_api__bootstrap__PostData": {
+                "title": "PostData",
+                "type": "object",
+                "properties": {
+                    "task_id": {
+                        "title": "Task Id",
+                        "type": "string"
+                    }
+                }
+            },
             "repository_service_tuf_api__config__Response": {
                 "title": "Response",
                 "required": [
@@ -1383,6 +1556,16 @@
                         "timestamp_threshold": 1
                     },
                     "message": "Current Settings"
+                }
+            },
+            "repository_service_tuf_api__metadata__PostData": {
+                "title": "PostData",
+                "type": "object",
+                "properties": {
+                    "task_id": {
+                        "title": "Task Id",
+                        "type": "string"
+                    }
                 }
             },
             "repository_service_tuf_api__targets__Response": {
@@ -1453,6 +1636,7 @@
                             "write:targets": "Write (POST) targets",
                             "write:token": "Write (POST) token",
                             "write:bootstrap": "Write (POST) bootstrap",
+                            "write:metadata": "Write (POST) metadata",
                             "delete:targets": "Delete (DELETE) targets"
                         },
                         "tokenUrl": "/api/v1/token"

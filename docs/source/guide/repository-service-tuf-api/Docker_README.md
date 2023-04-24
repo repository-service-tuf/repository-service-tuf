@@ -32,7 +32,7 @@ docker run -p 80:80 \
     --env="RSTUF_REDIS_SERVER=redis://redis" \
     --env="SECRETS_RSTUF_TOKEN_KEY=secret" \
     --env="SECRETS_RSTUF_ADMIN_PASSWORD=password" \
-    ghcr.io/vmware/repository-service-tuf-api:latest
+    ghcr.io/repository-service-tuf/repository-service-tuf-api:latest
 ```
 
 
