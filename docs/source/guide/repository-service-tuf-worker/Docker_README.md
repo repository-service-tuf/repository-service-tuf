@@ -40,8 +40,7 @@ For more information read the [Deployment documentation](https://repository-serv
 ### Container Parameters
 
 ```shell
-docker run --env="RSTUF_WORKER_ID=worker1" \
-    --env="RSTUF_STORAGE_BACKEND=LocalStorage" \
+docker run --env="RSTUF_STORAGE_BACKEND=LocalStorage" \
     --env="RSTUF_LOCAL_STORAGE_BACKEND_PATH=storage" \
     --env="RSTUF_KEYVAULT_BACKEND=LocalKeyVault" \
     --env="RSTUF_LOCAL_KEYVAULT_PASSWORD=mypass" \
@@ -138,6 +137,10 @@ Available types:
       - cryptographic type of the online key, example: `ed25519`.
       - Default: `ed25519`
       - [Note: At the moment RSTUF Worker supports `ed25519`, `rsa`, `ecdsa`]
+
+#### (Optional) `RSTUF_WORKER_ID`
+
+Custom Worker ID.  Default: `hostname` (Container hostname)
 
 #### (Optional) `DATA_DIR`
 

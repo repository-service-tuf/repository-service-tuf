@@ -95,10 +95,21 @@ Disable/Enable RSTUF built-in token authentication. Default: true
 
 Secret Token for hash the Tokens.
 
+This environment variable supports container secrets when the volume is added
+to `/run/secrets` path.
+
+Example:
+`SECRETS_RSTUF_TOKEN_KEY=/run/secrets/SECRETS_RSTUF_TOKEN_KEY`
+
 ##### (Required) `SECRETS_RSTUF_ADMIN_PASSWORD`
 
 Secret admin password.
 
+This environment variable supports container secrets when the volume is added
+to `/run/secrets` path.
+
+Example:
+`SECRETS_RSTUF_ADMIN_PASSWORD=/run/secrets/SECRETS_RSTUF_ADMIN_PASSWORD`
 
 #### (Optional) `SECRETS_RSTUF_SSL_CERT`
 
@@ -108,6 +119,13 @@ Conainer running port will be 443
 
 Requires a another environment variable ``SECRETS_RSTUF_SSL_KEY`` with the
 certificate key file. Example ``/path/to/api.key``
+
+These environment variables supports container secrets when the volume is added
+to `/run/secrets` path.
+
+Example:
+`SECRETS_RSTUF_SSL_CERT=/run/secrets/SECRETS_RSTUF_SSL_CERT`
+`SECRETS_RSTUF_SSL_KEY=/run/secrets/SECRETS_RSTUF_SSL_KEY`
 
 #### (Optional) `DATA_DIR`
 
