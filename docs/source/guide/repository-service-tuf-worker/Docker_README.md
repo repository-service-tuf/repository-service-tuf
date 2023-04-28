@@ -129,6 +129,9 @@ Available types:
   - Required variables:
     - ``RSTUF_LOCAL_KEYVAULT_PASSWORD``
       - password used to load the online key
+      - This environment variable supports container secrets when the `/run/secrets`
+        volume is added to the path.
+        Example: `RSTUF_LOCAL_KEYVAULT_PASSWORD=/run/secrets/ONLINE_KEY_PASSWORD`
   - Optional variables:
     - ``RSTUF_LOCAL_KEYVAULT_PATH``
       - file name of the online key
