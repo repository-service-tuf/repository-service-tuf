@@ -33,7 +33,7 @@ jobs:
         run: |
           pipenv run make docs
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@38e0b6e68b4c852a5500a94740f0e535e0d7ba54
+        uses: peter-evans/create-pull-request@284f54f989303d2699d373481a0cfa13ad5a6666
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore: sync git submodules and docs"
