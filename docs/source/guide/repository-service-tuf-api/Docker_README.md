@@ -89,27 +89,24 @@ Important: It should use the same db id as used by RSTUF Workers.
 
 #### (Optional) `RSTUF_AUTH`
 
-Disable/Enable RSTUF built-in token authentication. Default: true
+Disable/Enable RSTUF built-in token authentication. Default: false
 
-##### (Required) `SECRETS_RSTUF_TOKEN_KEY`
+* Required variables (when enabled):
+  - `SECRETS_RSTUF_TOKEN_KEY`
+    Secret Token for hash the Tokens.
 
-Secret Token for hash the Tokens.
+  - `SECRETS_RSTUF_ADMIN_PASSWORD`
+    Secret admin password.
 
-This environment variable supports container secrets when the volume is added
-to `/run/secrets` path.
+  These environment variables support container secrets when the volume is added
+  to `/run/secrets` path.
 
-Example:
-`SECRETS_RSTUF_TOKEN_KEY=/run/secrets/SECRETS_RSTUF_TOKEN_KEY`
+  Example:
+  ```
+  SECRETS_RSTUF_ADMIN_PASSWORD=/run/secrets/SECRETS_RSTUF_ADMIN_PASSWORD
+  SECRETS_RSTUF_TOKEN_KEY=/run/secrets/SECRETS_RSTUF_TOKEN_KEY`
+  ```
 
-##### (Required) `SECRETS_RSTUF_ADMIN_PASSWORD`
-
-Secret admin password.
-
-This environment variable supports container secrets when the volume is added
-to `/run/secrets` path.
-
-Example:
-`SECRETS_RSTUF_ADMIN_PASSWORD=/run/secrets/SECRETS_RSTUF_ADMIN_PASSWORD`
 
 #### (Optional) `SECRETS_RSTUF_SSL_CERT`
 
@@ -124,8 +121,10 @@ These environment variables supports container secrets when the volume is added
 to `/run/secrets` path.
 
 Example:
-`SECRETS_RSTUF_SSL_CERT=/run/secrets/SECRETS_RSTUF_SSL_CERT`
-`SECRETS_RSTUF_SSL_KEY=/run/secrets/SECRETS_RSTUF_SSL_KEY`
+```
+SECRETS_RSTUF_SSL_CERT=/run/secrets/SECRETS_RSTUF_SSL_CERT
+SECRETS_RSTUF_SSL_KEY=/run/secrets/SECRETS_RSTUF_SSL_KEY
+```
 
 #### (Optional) `DATA_DIR`
 
