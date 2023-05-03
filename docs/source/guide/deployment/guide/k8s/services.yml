@@ -1,0 +1,70 @@
+##########################################
+# SERVICES
+##########################################
+
+# Redis service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: redis
+  name: redis
+spec:
+  ports:
+    - name: "6379"
+      port: 6379
+      targetPort: 6379
+  selector:
+    io.kompose.service: redis
+status:
+  loadBalancer: {}
+---
+# Postgres service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: postgres
+  name: postgres
+spec:
+  ports:
+    - name: "5432"
+      port: 5432
+      targetPort: 5432
+  selector:
+    io.kompose.service: postgres
+status:
+  loadBalancer: {}
+---
+# http service (exposing TUF metadata plublic)
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: web-metadata
+  name: web-metadata
+spec:
+  type: LoadBalancer
+  ports:
+    - name: "http"
+      port: 80
+      targetPort: 80
+  selector:
+    io.kompose.service: web-metadata
+---
+# RSTUF API service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: rstuf-api
+  name: rstuf-api
+spec:
+  type: LoadBalancer
+  ports:
+    - name: "http"
+      port: 80
+      targetPort: 80
+  selector:
+    io.kompose.service: rstuf-api
+# RSTUF Worker is not a service, only a consumer backend
