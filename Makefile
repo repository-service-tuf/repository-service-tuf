@@ -21,7 +21,7 @@ docs:
 	rm -rf docs/source/guide/repository-service-tuf-worker/*
 	cp -r repository-service-tuf-worker/docs/source/guide/* docs/source/guide/repository-service-tuf-worker/
 
-	plantuml -o ../source/_static/ -tpng docs/diagrams/*rstuf*.puml
+	plantuml -o ../source/_static/ -tpng docs/diagrams/*.puml
 	sphinx-build -T -E -b html docs/source docs/build/html
 
 requirements:

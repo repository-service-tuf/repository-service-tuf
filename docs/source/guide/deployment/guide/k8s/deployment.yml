@@ -1,0 +1,237 @@
+##########################################
+# DEPLOYMENT
+##########################################
+
+# Redis deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: redis
+  name: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: redis
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: redis
+    spec:
+      containers:
+        - image: redis:4.0
+          livenessProbe:
+            exec:
+              command:
+                - exit 0
+          name: redis
+          ports:
+            - containerPort: 6379
+          resources: {}
+          tty: true
+          volumeMounts:
+            - mountPath: /data
+              name: redis-data
+      restartPolicy: Always
+      volumes:
+        - name: redis-data
+          persistentVolumeClaim:
+            claimName: redis-data
+status: {}
+---
+# Postgres Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: postgres
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: postgres
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: postgres
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgrespassword
+                  key: password
+            - name: PGDATA
+              value: /var/lib/postgresql/data/rstuf
+          image: postgres:15.1
+          livenessProbe:
+            exec:
+              command:
+                - exit 0
+          name: postgres
+          resources: {}
+          tty: true
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-data
+      restartPolicy: Always
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-data
+status: {}
+---
+# http deployment (Web Server to expose metadata public)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-metadata
+  labels:
+    io.kompose.service: web-metadata
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: web-metadata
+  template:
+    metadata:
+      labels:
+        io.kompose.service: web-metadata
+    spec:
+      containers:
+        - name: web-metadata
+          image: httpd
+          ports:
+            - containerPort: 80
+          resources: {}
+          volumeMounts:
+            - mountPath: /usr/local/apache2/htdocs
+              name: rstuf-storage
+      restartPolicy: Always
+      volumes:
+        - name: rstuf-storage
+          persistentVolumeClaim:
+            claimName: rstuf-storage
+---
+# RSTUF Worker deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: rstuf-worker
+  name: rstuf-worker
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      io.kompose.service: rstuf-worker
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: rstuf-worker
+    spec:
+      containers:
+        - env:
+            - name: RSTUF_BROKER_SERVER
+              value: redis://redis
+            - name: RSTUF_REDIS_SERVER
+              value: redis://redis
+            - name: RSTUF_SQL_SERVER
+              value: postgres:5433
+            - name: RSTUF_SQL_USER
+              value: postgres
+            - name: RSTUF_SQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgrespassword
+                  key: password
+            - name: RSTUF_KEYVAULT_BACKEND
+              value: LocalKeyVault
+            - name: RSTUF_LOCAL_KEYVAULT_PATH
+              value: /var/opt/repository-service-tuf/keystorage/
+            - name: RSTUF_LOCAL_KEYVAULT_KEYS
+              valueFrom:
+                secretKeyRef:
+                  name: onlinekey
+                  key: keys
+            - name: RSTUF_STORAGE_BACKEND
+              value: LocalStorage
+            - name: RSTUF_LOCAL_STORAGE_BACKEND_PATH
+              value: /var/opt/repository-service-tuf/storage
+          image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:dev
+          livenessProbe:
+            exec:
+              command:
+                - exit 0
+          name: rstuf-worker
+          resources: {}
+          tty: true
+          volumeMounts:
+            - name: onlinekey
+              mountPath: "/run/secrets/onlinekey"
+              readOnly: true
+            - name: postgrespassword
+              mountPath: "/run/secrets/postgrespassword"
+              readOnly: true
+            - mountPath: /var/opt/repository-service-tuf/storage
+              name: rstuf-storage
+            - mountPath: /var/opt/repository-service-tuf/keystorage
+              name: rstuf-keystorage
+      restartPolicy: Always
+      volumes:
+        - name: rstuf-storage
+          persistentVolumeClaim:
+            claimName: rstuf-storage
+        - name: rstuf-keystorage
+          persistentVolumeClaim:
+            claimName: rstuf-keystorage
+        - name: onlinekey
+          secret:
+            secretName: onlinekey
+        - name: postgrespassword
+          secret:
+            secretName: postgrespassword
+status: {}
+---
+# RSTUF API deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: rstuf-api
+  name: rstuf-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: rstuf-api
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: rstuf-api
+    spec:
+      containers:
+        - env:
+            - name: RSTUF_BROKER_SERVER
+              value: redis://redis
+            - name: RSTUF_REDIS_SERVER
+              value: redis://redis
+          image: ghcr.io/repository-service-tuf/repository-service-tuf-api:dev
+          name: rstuf-api
+          ports:
+            - containerPort: 80
+          resources: {}
+      volumes:
+      restartPolicy: Always
+status: {}

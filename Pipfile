@@ -8,7 +8,6 @@ sphinx-rtd-theme = "*"
 sphinx = "*"
 sphinxcontrib-needs = "*"
 sphinxcontrib-plantuml = "*"
-sphinxcontrib-openapi = "*"
 mistune = "==0.8.4"
 myst-parser = "*"
 pytest = "*"
@@ -21,6 +20,7 @@ pretend = "*"
 names-generator = "*"
 pytest-bdd-html = "*"
 pytest-html = "*"
+sphinx-toolbox = "*"
 
 [dev-packages]
 

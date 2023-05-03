@@ -1,0 +1,14 @@
+@startuml rstuf_networking
+    person "HTTP Requests" as api_user
+    node "RSTUF API" as rstuf_api #LightBlue
+    node "RSTUF Worker" as rstuf_worker #LightBlue
+    queue "Broker" as broker
+    collections "Redis" as redis
+    database "PostgreSQL" as postgres
+    api_user -> rstuf_api
+    rstuf_api --> broker
+    rstuf_api --> redis
+    rstuf_worker --> broker
+    rstuf_worker --> redis
+    rstuf_worker --> postgres
+@enduml

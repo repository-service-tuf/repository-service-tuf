@@ -35,7 +35,7 @@ extensions = [
     'sphinxcontrib.plantuml',
     'sphinxcontrib.needs',
     'sphinx.ext.autosectionlabel',
-    'sphinxcontrib.openapi',
+    'sphinx_toolbox.collapse',
 ]
 
 autosectionlabel_prefix_document = True
