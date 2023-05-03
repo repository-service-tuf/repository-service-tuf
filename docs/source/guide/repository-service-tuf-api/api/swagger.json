@@ -1099,6 +1099,10 @@
                         "additionalProperties": {
                             "type": "string"
                         }
+                    },
+                    "name": {
+                        "title": "Name",
+                        "type": "string"
                     }
                 }
             },

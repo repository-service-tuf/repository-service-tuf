@@ -222,6 +222,7 @@ Step 2: Load the Online Key
     Choose 1/1 ONLINE key type [ed25519/ecdsa/rsa] (ed25519):
     Enter 1/1 the ONLINE`s private key path: tests/files/online.key
     Enter 1/1 the ONLINE`s private key password:
+    [Optional] Give a name/tag to the key:
     ✅ Key 1/1 Verified
 
     Step 3: Validate the information/settings
@@ -258,11 +259,13 @@ to load their keys.
     Choose 1/2 root key type [ed25519/ecdsa/rsa] (ed25519):
     Enter 1/2 the root`s private key path: tests/files/JanisJoplin.key
     Enter 1/2 the root`s private key password:
+    [Optional] Give a name/tag to the key:
     ✅ Key 1/2 Verified
 
     Choose 2/2 root key type [ed25519/ecdsa/rsa] (ed25519):
     Enter 2/2 the root`s private key path: tests/files/JimiHendrix.key
     Enter 2/2 the root`s private key password:
+    [Optional] Give a name/tag to the key:
     ✅ Key 2/2 Verified
 
 Step 4: Validate Configuration
