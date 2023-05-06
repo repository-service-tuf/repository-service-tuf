@@ -90,160 +90,6 @@
                 ]
             }
         },
-        "/api/v1/token/": {
-            "get": {
-                "tags": [
-                    "v1",
-                    "v1"
-                ],
-                "summary": "Get token details. Scope: read:token",
-                "description": "Return the token details. It requires an authenticated token with scope authorization.",
-                "operationId": "get_api_v1_token__get",
-                "security": [
-                    {
-                        "OAuth2PasswordBearer": [
-                            "read:token"
-                        ]
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "token",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "title": "Token",
-                            "description": "Token to be validated",
-                            "required": true,
-                            "type": "string"
-                        },
-                        "description": "Token to be validated"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/GetTokenResponse"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not found"
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "v1",
-                    "v1"
-                ],
-                "summary": "Issue token user/password authentication",
-                "description": "Issue a token with scopes for all granted user scope.",
-                "operationId": "post_api_v1_token__post",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/x-www-form-urlencoded": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Body_post_api_v1_token__post"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PostTokenResponse"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not found"
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/token/new/": {
-            "post": {
-                "tags": [
-                    "v1",
-                    "v1"
-                ],
-                "summary": "Issue token from authenticated token. Scope: write:token",
-                "description": "Issue token from a valid and existent token.",
-                "operationId": "post_token_api_v1_token_new__post",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/TokenRequestPayload"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "Successful Response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PostTokenResponse"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not found"
-                    },
-                    "422": {
-                        "description": "Validation Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/HTTPValidationError"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "OAuth2PasswordBearer": [
-                            "write:token"
-                        ]
-                    }
-                ]
-            }
-        },
         "/api/v1/config/": {
             "get": {
                 "tags": [
@@ -522,6 +368,160 @@
                         }
                     }
                 }
+            }
+        },
+        "/api/v1/token/": {
+            "get": {
+                "tags": [
+                    "v1",
+                    "v1"
+                ],
+                "summary": "Get token details. Scope: read:token",
+                "description": "Return the token details. It requires an authenticated token with scope authorization.",
+                "operationId": "get_api_v1_token__get",
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": [
+                            "read:token"
+                        ]
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "title": "Token",
+                            "description": "Token to be validated",
+                            "required": true,
+                            "type": "string"
+                        },
+                        "description": "Token to be validated"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetTokenResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "v1",
+                    "v1"
+                ],
+                "summary": "Issue token user/password authentication",
+                "description": "Issue a token with scopes for all granted user scope.",
+                "operationId": "post_api_v1_token__post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Body_post_api_v1_token__post"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostTokenResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/token/new/": {
+            "post": {
+                "tags": [
+                    "v1",
+                    "v1"
+                ],
+                "summary": "Issue token from authenticated token. Scope: write:token",
+                "description": "Issue token from a valid and existent token.",
+                "operationId": "post_token_api_v1_token_new__post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TokenRequestPayload"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostTokenResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2PasswordBearer": [
+                            "write:token"
+                        ]
+                    }
+                ]
             }
         }
     },
