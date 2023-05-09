@@ -100,7 +100,6 @@ jobs:
         ports:
           - 80:80
         env:
-          RSTUF_BOOTSTRAP_NODE: "true"
           RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
           RSTUF_REDIS_SERVER: redis://redis
           RSTUF_AUTH: "true"
