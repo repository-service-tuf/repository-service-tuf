@@ -54,17 +54,11 @@ Rest API endpoint ``api/v1/token/new``.
 
         $ repository-service-tuf admin token
 
-API Endpoints
-=============
+API Documentation
+=================
 
-The REST API Swagger Documentation is available after the Deploy
-(http://ip-address/)
+The REST API Swagger Documentation is available after the deploy at
+(``http://<IP-ADDRESS>/``)
 
-
-.. note::
-
-    This documentation has limited information. We recommend access the API
-    documentation available in the service.
-
-
-.. openapi:: api/swagger.json
+An online version is available in
+https://repository-service-tuf.github.io/repository-service-tuf-api/
