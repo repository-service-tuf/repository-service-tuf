@@ -35,6 +35,9 @@ on:
         default: "latest"
         type: string
         required: False
+    secrets:
+      RSTUF_ONLINE_KEY:
+        required: True
 env:
   MAKE_FT_TARGET: functional-tests
   REQUIREMENTS_PATH: requirements.txt
