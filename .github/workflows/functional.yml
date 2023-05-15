@@ -71,8 +71,8 @@ jobs:
           RSTUF_STORAGE_BACKEND: LocalStorage
           RSTUF_KEYVAULT_BACKEND: LocalKeyVault
           RSTUF_LOCAL_STORAGE_BACKEND_PATH: /var/opt/repository-service-tuf/storage
-          RSTUF_LOCAL_KEYVAULT_PATH: /var/opt/repository-service-tuf/keystorage/online.key
-          RSTUF_LOCAL_KEYVAULT_PASSWORD: strongPass  # using clear string
+          RSTUF_LOCAL_KEYVAULT_PATH: /var/opt/repository-service-tuf/keystorage
+          RSTUF_LOCAL_KEYVAULT_KEYS: ${{ secrets.RSTUF_ONLINE_KEY }}
           RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
           RSTUF_REDIS_SERVER: redis://redis
           RSTUF_WORKER_ID: dev-1
@@ -88,8 +88,8 @@ jobs:
           RSTUF_STORAGE_BACKEND: LocalStorage
           RSTUF_KEYVAULT_BACKEND: LocalKeyVault
           RSTUF_LOCAL_STORAGE_BACKEND_PATH: /var/opt/repository-service-tuf/storage
-          RSTUF_LOCAL_KEYVAULT_PATH: /var/opt/repository-service-tuf/keystorage/online.key
-          RSTUF_LOCAL_KEYVAULT_PASSWORD: ${{ secrets.RSTUF_ONLINE_KEY_PASSWORD }}  # using secrets
+          RSTUF_LOCAL_KEYVAULT_PATH: /var/opt/repository-service-tuf/keystorage
+          RSTUF_LOCAL_KEYVAULT_KEYS: ${{ secrets.RSTUF_ONLINE_KEY }} # using secrets
           RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
           RSTUF_REDIS_SERVER: redis://redis
           RSTUF_WORKER_ID: dev-2
@@ -122,13 +122,6 @@ jobs:
            repository: repository-service-tuf/repository-service-tuf
            path: rstuf-umbrella
            ref: main
-
-      - name: Deploy online.key to Docker Volume
-        # This is an workaround for the issue https://github.com/repository-service-tuf/repository-service-tuf-worker/issues/241
-        # Once solving it:
-        # 1. Change workers to use secrets with the online key
-        # 2. Remove this step
-        run: docker cp tests/files/key_storage/online.key "${{ job.services.rstuf-worker-1.id }}:/var/opt/repository-service-tuf/keystorage/"
 
       - name: Get RSTUF Container logs
         run: |
