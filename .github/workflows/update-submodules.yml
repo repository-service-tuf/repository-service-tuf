@@ -10,6 +10,8 @@ jobs:
       api_version: dev
       worker_version: dev
       cli_version: dev
+    secrets:
+      RSTUF_ONLINE_KEY: ${{ secrets.RSTUF_ONLINE_KEY }}
   sync-submodules:
     name: "Sync submodules and RSTUF docs"
     runs-on: ubuntu-latest
