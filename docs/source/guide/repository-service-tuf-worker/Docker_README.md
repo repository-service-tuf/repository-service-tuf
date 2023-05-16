@@ -43,7 +43,8 @@ For more information read the [Deployment documentation](https://repository-serv
 docker run --env="RSTUF_STORAGE_BACKEND=LocalStorage" \
     --env="RSTUF_LOCAL_STORAGE_BACKEND_PATH=storage" \
     --env="RSTUF_KEYVAULT_BACKEND=LocalKeyVault" \
-    --env="RSTUF_LOCAL_KEYVAULT_PASSWORD=mypass" \
+    --env="RSTUF_LOCAL_KEYVAULT_PATH=keyvault" \
+    --env="RSTUF_LOCAL_KEYVAULT_KEYS=online.key,strongPass" \
     --env="RSTUF_BROKER_SERVER=guest:guest@rabbitmq:5672" \
     --env="RSTUF_REDIS_SERVER=redis://redis" \
     --env="RSTUF_SQL_SERVER=postgresql://postgres:secret@postgres:5432" \
@@ -144,19 +145,46 @@ Available types:
 
 * LocalKeyVault (local file system)
   - Required variables:
-    - ``RSTUF_LOCAL_KEYVAULT_PASSWORD``
-      - password used to load the online key
-      - This environment variable supports container secrets when the `/run/secrets`
-        volume is added to the path.
-        Example: `RSTUF_LOCAL_KEYVAULT_PASSWORD=/run/secrets/ONLINE_KEY_PASSWORD`
-  - Optional variables:
     - ``RSTUF_LOCAL_KEYVAULT_PATH``
-      - file name of the online key
-      - Default: `online.key`
-    - ``RSTUF_LOCAL_KEYVAULT_TYPE``
-      - cryptographic type of the online key, example: `ed25519`.
-      - Default: `ed25519`
-      - [Note: At the moment RSTUF Worker supports `ed25519`, `rsa`, `ecdsa`]
+      - Define the path for the container volume mounted
+        Example: ``RSTUF_LOCAL_KEYVAULT_PATH=/var/opt/repository-service-tuf/key_storage``
+
+    - ``RSTUF_LOCAL_KEYVAULT_KEYS``
+      - Define the key(s) with format ``<file>,<password>,<(optional) type>``
+        - file: defines the key file
+          - `base64|<key content in base64>` allows to inform directly the key content.
+            It will dynamically manage and write a key file in
+            ``RSTUF_LOCAL_KEYVAULT_PATH`` (write permissions required).
+
+            Requires content as base64.
+
+            Example: ``RSTUF_LOCAL_KEYVAULT_KEYS=base64|LnRveC8KdmVudi8KLmlkZWEvCi52c2NvZGUvC...,strongPass,rsa``
+
+        - password: credential used to load the key
+        - (optional) type: The key type. Default: `ed25519`
+
+          [Note: At the moment RSTUF Worker supports `ed25519`, `rsa`, `ecdsa`]
+
+        Example: ``RSTUF_LOCAL_KEYVAULT_KEYS=online.key,strongPass,rsa``
+
+      - Accepts multiple keys separated by ``:``.
+
+        It accepts multiple keys, but RSTUF supports the usage of only one
+        online key for signing.
+
+        The Local Key Vault will find the key that matches the online key
+        defined in the root metadata.
+        Allowing multiple keys is helpful for performing metadata/key
+        rotation without disruption.
+
+        Example: ``RSTUF_LOCAL_KEYVAULT_KEYS=online.key,strongPass:online-rsa.key,newStrongPass,rsa``
+
+      - This environment variable supports container secrets when the
+        ``/run/secrets`` volume is added to the path. The content must be
+        in the standard format ``<file>,<password>,<(optional) type>``
+
+        Example: ``RSTUF_LOCAL_KEYVAULT_KEYS=/run/secrets/ONLINE_KEY_1:/run/secrets/ONLINE_KEY_2``
+
 
 #### (Optional) `RSTUF_WORKER_ID`
 
