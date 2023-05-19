@@ -69,7 +69,8 @@ def test_bootstrap_using_rstuf_cli_with_invalid_payload():
 )
 def the_administrator_uses_rstufcli_bootstrap_invalid_payload(rstuf_cli):
     rc, output = rstuf_cli(
-        "admin ceremony -b -u -f tests/data/payload-invalid.json --upload-server http://localhost"
+        "admin ceremony -b -u -f tests/data/payload-invalid.json "
+        "--upload-server http://localhost"
     )
 
     return rc, output
