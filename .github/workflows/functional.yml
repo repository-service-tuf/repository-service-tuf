@@ -116,11 +116,11 @@ jobs:
           docker logs "${{ job.services.rstuf-api.id }}"
 
       - name: Checkout release tag
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
 
       - name: Checkout release tag if not umbrella
         if: github.repository != 'repository-service-tuf/repository-service-tuf'
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
         with:
            repository: repository-service-tuf/repository-service-tuf
            path: rstuf-umbrella
@@ -149,7 +149,7 @@ jobs:
           pip install -r ${{ env.REQUIREMENTS_PATH }}
 
       - name: Checkout the Repository Service for TUF CLI
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
         with:
           repository: repository-service-tuf/repository-service-tuf-cli
           path: rstuf-cli
