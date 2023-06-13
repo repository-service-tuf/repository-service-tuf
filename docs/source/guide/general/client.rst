@@ -1,6 +1,6 @@
-##############
-Client updater
-##############
+##########
+TUF Client
+##########
 
 RSTUF makes it easy to host and manage TUF metadata for your content
 repository.
