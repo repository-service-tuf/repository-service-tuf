@@ -9,6 +9,21 @@ In order to effectively protect your clients, they must download or update
 artifacts from your content repository along with metadata served by RSTUF,
 and interpret them in a TUF-compliant way.
 
+.. uml::
+
+    @startuml
+        actor User as User
+        User -> Client: Download artifact vX.Y.Z
+        group TUF Client
+            collections TUF as "TUF Metadata"
+            Client -> TUF: Request metadata
+
+            Artifact --> Client: Fetch artifact vX.Y.Z
+        end
+        Client -> User: Artifact vX.Y.Z
+    @enduml
+
+
 RSTUF itself does not provide client-side tools, but there are several TUF
 libraries that you can use.
 
