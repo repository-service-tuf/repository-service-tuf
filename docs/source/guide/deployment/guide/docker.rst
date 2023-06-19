@@ -51,7 +51,7 @@ RSTUF Command Line Interface (CLI) provides a feature for
 Steps
 =====
 
-1. Create a folder ``local-keyvault`` and add your online key
+1. Create a folder ``local-keyvault`` and add the online key
 
   .. code:: shell
 

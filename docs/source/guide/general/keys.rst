@@ -13,7 +13,7 @@ Root Key(s) (offline)
 #####################
 
 The Root key(s) delegates trust to TUF. The number of keys is
-the number of identities/people who administrate the top-level TUF Metadata.
+the number of identities/people who administer the top-level TUF Metadata.
 
 RSTUF requires all Root key(s) only during the
 :ref:`guide/deployment/setup:Service Setup` specifically during the

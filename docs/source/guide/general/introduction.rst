@@ -17,7 +17,7 @@ as containers:
  * Repository Service for TUF Worker (RSTUF Worker ``repository-service-tuf-worker``)
 
 Repository Service for TUF (RSTUF) also provides a Command Line Interface tool
-to manage your RSTUF deployment.
+to manage the RSTUF deployment.
 
  * Repository Service for TUF CLI (RSTUF CLI ``repository-service-tuf-cli``)
 
@@ -62,6 +62,6 @@ More details about the above roles in the TUF documentation:
 * `Snapshot <https://theupdateframework.io/metadata/#snapshot-metadata-snapshotjson>`_
 * `Timestamp <https://theupdateframework.io/metadata/#timestamp-metadata-timestampjson>`_
 
-Some configurations are possible during the initial
+Configurations are customizable during the initial
 :ref:`guide/deployment/setup:Service Setup`, such as the number of keys,
 thresholds, expiration, etc.

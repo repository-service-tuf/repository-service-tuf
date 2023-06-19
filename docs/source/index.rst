@@ -5,8 +5,7 @@ Repository Service for TUF Documentation
 .. note::
 
     Repository Service for TUF is a work in progress. As of May 2023 RSTUF is
-    considered **alpha** - use with caution. Check out our `ROADMAP`_ to better
-    understand where we are heading next.
+    considered **alpha** - use with caution. Please reference the The RSTUF `ROADMAP`_ for feature and functionality plans.
 
 .. include:: ../../README.rst
   :end-before: .. readme-design
@@ -17,8 +16,7 @@ Repository Service for TUF Documentation
       <iframe src="https://www.youtube.com/embed/mZX16o3E384" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
   </div>
 
-To fully achieve the client's security, the client side must implement TUF,
-which has low complexity due to powerful TUF client libraries.
+TUF is easily implemented on the client side utilizing powerful TUF client libraries.
 
 Use cases
 ---------
@@ -68,9 +66,9 @@ RSTUF was born as a consequence of working on implementing `PEP 458
 <https://peps.python.org/pep-0458/>`_ in the `Warehouse`_ project,
 *which powers the* [#]_ `Python Package Index (PyPI) <https://pypi.org>`_.
 
-Due to our experience with the complexity and fragility of deep integration
-into an intricate platform, we began designing how to implement a flexible,
-reusable TUF platform to integrate into different flows and infrastructures.
+Due to combined experience with the complexity and fragility of deep integration
+into an intricate platform, the designing of how to implement a flexible,
+reusable TUF platform to integrate into different flows and infrastructures began.
 
 Repository Service for TUF aims to be an easy-to-use tool for Developers,
 DevOps, and DevOpsSec teams working on the delivery process.

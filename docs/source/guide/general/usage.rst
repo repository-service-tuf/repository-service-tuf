@@ -33,7 +33,7 @@ to fetch the new artifact using the trusted metadata.
         release --> vxyz_metadata
     @enduml
 
-Releasing the artifact in the content repository doesn't require changes to the
+Releasing the artifact in the content repository does not require changes to the
 existing process.
 
 To manage artifacts in the TUF metadata, use HTTP requests to the RSTUF API.
@@ -195,10 +195,8 @@ Adding targets/artifacts for back-singing
 Repository Service for TUF (RSTUF) allows adding target files (artifacts)
 without publishing immediately to the TUF Metadata.
 
-It can be helpful in some use cases. For example, the organization decides to
-do all flow of adding/removing artifacts but publishing only once a day.
-The organization can schedule the artifacts to be published (back-signed)
-at night.
+As example, an organization adds and removes artifacts while batch publishing daily.
+
 
 This feature requires adding the ``publish_targets`` parameter to
 :ref:`guide/general/usage:Add targets payload` or
@@ -267,16 +265,16 @@ Metadata Update
 Importing existing targets
 ==========================
 
-If you're adopting Repository Service for TUF (RSTUF), and you already have a
-large number of targets (artifacts/packages/files/etc.), we recommend you use
-the "import targets" feature.
+When adopting Repository Service for TUF (RSTUF), with a
+large number of targets (artifacts/packages/files/etc.), using
+the "import targets" feature is recommended.
 
-If you decide, you can send all of the existing targets using the REST API, but it
+Existing targets can be sent using the REST API, however it
 will be slower than using the "import targets" feature.
 
 The "import targets" feature can be used to add targets directly to the RSTUF
 database skipping the standard processing of the API.
-Normally, when you add a target through the API there will be an overhead of
+Normally, when adding a target through the API there will be an overhead of
 multiple additional operations which for a large number of targets can prove
 to be significant.
 
@@ -293,7 +291,7 @@ Here are some benchmarks of the "import targets" feature:
 
 .. warning::
 
-    Use the API flow integration to your release process (CI/CD or Distribution
+    Use the API flow integration to the release process (CI/CD or Distribution
     Platform).
 
     Do not use "import targets" as a replacement for the standard procedure to
@@ -313,5 +311,5 @@ CLI usage
 
 .. note::
 
-    If you provide users with download or update tools, you need to add
-    functionality to your tools to check the signed metadata.
+    When providing users with download or update capabilities, it is necessary to add
+    signed metadata checkpoints to the functionality tools.

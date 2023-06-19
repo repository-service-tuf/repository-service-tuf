@@ -12,7 +12,7 @@ Repository Service for TUF (RSTUF) is a collection of components that provide
 services for securing content downloads from tampering between the repository
 and the client (for example, by an on-path attacker).
 
-RSTUF security properties are achieved through implementing
+RSTUF security properties are achieved by implementing
 `The Update Framework <https://theupdateframework.io/>`_ (TUF) as a service.
 
 **Repository Service for TUF is platform, artifact, language, and process-flow

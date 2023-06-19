@@ -2,21 +2,21 @@
 Kubernetes
 ##########
 
-You can deploy multiple RSTUF API instances/replicas in a distributed
+Multiple RSTUF API instances/replicas can be deployed in a distributed
 environment to support multiple requests.
 
 This example uses Kubernetes
 
 .. note::
-  This deployment guide doesn't show the Kubernetes cluster configuration.
+  This deployment guide does not show the Kubernetes cluster configuration.
   It requires a Kubernetes cluster running with ``kubectl`` configured.
 
 .. note::
-  For this deployment we will use Redis as the
+  For this deployment Redis is used as the
   :ref:`message queue/broker <guide/deployment/planning/deployment:Message Queue/Broker: Redis or RabbitMQ server>`.
 
 .. Warning::
-  This deployment doesn't have :ref:`guide/deployment/planning/deployment:Authentication/Authorization`
+  This deployment does not have :ref:`guide/deployment/planning/deployment:Authentication/Authorization`
   for the API.
 
   This API is fully accessible for unauthorized users. Consider using an
@@ -56,7 +56,7 @@ Secrets
 #######
 
 .. caution::
-    Do not use this credentials, it is just an example.
+    Do not use this credential, it is just an example.
 
 onlinekey secret
 ================

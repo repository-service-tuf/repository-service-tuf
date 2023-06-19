@@ -19,8 +19,8 @@ It requires a persistent volume only if using the built-in
 authentication/authorization.
 
 .. Caution::
-    We don't recommend using the built-in RSTUF
-    :ref:`guide/deployment/planning/deployment:Authentication/Authorization`.
+    Using the built-in RSTUF
+    :ref:`guide/deployment/planning/deployment:Authentication/Authorization` is not recommended.
 
 Share the persistent volume between all RSTUF API instances and mount it on the
 container's path ``/data``.

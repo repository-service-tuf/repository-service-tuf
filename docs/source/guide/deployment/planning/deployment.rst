@@ -8,7 +8,7 @@ plan a more customized deployment.
 This document describes all the aspects of deploying RSTUF independent of the
 environment and focuses on the technology stacks required by RSTUF services.
 
-This document also complements our straightforward deployment guides for
+This document also complements the published deployment guides for
 :ref:`guide/deployment/guide/docker:Docker` and
 :ref:`guide/deployment/guide/kubernetes:Kubernetes` with some detailed
 nformation.
@@ -33,10 +33,9 @@ Message Queue/Broker: Redis or RabbitMQ server
 
 RSTUF API and RSTUF Worker will use the message queue/broker.
 
-RSTUF support Redis or RabbitMQ server. The decision to choose Redis or
-RabbitMQ depends on your needs.
+RSTUF supports Redis or RabbitMQ server. 
 
-RSTUF uses Celery, and here you can find a `summary about Celery and these two
+RSTUF uses Celery. For more details, see the `summary about Celery and these two
 brokers <https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers/index.html#summaries>`_.
 
 .. Caution::
@@ -52,11 +51,11 @@ brokers <https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers
    queue/broker.
 
 .. Note::
-   RSTUF API and Worker can use an existing Redis or RabbitMQ server in your
+   RSTUF API and Worker can use an existing Redis or RabbitMQ server in the host
    infrastructure.
    A specific Redis database id or specific RabbitMQ vhost is recommended.
 
-   Give it a complete address to the ``RSTUF_BROKER_SERVER`` configuration on
+  Assign the Redis database id a complete address to the ``RSTUF_BROKER_SERVER`` configuration on
    RSTUF API and Worker.
 
    - Example using Redis database id **5**: ``RSTUF_BROKER_SERVER=redis://redis/5``
@@ -82,7 +81,7 @@ Every request to RSTUF API is a unique task. The task result is stored in the
 backend result for `24 hours <https://docs.celeryq.dev/en/stable/userguide/configuration.html#result-expires>`_.
 
 .. Caution::
-   Make sure the Redis uses a persistent storage.
+   Be sure the Redis uses a persistent storage.
 
 .. centered:: RSTUF configuration
 
@@ -90,13 +89,13 @@ backend result for `24 hours <https://docs.celeryq.dev/en/stable/userguide/confi
 * ``RSTUF_REDIS_SERVER`` :ref:`RSTUF Worker <guide/repository-service-tuf-worker/Docker_README:(Required) `RSTUF_REDIS_SERVER\`>`
 
 .. Caution::
-   Both services, RSTUF API and Worker, must to access the same Redis.
+   Both services, RSTUF API and Worker, must access the same Redis.
 
 .. Note::
-   If you use Redis as a message queue/broker, you can use the same
-   service/instance as the result backend and RSTUF repository settings.
+ When using Redis as a message queue/broker, the same
+   service/instance can be used as the result backend and RSTUF repository settings.
 
-   The advice is to keep the broker, result backend, and RSTUF settings in
+   It is recommended to keep the broker, result backend, and RSTUF settings in
    different Redis database ids.
 
    RSTUF provides optional settings in the container for it
@@ -106,9 +105,9 @@ backend result for `24 hours <https://docs.celeryq.dev/en/stable/userguide/confi
    * ``RSTUF_REDIS_SERVER_DB_REPO_SETTINGS`` :ref:`RSTUF API <guide/repository-service-tuf-api/Docker_README:(Optional) `RSTUF_REDIS_SERVER_DB_REPO_SETTINGS\`>`
    * ``RSTUF_REDIS_SERVER_DB_REPO_SETTINGS`` :ref:`RSTUF Worker <guide/repository-service-tuf-worker/Docker_README:(Optional) `RSTUF_REDIS_SERVER_DB_REPO_SETTINGS\`>`
 
-   For example, if we are setting up a deployment that will use Redis as a
-   broker, result backend, and settings, we could have a configuration for RSTUF
-   API and Workers where we use respective Redis database ids 5, 6, and 7.
+   As example, when setting up a deployment that will use Redis as a
+   broker, result backend, and settings, the configuration for RSTUF
+   API and Workers could use respective Redis database ids 5, 6, and 7.
 
    .. code::
 
@@ -127,7 +126,7 @@ Only the RSTUF Worker uses the Postgres server
 It uses the database to perform the TUF metadata management.
 
 .. Caution::
-   Make sure the Postgres uses a persistent storage.
+Be sure the Postgres uses a persistent storage.
 
 .. centered:: RSTUF configuration
 
@@ -137,10 +136,10 @@ It uses the database to perform the TUF metadata management.
 ====================================
 
 The content server is responsible for exposing the TUF metadata managed by the
-RSTUF Worker(s). This metadata will be used by some TUF client implementations
+RSTUF Worker(s). This metadata will be used by TUF client implementations
 such as python-tuf, go-tuf, etc.
 
-We recommend a web server listing all JSON files stored and managed by RSTUF
+It is recommend to use a web server listing for all JSON files stored and managed by RSTUF
 Worker(s).
 
 Suggestion:
@@ -185,11 +184,11 @@ HTTP Rest API
 
 Do not expose the HTTP REST API if it is not necessary
 
-If you are integrating RSTUF into a specific content management or
+When integrating RSTUF into a specific content management or
 distribution platform, restrict the API access to the hosts where this
 integration is done.
 
-If you need to expose public RSTUF API, deploy RSTUF API containers with
+If it becomes necessary to expose public RSTUF API, deploy RSTUF API containers with
 disabled administrative endpoints.
 
 See:
@@ -204,16 +203,16 @@ Use the Authentication/Authorization to restrict scopes
 
 Use such an API Gateway to manage API endpoints' access.
 
-RSTUF API has a built-in authentication service, but we consider this feature
-not for production. We recommend using external authentication technology.
+RSTUF API has a built-in authentication service, however this feature is
+not for production. Using external authentication technology is recommended.
 
 SSL/HTTPS
 ---------
 
 Use HTTPS on RSTUF API (SSL certificates).
 
-RSTUF API supports SSL Certificates. We recommend enabling and using trusted
-certificates.
+RSTUF API supports SSL Certificates. Enabling and using trusted
+certificates is recommended.
 
 See:
 
@@ -233,6 +232,6 @@ Environment variables for more details.
 Scaling
 -------
 
-You can deploy multiple RSTUF API and Worker instances/replicas in a
+It is possible to deploy multiple RSTUF API and Worker instances/replicas in a
 distributed environment to support multiple HTTP Requests and
 increase workload for processing the TU Metadata.
