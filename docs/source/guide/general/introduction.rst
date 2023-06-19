@@ -17,7 +17,7 @@ as containers:
  * Repository Service for TUF Worker (RSTUF Worker ``repository-service-tuf-worker``)
 
 Repository Service for TUF (RSTUF) also provides a Command Line Interface tool
-to manage the RSTUF deployment.
+to manage RSTUF deployments.
 
  * Repository Service for TUF CLI (RSTUF CLI ``repository-service-tuf-cli``)
 
@@ -25,7 +25,7 @@ Repository Service for TUF API (RSTUF API)
 ------------------------------------------
 
 The :ref:`guide/repository-service-tuf-api/index:Repository Service for TUF API`
-(RSTUF API) servers an HTTP REST API for integration and service management.
+(RSTUF API) delivers an HTTP REST API for integration and service management.
 
 The API integrates with the CI/CD or artifact release management flow.
 

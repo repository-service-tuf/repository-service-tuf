@@ -24,9 +24,9 @@ operations.
 .. note::
   .. collapse:: See the number of Root keys/threshold example
 
-      An organization defines that it will have 5 (five) Root keys to
-      administrate the RSTUF Service. A total of 5 (five) people will require
-      to use their keys individually during the Ceremony process.
+      An organization declares that it will utilize 5 (five) Root keys in order
+      to administer the RSTUF Service. All 5 (five) people will be required
+      to utilize their keys individually during the Ceremony process.
 
       During the Ceremony process, the same organization defines that the
       threshold for Root metadata is 2 (two).

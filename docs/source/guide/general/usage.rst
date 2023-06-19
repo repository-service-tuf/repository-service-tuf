@@ -278,7 +278,7 @@ Normally, when adding a target through the API there will be an overhead of
 multiple additional operations which for a large number of targets can prove
 to be significant.
 
-Here are some benchmarks of the "import targets" feature:
+Below are sample benchmarks of the "import targets" feature:
 
 * Running in a Macbook Pro (2019) 2,4 GHz 8-Core Intel Core i9/32GB 2667 MHz DDR4:
 

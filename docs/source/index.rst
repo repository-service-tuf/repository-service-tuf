@@ -4,8 +4,10 @@ Repository Service for TUF Documentation
 
 .. note::
 
-    Repository Service for TUF is a work in progress. As of May 2023 RSTUF is
-    considered **alpha** - use with caution. Please reference the The RSTUF `ROADMAP`_ for feature and functionality plans.
+    Repository Service for TUF is a work in progress. As of June 2023 RSTUF is
+    considered **beta** - use with caution.
+
+    Please reference the The RSTUF `ROADMAP`_ for feature and functionality plans.
 
 .. include:: ../../README.rst
   :end-before: .. readme-design
