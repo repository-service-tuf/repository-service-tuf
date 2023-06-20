@@ -234,4 +234,4 @@ Scaling
 
 It is possible to deploy multiple RSTUF API and Worker instances/replicas in a
 distributed environment to support multiple HTTP Requests and
-increase workload for processing the TU Metadata.
+increase workload for processing the TUF Metadata.
