@@ -79,9 +79,7 @@ def get_target_info():
 
 @pytest.fixture
 def task_completed_within_threshold():
-    def _run_task_completion_check(
-        http_request, response_json, threshold
-    ):
+    def _run_task_completion_check(http_request, response_json, threshold):
         """Validates that a task has finished within a threshold of seconds."""
         task_id = response_json["data"]["task_id"]
         task_submitted = dateutil.parser.parse(

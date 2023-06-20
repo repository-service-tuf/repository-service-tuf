@@ -16,18 +16,9 @@ def test_api_requester_multiple_request_and_targets():
     """Multiple requests with multiple targets and timeout threshold"""
 
 
-@given("admin provided the token to the API requester", target_fixture="token")
-def token(access_token):
-    return access_token
-
-
-@given(
-    "the API requester has generated the 'headers' with the token",
-    target_fixture="headers",
-)
-def generate_headers(token):
-    header_token = {"Authorization": f"Bearer {token}"}
-    return header_token
+@given("the API requester has access to RSTUF API")
+def token():
+    pass
 
 
 @given(
@@ -37,9 +28,7 @@ def generate_headers(token):
     ),
     target_fixture="multiple_requests",
 )
-def send_requests_with_targets(
-    headers, num_requests, num_targets, http_request
-):
+def send_requests_with_targets(num_requests, num_targets, http_request):
     def multiple_targets(number_of_targets):
         targets = []
         for count in range(0, int(number_of_targets)):
@@ -60,7 +49,6 @@ def send_requests_with_targets(
 
         result = http_request(
             "POST",
-            headers=headers,
             url="/api/v1/targets",
             json={"targets": targets},
         )
@@ -91,7 +79,7 @@ def send_requests_with_targets(
     ),
     target_fixture="tasks_result",
 )
-def get_tasks(headers, multiple_requests, http_request, timeout):
+def get_tasks(multiple_requests, http_request, timeout):
     tasks = multiple_requests
     tasks_result = []
     while len(tasks) > 0:
@@ -103,7 +91,6 @@ def get_tasks(headers, multiple_requests, http_request, timeout):
             assert total_time_now.total_seconds() <= int(timeout)
             response = http_request(
                 "GET",
-                headers=headers,
                 url=f"/api/v1/task/?task_id={task['task_id']}",
             )
 

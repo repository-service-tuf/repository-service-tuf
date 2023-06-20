@@ -17,22 +17,6 @@ def the_tufrepositoryservice_rstufcli_is_installed(rstuf_cli):
     assert rc == 0, output
 
 
-@given("the admin login to RSTUF using rstuf", target_fixture="login")
-def the_administrator_login_to_rstuf(get_admin_pwd, rstuf_cli):
-    rc, output = rstuf_cli(
-        f"admin login -s http://localhost -u admin -p {get_admin_pwd} -e 1"
-    )
-
-    return rc, output
-
-
-@given("the admin is logged in")
-def the_admin_is_logged(login):
-    rc, output = login
-    assert rc == 0, output
-    assert "Login successful." in output or "Already logged to " in output
-
-
 @when("the admin run rstuf for ceremony bootstrap", target_fixture="bootstrap")
 def the_administrator_uses_rstufcli_bootstrap(rstuf_cli):
     rc, output = rstuf_cli(

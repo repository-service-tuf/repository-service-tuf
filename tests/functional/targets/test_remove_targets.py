@@ -16,22 +16,10 @@ def test_removing_a_target_using_rstuf_api():
 
 
 @given(
-    "the API requester has a token with scopes delete for targets and "
-    "read for tasks",
-    target_fixture="access_token",
+    "the API requester has access to RSTUF API",
 )
-def the_api_requester_has_a_token_with_scope_specific_scope(access_token):
-    return access_token
-
-
-@given(
-    "the admin adds authorization Bearer 'access_token' in the 'headers'",
-    target_fixture="headers",
-)
-def the_admin_adds_authorization_token_in_the_headers(access_token):
-    header_token = f"Bearer {access_token}"
-    headers = {"Authorization": header_token}
-    return headers
+def the_api_requester_has_a_token_with_scope_specific_scope():
+    ...
 
 
 @given(
@@ -42,7 +30,6 @@ def the_admin_adds_authorization_token_in_the_headers(access_token):
 )
 def there_are_targets_available_for_download(
     http_request,
-    headers,
     get_target_info,
     task_completed_within_threshold,
     paths,
@@ -64,14 +51,10 @@ def there_are_targets_available_for_download(
             }
         )
 
-    response = http_request(
-        method="POST", url="/api/v1/targets", headers=headers, json=payload
-    )
+    response = http_request(method="POST", url="/api/v1/targets", json=payload)
     assert response.status_code == 202, response.text
     threshold = 90
-    task_completed_within_threshold(
-        http_request, headers, response.json(), threshold
-    )
+    task_completed_within_threshold(http_request, response.json(), threshold)
     # Make sure all of the targets can be downloaded
     for path in paths:
         target_info = get_target_info(path)
@@ -82,13 +65,11 @@ def there_are_targets_available_for_download(
     parse("the API requester deletes all of the following targets {paths}"),
     target_fixture="response",
 )
-def the_api_requester_deletes_targets(http_request, headers, paths):
+def the_api_requester_deletes_targets(http_request, paths):
     # remove quotes; example "[str, str]" -> [str, str]
     paths = ast.literal_eval(paths)
     payload = {"targets": paths}
-    return http_request(
-        method="DELETE", url="/api/v1/targets", headers=headers, json=payload
-    )
+    return http_request(method="DELETE", url="/api/v1/targets", json=payload)
 
 
 @then(
@@ -106,11 +87,11 @@ def the_api_requester_gets_successful_message(response):
     target_fixture="api_response",
 )
 def the_api_requester_gets_task_status_finished_within_threshold(
-    http_request, headers, task_completed_within_threshold, response_json
+    http_request, task_completed_within_threshold, response_json
 ):
     threshold = 90
     return task_completed_within_threshold(
-        http_request, headers, response_json, threshold
+        http_request, response_json, threshold
     )
 
 
@@ -144,15 +125,13 @@ def test_removing_targets_that_does_exist_and_ignoring_the_rest():
     target_fixture="response",
 )
 def the_api_requester_tries_to_delete_all_targets(
-    http_request, headers, paths, non_existing_paths
+    http_request, paths, non_existing_paths
 ):
     # remove quotes; example "[str, str]" -> [str, str]
     paths = ast.literal_eval(paths)
     non_existing_paths = ast.literal_eval(non_existing_paths)
     payload = {"targets": paths + non_existing_paths}
-    return http_request(
-        method="DELETE", url="/api/v1/targets", headers=headers, json=payload
-    )
+    return http_request(method="DELETE", url="/api/v1/targets", json=payload)
 
 
 @then(
