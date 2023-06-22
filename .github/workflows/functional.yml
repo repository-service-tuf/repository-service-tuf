@@ -105,9 +105,6 @@ jobs:
         env:
           RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
           RSTUF_REDIS_SERVER: redis://redis
-          RSTUF_AUTH: "true"
-          SECRETS_RSTUF_TOKEN_KEY: test-token-key
-          SECRETS_RSTUF_ADMIN_PASSWORD: secret
     steps:
       - name: Get RSTUF Container logs
         run: |
@@ -188,9 +185,6 @@ jobs:
           cd ..
           pip install rstuf-cli/
 
-      - name: Login to RSTUF service
-        run: rstuf --auth -c rstuf.ini admin login -s http://localhost -u admin -p secret -e 1
-
       - name: Run the Offline Ceremony using RSTUF saving payload.json
         # Notes:
         # * We copy the rstuf-cli/tests/files because the UT
@@ -204,10 +198,7 @@ jobs:
 
       - name: Run RSTUF Ceremony Bootstrap Upload
         timeout-minutes: 2
-        run: 'rstuf --auth -c rstuf.ini admin ceremony -b -u -f payload.json --upload-server http://localhost'
+        run: 'rstuf admin ceremony -b -u -f payload.json --upload-server http://localhost'
 
       - name: Functional Tests (BDD)
-        env:
-          ADMIN_SECRET_TESTS: secret
-        run: |
-            make ${{ env.MAKE_FT_TARGET }}
+        run: make ${{ env.MAKE_FT_TARGET }}

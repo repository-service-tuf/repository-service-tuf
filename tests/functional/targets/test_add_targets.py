@@ -14,23 +14,9 @@ def test_adding_a_target_using_rstuf_api():
     """Adding a target using RSTUF API"""
 
 
-@given(
-    "the API requester has a token with scopes write for targets "
-    "('write:targets') and read for tasks ('read:tasks')",
-    target_fixture="access_token",
-)
-def the_api_requester_has_a_token_with_scope_specific_scope(access_token):
-    return access_token
-
-
-@given(
-    "the admin adds Authorization Bearer 'access_token' in the 'headers'",
-    target_fixture="headers",
-)
-def the_admin_adds_authorization_token_in_the_headers(access_token):
-    header_token = f"Bearer {access_token}"
-    headers = {"Authorization": header_token}
-    return headers
+@given("the API requester has access to RSTUF API")
+def the_api_requester_has_a_token_with_scope_specific_scope():
+    pass
 
 
 @when(
@@ -41,7 +27,7 @@ def the_admin_adds_authorization_token_in_the_headers(access_token):
     target_fixture="response",
 )
 def the_api_requester_adds_a_new_target(
-    http_request, headers, length, hashes, custom, path
+    http_request, length, hashes, custom, path
 ):
     # remove quotes; example "['str', 'str']" -> to python list['str', 'str']
     hashes = ast.literal_eval(hashes)
@@ -63,9 +49,7 @@ def the_api_requester_adds_a_new_target(
         custom = ast.literal_eval(custom)
         payload["targets"][0]["info"].update({"custom": custom})
 
-    return http_request(
-        method="POST", url="/api/v1/targets", headers=headers, json=payload
-    )
+    return http_request(method="POST", url="/api/v1/targets", json=payload)
 
 
 @then(
@@ -82,12 +66,10 @@ def the_api_requester_gets_successful_message(response):
     "'Task finished' within 90 seconds"
 )
 def the_api_requester_gets_task_status_task_finished_within_threshold(
-    http_request, headers, task_completed_within_threshold, response_json
+    http_request, task_completed_within_threshold, response_json
 ):
     threshold = 90
-    task_completed_within_threshold(
-        http_request, headers, response_json, threshold
-    )
+    task_completed_within_threshold(http_request, response_json, threshold)
 
 
 @then(

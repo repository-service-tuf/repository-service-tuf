@@ -5,8 +5,7 @@ Feature: Adding targets in Repository Service for TUF (RSTUF)
     Admin has provided a token to the API requester
 
     Scenario Outline: Adding a target using RSTUF API
-        Given the API requester has a token with scopes write for targets ('write:targets') and read for tasks ('read:tasks')
-        And the admin adds Authorization Bearer 'access_token' in the 'headers'
+        Given the API requester has access to RSTUF API
         When the API requester adds a new target with <length>, <hashes>, <custom> and <path>
         Then the API requester should get status code '202' with 'task_id'
         Then the API requester gets from endpoint 'GET /api/v1/task' status 'Task finished' within 90 seconds
