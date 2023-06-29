@@ -80,8 +80,7 @@ such as Ceremony, Token Generation, etc.
     └──────────────────────────────────────────────────────────────────────────────────────┘
 
     Server Address: http://192.168.1.199
-    Username (admin): admin
-    Password:
+    Password for admin:
     Expire (in hours): 2
     Token stored in /Users/kairoaraujo/.repository_service_tuf.ini
 
