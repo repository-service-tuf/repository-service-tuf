@@ -113,7 +113,7 @@ TUF service.
         The base URL path for downloading all artifacts.
         Example: https://www.example.com/download/
 
-    * Singing
+    * Signing
 
         This process will also require the Online Key and Root Key(s) (offline) for
         signing the initial root TUF metadata.

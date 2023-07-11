@@ -189,7 +189,7 @@ The response will have a body with all task details
 See the `endpoint task documentation <https://repository-service-tuf.github.io/repository-service-tuf-api/#/v1/get_api_v1_task__get>`_
 for more details.
 
-Adding targets/artifacts for back-singing
+Adding targets/artifacts for back-signing
 =========================================
 
 Repository Service for TUF (RSTUF) allows adding target files (artifacts)

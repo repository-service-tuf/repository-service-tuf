@@ -1,5 +1,5 @@
 ############
-Singing Keys
+Signing Keys
 ############
 
 Repository Service for TUF (RSTUF) requires two sets of keys for
