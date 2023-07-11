@@ -153,7 +153,7 @@ connected to RSTUF API. It does not require a
 
 .. code::
 
-    ❯ rstuf --no-auth admin ceremony -b
+    ❯ rstuf admin ceremony -b
 
 .. note::
 
