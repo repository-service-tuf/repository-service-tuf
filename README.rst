@@ -1,6 +1,10 @@
 Repository Service for TUF (RSTUF)
 ==================================
 
+.. image:: ./docs/source/_static/rstuf-logo.png
+
+.. readme-logo
+
 |OpenSSF Best Practices|
 
 .. |OpenSSF Best Practices| image:: https://bestpractices.coreinfrastructure.org/projects/6587/badge
