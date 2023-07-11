@@ -55,7 +55,7 @@ services:
       interval: 1s
 
   rstuf-worker:
-    image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:dev
+    image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:latest
     volumes:
       - rstuf-storage:/var/opt/repository-service-tuf/storage
       - ./local-keyvault/:/var/opt/repository-service-tuf/keyvault/ # map the path where is your key
@@ -90,7 +90,7 @@ services:
       - "8080:8080"
 
   rstuf-api:
-    image: ghcr.io/repository-service-tuf/repository-service-tuf-api:dev
+    image: ghcr.io/repository-service-tuf/repository-service-tuf-api:latest
     volumes:
       - rstuf-api-data:/data
     ports:

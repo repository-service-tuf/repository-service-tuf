@@ -167,7 +167,7 @@ spec:
               value: LocalStorage
             - name: RSTUF_LOCAL_STORAGE_BACKEND_PATH
               value: /var/opt/repository-service-tuf/storage
-          image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:dev
+          image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:latest
           livenessProbe:
             exec:
               command:
@@ -227,7 +227,7 @@ spec:
               value: redis://redis
             - name: RSTUF_REDIS_SERVER
               value: redis://redis
-          image: ghcr.io/repository-service-tuf/repository-service-tuf-api:dev
+          image: ghcr.io/repository-service-tuf/repository-service-tuf-api:latest
           name: rstuf-api
           ports:
             - containerPort: 80
