@@ -44,7 +44,7 @@ Online Key
 This deployment requires the :ref:`guide/general/keys:Online Key`.
 See the chapter :ref:`guide/general/keys:Singing Keys`
 
-.. centered:: You can skip it if you already have the online key.
+.. centered:: Skip if the online key has been secured.
 
 RSTUF Command Line Interface (CLI) provides a feature for
 :ref:`guide/repository-service-tuf-cli/index:Key Generation (``generate\`\`)`
@@ -63,7 +63,7 @@ onlinekey secret
 
 Generating the secrets for RSTUF Online Key
 
-1. Get the key content and transforms encode it to base 64
+1. Get the key content and encode it to base 64
 
 .. code:: shell
 

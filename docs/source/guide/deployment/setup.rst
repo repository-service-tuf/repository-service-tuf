@@ -3,7 +3,7 @@ Service Setup
 #############
 
 Repository Service for TUF (RSTUF) has two specific processes as part of the
-initail setup: Ceremony and Bootstrap.
+initial setup: Ceremony and Bootstrap.
 
 .. note::
     * The setup and configuration requirements:
@@ -37,7 +37,7 @@ provides an interactive guided process to perform the
     ❯ rstuf admin ceremony -h
 
 
-We have a video to show this process.
+A video demonstrating this process is available.
 
    .. raw:: html
 
@@ -53,14 +53,14 @@ Ceremony
 The Ceremony defines the RSTUF settings/configuration and generates the initial
 signed TUF root metadata.
 
-It doesn't activate the RSTUF service. It generates the required JSON payload
-to bootstrap your RSTUF service.
+It does not activate the RSTUF service. It generates the required JSON payload
+to bootstrap the RSTUF service.
 
 The Ceremony can be done :ref:`guide/deployment/setup:Connected` as a specific
 step or :ref:`guide/deployment/setup:Disconnected`, combined with
 :ref:`guide/deployment/setup:Bootstrap`.
 
-This process generates the initial metadata and defines some settings of your
+This process generates the initial metadata and defines some settings of the
 TUF service.
 
 .. collapse:: See settings details
@@ -105,7 +105,7 @@ TUF service.
     * Targets number of delegated hash bin roles
 
         The target metadata file might contain a large number of artifacts.
-        That’s why the target role delegates trust to the hash bin roles to
+        The target role delegates trust to the hash bin roles to
         reduce the metadata overhead for clients.
 
     * Targets base URL
@@ -128,10 +128,10 @@ The disconnected Ceremony will only generate the required JSON payload
 payload.
 
 .. note::
-    The payload (``payload.json``) contains only public data, it do not contain
+    The payload (``payload.json``) contains only public data, it does not contain
     private keys.
 
-This process is proper when performing the Ceremony on a disconnected computer
+This process is appropriate when performing the Ceremony on a disconnected computer
 to RSTUF API to perform the :ref:`guide/deployment/setup:Bootstrap` later as a
 separate step.
 
@@ -147,8 +147,8 @@ Connected
 The connected Ceremony generates the JSON payload file and run the Bootstrap
 request to RSTUF API.
 
-This process is proper when performing the Ceremony on a computer
-connected to RSTUF API. It doesn't require a
+This process is appropriate when performing the Ceremony on a computer
+connected to RSTUF API. It does not require a
 :ref:`guide/deployment/setup:Bootstrap` step.
 
 .. code::
@@ -169,7 +169,7 @@ Bootstrap
 =========
 
 If a Ceremony :ref:`guide/deployment/setup:Connected` is complete, skip this,
-your RSTUF service is ready.
+as the RSTUF service is ready.
 
 If a Ceremony :ref:`guide/deployment/setup:Disconnected` is complete, it
 requires running the Bootstrap from a computer connected to the RSTUF API.

@@ -72,7 +72,7 @@ application languages.
 Bootstrap trust
 ===============
 
-To bootstrap initial trust relationship with the metadata repository, a
+To bootstrap an initial trust relationship with the metadata repository, a
 client application needs to be initialized with root metadata. This can be
 provided out-of-band, as part of the client application, or via
 Trust-on-first-use (TOFU). TOFU is demonstrated in the python-tuf

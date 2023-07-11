@@ -9,7 +9,7 @@ Docker
   This deployment is recommended for Tests, Development, POC and POV.
 
 .. Note::
-    * For this deployment we will use RabbitMQ as the
+    * For this deployment RabbitMQ will be used as the
       :ref:`message queue/broker <guide/deployment/planning/deployment:Message Queue/Broker: Redis or RabbitMQ server>`.
 
     * This deployment uses the built-in RSTUF Authentication/Authorization
@@ -40,7 +40,7 @@ Online Key
 This deployment requires the :ref:`guide/general/keys:Online Key`.
 See the chapter :ref:`guide/general/keys:Singing Keys`
 
-.. centered:: You can skip it if you already have the online key.
+.. centered:: Skip this section if an online key has already been secured.
 
 RSTUF Command Line Interface (CLI) provides a feature for
 :ref:`guide/repository-service-tuf-cli/index:Key Generation (``generate\`\`)`
@@ -69,7 +69,7 @@ Steps
     Initiating the Docker Swarm
 
     .. caution::
-        Do not use this credentials, it is just an example.
+        Do not use these credentials, as they are provided as example.
 
     .. code:: shell
 
@@ -103,7 +103,7 @@ Steps
 
       **HTTPS**
 
-      Add your Certificate and your Key in the secrets
+      Add the Certificate and the Key in the secrets
 
       .. code:: shell
 
@@ -140,15 +140,15 @@ Steps
 
    * It uses RabbitMQ as the :ref:`broker/message queue <guide/deployment/planning/deployment:Message Queue/Broker: Redis or RabbitMQ server>`
    * It uses Redis for the :ref:`task results and RSTUF configuration <guide/deployment/planning/deployment:Result Backend and RSTUF Settings: Redis server>`.
-   * It uses simple python container as the webserver to exposes the public
+   * It uses a simple python container as the webserver to expose the public
      TUF metadata from ``rstuf-storage``
-   * It configures the ``repository-service-tuf-api`` configuration as
+   * It provisions the ``repository-service-tuf-api`` configuration as
      environment variables:
      - Broker Server: ``RSTUF_BROKER_SERVER``
      - Redis Server: ``RSTUF_REDIS_SERVER``
      - Enable the RSTUF Authentication/Authorization: ``RSTUF_AUTH``, ``SECRETS_RSTUF_TOKEN_KEY``, ``SECRETS_RSTUF_ADMIN_PASSWORD``
 
-   * It adds the ``repository-service-tuf-worker`` configuration as environment
+   * It provisions the ``repository-service-tuf-worker`` configuration as environment
      variables:
 
      - Storage backend: ``RSTUF_STORAGE_BACKEND``, ``RSTUF_LOCAL_STORAGE_BACKEND_PATH``
@@ -161,9 +161,9 @@ Steps
      .. note::
       **HTTPS**
 
-      - Uncoment repository-service-tuf-api environment ``SECRETS_RSTUF_SSL_CERT``, ``SECRETS_RSTUF_SSL_KEY``
+      - Uncomment repository-service-tuf-api environment ``SECRETS_RSTUF_SSL_CERT``, ``SECRETS_RSTUF_SSL_KEY``
         for the certificate and key
-      - Uncoment the in repository-service-tuf-api secrets section ``API_CRT``, ``API_KEY``
+      - Uncomment the in repository-service-tuf-api secrets section ``API_CRT``, ``API_KEY``
       - (Optionally) Comment port ``- 80:80``
 
 

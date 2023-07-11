@@ -2,23 +2,23 @@
 Deployment Configuration
 ########################
 
-The Deployment Planning aims to give in-depth details to RSTUF users that will
-plan a more customized deployment.
+The Deployment Planning aims to provide in-depth details to RSTUF users to aid in the
+planning of a more customized deployment.
 
-This document describes all the aspects of deploying RSTUF independent of the
+This document describes all aspects of deploying RSTUF independent of the
 environment and focuses on the technology stacks required by RSTUF services.
 
 This document also complements the published deployment guides for
 :ref:`guide/deployment/guide/docker:Docker` and
 :ref:`guide/deployment/guide/kubernetes:Kubernetes` with some detailed
-nformation.
+information.
 
 .. image:: /_static/2_2_rstuf.png
 
 Required Infrastructure Services
 ################################
 
-Repository Service for TUF API and Worker some infrastructure services.
+Repository Service for TUF API and Worker infrastructure services.
 
 * :ref:`guide/deployment/planning/deployment:Message Queue/Broker: Redis or RabbitMQ server`
 * :ref:`guide/deployment/planning/deployment:Result Backend and RSTUF Settings: Redis server`
@@ -65,8 +65,7 @@ brokers <https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers
     RSTUF requires Redis server as a
     :ref:`result backend <guide/deployment/planning/deployment:Result Backend and RSTUF Settings: Redis server>`.
 
-    If Redis server is a good choice for you as a message queue/broker, using
-    this will simplify your deployment as it reduces one technology stack.
+  Selecting Redis over RabbitMQ as the message queue/broker, reduces one technology stack.
 
 
 Result Backend and RSTUF Settings: Redis server
@@ -139,7 +138,7 @@ The content server is responsible for exposing the TUF metadata managed by the
 RSTUF Worker(s). This metadata will be used by TUF client implementations
 such as python-tuf, go-tuf, etc.
 
-It is recommend to use a web server listing for all JSON files stored and managed by RSTUF
+It is recommended to use a web server listing for all JSON files stored and managed by RSTUF
 Worker(s).
 
 Suggestion:
@@ -201,7 +200,7 @@ Authentication/Authorization
 
 Use the Authentication/Authorization to restrict scopes
 
-Use such an API Gateway to manage API endpoints' access.
+Use an API Gateway to manage API endpoints' access.
 
 RSTUF API has a built-in authentication service, however this feature is
 not for production. Using external authentication technology is recommended.
@@ -221,7 +220,7 @@ See:
 Secrets
 -------
 
-Use secrets always for sensitive configuration.
+Use secrets always for sensitive configurations.
 
 RSTUF API supports using secrets in the container deployment for sensitive
 environment variables settings.
@@ -234,4 +233,4 @@ Scaling
 
 It is possible to deploy multiple RSTUF API and Worker instances/replicas in a
 distributed environment to support multiple HTTP Requests and
-increase workload for processing the TUF Metadata.
+increase workloads for processing the TUF Metadata.

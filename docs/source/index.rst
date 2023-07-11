@@ -23,7 +23,7 @@ TUF is easily implemented on the client side utilizing powerful TUF client libra
 Use cases
 ---------
 
-Some RSTUF use cases examples include but are not limited to:
+Some RSTUF use case examples include but are not limited to:
 
 * An organization has a live "Software Updater". This "Software Updater" uses
   TUF to download, install and update software artifacts.
@@ -34,8 +34,8 @@ Some RSTUF use cases examples include but are not limited to:
 * An organization with many Operational Technology (OT) devices in different
   plants uses TUF clients to fetch firmware, software, and projects from a
   distributed artifact repository.
-* Web portal, which use TUF to lists all artifacts from a content repository
-  and render as a Web UI, the user to download using the web browser.
+* Web portal, which uses TUF to list all artifacts from a content repository
+  and render as a Web UI, the user to download using a web browser.
 
 
 What is TUF?
@@ -61,7 +61,7 @@ adopt and an excellent Python Library (`python-tuf`_) that provides two APIs
 for low-level Metadata management and client implementation.
 
 Implementing `TUF`_ requires sufficient knowledge of `TUF`_ to design how to
-integrate the framework into your repository and hours of engineering work to
+integrate the framework into a repository and hours of engineering work to
 implement.
 
 RSTUF was born as a consequence of working on implementing `PEP 458
