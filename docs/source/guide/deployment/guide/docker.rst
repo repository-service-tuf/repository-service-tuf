@@ -191,7 +191,28 @@ Steps
         Creating service rstuf_rstuf-api
         Creating service rstuf_rabbitmq
 
-5. RSTUF Ceremony and Bootstrap
+6. Check if all services are running and health
+
+  .. code:: shell
+
+      $ docker ps -a
+      CONTAINER ID   IMAGE                                                                 COMMAND                  CREATED              STATUS                        PORTS                                                                  NAMES
+      f3eb8e38c244   postgres:15.1                                                         "docker-entrypoint.s…"   59 seconds ago       Up 58 seconds (healthy)       5432/tcp                                                               rstuf_postgres.1.n9bculkxiikst502oneq2y1tl
+      00831512a35d   redis:4.0                                                             "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   6379/tcp                                                               rstuf_redis.1.gy8owq16qa0fbgyklr6ji1hyy
+      75be8062673e   rabbitmq:3-management-alpine                                          "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   4369/tcp, 5671-5672/tcp, 15671-15672/tcp, 15691-15692/tcp, 25672/tcp   rstuf_rabbitmq.1.rw9xdy0bc2n2vszayz8z6onij
+      a15dc8f6f3c9   ghcr.io/repository-service-tuf/repository-service-tuf-api:latest      "bash entrypoint.sh"     About a minute ago   Up About a minute                                                                                    rstuf_rstuf-api.1.o8zmoccz2n4vnxemczlrrg3o9
+      40d410b9c6ff   python:3.10-slim-buster                                               "python -m http.serv…"   About a minute ago   Up About a minute                                                                                    rstuf_web-server.1.s29tparemtrj5tut6l41in8ah
+      5762860c1ccc   ghcr.io/repository-service-tuf/repository-service-tuf-worker:latest   "bash entrypoint.sh"     About a minute ago   Up About a minute (healthy)                                                                          rstuf_rstuf-worker.1.aq20wunul0z9lla0nkpo303zn
+
+
+  Verify ``rstuf_rstuf-worker`` logs
+
+  .. code:: shell
+
+      docker service logs rstuf_rstuf-worker --raw
+
+
+7. RSTUF Ceremony and Bootstrap
 
   .. include:: ../setup.rst
 

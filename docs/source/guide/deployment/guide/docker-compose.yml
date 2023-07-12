@@ -74,6 +74,7 @@ services:
       - SECRETS_RSTUF_ONLINE_KEY
       - SECRETS_POSTGRES_PASSWORD
     depends_on:
+      - postgres
       - redis
       - rabbitmq
     healthcheck:
@@ -112,6 +113,4 @@ services:
       # - API_CRT
       # - API_KEY
     depends_on:
-      - rabbitmq
-      - redis
       - rstuf-worker
