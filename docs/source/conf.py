@@ -35,7 +35,7 @@ extensions = [
     'sphinxcontrib.plantuml',
     'sphinxcontrib.needs',
     'sphinx.ext.autosectionlabel',
-    'sphinxcontrib.openapi',
+    'sphinx_toolbox.collapse',
 ]
 
 autosectionlabel_prefix_document = True
@@ -68,8 +68,8 @@ html_theme = 'sphinx_rtd_theme'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
-# html_logo = '_static/repository-service-tuf-logo.gif'
-# html_favicon = '_static/rstuf-logo.ico'
+html_logo = '_static/rstuf-logo.png'
+html_favicon = '_static/rstuf.ico'
 # HTML Theme Options
 html_theme_options = {
     'navigation_depth': 4,

@@ -2,7 +2,6 @@ version: "3.7"
 
 volumes:
   rstuf-api-data:
-  rstuf-worker-data:
   rstuf-mq-data:
   rstuf-storage:
   rstuf-redis-data:
@@ -13,7 +12,9 @@ secrets:
     external: True
   SECRETS_RSTUF_TOKEN_KEY:
     external: True
-  SECRETS_RSTUF_ONLINE_KEY_PASSWORD:
+  SECRETS_RSTUF_ONLINE_KEY:
+    external: True
+  SECRETS_POSTGRES_PASSWORD:
     external: True
   # HTTPS (SSL)
   # API_KEY:
@@ -56,22 +57,24 @@ services:
   rstuf-worker:
     image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:latest
     volumes:
-      - rstuf-worker-data:/data
       - rstuf-storage:/var/opt/repository-service-tuf/storage
       - ./local-keyvault/:/var/opt/repository-service-tuf/keyvault/ # map the path where is your key
     environment:
       RSTUF_STORAGE_BACKEND: LocalStorage
-      RSTUF_KEYVAULT_BACKEND: LocalKeyVault
       RSTUF_LOCAL_STORAGE_BACKEND_PATH: /var/opt/repository-service-tuf/storage
-      RSTUF_LOCAL_KEYVAULT_PATH: /var/opt/repository-service-tuf/keyvault/online.key
-      RSTUF_LOCAL_KEYVAULT_PASSWORD: /run/secrets/SECRETS_RSTUF_ONLINE_KEY_PASSWORD
+      RSTUF_KEYVAULT_BACKEND: LocalKeyVault
+      RSTUF_LOCAL_KEYVAULT_PATH: /var/opt/repository-service-tuf/keyvault
+      RSTUF_LOCAL_KEYVAULT_KEYS: /run/secrets/SECRETS_RSTUF_ONLINE_KEY
       RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
       RSTUF_REDIS_SERVER: redis://redis
-      RSTUF_SQL_SERVER: postgresql://postgres:secret@postgres:5432
-      RSTUF_WORKER_ID: rstuf_worker_001
+      RSTUF_SQL_SERVER: postgres:5432
+      RSTUF_SQL_USER: postgres
+      RSTUF_SQL_PASSWORD: /run/secrets/SECRETS_POSTGRES_PASSWORD
     secrets:
-      - SECRETS_RSTUF_ONLINE_KEY_PASSWORD
+      - SECRETS_RSTUF_ONLINE_KEY
+      - SECRETS_POSTGRES_PASSWORD
     depends_on:
+      - postgres
       - redis
       - rabbitmq
     healthcheck:
@@ -95,9 +98,9 @@ services:
       - 80:80
       - 443:443
     environment:
-      RSTUF_BOOTSTRAP_NODE: "true"
       RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
       RSTUF_REDIS_SERVER: redis://redis
+      RSTUF_AUTH: "true"
       SECRETS_RSTUF_TOKEN_KEY: /run/secrets/SECRETS_RSTUF_TOKEN_KEY
       SECRETS_RSTUF_ADMIN_PASSWORD: /run/secrets/SECRETS_RSTUF_ADMIN_PASSWORD
       # HTTP (SSL)
@@ -106,11 +109,8 @@ services:
     secrets:
       - SECRETS_RSTUF_ADMIN_PASSWORD
       - SECRETS_RSTUF_TOKEN_KEY
-      - SECRETS_RSTUF_ONLINE_KEY_PASSWORD
       # HTTPS (SSL)
       # - API_CRT
       # - API_KEY
     depends_on:
-      - rabbitmq
-      - redis
       - rstuf-worker
