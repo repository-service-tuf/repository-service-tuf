@@ -24,8 +24,8 @@
 !include <azure/Security/AzureKeyVault>
 
 !include <awslib/AWSCommon>
-!include <awslib/SecurityIdentityAndCompliance/KeyManagementService>
-!include <awslib/Storage/S3Bucket>
+!include <awslib/SecurityIdentityCompliance/KeyManagementService>
+!include <awslib/Storage/SimpleStorageService>
 
 sprite $rstuf [125x125/16z] {
 xC610000082W_QaNgG8009WTCz6QL8M1S585A8ha_T_sYavpCdYEtVwptUsRzNUX81N3yejHXZJDESzJ2b3vZI1cCq-EaD-2XiNCQYbRRRfrAwKs_I2_dbZC

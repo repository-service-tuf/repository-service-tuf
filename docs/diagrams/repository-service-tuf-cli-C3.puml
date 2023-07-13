@@ -46,6 +46,9 @@ System_Boundary(trs_cli, "Repository Service for TUF CLI") #APPLICATION {
             Container_Ext(click, "click")
             Container_Boundary(admin, "admin") {
                 Container(ceremony, "ceremony")
+                Container_Boundary(metadata, "metadata"){
+                    Container(update, "update")
+                }
                 Container(login, "login")
                 Container_Boundary(token, "token"){
                     Container(generate, "generate")
@@ -69,6 +72,8 @@ Rel_R(user, trs_cli, "rstuf-cli", $tags="terminal")
 
 Rel(ceremony, tuf, " ")
 Rel(ceremony, api_client, " ")
+Rel(update, tuf, " ")
+Rel(update, api_client, " ")
 Rel_R(generate, api_client, " ")
 Rel_L(token, click, " ")
 Rel(login, api_client, " ")
@@ -77,6 +82,7 @@ Rel(dynaconf, user, " ", $tags="os")
 Rel(python_tuf, user, " ", $tags="os")
 Rel_U(ceremony, click, " ")
 Rel_U(login, click, " ")
+Rel_U(update, click, " ")
 
 Rel(requests, tuf_repository_service_api, " ")
 
