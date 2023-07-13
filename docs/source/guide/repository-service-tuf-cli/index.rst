@@ -379,6 +379,324 @@ Using another computer with access to ``repository-service-tuf-api``
   3.  Run ``rstuf admin ceremony -b -u [-f filename]``
 
 
+.. rstuf-cli-admin-metadata
+
+Metadata Management (``metadata``)
+----------------------------------
+
+.. code::
+
+    ❯ rstuf admin metadata
+
+    Usage: rstuf admin metadata [OPTIONS] COMMAND [ARGS]...
+
+    Token Management.
+
+    ╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │  --help  -h    Show this message and exit.                                                                             │
+    ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Commands ─────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │  update  Start a new metadata update ceremony.                                                                         │
+    ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+.. rstuf-cli-admin-metadata-update
+
+update
+......
+
+The metadata update ceremony allows to:
+- extend Root expiration
+- change Root signature threshold
+- change any signing key
+
+.. code::
+
+    ❯ rstuf admin metadata update --help
+
+    Usage: rstuf admin metadata update [OPTIONS]
+
+    Start a new metadata update ceremony.
+
+    ╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │ --current-root-uri      TEXT  URL or local path to the current root.json file.                                                             │
+    │ --file              -f  TEXT  Generate specific JSON payload file [default: metadata-update-payload.json]                                  │
+    │ --upload            -u        Upload existent payload 'file'. Optional '-f/--file' to use non default file name.                           │
+    │ --run-ceremony                When '--upload' is set this flag can be used to run the ceremony and the result will be uploaded.            │
+    │ --save              -s        Save a copy of the metadata locally. This option saves the JSON metadata update payload file in the current  │
+    │                               directory.                                                                                                   │
+    │ --help              -h        Show this message and exit.                                                                                  │
+    ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+.. code::
+
+    ❯ rstuf admin metadata update
+
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃                                         Metadata Update                                          ┃
+    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+    The metadata update ceremony allows to:
+
+    • extend Root expiration
+    • change Root signature threshold
+    • change any signing key
+
+    The result of this ceremony will be a new metadata-update-payload.json file.
+
+
+    NOTICE: This is an alpha feature and will get updated over time!
+
+
+    File name or URL to the current root metadata: rstuf/cli/tests/files/root.json
+
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃                                       Current Root Content                                       ┃
+    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+    Before deciding what you want to update it's recommended that you get familiar with the current
+    state of the root metadata file.
+
+
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃ Root                         ┃                                                                                    KEYS                                                                                     ┃
+    ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+    │                              │                                                                    ╷              ╷          ╷         ╷                                                                    │
+    │                              │                                  Id                                │   Name/Tag   │ Key Type │ Storage │                           Public Value                             │
+    │ Number of Keys: 2            │ ╶──────────────────────────────────────────────────────────────────┼──────────────┼──────────┼─────────┼──────────────────────────────────────────────────────────────────╴ │
+    │ Threshold: 1                 │   1cebe343e35f0213f6136758e6c3a8f8e1f9eeb7e47a07d5cb336462ed31dcb7 │ Martin's Key │ ed25519  │ Offline │ ad1709b3cb419b99c5cd7427d6411522e5a93aec6767453e91af921a73d22a3c   │
+    │ Root Expiration: 2024-Apr-30 │   800dfb5a1982b82b7893e58035e19f414f553fc08cbb1130cfbae302a7b7fee5 │ Steven's Key │ ed25519  │ Offline │ 7098f769f6ab8502b50f3b58686b8a042d5d3bb75d8b3a48a2fcbc15a0223501   │
+    │                              │                                                                    ╵              ╵          ╵         ╵                                                                    │
+    └──────────────────────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+The metadata ceremony consists of 4 steps:
+
+Step 1: Authorization
+"""""""""""""""""""""
+.. code::
+
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃                                      STEP 1: Authorization                                       ┃
+    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+    Before continuing, you must authorize using the current root key(s).
+
+    In order to complete the authorization you will be asked to provide information about one or more
+    keys used to sign the current root metadata. To complete the authorization, you must provide
+    information about one or more keys used to sign the current root metadata. The number of required
+    keys is based on the current "threshold".
+
+    You will need local access to the keys as well as their corresponding passwords.
+    You will need to load 1 key(s).
+    You will enter information for key 0 of 1
+
+    Choose root key type [ed25519/ecdsa/rsa] (ed25519):
+    Enter the root`s private key path: rstuf/cli/tests/files/key_storage/JanisJoplin.key
+    Enter the root`s private key password:
+    ✅ Key 1/1 Verified
+
+    Authorization is successful
+
+Step 2: Extend Root Expiration
+""""""""""""""""""""""""""""""
+.. code::
+
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃                                  STEP 2: Extend Root Expiration                                  ┃
+    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+    Now, you will be given the opportunity to extend root's expiration.
+
+    Note: the root expiration can be extended ONLY during the metadata update ceremony.
+
+
+    Current root expiration: 2024-Apr-30
+    Do you want to extend the root's expiration? [y/n]: y
+    Days to extend root's expiration starting from today (365):
+    New root expiration: 2024-May-28. Do you agree? [y/n]: y
+
+Note: Root's expiration is extended starting from today and not from the
+current root expiration date.
+
+Step 3: Root Keys Changes
+"""""""""""""""""""""""""
+
+.. code::
+
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃                                  STEP 3:  Root Keys Changes                                      ┃
+    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+    You are starting the Root keys changes procedure.
+
+    Note: when asked about specific attributes the default values that are suggested will be the ones
+    used in the current root metadata.
+
+
+    Do you want to change the root metadata? [y/n]: y
+
+    What should be the root role threshold? (1):
+
+                                            Root Keys Removal
+                                            -----------------
+
+    You are starting the root keys modification procedure.
+
+    First, you will be asked if you want to remove any of the keys. Then you will be given the
+    opportunity to add as many keys as you want.
+
+    In the end, the number of keys that are left must be equal or above the threshold you have given.
+    Here are the current root keys:
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃                        Id                        ┃   Name/Tag   ┃ Key Type ┃ Storage ┃ Singing Key ┃                   Public Value                   ┃
+    ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+    │ 1cebe343e35f0213f6136758e6c3a8f8e1f9eeb7e47a07d… │ Martin's Key │ ed25519  │ Offline │    True     │ ad1709b3cb419b99c5cd7427d6411522e5a93aec6767453… │
+    │ 800dfb5a1982b82b7893e58035e19f414f553fc08cbb113… │ Steven's Key │ ed25519  │ Offline │    False    │ 7098f769f6ab8502b50f3b58686b8a042d5d3bb75d8b3a4… │
+    └──────────────────────────────────────────────────┴──────────────┴──────────┴─────────┴─────────────┴──────────────────────────────────────────────────┘
+
+
+    Do you want to remove a key [y/n]: y
+    Name/Tag of the key to remove: Martin's Key
+    Key with name/tag Martin's Key removed
+
+    Here are the current root keys:
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃                        Id                        ┃   Name/Tag   ┃ Key Type ┃ Storage ┃ Singing Key ┃                   Public Value                   ┃
+    ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+    │ 800dfb5a1982b82b7893e58035e19f414f553fc08cbb113… │ Steven's Key │ ed25519  │ Offline │    False    │ 7098f769f6ab8502b50f3b58686b8a042d5d3bb75d8b3a4… │
+    └──────────────────────────────────────────────────┴──────────────┴──────────┴─────────┴─────────────┴──────────────────────────────────────────────────┘
+
+
+    Do you want to remove a key [y/n]: n
+
+                                            Root Keys Addition
+                                            ------------------
+
+    Now, you will be able to add root keys.
+    You need to have at least 1 signing keys.
+
+    Here are the current root signing keys:
+    ┏━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+    ┃ Id ┃ Name/Tag ┃ Key Type ┃ Storage ┃ Singing Key ┃ Public Value ┃
+    ┡━━━━╇━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+    └────┴──────────┴──────────┴─────────┴─────────────┴──────────────┘
+
+    Do you want to add a new key? [y/n]: y
+
+    Choose root key type [ed25519/ecdsa/rsa] (ed25519):
+    Enter the root`s private key path: rstuf/cli/tests/files/key_storage/JanisJoplin.key
+    Enter the root`s private key password:
+    [Optional] Give a name/tag to the key: Kairo's Key
+
+    Here are the current root keys:
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃                        Id                        ┃   Name/Tag   ┃ Key Type ┃ Storage ┃ Singing Key ┃                   Public Value                   ┃
+    ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+    │ 800dfb5a1982b82b7893e58035e19f414f553fc08cbb113… │ Steven's Key │ ed25519  │ Offline │    False    │ 7098f769f6ab8502b50f3b58686b8a042d5d3bb75d8b3a4… │
+    └──────────────────────────────────────────────────┴──────────────┴──────────┴─────────┴─────────────┴──────────────────────────────────────────────────┘
+
+    Do you want to add a new key? [y/n]: n
+
+    Here is the current content of root:
+
+
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃ Root                         ┃                                                          KEYS                                                          ┃
+    ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+    │                              │                                  ╷              ╷          ╷         ╷             ╷                                   │
+    │                              │                 Id               │   Name/Tag   │ Key Type │ Storage │ Singing Key │          Public Value             │
+    │ Number of Keys: 2            │ ╶────────────────────────────────┼──────────────┼──────────┼─────────┼─────────────┼─────────────────────────────────╴ │
+    │ Threshold: 1                 │   800dfb5a1982b82b7893e58035e19… │ Steven's Key │ ed25519  │ Offline │    False    │ 7098f769f6ab8502b50f3b58686b8a…   │
+    │ Root Expiration: 2024-Jun-12 │   1cebe343e35f0213f6136758e6c3a… │ Kairo's Key  │ ed25519  │ Offline │    True     │ ad1709b3cb419b99c5cd7427d64115…   │
+    │                              │                                  ╵              ╵          ╵         ╵             ╵                                   │
+    └──────────────────────────────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+    Do you want to change the root metadata? [y/n]: n
+    Skipping further root metadata changes
+
+
+Step 4: Online Key Change
+"""""""""""""""""""""""""
+
+.. code::
+
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃                                    STEP 4: Online Key Change                                     ┃
+    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+    Now you will be given the opportunity to change the online key.
+
+    The online key is used to sign all roles except root.
+
+    Note: there can be only one online key at a time.
+
+    Here is the information for the current online key:
+
+
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃                      Id                      ┃  Name/Tag  ┃ Key Type ┃ Storage ┃                 Public Value                  ┃
+    ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+    │ f7a6872f297634219a80141caa2ec9ae8802098b07b… │ Online key │ ed25519  │ Online  │ 9fe7ddccb75b977a041424a1fdc142e01be4abab918d… │
+    └──────────────────────────────────────────────┴────────────┴──────────┴─────────┴───────────────────────────────────────────────┘
+
+
+    Do you want to change the online key? [y/n]: y
+
+    Choose root key type [ed25519/ecdsa/rsa] (ed25519): rsa
+    Enter the root`s private key path: rstuf/cli/tests/files/key_storage/online-rsa.key
+    Enter the root`s private key password:
+    [Optional] Give a name/tag to the key: New Online Key
+
+    Here is the information for the current online key:
+
+
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃                     Id                     ┃    Name/Tag    ┃ Key Type ┃ Storage ┃                Public Value                 ┃
+    ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+    │ b1b4a183b603ad34e898ab7a3b4d138d5fab5bcd7… │ New Online Key │   rsa    │ Online  │         -----BEGIN PUBLIC KEY-----          │
+    │                                            │                │          │         │ MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAY… │
+    │                                            │                │          │         │ sp+ZH8CqbF1f4DeKodBooz5nx5pN+xzPe7T3WPZLAc… │
+    │                                            │                │          │         │ wOD4KtpoAOJnjZWwEYk5SO/28RlaZoye/USrnvsSE4… │
+    │                                            │                │          │         │ Rf91kYH6qM/fr4e87K81HXGyfZ4Vqshg/Q1wybBB1A… │
+    │                                            │                │          │         │ PaTvB4f746vPfBhqxpzJ8/E3spXA2eOIoGOPrHkZhp… │
+    │                                            │                │          │         │ KicMXaLyt9yD15bwy/7boupBcpBGIg1tPr1r8nzPdu… │
+    │                                            │                │          │         │ 62SyHP8JvwYPEgbYfJHQjaSJUV0ZYAP15TF6S8ZNeZ… │
+    │                                            │                │          │         │ eKfiWVtujJHvxW5rN7bKreZ4qMi4/u8wHoqPslO2QC… │
+    │                                            │                │          │         │ Vb14QJQvtQNjy8IGu/J04bzhIbtPjQh5pps2llK3Ty… │
+    │                                            │                │          │         │          -----END PUBLIC KEY-----           │
+    └────────────────────────────────────────────┴────────────────┴──────────┴─────────┴─────────────────────────────────────────────┘
+
+
+    Do you want to change the online key? [y/n]: n
+    Skipping further online key changes
+
+                                                            Payload Generation
+
+    Verifying the new payload...
+    The new payload is verified
+    File metadata-update-payload.json successfully generated
+
+Finishing
+"""""""""
+
+The metadata update ceremony should be used when a user wants to update the
+content of their metadata files.
+In order to fully complete this besides finishing the ceremony steps you need
+to send the resulting payload to the active RSTUF API deployment
+(```repository-service-tuf-api``) you already use.
+
+There are a few of ways to you can fully complete the metadata update ceremony:
+
+* Run ceremony and upload it with one command:
+
+    * Run ``rstuf admin metadata update -u --run-ceremony``
+
+* Do it in two steps:
+
+    * Finish the metadata ceremony and generate ``metadata-update-payload.json`` (or the custom name you chose)
+
+    * Run ``rstuf admin metadata update -u [-f filename]``
+
 .. rstuf-cli-admin-token
 
 Token (``token``)
