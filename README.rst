@@ -1,7 +1,7 @@
 Repository Service for TUF (RSTUF)
 ==================================
 
-.. image:: ./docs/source/_static/rstuf-logo.png
+.. image:: ./docs/source/_static/logo/PNG/rstuf_horizontal-color.png
 
 .. readme-logo
 
