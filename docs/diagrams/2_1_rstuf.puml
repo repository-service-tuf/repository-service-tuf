@@ -46,14 +46,14 @@ ContainerDb(key_service, "Key Service", "Local/SaaS Vault", $tags="key_service")
 ContainerDb(storage_service, "Storage Service", "Local/SaaS Storage", $tags="storage_service") #LightGrey
 ContainerDb(sql, "SQL Server", "SQL Server", $tags="sql_db") #SlateGray
 
-Rel(rstuf_cli, rstuf_rest_api, "REPOSITORY-SERVICE-TUF-CLI", "HTTP")
+Rel(rstuf_cli, rstuf_rest_api, "REPOSITORY-SERVICE-TUF-CLI", "HTTP(S)")
 Rel_U(queue, rstuf_repo_worker, "Consumer", "Tasks")
-Rel_U(redis, rstuf_repo_worker, "Read/Write", "Settings")
+Rel_U(key_service, rstuf_repo_worker, "Read", "Online Keys")
+BiRel_U(redis, rstuf_repo_worker, "Read/Write", "Settings")
 Rel_D(rstuf_rest_api, queue, "Producer", "Tasks")
 Rel_D(redis, rstuf_rest_api, "Read", "Settings")
-Rel_D(rstuf_repo_worker, key_service, "Read/Write", "Online Keys")
-Rel_D(rstuf_repo_worker, storage_service, "Read/Write", "Repository Metadata")
-Rel_U(rstuf_repo_worker, sql, "Read/Write", "TargetFiles, BINSRoles")
+BiRel_D(rstuf_repo_worker, storage_service, "Read/Write", "Repository Metadata")
+BiRel_U(rstuf_repo_worker, sql, "Read/Write", "TargetFiles, BINSRoles")
 
 
 HIDE_STEREOTYPE()
