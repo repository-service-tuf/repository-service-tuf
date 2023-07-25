@@ -13,14 +13,14 @@ The principles
 
    * RSTUF is easy to deploy.
 
-   * RSTUF has API first design.
+   * RSTUF has API-first design.
 
-     - RSTUF is language agnostic, making any language use/integrate easily.
+     - RSTUF is language agnostic, allowing any programming language integration
 
    * RSTUF is process agnostic.
 
-     - Adding/removing artifacts goes with the existing releasing/publishing
-       process.
+     - Add/Remove artifacts doesn't interfere with the existing organization
+       release/publish processes.
 
    * RSTUF focuses on scalability and Metadata consistency.
 
@@ -48,6 +48,7 @@ The below definitions allow RSTUF API and RSTUF Worker scalability.
 RSTUF is Asynchronous
 =====================
 
+    * RSTUF uses `Celery <https://docs.celeryq.dev>`_.
     * Every API request is a task.
     * RSTUF centralizes all tasks in the :ref:`devel/design:Message Queue`.
     * RSTUF stores all task results in the :ref:`devel/design:Backend Result`.
@@ -57,19 +58,29 @@ RSTUF is Asynchronous
 RSTUF Repository Settings/Configuration
 =======================================
 
-    * :ref:`guide/general/introduction:RSTUF Components` are RSTUF
-      **stateless** about the Repository Settings, relying on
-      :ref:`devel/design:RSTUF settings`.
+    * :ref:`guide/general/introduction:RSTUF Components` are **stateless**
 
-    * :ref:`devel/design:RSTUF settings` stores in
-      :ref:`devel/design:Redis` using `Dynaconf <https://www.dynaconf.com>`_.
+      - Components are configured by runtime environment variables
+      - Components uses runtime :ref:`devel/design:TUF Repository Settings`
+
+    * :ref:`devel/design:Redis` stores the
+      :ref:`devel/design:TUF Repository Settings` using
+      `Dynaconf <https://www.dynaconf.com>`_.
 
     * :ref:`devel/design:Repository Service TUF Worker` **writes** settings
     * :ref:`devel/design:Repository Service TUF API` **reads** settings.
 
         .. note::
-          A unique exception is when a bootstrap process fails and the API
-          **writes** it back to ``None``.
+          A single exception is during a bootstrap process. If the
+          :ref:`devel/design:Repository Service TUF API` detects a failure
+          **writes** :ref:`devel/design:TUF Repository Settings`
+          ``BOOTSTRAP`` to ``None``.
+
+TUF Repository Settings
+-----------------------
+
+TUF Repository Setting are key configuration for the Metadata Repository
+operations.
 
     .. list-table:: RSTUF reserved settings/configuration
         :header-rows: 1
@@ -117,8 +128,8 @@ RSTUF Repository Settings/Configuration
 Target Files and Target Roles
 =============================
 
-    * The TUF top-level Targets Role is only used for delegation. 
-This role does not register target files (artifacts).
+    * The TUF top-level Targets Role is only used for delegation.
+      This role does not register target files (artifacts).
     * :ref:`devel/design:PostgreSQL` stores the artifacts (``TargetFiles``) and
       Targets delegated roles.
     * :ref:`devel/design:Repository Service TUF Worker` manages the
@@ -184,12 +195,20 @@ The Infrastructure Services have key functionality on RSTUF
 Message Queue
 =============
 
-* It is a centralized queue
+* It is a centralized queue service for tasks
+* This queue is used as `Broker by Celery
+  <https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers/index.html#broker-overview>`_.
+* :ref:`devel/design:Repository Service TUF Worker` defines the supported Queue
+  servers.
 
 Backend Result
 ==============
 
-* It is a centralized backend result for tasks
+* It is a centralized `backend result used by Celery for task results
+  <https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers/index.html>`_
+* :ref:`devel/design:Repository Service TUF Worker` defines the supported
+  backend results servers.
+
 
 Redis
 =====
