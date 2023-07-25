@@ -13,7 +13,7 @@ The principles
 
    * RSTUF is easy to deploy.
 
-   * RSTUF is API first designed.
+   * RSTUF has API first design.
 
      - RSTUF is language agnostic, making any language use/integrate easily.
 
@@ -49,7 +49,7 @@ RSTUF is Asynchronous
 =====================
 
     * Every API request is a task.
-    * RSTUF centralizes all tasks in the Message :ref:`devel/design:Message Queue`.
+    * RSTUF centralizes all tasks in the :ref:`devel/design:Message Queue`.
     * RSTUF stores all task results in the :ref:`devel/design:Backend Result`.
     * :ref:`devel/design:Repository Service TUF API` **publishes** RSTUF tasks.
     * :ref:`devel/design:Repository Service TUF Worker` **consumes** RSTUF tasks.
@@ -90,26 +90,22 @@ RSTUF Repository Settings/Configuration
             | ``sign-<task id>``: Signing process
         * - ``<ROLE NAME>_EXPIRATION``
           - | ``int``
-            | days
-          - | Role Metadata expiration setting
+          - | Role Metadata expiration policy in days
             | It uses the role name uppercase
             | Example: ``ROOT_EXPIRATION``
         * - ``<ROLE NAME>_NUM_KEYS``
           - | ``int``
-            | number of keys
           - | Role number of keys
             | It uses the role name uppercase
             | Example: ``ROOT_NUM_KEYS``
         * - ``<ROLE NAME>_THRESHOLD``
           - | ``int``
-            | keys threshold
-          - | Role threshold
+          - | Role key threshold
             | It uses the role name uppercase
             | Example: ``ROOT_THRESHOLD``
         * - ``NUMBER_OF_DELEGATED_BINS``
           - | ``int``
-            | Number of delegated bins
-          - number of delegated hash bin roles
+          - Number of delegated hash bin roles
         * - ``SIGNING_<ROLE NAME>``
           - | ``None``
             | ``<json>``
@@ -121,8 +117,8 @@ RSTUF Repository Settings/Configuration
 Target Files and Target Roles
 =============================
 
-    * The TUF top Role Targets is a role only for delegation. This role does
-      not register target files (artifacts).
+    * The TUF top-level Targets Role is only used for delegation. 
+This role does not register target files (artifacts).
     * :ref:`devel/design:PostgreSQL` stores the artifacts (``TargetFiles``) and
       Targets delegated roles.
     * :ref:`devel/design:Repository Service TUF Worker` manages the
@@ -170,7 +166,7 @@ Repository Service TUF CLI
 ==========================
 
 * Command Line Interface for the API
-* Guide users in the process
+* Guide users in the processes
 
 .. note::
     The service can implement other features without interfering with the
