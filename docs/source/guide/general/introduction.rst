@@ -5,10 +5,10 @@ Introduction
 Repository Service for TUF
 ##########################
 
+.. image:: /_static/1_1_rstuf.png
+
 RSTUF Components
 ================
-
-.. image:: /_static/2_1_rstuf.png
 
 Repository Service for TUF (RSTUF) is a combination of micro-services provided
 as containers:
