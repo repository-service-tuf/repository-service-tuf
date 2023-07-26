@@ -33,7 +33,7 @@ Components Milestones:
 Goal: Minimum Working Version
 =============================
 
-Status: Work In Progress
+Status: Done
 
 Not for a Production Deploy.
 This release is to evaluate the features and functionality.
@@ -52,9 +52,9 @@ This release is to evaluate the features and functionality.
 
 Components Milestones:
 
-- `repository-service-tuf-api v1.0.0bX <https://github.com/repository-service-tuf/repository-service-tuf-api/milestone/3>`_
-- `repository-service-tuf-worker v1.0.0bX <https://github.com/repository-service-tuf/repository-service-tuf-worker/milestone/3>`_
-- `repository-service-tuf-cli v1.0.0bX <https://github.com/repository-service-tuf/repository-service-tuf-cli/milestone/3>`_
+- `repository-service-tuf-api v0.4.0b1 <https://github.com/repository-service-tuf/repository-service-tuf-api/milestone/3>`_
+- `repository-service-tuf-worker v0.5.0b1 <https://github.com/repository-service-tuf/repository-service-tuf-worker/milestone/3>`_
+- `repository-service-tuf-cli v0.4.0b1 <https://github.com/repository-service-tuf/repository-service-tuf-cli/milestone/3>`_
 
 
 Goal: Minimum Valuable Product
@@ -65,16 +65,17 @@ Status: TBD
 First Production Deploy
 This release achive the minimum valuable product for users.
 
+- [x] Deployment Design Document (`Issue #227 <https://github.com/repository-service-tuf/repository-service-tuf/issues/227>`_)
+- [ ] Distributed asynchronous threshold signing (`Issue #327 <https://github.com/repository-service-tuf/repository-service-tuf/issues/327>`_)
 - [ ] Old Metadata retention (`Issue #29 <https://github.com/repository-service-tuf/repository-service-tuf/issues/29>`_)
-- [ ] Deployment Design Document (`Issue #227 <https://github.com/repository-service-tuf/repository-service-tuf/issues/227>`_)
 - [ ] Support to AWS S3 (Storage) and AWS KMS (Key Vault) (`Issue #24 <https://github.com/repository-service-tuf/repository-service-tuf/issues/24>`_)
 - [ ] Token revocation (`Issue #30 <https://github.com/repository-service-tuf/repository-service-tuf/issues/30>`_)
 
 Components Milestones:
 
-- `repository-service-tuf-api v1.0.X <https://github.com/repository-service-tuf/repository-service-tuf-api/milestone/4>`_
-- `repository-service-tuf-worker v1.0.X <https://github.com/repository-service-tuf/repository-service-tuf-worker/milestone/4>`_
-- `repository-service-tuf-cli v1.0.X <https://github.com/repository-service-tuf/repository-service-tuf-cli/milestone/4>`_
+- `repository-service-tuf-api v1.Y.Z <https://github.com/repository-service-tuf/repository-service-tuf-api/milestone/4>`_
+- `repository-service-tuf-worker v1.Y.Z <https://github.com/repository-service-tuf/repository-service-tuf-worker/milestone/4>`_
+- `repository-service-tuf-cli v1.Y.Z <https://github.com/repository-service-tuf/repository-service-tuf-cli/milestone/4>`_
 
 
 Goal: End-to-End Signing
