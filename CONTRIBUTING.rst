@@ -8,6 +8,11 @@ taking the time to contribute!
 Please familiarize yourself with the `Code of Conduct`_
 before contributing.
 
+Meetings
+========
+
+* `Community Meetings <https://hackmd.io/sSB1pwpDR5Seag0YB-vYMA>`_
+
 DCO
 ===
 
