@@ -138,7 +138,7 @@ Target Files and Target Roles
       the Key Vault and Storage Services.
 
       - Access to the Key Vault Service is restricted to
-        :ref:`devel/design:Repository Service TUF Worker`
+        :ref:`devel/design:Repository Service TUF Worker` (ready-only)
       - Writing the TUF Metadata in the Storage Service  is limited to
         :ref:`devel/design:Repository Service TUF Worker`
       - The Storage Service is the only public data
