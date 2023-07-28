@@ -13,9 +13,9 @@ The principles
 
    * RSTUF is easy to deploy.
 
-   * RSTUF has API-first design.
+   * RSTUF has an API-first design.
 
-     - RSTUF is language agnostic, allowing any programming language integration
+     - RSTUF is language agnostic, allowing integration by any programming language
 
    * RSTUF is process agnostic.
 
@@ -58,16 +58,16 @@ RSTUF is Asynchronous
 RSTUF Repository Settings/Configuration
 =======================================
 
-    * :ref:`guide/general/introduction:RSTUF Components` are **stateless**
+    * :ref:`guide/general/introduction:RSTUF Components` are **stateless**.
 
-      - Components are configured by runtime environment variables
-      - Components uses runtime :ref:`devel/design:TUF Repository Settings`
+      - Components are configured by runtime environment variables.
+      - Components uses runtime :ref:`devel/design:TUF Repository Settings`.
 
     * :ref:`devel/design:Redis` stores the
       :ref:`devel/design:TUF Repository Settings` using
       `Dynaconf <https://www.dynaconf.com>`_.
 
-    * :ref:`devel/design:Repository Service TUF Worker` **writes** settings
+    * :ref:`devel/design:Repository Service TUF Worker` **writes** settings.
     * :ref:`devel/design:Repository Service TUF API` **reads** settings.
 
         .. note::
@@ -79,7 +79,7 @@ RSTUF Repository Settings/Configuration
 TUF Repository Settings
 -----------------------
 
-TUF Repository Setting are key configuration for the Metadata Repository
+TUF Repository Settings are key configurations for the Metadata Repository
 operations.
 
     .. list-table:: RSTUF reserved settings/configuration
@@ -138,10 +138,10 @@ Target Files and Target Roles
       the Key Vault and Storage Services.
 
       - Access to the Key Vault Service is restricted to
-        :ref:`devel/design:Repository Service TUF Worker` (read-only)
+        :ref:`devel/design:Repository Service TUF Worker`. (read-only)
       - Writing the TUF Metadata in the Storage Service  is limited to
-        :ref:`devel/design:Repository Service TUF Worker`
-      - The Storage Service is the only public data
+        :ref:`devel/design:Repository Service TUF Worker`.
+      - The Storage Service is the only public data.
 
 RSTUF Components Design
 #######################
@@ -195,7 +195,7 @@ The Infrastructure Services have key functionality on RSTUF
 Message Queue
 =============
 
-* It is a centralized queue service for tasks
+* It is a centralized queue service for tasks.
 * This queue is used as `Broker by Celery
   <https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers/index.html#broker-overview>`_.
 * :ref:`devel/design:Repository Service TUF Worker` defines the supported Queue
@@ -205,7 +205,7 @@ Backend Result
 ==============
 
 * It is a centralized `backend result used by Celery for task results
-  <https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers/index.html>`_
+  <https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers/index.html>`_.
 * :ref:`devel/design:Repository Service TUF Worker` defines the supported
   backend results servers.
 
@@ -213,12 +213,12 @@ Backend Result
 Redis
 =====
 
-* It is a centralized key/cache service
+* It is a centralized key/cache service.
 * Stores :ref:`devel/design:RSTUF Repository Settings/Configuration`
 * Optional:
 
-  - Used as :ref:`devel/design:Message Queue`
-  - Used as :ref:`devel/design:Backend Result`
+  - Used as :ref:`devel/design:Message Queue`.
+  - Used as :ref:`devel/design:Backend Result`.
 
     .. Note::
         See :ref:`guide/deployment/planning/deployment:Required Infrastructure Services`
