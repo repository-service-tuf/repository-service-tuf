@@ -19,16 +19,16 @@ The principles
 
    * RSTUF is process agnostic.
 
-     - Add/Remove artifacts doesn't interfere with the existing organization
-       release/publish processes.
+     - Add/Remove artifacts doesn't interfere with the existing organizational
+       processes for release/publish.
 
    * RSTUF focuses on scalability and Metadata consistency.
 
    * RSTUF guides users on TUF processes.
 
 
-The architecture design principles:
-###################################
+The architecture design principles
+##################################
 
 The Repository Service for TUF (RSTUF) has two services
 (``repository-service-tuf-api``, ``repository-service-tuf-worker``) and one
@@ -67,7 +67,8 @@ RSTUF Repository Settings/Configuration
       :ref:`devel/design:TUF Repository Settings` using
       `Dynaconf <https://www.dynaconf.com>`_.
 
-    * :ref:`devel/design:Repository Service TUF Worker` **writes** settings.
+    * :ref:`devel/design:Repository Service TUF Worker` **reads** and
+      **writes** settings.
     * :ref:`devel/design:Repository Service TUF API` **reads** settings.
 
         .. note::
@@ -93,12 +94,13 @@ operations.
           - | ``None``
             | ``<task id>``
             | ``pre-<task id>``
-            | ``sign-<task id>``
+            | ``signing-<task id>``
           - | RSTUF bootstrap state
             | ``None``: No bootstrap
             | ``<task id>``: Finished
             | ``pre-<task id>``: Initial process
-            | ``sign-<task id>``: Signing process
+            | ``signing-<task id>``: Signing process
+            | The ``<task-id>`` is the initial bootstrap task
         * - ``<ROLE NAME>_EXPIRATION``
           - | ``int``
           - | Role Metadata expiration policy in days
@@ -128,20 +130,25 @@ operations.
 Target Files and Target Roles
 =============================
 
-    * The TUF top-level Targets Role is only used for delegation.
-      This role does not register target files (artifacts).
-    * :ref:`devel/design:PostgreSQL` stores the artifacts (``TargetFiles``) and
-      Targets delegated roles.
-    * :ref:`devel/design:Repository Service TUF Worker` manages the
-      :ref:`devel/design:PostgreSQL` database.
-    * :ref:`devel/design:Repository Service TUF Worker` implements and manages
-      the Key Vault and Storage Services.
+  * The TUF top-level Targets Role is only used for delegation.
+    This role does not register target files (artifacts).
+  * :ref:`devel/design:PostgreSQL` stores the artifacts (``TargetFiles``) and
+    Targets delegated roles.
+  * :ref:`devel/design:Repository Service TUF Worker` manages the
+    :ref:`devel/design:PostgreSQL` database.
 
-      - Access to the Key Vault Service is restricted to
-        :ref:`devel/design:Repository Service TUF Worker`. (read-only)
-      - Writing the TUF Metadata in the Storage Service  is limited to
-        :ref:`devel/design:Repository Service TUF Worker`.
-      - The Storage Service is the only public data.
+
+Key Vault and TUF Metadata Storage
+==================================
+
+  * :ref:`devel/design:Repository Service TUF Worker` implements and manages
+    the Key Vault and Storage Services.
+
+    - Access to the Key Vault Service is restricted to
+      :ref:`devel/design:Repository Service TUF Worker` (read-only).
+    - Writing the TUF Metadata in the Storage Service  is limited to
+      :ref:`devel/design:Repository Service TUF Worker`.
+    - The Storage Service is the only public data.
 
 RSTUF Components Design
 #######################
@@ -190,7 +197,7 @@ Repository Service TUF CLI
 RSTUF Infrastructure Services Design
 ####################################
 
-The Infrastructure Services have key functionality on RSTUF
+The Infrastructure Services supports the RSTUF Components operation.
 
 Message Queue
 =============
@@ -198,7 +205,8 @@ Message Queue
 * It is a centralized queue service for tasks.
 * This queue is used as `Broker by Celery
   <https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers/index.html#broker-overview>`_.
-* :ref:`devel/design:Repository Service TUF Worker` defines the supported Queue
+* :ref:`devel/design:Repository Service TUF Worker` and
+  :ref:`devel/design:Repository Service TUF API` define the supported Queue
   servers.
 
 Backend Result
@@ -206,8 +214,9 @@ Backend Result
 
 * It is a centralized `backend result used by Celery for task results
   <https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers/index.html>`_.
-* :ref:`devel/design:Repository Service TUF Worker` defines the supported
-  backend results servers.
+* :ref:`devel/design:Repository Service TUF Worker` and
+  :ref:`devel/design:Repository Service TUF API` define the supported Queue
+  servers.
 
 
 Redis
