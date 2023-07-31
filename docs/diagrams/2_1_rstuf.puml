@@ -17,21 +17,16 @@
 !include <logos/terminal>
 !include <office/Security/lock_with_key_security>
 !include <office/Concepts/download>
+!include <tupadr3/devicons/redis>
 
 
-AddPersonTag("admin", $sprite="osa_user_audit,color=yellow", $legendSprite="osa_user_audit,scale=0.25,color=yellow", $legendText="Repository Admins", $bgColor=Gray)
-AddPersonTag("user", $sprite="osa_user_green_developer", $legendSprite="osa_user_green_developer,scale=0.25,color=yellow", $legendText="Repository Users", $bgColor=Gray)
-
-AddContainerTag("webui", $sprite="application_server", $legendText="Web UI Interface", $bgColor=Gray)
 AddContainerTag("key_service", $sprite="lock_with_key_security", $legendText="Key Service", $bgColor=Gray)
 AddContainerTag("storage_service", $sprite="file_server", $legendText="Storage Service", $bgColor=Gray)
 AddContainerTag("rest_api", $sprite="web_server", $legendText="Repository REST API")
 AddContainerTag("repo_worker", $sprite="service_application", $legendText="Repository Metadata Worker")
-AddContainerTag("sql_db", $sprite="database_server", $legendText="SQL Server")
+AddContainerTag("sql_db", $sprite="database_server", $legendText="PostgreSQL")
 AddContainerTag("queue", $sprite="queue_viewer", $legendText="Message Queue")
-AddContainerTag("ci_cd", $sprite="application_generic", $legendText="CI/CD, Artfact Management, etc")
-AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed TUF Metadata")
-AddContainerTag("download_target", $sprite="download", $legendText="Download file/target/package", $bgColor=Gray)
+AddContainerTag("redis", $sprite="redis", $legendText="Redis")
 AddContainerTag("terminal", $sprite="terminal,scale=0.5,color=#000000", $legendText="CLI")
 
 AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=0.75,color=#438DD5", $legendText="Repository Service for TUF CLI")
@@ -45,17 +40,21 @@ System_Boundary(rstuf, "Repository Service for TUF ") {
     Container(rstuf_rest_api, "REPOSITORY-SERVICE-TUF-API", "Docker", $tags="rest_api") #DodgerBlue
     Container(rstuf_repo_worker, "REPOSITORY-SERVICE-TUF-WORKER", "Docker", $tags="repo_worker") #DodgerBlue
 }
-Container(queue, "Broker/Backend", "RabbitMQ, Redis, etc", $tags="queue") #Grey
-ContainerDb(key_service, "Key Service", "Local/SaaS Vault", $tags="key_service") #Grey
-ContainerDb(storage_service, "Storage Service", "Local/SaaS Storage", $tags="storage_service") #Grey
-ContainerDb(sql, "SQL Server", "SQL Server", $tags="sql_db") #Grey
+Container(queue, "Broker/Backend", "RabbitMQ, Redis, etc", $tags="queue") #SlateGray
+Container(redis, "Redis", "Redis", $tags="redis") #SlateGray
+ContainerDb(key_service, "Key Service", "Local/SaaS Vault", $tags="key_service") #LightGrey
+ContainerDb(storage_service, "Storage Service", "Local/SaaS Storage", $tags="storage_service") #LightGrey
+ContainerDb(sql, "SQL Server", "SQL Server", $tags="sql_db") #SlateGray
 
-Rel(rstuf_cli, rstuf_rest_api, "REPOSITORY-SERVICE-TUF-CLI", "HTTP")
+Rel(rstuf_cli, rstuf_rest_api, "REPOSITORY-SERVICE-TUF-CLI", "HTTP(S)")
 Rel_U(queue, rstuf_repo_worker, "Consumer", "Tasks")
+Rel_U(key_service, rstuf_repo_worker, "Read", "Online Keys")
+BiRel_U(redis, rstuf_repo_worker, "Read/Write", "Settings")
 Rel_D(rstuf_rest_api, queue, "Producer", "Tasks")
-Rel_D(rstuf_repo_worker, key_service, "Read/Write", "Online Keys")
-Rel_D(rstuf_repo_worker, storage_service, "Read/Write", "Repository Metadata")
-Rel_U(rstuf_repo_worker, sql, "Consumer", "Tasks")
+Rel_D(redis, rstuf_rest_api, "Read", "Settings")
+BiRel_D(rstuf_repo_worker, storage_service, "Read/Write", "Repository Metadata")
+BiRel_U(rstuf_repo_worker, sql, "Read/Write", "TargetFiles, BINSRoles")
+
 
 HIDE_STEREOTYPE()
 
