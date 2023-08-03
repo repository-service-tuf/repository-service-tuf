@@ -8,6 +8,7 @@ Deployment Guides
 .. toctree::
    :maxdepth: 3
 
+   guide/rstuf-mini
    guide/docker
    guide/kubernetes
 

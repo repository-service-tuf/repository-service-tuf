@@ -1,0 +1,77 @@
+{
+  "settings": {
+    "expiration": {
+      "root": 365,
+      "targets": 365,
+      "snapshot": 1,
+      "timestamp": 1,
+      "bins": 1
+    },
+    "services": {
+      "number_of_delegated_bins": 2,
+      "targets_base_url": "http://127.0.0.1:8081/",
+      "targets_online_key": true
+    }
+  },
+  "metadata": {
+    "root": {
+      "signatures": [
+        {
+          "keyid": "1cebe343e35f0213f6136758e6c3a8f8e1f9eeb7e47a07d5cb336462ed31dcb7",
+          "sig": "3135e921ee32d0aee8cf3c5798633bdb808494d4dfe43ca9f41ee756faee474cf1871527d2ab8f825f810184e2e742ea1756840a1321c03dbcbcd3f5a189b60c"
+        }
+      ],
+      "signed": {
+        "_type": "root",
+        "version": 1,
+        "spec_version": "1.0.31",
+        "expires": "2024-08-02T11:03:05Z",
+        "consistent_snapshot": true,
+        "keys": {
+          "1cebe343e35f0213f6136758e6c3a8f8e1f9eeb7e47a07d5cb336462ed31dcb7": {
+            "keytype": "ed25519",
+            "scheme": "ed25519",
+            "keyval": {
+              "public": "ad1709b3cb419b99c5cd7427d6411522e5a93aec6767453e91af921a73d22a3c"
+            },
+            "name": "1cebe34"
+          },
+          "f7a6872f297634219a80141caa2ec9ae8802098b07b67963272603e36cc19fd8": {
+            "keytype": "ed25519",
+            "scheme": "ed25519",
+            "keyval": {
+              "public": "9fe7ddccb75b977a041424a1fdc142e01be4abab918dc4c611fbfe4a3360a9a8"
+            },
+            "name": "f7a6872"
+          }
+        },
+        "roles": {
+          "root": {
+            "keyids": [
+              "1cebe343e35f0213f6136758e6c3a8f8e1f9eeb7e47a07d5cb336462ed31dcb7"
+            ],
+            "threshold": 1
+          },
+          "timestamp": {
+            "keyids": [
+              "f7a6872f297634219a80141caa2ec9ae8802098b07b67963272603e36cc19fd8"
+            ],
+            "threshold": 1
+          },
+          "snapshot": {
+            "keyids": [
+              "f7a6872f297634219a80141caa2ec9ae8802098b07b67963272603e36cc19fd8"
+            ],
+            "threshold": 1
+          },
+          "targets": {
+            "keyids": [
+              "f7a6872f297634219a80141caa2ec9ae8802098b07b67963272603e36cc19fd8"
+            ],
+            "threshold": 1
+          }
+        }
+      }
+    }
+  }
+}

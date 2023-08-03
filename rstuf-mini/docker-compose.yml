@@ -1,0 +1,69 @@
+version: "3.7"
+
+volumes:
+  rstuf-mini-storage:
+  rstuf-mini-redis-data:
+  rstuf-mini-pgsql-data:
+
+services:
+  redis:
+    image: redis:4.0
+    volumes:
+      - rstuf-mini-redis-data:/data
+    healthcheck:
+      test: "exit 0"
+    restart: always
+    tty: true
+
+  postgres:
+    image: postgres:15.1
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=secret
+    volumes:
+      - "rstuf-mini-pgsql-data:/var/lib/postgresql/data"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres", "-d", "postgres"]
+      interval: 1s
+
+  rstuf-worker:
+    image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:latest
+    volumes:
+      - rstuf-mini-storage:/var/opt/repository-service-tuf/storage
+      - ./mini-keyvault/:/var/opt/repository-service-tuf/keyvault/ # map the path where is your key
+    environment:
+      RSTUF_STORAGE_BACKEND: LocalStorage
+      RSTUF_LOCAL_STORAGE_BACKEND_PATH: /var/opt/repository-service-tuf/storage
+      RSTUF_KEYVAULT_BACKEND: LocalKeyVault
+      RSTUF_LOCAL_KEYVAULT_PATH: /var/opt/repository-service-tuf/keyvault
+      RSTUF_LOCAL_KEYVAULT_KEYS: online.key,strongPass
+      RSTUF_BROKER_SERVER: redis://redis
+      RSTUF_REDIS_SERVER: redis://redis
+      RSTUF_SQL_SERVER: postgresql://postgres:secret@postgres:5432
+    depends_on:
+      - postgres
+      - redis
+    healthcheck:
+      test: "exit 0"
+    restart: always
+    tty: true
+
+  web-server:
+    image: python:3.10-slim-buster
+    command: python -m http.server -d /www 8080
+    volumes:
+      - rstuf-mini-storage:/www
+    ports:
+      - "8080:8080"
+
+  rstuf-api:
+    image: ghcr.io/repository-service-tuf/repository-service-tuf-api:latest
+    environment:
+      - RSTUF_BROKER_SERVER="amqp://guest:guest@rabbitmq:5672"
+      - RSTUF_REDIS_SERVER="redis://redis"
+    depends_on:
+      - rstuf-worker
+      - redis
+    ports:
+      - 80:80
