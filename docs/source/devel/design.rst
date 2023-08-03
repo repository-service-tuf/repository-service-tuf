@@ -68,14 +68,13 @@ RSTUF Repository Settings/Configuration
       `Dynaconf <https://www.dynaconf.com>`_.
 
     * :ref:`devel/design:Repository Service TUF Worker` **reads** and
-      **writes** settings.
-    * :ref:`devel/design:Repository Service TUF API` **reads** settings.
+      **writes** :ref:`devel/design:TUF Repository Settings`.
+    * :ref:`devel/design:Repository Service TUF API` **reads**
+      :ref:`devel/design:TUF Repository Settings` and
+      **writes only** during bootstrap process in two stages:
 
-        .. note::
-          A single exception is during a bootstrap process. If the
-          :ref:`devel/design:Repository Service TUF API` detects a failure
-          **writes** :ref:`devel/design:TUF Repository Settings`
-          ``BOOTSTRAP`` to ``None``.
+      - Start a bootstrap process: ``BOOTSTRAP`` to ``pre-<taskid>``.
+      - If detects a failure during bootstrap: ``BOOTSTRAP`` to ``None``
 
 TUF Repository Settings
 -----------------------
