@@ -886,12 +886,13 @@ for managing keys in the Repository Service for TUF.
 
     Cryptographic Key Commands
 
-    ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │ --help  -h    Show this message and exit.                                                                                        │
-    ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-    ╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │ generate                        Generate cryptographic keys using the `securesystemslib` library                                 │
-    ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+    │ --help  -h    Show this message and exit.                                                        │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
+    │ generate     Generate cryptographic keys using the `securesystemslib` library                    │
+    │ info         Get key information                                                                 │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
 
 
 .. rstuf-cli-key-generate
@@ -923,3 +924,25 @@ process, for the online key or the TUF roles' keys (``root``, ``targets``, etc. 
     Enter the key's filename: (id_ed25519): id_ed25519
     Enter password to encrypt private key file 'id_ed25519':
     Confirm:
+
+.. rstuf-cli-key-info
+
+Key Information (``info``)
+--------------------------
+
+Show relevant information about a key.
+
+.. code::
+
+    ❯ rstuf key info --help
+
+    Usage: rstuf key info [OPTIONS]
+
+    Show key information
+
+    ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+    │ --show-private        Show the private key. WARNING: use private key information carefully.      │
+    │ --help          -h    Show this message and exit.                                                │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+

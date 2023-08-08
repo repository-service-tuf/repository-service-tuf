@@ -54,6 +54,10 @@ System_Boundary(trs_cli, "Repository Service for TUF CLI") #APPLICATION {
                     Container(generate, "generate")
                 }
             }
+            Container_Boundary(key, "key") {
+                Container(key_generate, "generate")
+                Container(info, "info")
+            }
         }
         Container_Boundary(users, "helpers",) #LightBlue {
             Container(api_client, "api_client")
@@ -71,6 +75,7 @@ Container(tuf_repository_service_api, "REPOSITORY-SERVICE-TUF-API", "HTTP REST A
 Rel_R(user, trs_cli, "rstuf-cli", $tags="terminal")
 
 Rel(ceremony, tuf, " ")
+Rel(info, tuf, " ")
 Rel(ceremony, api_client, " ")
 Rel(update, tuf, " ")
 Rel(update, api_client, " ")
@@ -81,6 +86,8 @@ Rel(api_client, requests, " ")
 Rel(dynaconf, user, " ", $tags="os")
 Rel(python_tuf, user, " ", $tags="os")
 Rel_U(ceremony, click, " ")
+Rel_U(key_generate, click, " ")
+Rel_U(info, click, " ")
 Rel_U(login, click, " ")
 Rel_U(update, click, " ")
 
