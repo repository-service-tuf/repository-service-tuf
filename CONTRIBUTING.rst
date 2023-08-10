@@ -11,7 +11,11 @@ before contributing.
 Meetings
 ========
 
-* `Community Meetings <https://hackmd.io/sSB1pwpDR5Seag0YB-vYMA>`_
+* `Public Calendar RSTUF Meetings <https://calendar.google.com/calendar/u/0?cid=Y19hYWFjYjc2M2NkNTliNWJhOWUyYmY4N2U1MTJhM2Q4ZjEyYjkxNmFmYzdhOWM4YjQxMmZmNjcwZWYzNmFiOTdlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20>`_
+
+  - `Community Meetings <https://docs.google.com/document/d/13a_AtFpPK9WO4PlAN6ciD-G1jiBU3gEDtRD1OUinUFY>`_
+
+  - Sprint Planning Meetings (Every 2 weeks, see the `public calendar <https://calendar.google.com/calendar/u/0?cid=Y19hYWFjYjc2M2NkNTliNWJhOWUyYmY4N2U1MTJhM2Q4ZjEyYjkxNmFmYzdhOWM4YjQxMmZmNjcwZWYzNmFiOTdlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20>`_)
 
 DCO
 ===
