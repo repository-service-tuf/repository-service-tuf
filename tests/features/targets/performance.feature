@@ -8,7 +8,7 @@ Feature: Performance and Consistence adding and removing targets
 
     Scenario Outline: Multiple requests with multiple targets and timeout threshold
         Given the API requester sends <num_requests> requests with <num_targets> targets to RSTUF
-        When the API requester expects task 'SUCCESS' and status 'Task finished.' before <timeout> seconds
+        When the API requester expects task 'SUCCESS' and status as 'True' before <timeout> seconds
         Then the downloader using TUF client expects targets available in the Metadata Repository
 
         Examples:

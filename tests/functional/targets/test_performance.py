@@ -74,7 +74,7 @@ def send_requests_with_targets(num_requests, num_targets, http_request):
 
 @when(
     parse(
-        "the API requester expects task 'SUCCESS' and status 'Task finished.' "
+        "the API requester expects task 'SUCCESS' and status as 'True' "
         "before {timeout} seconds"
     ),
     target_fixture="tasks_result",
@@ -98,7 +98,7 @@ def get_tasks(multiple_requests, http_request, timeout):
             state = data.get("state", None)
             if state == "SUCCESS":
                 result = data.get("result", {})
-                if result.get("status", "") == "Task finished.":
+                if result.get("status", False) is True:
                     tasks_result.append(task)
                     tasks.remove(task)
 
