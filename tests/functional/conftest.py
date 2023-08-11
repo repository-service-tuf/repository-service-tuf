@@ -96,13 +96,12 @@ def task_completed_within_threshold():
             assert response.status_code == 200, response.text
             task_response_json = response.json()
             # "result" is missing when the task is still "PENDING"
-            status = ""
             result = task_response_json["data"].get("result")
             if result is not None:
                 # "status" is missing when the task is in its earliest stage
                 status = result.get("status")
 
-            if status == "Task finished.":
+            if status is True:
                 break
 
         if (datetime.utcnow() - task_submitted).total_seconds() > threshold:
