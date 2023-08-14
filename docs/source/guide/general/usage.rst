@@ -260,6 +260,29 @@ key.
 Metadata Update
 ---------------
 
+The Metadata Update ceremony is a guided step-by-step process allowing:
+
+- the removal or addition of key(s)
+- changes to the Root role threshold
+- extending the Root expiration
+
+Before starting the Metadata Update Ceremony authorization is required with
+at least one private root key to be fully loaded.
+
+The changes a user is allowed to make are not limited to the Root role, but
+also include the keys used by all other roles as well.
+
+When the ceremony is complete, the CLI can send the new information
+directly to an RSTUF API instance or save it locally into a JSON file.
+
+The Metadata Update ceremony could be used for multiple use cases as for
+example:
+
+- recover from a compromised key
+- remove a key for a person leaving the organization
+- add a new key to be used by a new employee
+- improving the security of a repository by increasing the Root role threshold
+
 .. note:: RSTUF CLI is implementing a guided process for Metadata Updates.
 
 Importing existing targets
