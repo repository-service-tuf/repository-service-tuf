@@ -26,7 +26,8 @@ spec:
           livenessProbe:
             exec:
               command:
-                - exit 0
+              - redis-cli
+              - ping
           name: redis
           ports:
             - containerPort: 6379
@@ -74,7 +75,11 @@ spec:
           livenessProbe:
             exec:
               command:
-                - exit 0
+                - pg_isready
+                - -U
+                - postgres
+                - -d
+                - postgres
           name: postgres
           resources: {}
           tty: true
@@ -168,10 +173,6 @@ spec:
             - name: RSTUF_LOCAL_STORAGE_BACKEND_PATH
               value: /var/opt/repository-service-tuf/storage
           image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:latest
-          livenessProbe:
-            exec:
-              command:
-                - exit 0
           name: rstuf-worker
           resources: {}
           tty: true
