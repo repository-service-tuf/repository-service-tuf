@@ -1176,20 +1176,20 @@
         },
         "sphinx": {
             "hashes": [
-                "sha256:6d56a34697bb749ffa0152feafc4b19836c755d90a7c59b72bc7dfd371b9cc6b",
-                "sha256:97787ff1fa3256a3eef9eda523a63dbf299f7b47e053cfcf684a1c2a8380c912"
+                "sha256:1c0abe6d4de7a6b2c2b109a2e18387bf27b240742e1b34ea42ac3ed2ac99978c",
+                "sha256:ed33bc597dd8f05cd37118f64cbac0b8bf773389a628ddfe95ab9e915c9308dc"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.8'",
-            "version": "==6.2.1"
+            "markers": "python_version >= '3.9'",
+            "version": "==7.2.2"
         },
         "sphinx-autodoc-typehints": {
             "hashes": [
-                "sha256:5d44e2996633cdada499b6d27a496ddf9dbc95dd1f0f09f7b37940249e61f6e9",
-                "sha256:ac099057e66b09e51b698058ba7dd76e57e1fe696cd91b54e121d3dad188f91d"
+                "sha256:6a73c0c61a9144ce2ed5ef2bed99d615254e5005c1cc32002017d72d69fb70e6",
+                "sha256:94e440066941bb237704bb880785e2d05e8ae5406c88674feefbb938ad0dc6af"
             ],
-            "markers": "python_version >= '3.7'",
-            "version": "==1.23.0"
+            "markers": "python_version >= '3.8'",
+            "version": "==1.24.0"
         },
         "sphinx-data-viewer": {
             "hashes": [
@@ -1208,20 +1208,20 @@
         },
         "sphinx-prompt": {
             "hashes": [
-                "sha256:0ae92cdae0962896827e11880d3e2317b436491663e83a8289a9c9c1b7d758ae",
-                "sha256:a118fc1519f367dfffd73fbc34e1d905e38929dec6a3971518a331bf0689b0df"
+                "sha256:7ee415d07f90f7ce1577a2c4c7f2560694af008926a69b4c940f20737621b089",
+                "sha256:f95c0b44d73621fc0b493f84b0c2866eb8741140ef0260c20a0f7578457f44ad"
             ],
             "markers": "python_version < '3.11' and python_version >= '3.8'",
-            "version": "==1.6.0"
+            "version": "==1.7.0"
         },
         "sphinx-rtd-theme": {
             "hashes": [
-                "sha256:01c5c5a72e2d025bd23d1f06c59a4831b06e6ce6c01fdd5ebfe9986c0a880fc7",
-                "sha256:6a7e7d8af34eb8fc57d52a09c6b6b9c46ff44aea5951bc831eeb9245378f3689"
+                "sha256:46ddef89cc2416a81ecfbeaceab1881948c014b1b6e4450b815311a89fb977b0",
+                "sha256:590b030c7abb9cf038ec053b95e5380b5c70d61591eb0b552063fbe7c41f0931"
             ],
             "index": "pypi",
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5'",
-            "version": "==1.2.2"
+            "version": "==1.3.0"
         },
         "sphinx-tabs": {
             "hashes": [
