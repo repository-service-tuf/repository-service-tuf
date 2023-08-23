@@ -34,8 +34,8 @@ including; Jenkins, GitHub Actions, GitLab, CircleCI, etc. RSTUF protects
 downloading, installing, and updating content from arbitrary content
 repositories, such as a web server, JFrog Artifactory, GitHub packages, etc.
 
-If a user wants to integrate RSTUF into an existing CI/CD pipeline there won't
-be a need of any changes to the existing flow:
+If a user wants to integrate RSTUF into an existing CI/CD pipeline the only
+requirement is to make a REST API request to RSTUF:
 
 .. readme-design-pic-1
 
@@ -46,7 +46,7 @@ be a need of any changes to the existing flow:
 .. readme-design-middle
 
 The same can be said when a user wants to integrate RSTUF into an existing
-distribution platform, no changes are required:
+distribution platform:
 
 .. readme-design-pic-2
 
