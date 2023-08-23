@@ -51,7 +51,23 @@ Design/Solution
 ===============
 
 .. include:: ../../README.rst
-  :start-after: .. readme-design
+  :start-after: .. readme-design-intro
+  :end-before: .. readme-design-pic-1
+
+.. image:: ./_static/rstuf_api_ci_cd_integration.png
+   :width: 800
+   :align: center
+
+.. include:: ../../README.rst
+  :start-after: .. readme-design-middle
+  :end-before: .. readme-design-pic-2
+
+.. image:: ./_static/rstuf_api_distribution_platfrom_integration.png
+   :width: 800
+   :align: center
+
+.. include:: ../../README.rst
+  :start-after: .. readme-design-final
   :end-before: .. readme-other-solutions-comparison
 
 Background and motivation

@@ -22,7 +22,7 @@ RSTUF security properties are achieved by implementing
 **Repository Service for TUF is platform, artifact, language, and process-flow
 agnostic.**
 
-.. readme-design
+.. readme-design-intro
 
 RSTUF simplifies the adoption of TUF by removing the need to design a
 repository integration -- RSTUF encapsulates that design.
@@ -33,6 +33,28 @@ alongside current artifact production systems, such as build systems,
 including; Jenkins, GitHub Actions, GitLab, CircleCI, etc. RSTUF protects
 downloading, installing, and updating content from arbitrary content
 repositories, such as a web server, JFrog Artifactory, GitHub packages, etc.
+
+If a user wants to integrate RSTUF into an existing CI/CD pipeline the only
+requirement is to make a REST API request to RSTUF:
+
+.. readme-design-pic-1
+
+.. image:: ./docs/source/_static/rstuf_api_ci_cd_integration.png
+   :width: 800
+   :align: center
+
+.. readme-design-middle
+
+The same can be said when a user wants to integrate RSTUF into an existing
+distribution platform:
+
+.. readme-design-pic-2
+
+.. image:: ./docs/source/_static/rstuf_api_distribution_platfrom_integration.png
+   :width: 800
+   :align: center
+
+.. readme-design-final
 
 Thanks to the REST API, integrating RSTUF into your existing content delivery
 solutions is straightforward. Furthermore, RSTUF is designed for scalability
