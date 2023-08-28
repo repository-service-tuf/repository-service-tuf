@@ -1212,12 +1212,12 @@
         },
         "sphinx": {
             "hashes": [
-                "sha256:6379ea22c49955a44ed4e62bde8c94575e9544303cc0554eaa97099ae5853a3a",
-                "sha256:ece68bb4d77b7dc090573825db45a6f9183e74098d1c21573485de250b1d1e3f"
+                "sha256:1aeec862bf1edff4374012ac38082e0d1daa066c9e327841a846401164797988",
+                "sha256:9b3aa23254ffc5be468646810543e491653bf5a67f3f23e4ccd4e515b0bd0b9c"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.9'",
-            "version": "==7.2.3"
+            "version": "==7.2.4"
         },
         "sphinx-autodoc-typehints": {
             "hashes": [
