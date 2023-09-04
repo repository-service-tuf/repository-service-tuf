@@ -3,7 +3,7 @@ Technical Advisory Council (RSTUF-TAC)
 ######################################
 
 The role of the Technical Advisory Council (TAC) is to provide subject matter
-expertise on software repository design, to make recommendations and guide the
+expertise in software repository design, to make recommendations and guide the
 future activities of the technical community.
 
 Get Involved
@@ -32,7 +32,7 @@ Voting Member
 
 .. note::
     Functional features, such as support, stability, securing, strength,
-    behavior, etc., have high-priority on user/repository features.
+    behavior, etc., have higher priority over user/repository features.
 
 RSTUF-TAC Members
 #################
