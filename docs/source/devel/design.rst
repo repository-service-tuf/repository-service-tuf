@@ -118,13 +118,13 @@ operations.
         * - ``NUMBER_OF_DELEGATED_BINS``
           - | ``int``
           - Number of delegated hash bin roles
-        * - ``SIGNING_<ROLE NAME>``
+        * - ``<ROLE NAME>_SIGNING``
           - | ``None``
             | ``<json>``
           - | ``None``: No pending signature(s)
             | ``json``: TUF Metadata pending signature
             | It uses the role name uppercase
-            | Example ``SIGNING_ROOT``
+            | Example ``ROOT_SIGNING``
 
 Target Files and Target Roles
 =============================
