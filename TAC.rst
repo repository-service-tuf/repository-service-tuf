@@ -31,7 +31,8 @@ Voting Member
   has one vote)
 
 .. note::
-    Functional features, such as support, stability, securing, strength,
+
+  * Functional features, such as support, stability, securing, strength,
     behavior, etc., have higher priority over user/repository features.
 
 RSTUF-TAC Members
@@ -45,14 +46,16 @@ RSTUF-TAC Members
       - Role
       - Organization
       - Github
-    * - Kairo de Araujo
+    * - | Kairo de Araujo
+        | Martin Vrachev
+        | Konstantinos Papadopoulos
+        | Lukas Pühringer
       - Voting Member
       - RSTUF Maintainer
-      - @kairoaraujo
-    * - Martin Vrachev
-      - Voting Member
-      - RSTUF Maintainer
-      - @MVrachev
+      - | @kairoaraujo
+        | @MVrachev
+        | @KAUTH
+        | @lukpueh
     * - `<name>`
       - Voting Member
       - The Update Framework Maintainer
@@ -66,3 +69,9 @@ RSTUF-TAC Members
       - <Public Repository Name>
       - `@github account`
 
+.. note::
+
+  * Organizations could have more than 1 member, but they have the right to 1
+    vote. It's recommended that organizations have more than one person listed
+    in the TAC list to allow substitutions in the absence of a listed member.
+  * A TAC member part of multiple organizations can vote for only one.
