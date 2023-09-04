@@ -6,6 +6,7 @@ Development Guide
    :maxdepth: 2
 
    contributing
+   tac
    development
    release
    documentation
