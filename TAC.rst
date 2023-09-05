@@ -56,6 +56,11 @@ RSTUF-TAC Members
         | @MVrachev
         | @KAUTH
         | @lukpueh
+    * - Josef Šimánek
+      - Voting Member
+      - | RubyGems.org maintainer
+        | OpenSSF/Securing Software Repo WG
+      - @simi
     * - `<name>`
       - Voting Member
       - The Update Framework Maintainer
