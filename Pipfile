@@ -21,6 +21,7 @@ names-generator = "*"
 pytest-bdd-html = "*"
 pytest-html = "*"
 sphinx-toolbox = "*"
+py = "*"
 
 [dev-packages]
 
