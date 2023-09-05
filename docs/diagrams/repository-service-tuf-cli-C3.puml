@@ -48,6 +48,8 @@ System_Boundary(trs_cli, "Repository Service for TUF CLI") #APPLICATION {
                 Container(ceremony, "ceremony")
                 Container_Boundary(metadata, "metadata"){
                     Container(update, "update")
+                    Container(sign, "sign")
+
                 }
                 Container(login, "login")
                 Container_Boundary(token, "token"){
@@ -77,8 +79,8 @@ Rel_R(user, trs_cli, "rstuf-cli", $tags="terminal")
 Rel(ceremony, tuf, " ")
 Rel(info, tuf, " ")
 Rel(ceremony, api_client, " ")
-Rel(update, tuf, " ")
-Rel(update, api_client, " ")
+Rel(metadata, tuf, " ")
+Rel(metadata, api_client, " ")
 Rel_R(generate, api_client, " ")
 Rel_L(token, click, " ")
 Rel(login, api_client, " ")
@@ -89,8 +91,7 @@ Rel_U(ceremony, click, " ")
 Rel_U(key_generate, click, " ")
 Rel_U(info, click, " ")
 Rel_U(login, click, " ")
-Rel_U(update, click, " ")
-
+Rel_U(metadata, click, " ")
 Rel(requests, tuf_repository_service_api, " ")
 
 HIDE_STEREOTYPE()
