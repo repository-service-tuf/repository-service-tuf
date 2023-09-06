@@ -98,6 +98,7 @@
                 "sha256:fb074d8b213749fa1d077d630db0d5f8cc3b2ae63587ad4116e8a436e9bbe995"
             ],
             "index": "pypi",
+            "markers": "python_version >= '3.8'",
             "version": "==23.7.0"
         },
         "cachecontrol": {
@@ -306,6 +307,7 @@
                 "sha256:2f98ec85a2b8edb767b3ed0f82c6d605d30af116ce4622932a719ba70ff152fc"
             ],
             "index": "pypi",
+            "markers": "python_version >= '3.8'",
             "version": "==3.2.2"
         },
         "exceptiongroup": {
@@ -330,6 +332,7 @@
                 "sha256:ffdfce58ea94c6580c77888a86506937f9a1a227dfcd15f245d694ae20a6b6e5"
             ],
             "index": "pypi",
+            "markers": "python_full_version >= '3.8.1'",
             "version": "==6.1.0"
         },
         "fonttools": {
@@ -410,6 +413,7 @@
                 "sha256:f84c2818376e66cf843d497486ea8fed8700b340f308f076c6fb1229dff318b6"
             ],
             "index": "pypi",
+            "markers": "python_full_version >= '3.8.0'",
             "version": "==5.12.0"
         },
         "jinja2": {
@@ -770,6 +774,7 @@
                 "sha256:ea929a67a6a0b1683cdbe19b8d2e724cd7643f8aa3e7bb18dd65beac3483bead"
             ],
             "index": "pypi",
+            "markers": "python_version >= '3.8'",
             "version": "==2.0.0"
         },
         "names-generator": {
@@ -943,6 +948,7 @@
                 "sha256:607c53218732647dff4acdfcd50cb62615cedf612e72d1724fb1a0cc6405b378"
             ],
             "index": "pypi",
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
             "version": "==1.11.0"
         },
         "pycodestyle": {
@@ -1016,6 +1022,7 @@
                 "sha256:460c9a59b14e27c602eb5ece2e47bec99dc5fc5f6513cf924a7d03a578991b1f"
             ],
             "index": "pypi",
+            "markers": "python_version >= '3.7'",
             "version": "==7.4.1"
         },
         "pytest-bdd": {
@@ -1024,6 +1031,7 @@
                 "sha256:57eba5878d77036f356a85fb1d108cb061d8af4fb4d032b1a424fa9abe9e498b"
             ],
             "index": "pypi",
+            "markers": "python_version >= '3.7' and python_version < '4.0'",
             "version": "==6.1.1"
         },
         "pytest-bdd-html": {
@@ -1032,6 +1040,7 @@
                 "sha256:e32e1ca26f54a783fcdc31749067bc5c55912f9b574f84e92ee360dadb58311f"
             ],
             "index": "pypi",
+            "markers": "python_version >= '3.7'",
             "version": "==0.1.14a0"
         },
         "pytest-html": {
@@ -1040,6 +1049,7 @@
                 "sha256:79c4677ed6196417bf290d8b81f706342ae49f726f623728efa3f7dfff09f8eb"
             ],
             "index": "pypi",
+            "markers": "python_version >= '3.8'",
             "version": "==4.0.0"
         },
         "pytest-metadata": {
@@ -1217,6 +1227,7 @@
                 "sha256:9269f9ed2821c9ebd30e4204f5c2339f5d4980e377bc89cb2cb6f9b17409c20a"
             ],
             "index": "pypi",
+            "markers": "python_version >= '3.9'",
             "version": "==7.2.5"
         },
         "sphinx-autodoc-typehints": {
@@ -1256,6 +1267,7 @@
                 "sha256:590b030c7abb9cf038ec053b95e5380b5c70d61591eb0b552063fbe7c41f0931"
             ],
             "index": "pypi",
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5'",
             "version": "==1.3.0"
         },
         "sphinx-tabs": {
@@ -1272,6 +1284,7 @@
                 "sha256:e5b5a7153f1997572d71a06aaf6cec225483492ec2c60097a84f15aad6df18b7"
             ],
             "index": "pypi",
+            "markers": "python_version >= '3.7'",
             "version": "==3.5.0"
         },
         "sphinxcontrib-applehelp": {
@@ -1320,6 +1333,7 @@
                 "sha256:fcbd5688e6114716673e04dde123ba3386c7435dc0667cb8cf70354f46eb79ff"
             ],
             "index": "pypi",
+            "markers": "python_version >= '3.7' and python_version < '4.0'",
             "version": "==0.7.9"
         },
         "sphinxcontrib-plantuml": {
