@@ -7,31 +7,7 @@ volumes:
   rstuf-redis-data:
   rstuf-pgsql-data:
 
-secrets:
-  SECRETS_RSTUF_ADMIN_PASSWORD:
-    external: True
-  SECRETS_RSTUF_TOKEN_KEY:
-    external: True
-  SECRETS_RSTUF_ONLINE_KEY:
-    external: True
-  SECRETS_POSTGRES_PASSWORD:
-    external: True
-  # HTTPS (SSL)
-  # API_KEY:
-  #   external: True
-  # API_CRT:
-  #   external: True
-
 services:
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    volumes:
-      - "rstuf-mq-data:/var/lib/rabbitmq"
-    healthcheck:
-      test: "exit 0"
-    restart: always
-    tty: true
-
   redis:
     image: redis:4.0
     volumes:
@@ -64,19 +40,14 @@ services:
       RSTUF_LOCAL_STORAGE_BACKEND_PATH: /var/opt/repository-service-tuf/storage
       RSTUF_KEYVAULT_BACKEND: LocalKeyVault
       RSTUF_LOCAL_KEYVAULT_PATH: /var/opt/repository-service-tuf/keyvault
-      RSTUF_LOCAL_KEYVAULT_KEYS: /run/secrets/SECRETS_RSTUF_ONLINE_KEY
-      RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
+      RSTUF_LOCAL_KEYVAULT_KEYS: online.key,strongPass
+      RSTUF_BROKER_SERVER: redis://redis
       RSTUF_REDIS_SERVER: redis://redis
-      RSTUF_SQL_SERVER: postgres:5432
-      RSTUF_SQL_USER: postgres
-      RSTUF_SQL_PASSWORD: /run/secrets/SECRETS_POSTGRES_PASSWORD
-    secrets:
-      - SECRETS_RSTUF_ONLINE_KEY
-      - SECRETS_POSTGRES_PASSWORD
+      RSTUF_SQL_SERVER: postgresql://postgres:secret@postgres:5432
+
     depends_on:
       - postgres
       - redis
-      - rabbitmq
     healthcheck:
       test: "exit 0"
     restart: always
@@ -98,19 +69,7 @@ services:
       - 80:80
       - 443:443
     environment:
-      RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
+      RSTUF_BROKER_SERVER: redis://redis
       RSTUF_REDIS_SERVER: redis://redis
-      RSTUF_AUTH: "true"
-      SECRETS_RSTUF_TOKEN_KEY: /run/secrets/SECRETS_RSTUF_TOKEN_KEY
-      SECRETS_RSTUF_ADMIN_PASSWORD: /run/secrets/SECRETS_RSTUF_ADMIN_PASSWORD
-      # HTTP (SSL)
-      # SECRETS_RSTUF_SSL_CERT: /run/secrets/API_CRT
-      # SECRETS_RSTUF_SSL_KEY: /run/secrets/API_KEY
-    secrets:
-      - SECRETS_RSTUF_ADMIN_PASSWORD
-      - SECRETS_RSTUF_TOKEN_KEY
-      # HTTPS (SSL)
-      # - API_CRT
-      # - API_KEY
     depends_on:
       - rstuf-worker
