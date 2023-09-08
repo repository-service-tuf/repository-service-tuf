@@ -1,0 +1,218 @@
+name: Functional Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      api_version:
+        description: "API Version"
+        default: "latest"
+        type: string
+        required: False
+      worker_version:
+        description: "Worker Version"
+        default: "latest"
+        type: string
+        required: False
+      cli_version:
+        description: "CLI Version"
+        default: "latest"
+        type: string
+        required: False
+  workflow_call:
+    inputs:
+      api_version:
+        description: "API Version"
+        default: "latest"
+        type: string
+        required: False
+      worker_version:
+        description: "Worker Version"
+        default: "latest"
+        type: string
+        required: False
+      cli_version:
+        description: "CLI Version"
+        default: "latest"
+        type: string
+        required: False
+    secrets:
+      RSTUF_ONLINE_KEY:
+        required: True
+env:
+  MAKE_FT_TARGET: functional-tests
+  REQUIREMENTS_PATH: requirements.txt
+
+jobs:
+  functional:
+    name: "FT|Signed|LocalStorage, LocalKeyVault"
+    runs-on: ubuntu-latest
+    services:
+      rabbitmq:
+        image: rabbitmq:3-alpine
+
+      redis:
+        image: redis:4.0
+
+      sql:
+        image: postgres:15.1
+        env:
+          POSTGRES_PASSWORD: secret
+
+      web-server:
+        image: httpd:latest
+        volumes:
+          - rstuf-storage:/usr/local/apache2/htdocs
+        ports:
+          - 8080:80
+
+      rstuf-worker-1:
+        image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:${{ inputs.worker_version }}
+        volumes:
+          - rstuf-worker-data:/data
+          - rstuf-storage:/var/opt/repository-service-tuf/storage
+          - rstuf-keystorage:/var/opt/repository-service-tuf/keystorage
+        env:
+          RSTUF_STORAGE_BACKEND: LocalStorage
+          RSTUF_KEYVAULT_BACKEND: LocalKeyVault
+          RSTUF_LOCAL_STORAGE_BACKEND_PATH: /var/opt/repository-service-tuf/storage
+          RSTUF_LOCAL_KEYVAULT_PATH: /var/opt/repository-service-tuf/keystorage
+          RSTUF_LOCAL_KEYVAULT_KEYS: ${{ secrets.RSTUF_ONLINE_KEY }}
+          RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
+          RSTUF_REDIS_SERVER: redis://redis
+          RSTUF_WORKER_ID: dev-1
+          RSTUF_SQL_SERVER: postgresql://postgres:secret@sql:5432
+
+      rstuf-worker-2:
+        image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:${{ inputs.worker_version }}
+        volumes:
+          - rstuf-worker-data:/data
+          - rstuf-storage:/var/opt/repository-service-tuf/storage
+          - rstuf-keystorage:/var/opt/repository-service-tuf/keystorage
+        env:
+          RSTUF_STORAGE_BACKEND: LocalStorage
+          RSTUF_KEYVAULT_BACKEND: LocalKeyVault
+          RSTUF_LOCAL_STORAGE_BACKEND_PATH: /var/opt/repository-service-tuf/storage
+          RSTUF_LOCAL_KEYVAULT_PATH: /var/opt/repository-service-tuf/keystorage
+          RSTUF_LOCAL_KEYVAULT_KEYS: ${{ secrets.RSTUF_ONLINE_KEY }} # using secrets
+          RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
+          RSTUF_REDIS_SERVER: redis://redis
+          RSTUF_WORKER_ID: dev-2
+          RSTUF_SQL_SERVER: postgresql://postgres:secret@sql:5432
+
+      rstuf-api:
+        image: ghcr.io/repository-service-tuf/repository-service-tuf-api:${{ inputs.api_version }}
+        ports:
+          - 80:80
+        env:
+          RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
+          RSTUF_REDIS_SERVER: redis://redis
+    steps:
+      - name: Get RSTUF Container logs
+        run: |
+          docker logs "${{ job.services.rstuf-worker-1.id }}"
+          docker logs "${{ job.services.rstuf-worker-2.id }}"
+          docker logs "${{ job.services.rstuf-api.id }}"
+
+      - name: Checkout release tag
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
+
+      - name: Checkout release tag if not umbrella
+        if: github.repository != 'repository-service-tuf/repository-service-tuf'
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
+        with:
+           repository: repository-service-tuf/repository-service-tuf
+           path: rstuf-umbrella
+           ref: main
+
+      - name: Get RSTUF Container logs
+        run: |
+          docker logs "${{ job.services.rstuf-worker-1.id }}"
+          docker logs "${{ job.services.rstuf-worker-2.id }}"
+          docker logs "${{ job.services.rstuf-api.id }}"
+
+      - name: Update environment variables
+        if: github.repository != 'repository-service-tuf/repository-service-tuf'
+        run: |
+          echo "MAKE_FT_TARGET=-C rstuf-umbrella/ functional-tests-exitfirst" >> $GITHUB_ENV
+          echo "REQUIREMENTS_PATH=rstuf-umbrella/requirements.txt" >> $GITHUB_ENV
+
+      - name: Set up Python
+        uses: actions/setup-python@61a6322f88396a6271a6ee3565807d608ecaddd1
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install Python Dependencies
+        run: |
+          pip install pipenv dynaconf[ini]
+          pip install -r ${{ env.REQUIREMENTS_PATH }}
+
+      - name: Checkout the Repository Service for TUF CLI
+        if: ${{ inputs.cli_version == 'dev' }}
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
+        with:
+          repository: repository-service-tuf/repository-service-tuf-cli
+          path: rstuf-cli
+          ref: main
+          fetch-depth: 0
+
+      - name: Install the RSTUF Command Line Interface (dev)
+        if: ${{ inputs.cli_version == 'dev' }}
+        run: pip install rstuf-cli/
+
+      - name: Install the RSTUF Command Line Interface (latest)
+        if: ${{ inputs.cli_version == 'latest' }}
+        run: |
+          pip install repository-service-tuf
+          pip install --upgrade repository-service-tuf
+
+      - name: Install the RSTUF Command Line Interface (vX.Y.Z)
+        if: ${{ startsWith(inputs.cli_version, 'v') }}
+        run: |
+          pip install repository-service-tuf==${{ inputs.cli_version }}
+
+      - name: "Offline Ceremony Full Signed using RSTUF (generate: payload.json)"
+        run: |
+          pip freeze securesystemslib | grep -E "securesystemslib|tuf"
+          rstuf --version
+          python tests/rstuf-admin-ceremony.py '{
+            "Do you want more information about roles and responsibilities?": "n",
+            "Do you want to start the ceremony?": "y",
+            "What is the metadata expiration for the root role?(Days)": "365",
+            "What is the number of keys for the root role?": "2",
+            "What is the key threshold for root role signing?": "1",
+            "What is the metadata expiration for the targets role?": "365",
+            "Show example?": "n",
+            "Choose the number of delegated hash bin roles": "4",
+            "What is the targets base URL": "http://rstuf.org/downloads",
+            "What is the metadata expiration for the snapshot role?(Days)": "1",
+            "What is the metadata expiration for the timestamp role?(Days)": "1",
+            "What is the metadata expiration for the bins role?(Days)": "1",
+            "(online) Select the ONLINE`s key type [ed25519/ecdsa/rsa] (ed25519)": "",
+            "(online) Enter ONLINE`s key id": "f7a6872f297634219a80141caa2ec9ae8802098b07b67963272603e36cc19fd8",
+            "(online) Enter ONLINE`s public key hash": "9fe7ddccb75b977a041424a1fdc142e01be4abab918dc4c611fbfe4a3360a9a8",
+            "Give a name/tag to the key [Optional]": "online v1",
+            "Ready to start loading the root keys?": "y",
+            "(root 1) Select the root`s key type [ed25519/ecdsa/rsa] (ed25519)": "ed25519",
+            "(root 1) Enter the root`s private key path": "tests/files/key_storage/JanisJoplin.key",
+            "(root 1) Enter the root`s private key password": "strongPass",
+            "(root 1) [Optional] Give a name/tag to the key": "JJ",
+            "(root 2) Select to use private key or public info? [private/public] (public)": "private",
+            "(root 2) Select the root`s key type [ed25519/ecdsa/rsa] (ed25519)": "",
+            "(root 2) Enter the root`s private key path": "tests/files/key_storage/JimiHendrix.key",
+            "(root 2) Enter the root`s private key password": "strongPass",
+            "(root 2) [Optional] Give a name/tag to the key": "JH",
+            "Is the online key configuration correct? [y/n]": "y",
+            "Is the root configuration correct? [y/n]": "y",
+            "Is the targets configuration correct? [y/n]": "y",
+            "Is the snapshot configuration correct? [y/n]": "y",
+            "Is the timestamp configuration correct? [y/n]": "y",
+            "Is the bins configuration correct? [y/n]": "y"
+          }'
+
+      - name: Run RSTUF Ceremony Bootstrap Upload
+        timeout-minutes: 2
+        run: 'rstuf admin ceremony -b -u -f payload.json --upload-server http://localhost'
+
+      - name: Functional Tests (BDD)
+        run: make ${{ env.MAKE_FT_TARGET }}
