@@ -44,7 +44,7 @@ env:
 
 jobs:
   functional-das:
-    name: "FT|DAS|LocalStorage, LocalKeyVault"
+    name: "FT | DAS | LocalStorage, LocalKeyVault"
     runs-on: ubuntu-latest
     services:
       rabbitmq:

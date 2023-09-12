@@ -44,7 +44,7 @@ env:
 
 jobs:
   functional:
-    name: "FT|Signed|LocalStorage, LocalKeyVault"
+    name: "FT | Signed | LocalStorage, LocalKeyVault"
     runs-on: ubuntu-latest
     services:
       rabbitmq:
