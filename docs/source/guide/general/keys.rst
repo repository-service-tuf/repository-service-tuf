@@ -75,3 +75,4 @@ RSTUF Command Line Interface (CLI) provides a feature for
 
 .. include:: ../repository-service-tuf-cli/index.rst
     :start-after: Key Generation (``generate``)
+    :end-before: Key Information (``info``)
