@@ -43,162 +43,21 @@ env:
   REQUIREMENTS_PATH: requirements.txt
 
 jobs:
-  functional:
-    runs-on: ubuntu-latest
-    services:
-      rabbitmq:
-        image: rabbitmq:3-alpine
-
-      redis:
-        image: redis:4.0
-
-      sql:
-        image: postgres:15.1
-        env:
-          POSTGRES_PASSWORD: secret
-
-      web-server:
-        image: httpd:latest
-        volumes:
-          - rstuf-storage:/usr/local/apache2/htdocs
-        ports:
-          - 8080:80
-
-      rstuf-worker-1:
-        image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:${{ inputs.worker_version }}
-        volumes:
-          - rstuf-worker-data:/data
-          - rstuf-storage:/var/opt/repository-service-tuf/storage
-          - rstuf-keystorage:/var/opt/repository-service-tuf/keystorage
-        env:
-          RSTUF_STORAGE_BACKEND: LocalStorage
-          RSTUF_KEYVAULT_BACKEND: LocalKeyVault
-          RSTUF_LOCAL_STORAGE_BACKEND_PATH: /var/opt/repository-service-tuf/storage
-          RSTUF_LOCAL_KEYVAULT_PATH: /var/opt/repository-service-tuf/keystorage
-          RSTUF_LOCAL_KEYVAULT_KEYS: ${{ secrets.RSTUF_ONLINE_KEY }}
-          RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
-          RSTUF_REDIS_SERVER: redis://redis
-          RSTUF_WORKER_ID: dev-1
-          RSTUF_SQL_SERVER: postgresql://postgres:secret@sql:5432
-
-      rstuf-worker-2:
-        image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:${{ inputs.worker_version }}
-        volumes:
-          - rstuf-worker-data:/data
-          - rstuf-storage:/var/opt/repository-service-tuf/storage
-          - rstuf-keystorage:/var/opt/repository-service-tuf/keystorage
-        env:
-          RSTUF_STORAGE_BACKEND: LocalStorage
-          RSTUF_KEYVAULT_BACKEND: LocalKeyVault
-          RSTUF_LOCAL_STORAGE_BACKEND_PATH: /var/opt/repository-service-tuf/storage
-          RSTUF_LOCAL_KEYVAULT_PATH: /var/opt/repository-service-tuf/keystorage
-          RSTUF_LOCAL_KEYVAULT_KEYS: ${{ secrets.RSTUF_ONLINE_KEY }} # using secrets
-          RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
-          RSTUF_REDIS_SERVER: redis://redis
-          RSTUF_WORKER_ID: dev-2
-          RSTUF_SQL_SERVER: postgresql://postgres:secret@sql:5432
-
-      rstuf-api:
-        image: ghcr.io/repository-service-tuf/repository-service-tuf-api:${{ inputs.api_version }}
-        ports:
-          - 80:80
-        env:
-          RSTUF_BROKER_SERVER: amqp://guest:guest@rabbitmq:5672
-          RSTUF_REDIS_SERVER: redis://redis
-    steps:
-      - name: Get RSTUF Container logs
-        run: |
-          docker logs "${{ job.services.rstuf-worker-1.id }}"
-          docker logs "${{ job.services.rstuf-worker-2.id }}"
-          docker logs "${{ job.services.rstuf-api.id }}"
-
-      - name: Checkout release tag
-        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
-
-      - name: Checkout release tag if not umbrella
-        if: github.repository != 'repository-service-tuf/repository-service-tuf'
-        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
-        with:
-           repository: repository-service-tuf/repository-service-tuf
-           path: rstuf-umbrella
-           ref: main
-
-      - name: Get RSTUF Container logs
-        run: |
-          docker logs "${{ job.services.rstuf-worker-1.id }}"
-          docker logs "${{ job.services.rstuf-worker-2.id }}"
-          docker logs "${{ job.services.rstuf-api.id }}"
-
-      - name: Update environment variables
-        if: github.repository != 'repository-service-tuf/repository-service-tuf'
-        run: |
-          echo "MAKE_FT_TARGET=-C rstuf-umbrella/ functional-tests-exitfirst" >> $GITHUB_ENV
-          echo "REQUIREMENTS_PATH=rstuf-umbrella/requirements.txt" >> $GITHUB_ENV
-
-      - name: Set up Python
-        uses: actions/setup-python@61a6322f88396a6271a6ee3565807d608ecaddd1
-        with:
-          python-version: '3.10'
-
-      - name: Install Python Dependencies
-        run: |
-          pip install pipenv dynaconf[ini]
-          pip install -r ${{ env.REQUIREMENTS_PATH }}
-
-      - name: Checkout the Repository Service for TUF CLI
-        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
-        with:
-          repository: repository-service-tuf/repository-service-tuf-cli
-          path: rstuf-cli
-          ref: main
-          fetch-depth: 0
-
-      - name: Install the RSTUF Command Line Interface (dev)
-        if: ${{ inputs.cli_version == 'dev' }}
-        # replace the run below after repository-service-tuf is available in
-        # pypi.org
-        # run: |
-        #   pip install "dynaconf[ini]" repository-service-tuf
-        run: pip install rstuf-cli/
-
-      - name: Install the RSTUF Command Line Interface (latest)
-        if: ${{ inputs.cli_version == 'latest' }}
-        # replace the run below after repository-service-tuf is available in
-        # pypi.org
-        # run: |
-        #   pip install "dynaconf[ini]" repository-service-tuf
-        run: |
-          cd rstuf-cli
-          git checkout $(git tag -l --sort=version:refname | tail -1)
-          cd ..
-          pip install rstuf-cli/
-
-      - name: Install the RSTUF Command Line Interface (vX.Y.Z)
-        if: ${{ startsWith(inputs.cli_version, 'v') }}
-        # replace the run below after repository-service-tuf is available in
-        # pypi.org
-        # run: |
-        #   pip install "dynaconf[ini]" repository-service-tuf==${{ inputs.cli_version }}
-        run: |
-          cd rstuf-cli
-          git checkout ${{ inputs.cli_version }}
-          cd ..
-          pip install rstuf-cli/
-
-      - name: Run the Offline Ceremony using RSTUF saving payload.json
-        # Notes:
-        # * We copy the rstuf-cli/tests/files because the UT
-        #   `test_ceremony_start_default_values` uses the key files
-        # TODO: Remove this unit tests, using a more clear way to generate the
-        #       payload.json using the rstuf-cli for the FT
-        run: |
-          cp -r rstuf-cli/tests/files tests/
-          pytest -vv rstuf-cli/tests/unit/cli/admin/test_ceremony.py::TestCeremonyInteraction::test_ceremony_start_default_values
-          if [[ -d rstuf-umbrella ]]; then cp -r metadata/ payload.json rstuf-umbrella/; fi
-
-      - name: Run RSTUF Ceremony Bootstrap Upload
-        timeout-minutes: 2
-        run: 'rstuf admin ceremony -b -u -f payload.json --upload-server http://localhost'
-
-      - name: Functional Tests (BDD)
-        run: make ${{ env.MAKE_FT_TARGET }}
+  full-signed:
+    name: "Full Singed Bootstrap"
+    uses: ./.github/workflows/FT-full-signed.yml
+    with:
+      api_version: dev
+      worker_version: dev
+      cli_version: dev
+    secrets:
+      RSTUF_ONLINE_KEY: ${{ secrets.RSTUF_ONLINE_KEY }}
+  das:
+    name: "DAS Bootstrap"
+    uses: ./.github/workflows/FT-das.yml
+    with:
+      api_version: dev
+      worker_version: dev
+      cli_version: dev
+    secrets:
+      RSTUF_ONLINE_KEY: ${{ secrets.RSTUF_ONLINE_KEY }}
