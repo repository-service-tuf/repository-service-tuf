@@ -41,6 +41,7 @@ on:
 env:
   MAKE_FT_TARGET: functional-tests
   REQUIREMENTS_PATH: requirements.txt
+  RSTUF_SCRIPTS_PATH: tests
 
 jobs:
   functional:
@@ -135,6 +136,7 @@ jobs:
         run: |
           echo "MAKE_FT_TARGET=-C rstuf-umbrella/ functional-tests-exitfirst" >> $GITHUB_ENV
           echo "REQUIREMENTS_PATH=rstuf-umbrella/requirements.txt" >> $GITHUB_ENV
+          echo "RSTUF_SCRIPTS_PATH=rstuf-umbrella/tests" >> $GITHUB_ENV
 
       - name: Set up Python
         uses: actions/setup-python@61a6322f88396a6271a6ee3565807d608ecaddd1
@@ -175,7 +177,7 @@ jobs:
         run: |
           pip freeze securesystemslib | grep -E "securesystemslib|tuf"
           rstuf --version
-          python tests/rstuf-admin-ceremony.py '{
+          python ${{ env.RSTUF_SCRIPTS_PATH }}/rstuf-admin-ceremony.py '{
             "Do you want more information about roles and responsibilities?": "n",
             "Do you want to start the ceremony?": "y",
             "What is the metadata expiration for the root role?(Days)": "365",
@@ -213,6 +215,16 @@ jobs:
       - name: Run RSTUF Ceremony Bootstrap Upload
         timeout-minutes: 2
         run: 'rstuf admin ceremony -b -u -f payload.json --upload-server http://localhost'
+
+      - name: Get the initial trusted root
+        run: |
+          rm metadata/1.root.json
+          wget -P metadata/ http://localhost:8080/1.root.json
+
+      - name: Set local metadata folder if not umbrella
+        if: github.repository != 'repository-service-tuf/repository-service-tuf'
+        run: |
+          cp -r metadata rstuf-umbrella/
 
       - name: Functional Tests (BDD)
         run: make ${{ env.MAKE_FT_TARGET }}
