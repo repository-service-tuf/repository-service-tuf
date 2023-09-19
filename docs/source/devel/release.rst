@@ -5,6 +5,9 @@ Repository Service for TUF Release process
 Release process
 ===============
 
+Versioning
+----------
+
 The Components track the Release Issues using the GitHub Milestones for the
 Component Repository.
 

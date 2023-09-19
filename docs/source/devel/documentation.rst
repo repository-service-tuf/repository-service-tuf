@@ -54,10 +54,10 @@ The components documentation also follows a required structure:
         └── index.rst
 
 
-- All diagrams needs to be in `docs/diagrams` and must to use `<component-name>`
+- All diagrams needs to be in ``docs/diagrams`` and must to use ``<component-name>``
   in the name
-- The umbrella repository will merge the `source/guide` into the main guide.
-- The umbrella repository will use the `source/devel/design` in the main
+- The umbrella repository will merge the ``source/guide`` into the main guide.
+- The umbrella repository will use the ``source/devel/design`` in the main
   Development Guide, so add to this document only the high-level information
   for Developers.
 
@@ -72,3 +72,17 @@ The umbrella repository has the component as git sub-module and builds the
 documentation using the Makefile (``make docs``)
 
 For each component, the ``make docs`` should also be available.
+
+
+Releasing new Documentation Version
+===================================
+
+In the
+`umbrella repository <https://github.com/repository-service-tuf/repository-service-tuf>`_
+> `Releases <https://github.com/repository-service-tuf/repository-service-tuf/releases>`_
+> `Draft new release <https://github.com/repository-service-tuf/repository-service-tuf/releases/new>`_
+
+Choose a new release tag based on the :ref:`devel/release:versioning`
+documentation.
+
+After Click on ``Generate release notes`` and keep the relevant updates.
