@@ -70,7 +70,7 @@ such as Ceremony, Token Generation, etc.
 
 .. code:: shell
 
-    ❯ rstuf admin login
+    ❯ rstuf --auth admin login
     ╔══════════════════════════════════════════════════════════════════════════════════════╗
     ║                     Login to Repository Service for TUF                              ║
     ╚══════════════════════════════════════════════════════════════════════════════════════╝
