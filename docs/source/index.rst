@@ -70,6 +70,41 @@ Design/Solution
   :start-after: .. readme-design-final
   :end-before: .. readme-other-solutions-comparison
 
+Talks and Mentions about RSTUF
+------------------------------
+
+Talks
+=====
+
+* `PackagingCon 2023 <https://cfp.packaging-con.org/2023/talk/997FQK/>`_:
+  “Our stuff” - how to protect users from package compromise with RSTUF (October 2023, comming soon)
+* `EuroPython 2023 <https://ep2023.europython.eu/session/pep-458-a-solution-not-only-for-pypi>`_:
+  `"PEP 458 a solution not only for PyPI" (video recoding) <https://www.youtube.com/watch?v=8pnOpfvhT9o>`_
+
+Mentions
+========
+
+* Open Source Summit EU 2023: at OpenSSF day Omkhar Arasaratnam, OpenSSF General Manager, mentions
+  Repository Service for TUF
+
+  .. image:: ./_static/images/rstuf_openssf_day_openssf_eu_2023.jpg
+    :width: 200
+    :align: center
+
+
+
+* KubeCon 2023: `"Maintaining TUF, a Talk" <https://www.youtube.com/watch?v=1rM8a9cPo-I>`_
+  by Joshua Lock and Lukas Pühringer
+
+  - `RSTUF part start at 23:41 <https://youtu.be/1rM8a9cPo-I?si=aSFHqTpGvs_YUWp0&t=1421>`_
+
+* KubeCon 2023: `CNCF Graduated Project Updates, TUF mentions the RSTUF Project <https://youtu.be/yit0zu8g_O4?si=jgdhCbMVlLK1EBMa&t=363>`_
+
+* Open Source Summit NA 2023 : `Toto-Ally TUF: Simple Tools for a Secure Software Supply Chain <https://www.youtube.com/watch?v=O8zs4NnSR5w>`_
+  by Marina Moore & Aditya Sirish A Yelgundhalli
+
+  - `The demo uses RSTUF deployed as mentioned here <https://youtu.be/O8zs4NnSR5w?si=dWvk8SwL-fhVT7y7&t=740>`_
+
 Background and motivation
 =========================
 
