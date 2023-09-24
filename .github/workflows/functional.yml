@@ -5,34 +5,34 @@ on:
     inputs:
       api_version:
         description: "API Version"
-        default: "latest"
+        default: "dev"
         type: string
         required: False
       worker_version:
         description: "Worker Version"
-        default: "latest"
+        default: "dev"
         type: string
         required: False
       cli_version:
         description: "CLI Version"
-        default: "latest"
+        default: "dev"
         type: string
         required: False
   workflow_call:
     inputs:
       api_version:
         description: "API Version"
-        default: "latest"
+        default: "dev"
         type: string
         required: False
       worker_version:
         description: "Worker Version"
-        default: "latest"
+        default: "dev"
         type: string
         required: False
       cli_version:
         description: "CLI Version"
-        default: "latest"
+        default: "dev"
         type: string
         required: False
     secrets:
@@ -47,17 +47,17 @@ jobs:
     name: "Full Singed Bootstrap"
     uses: ./.github/workflows/FT-full-signed.yml
     with:
-      api_version: dev
-      worker_version: dev
-      cli_version: dev
+      api_version: ${{ inputs.api_version }}
+      worker_version: ${{ inputs.worker_version }}
+      cli_version: ${{ inputs.cli_version }}
     secrets:
       RSTUF_ONLINE_KEY: ${{ secrets.RSTUF_ONLINE_KEY }}
   das:
     name: "DAS Bootstrap"
     uses: ./.github/workflows/FT-das.yml
     with:
-      api_version: dev
-      worker_version: dev
-      cli_version: dev
+      api_version: ${{ inputs.api_version }}
+      worker_version: ${{ inputs.worker_version }}
+      cli_version: ${{ inputs.cli_version }}
     secrets:
       RSTUF_ONLINE_KEY: ${{ secrets.RSTUF_ONLINE_KEY }}
