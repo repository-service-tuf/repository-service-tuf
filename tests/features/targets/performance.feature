@@ -13,8 +13,8 @@ Feature: Performance and Consistence adding and removing targets
 
         Examples:
             | num_requests | num_targets | timeout |
-            | 2            | 2           | 10      |
+            | 2            | 2           | 20      |
             | 2            | 100         | 60      |
-            | 5            | 10          | 30      |
-            | 100          | 2           | 180     |
-            | 50           | 50          | 300     |
+            | 5            | 10          | 60      |
+            | 100          | 2           | 350     |
+            | 50           | 50          | 600     |

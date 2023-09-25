@@ -1,0 +1,81 @@
+version: "3.9"
+
+volumes:
+  repository-service-tuf-storage:
+  repository-service-tuf-keyvault:
+  repository-service-tuf-api-data:
+  repository-service-tuf-redis-data:
+  repository-service-tuf-pgsql-data:
+
+services:
+  postgres:
+    image: postgres:15.1
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=secret
+    volumes:
+      - "repository-service-tuf-pgsql-data:/var/lib/postgresql/data"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres", "-d", "postgres"]
+      interval: 1s
+
+  repository-service-tuf-api:
+    image: ghcr.io/repository-service-tuf/repository-service-tuf-api:${API_VERSION}
+    volumes:
+      - repository-service-tuf-api-data:/data
+    ports:
+      - 80:80
+    environment:
+      - RSTUF_BROKER_SERVER=redis://redis
+      - RSTUF_REDIS_SERVER=redis://redis
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  web:
+    image: python:3.10-slim-buster
+    command: python -m http.server -d /var/opt/repository-service-tuf/storage 8080
+    volumes:
+      - repository-service-tuf-storage:/var/opt/repository-service-tuf/storage
+    ports:
+      - "8080:8080"
+
+  redis:
+    image: redis:4.0
+    volumes:
+      - repository-service-tuf-redis-data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+
+  repository-service-tuf-worker:
+    image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:${WORKER_VERSION}
+    environment:
+      - RSTUF_STORAGE_BACKEND=LocalStorage
+      - RSTUF_KEYVAULT_BACKEND=LocalKeyVault
+      - RSTUF_LOCAL_STORAGE_BACKEND_PATH=/var/opt/repository-service-tuf/storage
+      - RSTUF_LOCAL_KEYVAULT_PATH=/var/opt/repository-service-tuf/key_storage
+      - RSTUF_LOCAL_KEYVAULT_KEYS=online.key,strongPass
+      - RSTUF_BROKER_SERVER=redis://redis
+      - RSTUF_REDIS_SERVER=redis://redis
+      - RSTUF_SQL_SERVER=postgres:secret@postgres:5432
+    volumes:
+      - repository-service-tuf-storage:/var/opt/repository-service-tuf/storage
+      - ./tests/files/key_storage/:/var/opt/repository-service-tuf/key_storage
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    tty: true
+    stdin_open: true
+
+  rstuf-ft-runner:
+    image: python:3.10-slim-buster
+    command: python -V
+    working_dir: /rstuf-runner
+    volumes:
+      - ./:/rstuf-runner
