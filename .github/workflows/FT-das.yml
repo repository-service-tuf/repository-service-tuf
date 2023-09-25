@@ -228,6 +228,7 @@ jobs:
           python ${{ env.RSTUF_SCRIPTS_PATH }}/rstuf-admin-metadata-sign.py '{
             "API URL address:": "http://localhost",
             "Choose a metadata to sign [root]": "root",
+            "Do you still want to sign root? [y/n]": "y",
             "Choose a private key to load [JC]": "JC",
             "Select the root`s key type [ed25519/ecdsa/rsa] (ed25519)": "",
             "Enter the root`s private key path": "tests/files/key_storage/JoeCocker.key",
