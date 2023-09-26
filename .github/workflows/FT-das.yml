@@ -229,9 +229,9 @@ jobs:
             "API URL address:": "http://localhost",
             "Choose a metadata to sign [root]": "root",
             "Do you still want to sign root? [y/n]": "y",
-            "Choose a private key to load [JC]": "JC",
+            "Choose a private key to load [JH]": "JH",
             "Select the root`s key type [ed25519/ecdsa/rsa] (ed25519)": "",
-            "Enter the root`s private key path": "tests/files/key_storage/JoeCocker.key",
+            "Enter the root`s private key path": "tests/files/key_storage/JimiHendrix.key",
             "Enter the root`s private key password": "strongPass"
           }'
 
