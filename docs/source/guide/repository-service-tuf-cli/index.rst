@@ -993,3 +993,48 @@ Show relevant information about a key.
     ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
 
 
+.. rstuf-cli-artifact
+
+Artifact Management (``artifact``)
+==================================
+
+Manages artifacts using the RSTUF REST API.
+
+.. code::
+
+    ❯ rstuf artifact
+
+    Usage: rstuf artifact [OPTIONS] COMMAND [ARGS]...
+
+    Artifact Management Commands
+
+    ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+    │ --help          -h    Show this message and exit.                                                │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+    ╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────╮
+    │ add          Add artifacts to the TUF metadata.                                                  │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+.. rstuf-cli-artifact-add
+
+Artifact Addition (``add``)
+---------------------------
+
+This command adds the provided artifact to the TUF Metadata using the RSTUF REST API.
+If the API requires authentication/authorization the user needs to authenticate accordingly for
+the command to be carried out successfully.
+
+.. code::
+
+    ❯ rstuf artifact add --help
+
+    Usage: rstuf artifact add [OPTIONS] FILEPATH
+
+    Add artifacts to the TUF metadata.
+
+    ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────╮
+    │ --path  -p  TEXT  A custom path (`TARGETPATH`) for the file, defined in the metadata. [required] │
+    │ --help          -h    Show this message and exit.                                                │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
