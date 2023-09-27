@@ -87,6 +87,8 @@ jobs:
         env:
           API_VERSION: ${{ inputs.api_version }}
           WORKER_VERSION: ${{ inputs.worker_version }}
+          # If you use "RSTUF_ONLINE_KEY" make sure it's
+          # defined in the repositories you use for prs.
           RSTUF_ONLINE_KEY: ${{ secrets.RSTUF_ONLINE_KEY }}
 
       - name: Bootstrap/Setup RSTUF full signed and run Functional Tests
