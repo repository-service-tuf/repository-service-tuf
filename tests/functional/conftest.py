@@ -33,7 +33,7 @@ def http_request():
     def _run_requests(
         method,
         headers=None,
-        host="http://localhost",
+        host="http://repository-service-tuf-api",
         url="/",
         data=None,
         json=None,
@@ -68,7 +68,7 @@ def get_target_info():
 
         updater = Updater(
             metadata_dir=temp_md_dir.name,
-            metadata_base_url="http://localhost:8080",
+            metadata_base_url="http://web:8080",
             config=UpdaterConfig(prefix_targets_with_hash=False),
         )
         updater.refresh()

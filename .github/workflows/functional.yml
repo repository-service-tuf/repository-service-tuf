@@ -2,62 +2,96 @@ name: Functional Tests
 
 on:
   workflow_dispatch:
-    inputs:
-      api_version:
-        description: "API Version"
-        default: "dev"
+      inputs:
+        api_version:
+          description: "API Version"
+          default: "latest"
+          type: string
+          required: False
+        worker_version:
+          description: "Worker Version"
+          default: "latest"
+          type: string
+          required: False
+        cli_version:
+          description: "CLI Version"
+          default: "latest"
+          type: string
+          required: False
+      docker_compose:
+        description: "Docker Compose File"
+        default: "docker-compose.yml"
         type: string
         required: False
-      worker_version:
-        description: "Worker Version"
-        default: "dev"
-        type: string
-        required: False
-      cli_version:
-        description: "CLI Version"
-        default: "dev"
-        type: string
-        required: False
+
   workflow_call:
     inputs:
       api_version:
         description: "API Version"
-        default: "dev"
+        default: "latest"
         type: string
         required: False
       worker_version:
         description: "Worker Version"
-        default: "dev"
+        default: "latest"
         type: string
         required: False
       cli_version:
         description: "CLI Version"
-        default: "dev"
+        default: "latest"
+        type: string
+        required: False
+      docker_compose:
+        description: "Docker Compose File"
+        default: "docker-compose.yml"
         type: string
         required: False
     secrets:
       RSTUF_ONLINE_KEY:
         required: True
-env:
-  MAKE_FT_TARGET: functional-tests
-  REQUIREMENTS_PATH: requirements.txt
-
 jobs:
-  full-signed:
-    name: "Full Singed Bootstrap"
-    uses: ./.github/workflows/FT-full-signed.yml
-    with:
-      api_version: ${{ inputs.api_version }}
-      worker_version: ${{ inputs.worker_version }}
-      cli_version: ${{ inputs.cli_version }}
-    secrets:
-      RSTUF_ONLINE_KEY: ${{ secrets.RSTUF_ONLINE_KEY }}
-  das:
-    name: "DAS Bootstrap"
-    uses: ./.github/workflows/FT-das.yml
-    with:
-      api_version: ${{ inputs.api_version }}
-      worker_version: ${{ inputs.worker_version }}
-      cli_version: ${{ inputs.cli_version }}
-    secrets:
-      RSTUF_ONLINE_KEY: ${{ secrets.RSTUF_ONLINE_KEY }}
+  functional-das:
+    name: "DAS"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout RSTUF Umbrella
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
+
+      - name: RSTUF Deployment with docker compose
+        uses: isbang/compose-action@178aeba5c9dbeed89ffffbb3e6548ec08e9839cf
+        with:
+          compose-file: ${{ inputs.docker_compose }}
+        env:
+          API_VERSION: ${{ inputs.api_version }}
+          WORKER_VERSION: ${{ inputs.worker_version }}
+          RSTUF_ONLINE_KEY: ${{ secrets.RSTUF_ONLINE_KEY }}
+
+      - name: Bootstrap/Setup RSTUF using DAS and run Functional Tests
+        timeout-minutes: 30
+        run: |
+          docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh ${{ inputs.cli_version }}
+
+  functional-signed:
+    name: "Full Signed"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout RSTUF Umbrella
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
+
+      - name: RSTUF Deployment
+        uses: isbang/compose-action@178aeba5c9dbeed89ffffbb3e6548ec08e9839cf
+        with:
+          compose-file: ${{ inputs.docker_compose }}
+        env:
+          API_VERSION: ${{ inputs.api_version }}
+          WORKER_VERSION: ${{ inputs.worker_version }}
+          # If you use "RSTUF_ONLINE_KEY" make sure it's
+          # defined in the repositories you use for prs.
+          RSTUF_ONLINE_KEY: ${{ secrets.RSTUF_ONLINE_KEY }}
+
+      - name: Bootstrap/Setup RSTUF full signed and run Functional Tests
+        timeout-minutes: 30
+        run: |
+          docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-signed.sh ${{ inputs.cli_version }}
