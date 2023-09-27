@@ -972,6 +972,12 @@ process, for the online key or the TUF roles' keys (``root``, ``targets``, etc. 
     Enter password to encrypt private key file 'id_ed25519':
     Confirm:
 
+    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+    ┃                   Key ID                   ┃ Key Type ┃                Public Key                 ┃
+    ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+    │ f2f9f111b4a8dfb3766c8066628c81bd3aef42b34… │ ed25519  │ bb713c55bbf9b13ff7f92193af55b2f65ae15e55… │
+    └────────────────────────────────────────────┴──────────┴───────────────────────────────────────────┘
+
 .. rstuf-cli-key-info
 
 Key Information (``info``)
