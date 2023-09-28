@@ -17,6 +17,10 @@ case ${CLI_VERSION} in
         pip install --upgrade repository-service-tuf
         ;;
 
+    source) # it install froom the source code (used by CLI)
+        pip install -e .
+        ;;
+
     *) # dev or none
         pip install git+https://github.com/repository-service-tuf/repository-service-tuf-cli
         ;;
