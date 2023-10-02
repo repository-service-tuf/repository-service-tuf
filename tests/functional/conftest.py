@@ -104,7 +104,12 @@ def task_completed_within_threshold():
             if status is True:
                 break
 
-        if (datetime.utcnow() - task_submitted).total_seconds() > threshold:
+        perfomance_fail = os.getenv("PERFORMANCE", "true").lower() == "true"
+        if (
+            perfomance_fail
+            and (datetime.utcnow() - task_submitted).total_seconds()
+            > threshold
+        ):
             raise TimeoutError(
                 f"Task should be completed in {threshold} seconds."
             )
