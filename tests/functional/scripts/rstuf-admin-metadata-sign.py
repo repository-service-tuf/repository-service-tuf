@@ -11,7 +11,6 @@ def _run(input):
     folder_name = mkdtemp()
     setting_file = os.path.join(folder_name, "rstuf.ini")
     context = {"settings": Dynaconf(), "config": setting_file}
-    context["settings"].AUTH = False
     runner = CliRunner()
     output = runner.invoke(
         cli.admin.metadata.sign,

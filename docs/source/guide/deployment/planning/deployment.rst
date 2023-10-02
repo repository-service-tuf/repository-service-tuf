@@ -13,6 +13,11 @@ This document also complements the published deployment guides for
 :ref:`guide/deployment/guide/kubernetes:Kubernetes` with some detailed
 information.
 
+For the purpose of authentication and authorization, make sure that API Gateway is
+deployed and configured, as the Repository Service for TUF API does not provide a
+built-in functionality, considering it out of scope for the project's general
+purpose
+
 .. image:: /_static/2_2_rstuf.png
 
 Required Infrastructure Services

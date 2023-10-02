@@ -1,11 +1,8 @@
 Feature: Adding targets in Repository Service for TUF (RSTUF)
-    As an admin,
-    Admin has deployed RSTUF,
-    Admin has run the ceremony and completed bootstrap successfully,
-    Admin has provided a token to the API requester
+    User has deployed RSTUF,
+    User has run the ceremony and completed bootstrap successfully
 
     Scenario Outline: Adding a target using RSTUF API
-        Given the API requester has access to RSTUF API
         When the API requester adds a new target with <length>, <hashes>, <custom> and <path>
         Then the API requester should get status code '202' with 'task_id'
         Then the API requester gets from endpoint 'GET /api/v1/task' status 'Task finished' within 90 seconds

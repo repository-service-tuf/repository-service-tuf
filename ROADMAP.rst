@@ -8,9 +8,7 @@ Not for a Production Deploy.
 This release is for PoV/PoC of the project.
 
 Features:
-
-- [x] Authentication using Token
-- [x] Authorization defined by Scope
+Token
 - [x] Bootstrap the Repository Service for TUF (Initial TUF Metadata)
 - [x] Storage Service: Local file system
 - [x] Key Vault Service: Local file system

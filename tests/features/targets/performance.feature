@@ -1,10 +1,5 @@
 Feature: Performance and Consistence adding and removing targets
-    As an admin,
-    Admin has deployed and bootstrapped RSTUF
-    Admin has issued a Token with scopes 'write:targets', 'delete:targets' and "read:tasks"
-
-    Background:
-        Given the API requester has access to RSTUF API
+    User has deployed and bootstrapped RSTUF
 
     Scenario Outline: Multiple requests with multiple targets and timeout threshold
         Given the API requester sends <num_requests> requests with <num_targets> targets to RSTUF

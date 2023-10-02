@@ -2,7 +2,7 @@
 
 import ast
 
-from pytest_bdd import given, scenario, then, when
+from pytest_bdd import scenario, then, when
 from pytest_bdd.parsers import parse
 
 
@@ -12,11 +12,6 @@ from pytest_bdd.parsers import parse
 )
 def test_adding_a_target_using_rstuf_api():
     """Adding a target using RSTUF API"""
-
-
-@given("the API requester has access to RSTUF API")
-def the_api_requester_has_a_token_with_scope_specific_scope():
-    pass
 
 
 @when(

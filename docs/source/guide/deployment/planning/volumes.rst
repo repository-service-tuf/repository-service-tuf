@@ -9,25 +9,6 @@ work with volumes for persistent data.
     For the :ref:`guide/deployment/planning/deployment:Required Infrastructure Services`,
     use persistent data.
 
-Repository Service for TUF API (RSTUF API)
-##########################################
-
-DATA [optional]
-===============
-
-It requires a persistent volume only if using the built-in
-authentication/authorization.
-
-.. Caution::
-    Using the built-in RSTUF
-    :ref:`guide/deployment/planning/deployment:Authentication/Authorization` is not recommended.
-
-Share the persistent volume between all RSTUF API instances and mount it on the
-container's path ``/data``.
-
-To modify the default path ``/data``, use the
-:ref:`guide/repository-service-tuf-api/Docker_README:(Optional) `DATA_DIR\``
-
 Repository Service for TUF Worker (RSTUF Worker)
 ################################################
 
