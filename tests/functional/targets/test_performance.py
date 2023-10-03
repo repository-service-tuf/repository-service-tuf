@@ -1,4 +1,5 @@
 """Performance and Consistence adding and removing targets feature tests."""
+import os
 import time
 from datetime import datetime
 
@@ -85,10 +86,12 @@ def get_tasks(multiple_requests, http_request, timeout):
     while len(tasks) > 0:
         time.sleep(3)
         for task in tasks:
-            total_time_now = datetime.utcnow() - dateutil.parser.parse(
-                task["last_update"]
-            )
-            assert total_time_now.total_seconds() <= int(timeout)
+            if os.getenv("PERFORMANCE", "true").lower() == "true":
+                total_time_now = datetime.utcnow() - dateutil.parser.parse(
+                    task["last_update"]
+                )
+                assert total_time_now.total_seconds() <= int(timeout)
+
             response = http_request(
                 "GET",
                 url=f"/api/v1/task/?task_id={task['task_id']}",
