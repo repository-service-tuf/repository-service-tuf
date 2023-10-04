@@ -98,7 +98,6 @@ Example: `postgres:secret@postgres:5432`
   RSTUF_SQL_PASSWORD=/run/secrets/POSTGRES_PASSWORD
   ```
 
-
 #### (Optional) `RSTUF_REDIS_SERVER_PORT`
 
 Redis Server port number. Default: 6379
@@ -122,9 +121,49 @@ Select a supported type of Storage Service.
 
 Available types:
 
-* LocalStorage (local file system)
-    - Requires variable ``RSTUF_LOCAL_STORAGE_BACKEND_PATH``
-      - Define the directory where the data will be saved, example: `storage`
+* `LocalStorage` (container volume)
+* `AWSS3` (AWS S3)
+
+##### `LocalStorage` (container volume)
+
+* (Required) ``RSTUF_LOCAL_STORAGE_BACKEND_PATH``
+
+  - Define the directory where the data will be saved, example: `storage`
+
+##### `AWSS3` (AWS S3)
+
+* (Required) ``RSTUF_AWSS3_STORAGE_BUCKET``
+
+  The name of the region associated with the S3.
+
+* (Required) ``RSTUF_AWSS3_STORAGE_ACCESS_KEY``
+
+  The access key to use when creating the client session to the S3.
+
+  This environment variable supports container secrets when the ``/run/secrets``
+  volume is added to the path.
+  Example: `RSTUF_AWSS3_STORAGE_ACCESS_KEY=/run/secrets/S3_ACCESS_KEY`
+
+* (Required) ``RSTUF_AWSS3_STORAGE_SECRET_KEY``
+
+  The secret key to use when creating the client session to the S3.
+
+  This environment variable supports container secrets when the ``/run/secrets``
+  volume is added to the path.
+  Example: ``RSTUF_AWSS3_STORAGE_ACCESS_KEY=/run/secrets/S3_SECRET_KEY``
+
+* (Optional) ``RSTUF_AWSS3_STORAGE_REGION``
+
+  The name of the region associated with the S3.
+
+* (Optional) ``RSTUF_AWSS3_STORAGE_ENDPOINT_URL``
+
+  The complete URL to use for the constructed client. Normally, the
+  client automatically constructs the appropriate URL to use when
+  communicating with a service.
+
+**_NOTE:_**  The AWS3 supports all `boto3`
+[environment variables](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#using-environment-variables).
 
 #### (Optional) `RSTUF_LOCK_TIMEOUT`
 
@@ -134,7 +173,6 @@ This timeout avoids race conditions leading to publishing JSON metadata files by
 Worker's services. It guarantees that the metadata is consistent in the backend
 storage service (`RSTUF_STORAGE_BACKEND`).
 
-
 In most use cases, the timeout of 60.0 seconds is sufficient.
 
 #### (Required) `RSTUF_KEYVAULT_BACKEND`
@@ -143,47 +181,53 @@ Select a supported type of Key Vault Service.
 
 Available types:
 
-* LocalKeyVault (local file system)
-  - Required variables:
-    - ``RSTUF_LOCAL_KEYVAULT_PATH``
-      - Define the path for the container volume mounted
-        Example: ``RSTUF_LOCAL_KEYVAULT_PATH=/var/opt/repository-service-tuf/key_storage``
+* `LocalKeyVault` (container volume)
 
-    - ``RSTUF_LOCAL_KEYVAULT_KEYS``
-      - Define the key(s) with format ``<file>,<password>,<(optional) type>``
-        - file: defines the key file
-          - `base64|<key content in base64>` allows to inform directly the key content.
-            It will dynamically manage and write a key file in
-            ``RSTUF_LOCAL_KEYVAULT_PATH`` (write permissions required).
+##### `LocalKeyVault` (container volume)
 
-            Requires content as base64.
+* (Required) ``RSTUF_LOCAL_KEYVAULT_PATH``
 
-            Example: ``RSTUF_LOCAL_KEYVAULT_KEYS=base64|LnRveC8KdmVudi8KLmlkZWEvCi52c2NvZGUvC...,strongPass,rsa``
+  Define the path for the container volume mounted
+  Example: ``RSTUF_LOCAL_KEYVAULT_PATH=/var/opt/repository-service-tuf/key_storage``
 
-        - password: credential used to load the key
-        - (optional) type: The key type. Default: `ed25519`
+* (Required) ``RSTUF_LOCAL_KEYVAULT_KEYS``
 
-          [Note: At the moment RSTUF Worker supports `ed25519`, `rsa`, `ecdsa`]
+  Define the key(s) with format ``<file>,<password>,<(optional) type>``
 
-        Example: ``RSTUF_LOCAL_KEYVAULT_KEYS=online.key,strongPass,rsa``
+  - `file`: defines the key file
+    + `base64|<key content in base64>` allows to inform directly the key content.
+      It will dynamically manage and write a key file in
+      ``RSTUF_LOCAL_KEYVAULT_PATH`` (write permissions required).
 
-      - Accepts multiple keys separated by ``:``.
+      Requires content as base64.
 
-        It accepts multiple keys, but RSTUF supports the usage of only one
-        online key for signing.
+      Example: ``RSTUF_LOCAL_KEYVAULT_KEYS=base64|LnRveC8KdmVudi8KLmlkZWEvCi52c2NvZGUvC...,strongPass,rsa``
 
-        The Local Key Vault will find the key that matches the online key
-        defined in the root metadata.
-        Allowing multiple keys is helpful for performing metadata/key
-        rotation without disruption.
+  - `password`: credential used to load the key
+  - (optional) `type`: The key type. Default: `ed25519`
 
-        Example: ``RSTUF_LOCAL_KEYVAULT_KEYS=online.key,strongPass:online-rsa.key,newStrongPass,rsa``
+    [Note: At the moment RSTUF Worker supports `ed25519`, `rsa`, `ecdsa`]
 
-      - This environment variable supports container secrets when the
-        ``/run/secrets`` volume is added to the path. The content must be
-        in the standard format ``<file>,<password>,<(optional) type>``
+    Example: ``RSTUF_LOCAL_KEYVAULT_KEYS=online.key,strongPass,rsa``
 
-        Example: ``RSTUF_LOCAL_KEYVAULT_KEYS=/run/secrets/ONLINE_KEY_1:/run/secrets/ONLINE_KEY_2``
+  Accepts multiple keys separated by "``:``".
+
+  It accepts multiple keys, but RSTUF supports the usage of only one
+  online key for signing.
+
+  The Local Key Vault will find the key that matches the online key
+  defined in the root metadata.
+
+  Allowing multiple keys is helpful for performing metadata/key
+  rotation without disruption.
+
+  Example: ``RSTUF_LOCAL_KEYVAULT_KEYS=online.key,strongPass:online-rsa.key,newStrongPass,rsa``
+
+  This environment variable supports container secrets when the
+  ``/run/secrets`` volume is added to the path. The content must be
+  in the standard format ``<file>,<password>,<(optional) type>``
+
+  Example: ``RSTUF_LOCAL_KEYVAULT_KEYS=/run/secrets/ONLINE_KEY_1:/run/secrets/ONLINE_KEY_2``
 
 
 #### (Optional) `RSTUF_WORKER_ID`
