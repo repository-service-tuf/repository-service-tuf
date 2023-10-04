@@ -50,7 +50,7 @@ def send_requests_with_targets(num_requests, num_targets, http_request):
 
         result = http_request(
             "POST",
-            url="/api/v1/targets",
+            url="/api/v1/artifacts",
             json={"targets": targets},
         )
         return result

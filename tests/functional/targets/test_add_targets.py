@@ -49,7 +49,7 @@ def the_api_requester_adds_a_new_target(
         custom = ast.literal_eval(custom)
         payload["targets"][0]["info"].update({"custom": custom})
 
-    return http_request(method="POST", url="/api/v1/targets", json=payload)
+    return http_request(method="POST", url="/api/v1/artifacts", json=payload)
 
 
 @then(
