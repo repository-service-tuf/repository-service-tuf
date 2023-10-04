@@ -6,10 +6,22 @@ on:
       - main
     paths-ignore:
       - 'docs/**'
+      - "TAC.rst"
+      - "CODE_OF_CONDUCT.rst"
+      - "LICENSE"
+      - "MAINTAINERS.rst"
+      - "README.rst"
+      - "ROADMAP.rst"
 
   pull_request:
     paths-ignore:
       - 'docs/**'
+      - "TAC.rst"
+      - "CODE_OF_CONDUCT.rst"
+      - "LICENSE"
+      - "MAINTAINERS.rst"
+      - "README.rst"
+      - "ROADMAP.rst"
 
   workflow_dispatch:
 
