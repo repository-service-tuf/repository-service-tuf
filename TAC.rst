@@ -61,6 +61,11 @@ RSTUF-TAC Members
       - | RubyGems.org maintainer
         | OpenSSF/Securing Software Repo WG
       - @simi
+    * - Ee Durbin
+      - Voting Member
+      - | PyPI Maintainer
+        | Python Software Foundation
+      - @ewdurbin
     * - `<name>`
       - Voting Member
       - The Update Framework Maintainer
