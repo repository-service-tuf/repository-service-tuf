@@ -5,6 +5,12 @@ on:
       - opened
     paths:
       - "docs/**"
+      - "TAC.rst"
+      - "CODE_OF_CONDUCT.rst"
+      - "LICENSE"
+      - "MAINTAINERS.rst"
+      - "README.rst"
+      - "ROADMAP.rst"
 
 permissions:
   pull-requests: write
