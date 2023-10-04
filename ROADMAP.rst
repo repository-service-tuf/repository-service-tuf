@@ -69,7 +69,7 @@ This release achive the minimum valuable product for users.
 - [ ] Distributed asynchronous threshold signing (`Issue #327 <https://github.com/repository-service-tuf/repository-service-tuf/issues/327>`_)
 - [ ] Old Metadata retention (`Issue #29 <https://github.com/repository-service-tuf/repository-service-tuf/issues/29>`_)
 - [ ] Support to AWS S3 (Storage) and AWS KMS (Key Vault) (`Issue #24 <https://github.com/repository-service-tuf/repository-service-tuf/issues/24>`_)
-- [ ] Token revocation (`Issue #30 <https://github.com/repository-service-tuf/repository-service-tuf/issues/30>`_)
+- [ ] Feature: support of HashiCorp Vault (`Issue #509 <https://github.com/repository-service-tuf/repository-service-tuf/issues/509>`_)
 
 Components Milestones:
 
