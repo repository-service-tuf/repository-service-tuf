@@ -1,5 +1,20 @@
 .PHONY: docs lint reformat requirements functional-tests sync-submodules
 
+run-dev: export API_VERSION=dev
+run-dev: export WORKER_VERSION=dev
+run-dev:
+	docker compose up -d
+
+stop:
+	docker compose down -v
+
+clean:
+	$(MAKE) stop
+	docker compose rm --force
+	rm -rf ./data
+	rm -rf ./data_test
+
+
 sync-submodules:
 	git submodule sync
 	git submodule update --init --force --recursive
@@ -44,3 +59,18 @@ functional-tests-exitfirst:
 
 functional-tests:
 	pytest --gherkin-terminal-reporter tests -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
+
+
+ft-das:
+ifneq ($(CLI),)
+	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh dev
+else
+	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh $(CLI)
+endif
+
+ft-signed:
+ifneq ($(CLI),)
+	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-signed.sh dev
+else
+	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-signed.sh $(CLI)
+endif
