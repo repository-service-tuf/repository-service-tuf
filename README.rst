@@ -106,7 +106,7 @@ Please, check the `Repository Service for TUF Development Guide
 <https://repository-service-tuf.readthedocs.io/en/latest/devel/>`_.
 
 Questions, feedback, and suggestions are welcomed on the
-`#repository-service-for-tuf <https://cloud-native.slack.com/archives/C047L55314N>`_
-channel on `CNCF Slack <https://slack.cncf.io/>`_.
+`#repository-service-for-tuf <https://openssf.slack.com/archives/C052QF5CZFH>`_
+channel on `OpenSSF Slack <https://openssf.slack.com/>`_.
 
 .. _ROADMAP: ROADMAP.rst
