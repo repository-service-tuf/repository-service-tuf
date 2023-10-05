@@ -6,6 +6,7 @@ on:
     paths:
       - "docs/**"
       - "TAC.rst"
+      - "CONTRIBUTING.rst"
       - "CODE_OF_CONDUCT.rst"
       - "LICENSE"
       - "MAINTAINERS.rst"
