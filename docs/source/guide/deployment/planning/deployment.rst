@@ -125,7 +125,8 @@ Only the RSTUF Worker uses the Postgres server
 It uses the database to perform the TUF metadata management.
 
 .. Caution::
-Be sure the Postgres uses a persistent storage.
+
+   Be sure the Postgres uses a persistent storage.
 
 .. centered:: RSTUF configuration
 
