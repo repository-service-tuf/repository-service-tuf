@@ -99,10 +99,8 @@ def task_completed_within_threshold():
             result = task_response_json["data"].get("result")
             if result is not None:
                 # "status" is missing when the task is in its earliest stage
-                status = result.get("status")
-
-            if status is True:
-                break
+                if result.get("status") is True:
+                    break
 
         perfomance_fail = os.getenv("PERFORMANCE", "true").lower() == "true"
         if (
