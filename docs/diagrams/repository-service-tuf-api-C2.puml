@@ -62,14 +62,12 @@ AddRelTag("share", $textColor="orange", $lineColor="grey", $lineStyle = DashedLi
 Person(administration_user, "Admin", $tags="admin") #Grey
 
 Container(rstuf_rest_api, "REPOSITORY-SERVICE-TUF-API", $tags="rest_api")
-ContainerDb(data_dir, "/$DATA_DIR", "File System", "Service settings\nRepository settings\nUsers db", $tags="storage_service")
 Container_Ext(broker, "Broker/Backend", "RabbitMQ, Redis, etc", $tags="queue") #Grey
 Container_Ext(ci_cd, "Third Part Software", "Jenkis, Github, Gitlab, etc", $tags="ci_cd") #Grey
 
 Rel(administration_user, rstuf_rest_api, "REPOSITORY-SERVICE-TUF-CLI", $tags="terminal")
 Rel_R(ci_cd, rstuf_rest_api, "HTTPS + Tokens")
 Rel_D(rstuf_rest_api, broker, "Publisher/Consumer", "Tasks")
-Rel_R(rstuf_rest_api, data_dir, "Write/Read data")
 
 
 HIDE_STEREOTYPE()
