@@ -30,8 +30,6 @@ Some required services:
 docker run -p 80:80 \
     --env="RSTUF_BROKER_SERVER=amqp://guest:guest@rabbitmq:5672" \
     --env="RSTUF_REDIS_SERVER=redis://redis" \
-    --env="SECRETS_RSTUF_TOKEN_KEY=secret" \
-    --env="SECRETS_RSTUF_ADMIN_PASSWORD=password" \
     ghcr.io/repository-service-tuf/repository-service-tuf-api:latest
 ```
 
@@ -69,27 +67,6 @@ These settings are shared with the repository workers
 
 Important: It should use the same db id as used by RSTUF Workers.
 
-#### (Optional) `RSTUF_AUTH`
-
-Disable/Enable RSTUF built-in token authentication. Default: false
-
-* Required variables (when enabled):
-  - `SECRETS_RSTUF_TOKEN_KEY`
-    Secret Token for hash the Tokens.
-
-  - `SECRETS_RSTUF_ADMIN_PASSWORD`
-    Secret admin password.
-
-  These environment variables support container secrets when the volume is added
-  to `/run/secrets` path.
-
-  Example:
-  ```
-  SECRETS_RSTUF_ADMIN_PASSWORD=/run/secrets/SECRETS_RSTUF_ADMIN_PASSWORD
-  SECRETS_RSTUF_TOKEN_KEY=/run/secrets/SECRETS_RSTUF_TOKEN_KEY`
-  ```
-
-
 
 #### (Optional) `RSTUF_DISABLED_ENDPOINTS`
 
@@ -100,7 +77,7 @@ This variable receives a list separetad by `:`.
 You can disable a whole endpoint.
 For example:
 `RSTUF_DISABLED_ENDPOINTS = "/api/v1/targets"`
-Will disable all methods and all paths  related to v1 `targets`:  
+Will disable all methods and all paths  related to v1 `targets`:
 GET `/api/v1/targets`, POST `/api/v1/targets`, POST `/api/v1/targets/publish` etc.
 
 It is possible to disable a specific method endpoint with:
@@ -111,7 +88,7 @@ Note: If you give both
 the `/api/v1/targets` has a higher priority and will disable all v1 targets related endpoints.
 
 A list can be given as shown in the example bellow:
-`RSTUF_DISABLE_ENDPOINTS={'POST'}/api/v1/bootstrap/:/api/v1/metadata/:/api/v1/token/:{'DELETE'}/api/v1/targets/`
+`RSTUF_DISABLE_ENDPOINTS={'POST'}/api/v1/bootstrap/:/api/v1/metadata/:/api/v1/artifacts/:{'POST'}/api/v1/metadata/sign/`
 
 
 #### (Optional) `SECRETS_RSTUF_SSL_CERT`
@@ -131,10 +108,6 @@ Example:
 SECRETS_RSTUF_SSL_CERT=/run/secrets/SECRETS_RSTUF_SSL_CERT
 SECRETS_RSTUF_SSL_KEY=/run/secrets/SECRETS_RSTUF_SSL_KEY
 ```
-
-#### (Optional) `DATA_DIR`
-
-Data Directory. Default: `/data/`.
 
 ### Volumes
 
