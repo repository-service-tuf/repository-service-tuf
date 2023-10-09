@@ -5,17 +5,35 @@ Contributing to Repository Service for TUF
 We welcome contributions from the community and first want to thank you for
 taking the time to contribute!
 
-Please familiarize yourself with the `Code of Conduct`_
-before contributing.
+Please familiarize yourself with the `Code of Conduct`_ before contributing.
+
+.. slack-meetings-mail
+
+Slack channel
+=============
+
+`#repository-service-for-tuf <https://openssf.slack.com/archives/C052QF5CZFH>`_
+channel on `OpenSSF Slack <https://openssf.slack.com/>`_.
+
 
 Meetings
 ========
 
-* `Public Calendar RSTUF Meetings <https://calendar.google.com/calendar/u/0?cid=Y19hYWFjYjc2M2NkNTliNWJhOWUyYmY4N2U1MTJhM2Q4ZjEyYjkxNmFmYzdhOWM4YjQxMmZmNjcwZWYzNmFiOTdlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20>`_
+* `RSTUF Community Meetings at OpenSSF Calendar <https://calendar.google.com/calendar/u/0?cid=czYzdm9lZmhwNWk5cGZsdGI1cTY3bmdwZXNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ>`_
 
   - `Community Meetings <https://docs.google.com/document/d/13a_AtFpPK9WO4PlAN6ciD-G1jiBU3gEDtRD1OUinUFY>`_
 
   - Sprint Planning Meetings (Every 2 weeks, see the `public calendar <https://calendar.google.com/calendar/u/0?cid=Y19hYWFjYjc2M2NkNTliNWJhOWUyYmY4N2U1MTJhM2Q4ZjEyYjkxNmFmYzdhOWM4YjQxMmZmNjcwZWYzNmFiOTdlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20>`_)
+
+
+RSTUF mailing list
+==================
+
+Join the mail list https://lists.openssf.org/g/RSTUF
+
+email: RSTUF@lists.openssf.org
+
+.. dco
 
 DCO
 ===
@@ -59,7 +77,6 @@ details:
 
 .. rstuf-contributing-links
 
-.. _Code of Conduct: CODE_OF_CONDUCT.rst
 
 Getting the source code
 =======================
@@ -179,3 +196,6 @@ You must to have the Repository Service for TUF running local
 .. code:: shell
 
     $ make functional-tests
+
+
+.. _Code of Conduct: CODE_OF_CONDUCT.rst

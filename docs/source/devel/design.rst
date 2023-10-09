@@ -162,7 +162,7 @@ Repository Service TUF API
     The service can implement other features without interfering with the
     RSTUF principles and architecture design principles.
 
-`See component development documentation
+`See API component development documentation
 <https://repository-service-tuf.readthedocs.io/projects/rstuf-api/en/latest/devel/>`_.
 
 
@@ -176,7 +176,7 @@ Repository Service TUF Worker
     The service can implement other features without interfering with the
     RSTUF principles and architecture design principles.
 
-`See component development documentation
+`See Worker component development documentation
 <https://repository-service-tuf.readthedocs.io/projects/rstuf-worker/en/latest/devel/>`_.
 
 Repository Service TUF CLI

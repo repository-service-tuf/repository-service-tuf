@@ -142,6 +142,13 @@ DevOps, and DevOpsSec teams working on the delivery process.
 .. _python-tuf: https://pypi.org/project/tuf/
 
 
+How to get involved
+===================
+
+.. include:: ../../CONTRIBUTING.rst
+  :start-after: .. slack-meetings-mail
+  :end-before: .. dco
+
 Documentation List
 ==================
 
