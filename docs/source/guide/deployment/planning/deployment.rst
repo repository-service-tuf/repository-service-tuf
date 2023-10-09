@@ -126,7 +126,7 @@ It uses the database to perform the TUF metadata management.
 
 .. Caution::
 
-   Be sure the Postgres uses a persistent storage.
+   Make sure that Postgres uses persistent storage.
 
 .. centered:: RSTUF configuration
 
