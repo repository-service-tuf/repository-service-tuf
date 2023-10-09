@@ -161,7 +161,7 @@ connected to RSTUF API. It does not require a
 
     .. code::
 
-        ❯ rstuf admin login
+        ❯ rstuf --auth admin login
         ❯ rstuf admin ceremony -b
 
 

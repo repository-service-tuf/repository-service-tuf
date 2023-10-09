@@ -110,3 +110,11 @@ Questions, feedback, and suggestions are welcomed on the
 channel on `CNCF Slack <https://slack.cncf.io/>`_.
 
 .. _ROADMAP: ROADMAP.rst
+
+Contributing: Getting Started
+=============================
+
+To configure RSTUF components for development, please see the contributing guidelines:
+* Getting Started with `repository-service-tuf-cli <https://github.com/repository-service-tuf/repository-service-tuf-cli/blob/main/CONTRIBUTING.rst>`_
+* Getting Started with `repository-service-tuf-api <https://github.com/repository-service-tuf/repository-service-tuf-api/blob/main/README.rst>`_
+* Getting Started with `repository-service-tuf-worker <https://github.com/repository-service-tuf/repository-service-tuf-worker/blob/main/README.rst>`_
