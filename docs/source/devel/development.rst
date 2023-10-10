@@ -132,7 +132,7 @@ It is possible to run Functional Tests (FT) from each component, including the
 Umbrella repository.
 
 1. Start the development deployment ``make run-dev``
-2. Start the functional test  ``make ft-<type>`` (Check the ``Makefile`` to
+2. Start the functional tests  ``make ft-<type>`` (Check ``Makefile`` to
    see the available types of tests).
 
 The functional tests has global environment variables that can be used:
