@@ -110,6 +110,7 @@ A new BDD Feature file for an unexisting RSTUF Feature is always merged into a
 feature branch. After discussing the new feature request, the feature branch is
 created upon request by the maintainers.
 
+
 Tooling
 .......
 
@@ -123,6 +124,27 @@ The BDD tests have the workflow also in the `Umbrella repository
 <http://github.com/repository-service-tuf/repository-service-tuf>`_ , as a reusable
 GitHub Workflow, and it is triggered by other workflows/components i.e.,
 before releasing.
+
+Running Functional Tests
+........................
+
+It is possible to run Functional Tests (FT) from each component, including the
+Umbrella repository.
+
+1. Start the development deployment ``make run-dev``
+2. Start the functional tests  ``make ft-<type>`` (Check ``Makefile`` to
+   see the available types of tests).
+
+The functional tests has global environment variables that can be used:
+
+- ``PERFORMANCE``: ``bool``, it disables the failure in case of low performance
+  timeout. It is used to test only the consistency.
+
+- ``METADATA_BASE_URL``: to use some custom metatada base url in the TUF
+  Client. Default is  ``http://web:8080``
+
+This environment variables needs to be passed to the container that calls
+the ``pytest`` or ``ft-<name>`` scripts.
 
 
 Project organization
