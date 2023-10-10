@@ -137,7 +137,7 @@ Umbrella repository.
 
 The functional tests has global environment variables that can be used:
 
-- ``PERFORMANCE``: ``bool``, it disable the failure in case of low performance
+- ``PERFORMANCE``: ``bool``, it disables the failure in case of low performance
   timeout. It is used to test only the consistency.
 
 - ``METADATA_BASE_URL``: to use some custom metatada base url in the TUF
