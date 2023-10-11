@@ -155,15 +155,6 @@ connected to RSTUF API. It does not require a
 
     ❯ rstuf admin ceremony -b
 
-.. note::
-
-    if using authentication/authorization the login is required
-
-    .. code::
-
-        ❯ rstuf admin login
-        ❯ rstuf admin ceremony -b
-
 
 Bootstrap
 =========

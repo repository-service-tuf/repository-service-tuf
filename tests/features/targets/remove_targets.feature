@@ -1,11 +1,6 @@
 Feature: Adding targets in Repository Service for TUF (RSTUF)
-    As an admin,
-    Admin has deployed RSTUF,
-    Admin has run the ceremony and completed bootstrap successfully,
-    Admin has provided a token to the API requester
-
-    Background:
-        Given the API requester has access to RSTUF API
+    User has deployed RSTUF,
+    User has run the ceremony and completed bootstrap successfully
 
     Scenario Outline: Removing targets using RSTUF api
         Given there are targets <paths> available for download using TUF client from the metadata repository

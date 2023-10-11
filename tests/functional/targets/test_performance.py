@@ -17,11 +17,6 @@ def test_api_requester_multiple_request_and_targets():
     """Multiple requests with multiple targets and timeout threshold"""
 
 
-@given("the API requester has access to RSTUF API")
-def token():
-    pass
-
-
 @given(
     parse(
         "the API requester sends {num_requests} requests with {num_targets} "

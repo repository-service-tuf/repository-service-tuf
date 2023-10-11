@@ -67,8 +67,6 @@ Steps
 
    * It uses Docker Volume for the persistent data and Volumes
 
-    - ``rstuf-api-data``: Persist the
-      :ref:`built-in RSTUF auth data <guide/deployment/planning/volumes:DATA [optional]>`.
     - ``rstuf-storage``: public TUF Metadata. Using RSTUF Worker with
       :ref:`LocalKeyVault storage backend <guide/deployment/planning/volumes:LocalStorage [Optional]>`.
     - ``rstuf-redis-data``: Persistent Redis data
@@ -152,4 +150,3 @@ Remove all data
     rstuf_rstuf-storage \
     rstuf_rstuf-keystorage \
     rstuf_rstuf-redis-data \
-    rstuf_rstuf-api-data \

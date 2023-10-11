@@ -16,13 +16,6 @@ def test_removing_a_target_using_rstuf_api():
 
 
 @given(
-    "the API requester has access to RSTUF API",
-)
-def the_api_requester_has_a_token_with_scope_specific_scope():
-    ...
-
-
-@given(
     parse(
         "there are targets {paths} available for download using TUF client "
         "from the metadata repository"
