@@ -64,7 +64,9 @@ def the_api_requester_deletes_targets(http_request, paths):
     # remove quotes; example "[str, str]" -> [str, str]
     paths = ast.literal_eval(paths)
     payload = {"targets": paths}
-    return http_request(method="DELETE", url="/api/v1/artifacts", json=payload)
+    return http_request(
+        method="POST", url="/api/v1/artifacts/delete", json=payload
+    )
 
 
 @then(
@@ -126,7 +128,9 @@ def the_api_requester_tries_to_delete_all_targets(
     paths = ast.literal_eval(paths)
     non_existing_paths = ast.literal_eval(non_existing_paths)
     payload = {"targets": paths + non_existing_paths}
-    return http_request(method="DELETE", url="/api/v1/artifacts", json=payload)
+    return http_request(
+        method="POST", url="/api/v1/artifacts/delete", json=payload
+    )
 
 
 @then(
