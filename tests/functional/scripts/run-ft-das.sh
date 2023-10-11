@@ -46,7 +46,7 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-ceremony.py '{
 }'
 
 # Bootstrap using DAS
-rstuf admin ceremony -b -u -f payload.json --upload-server http://repository-service-tuf-api
+rstuf admin ceremony -b -u -f payload.json --api-server http://repository-service-tuf-api
 
 
 # Finish the DAS signing the Root Metadata (bootstrap)

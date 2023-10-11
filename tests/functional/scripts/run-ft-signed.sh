@@ -40,7 +40,7 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-ceremony.py '{
 }'
 
 # Bootstrap using full signed payload
-rstuf admin ceremony -b -u -f payload.json --upload-server http://repository-service-tuf-api
+rstuf admin ceremony -b -u -f payload.json --api-server http://repository-service-tuf-api
 
 # Get initial trusted Root
 rm metadata/1.root.json
