@@ -22,15 +22,15 @@ Using pip:
 
     Repository Service for TUF Command Line Interface (CLI).
 
-    ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │ --config   -c  TEXT  Repository Service for TUF config file.                                                                                                                                                             │
-    │ --version            Show the version and exit.                                                                                                                                                                              │
-    │ --help     -h        Show this message and exit.                                                                                                                                                                             │
-    ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-    ╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │ admin                                    Administrative Commands                                                                                                                                                             │
-    │ key                                      Cryptographic Key Commands                                                                                                                                                          │
-    ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Options ────────────────────────────────────────────────────────────────────────────────╮
+    │ --config   -c  TEXT  Repository Service for TUF config file. [default: $HOME/.rstuf.ini] │
+    │ --version            Show the version and exit.                                          │
+    │ --help     -h        Show this message and exit.                                         │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Commands ───────────────────────────────────────────────────────────╮
+    │ admin                                    Administrative Commands     │
+    │ key                                      Cryptographic Key Commands  │
+    ╰──────────────────────────────────────────────────────────────────────╯
 
 .. rstuf-cli-admin
 
@@ -54,7 +54,6 @@ It executes administrative commands to the Repository Service for TUF.
     │ ceremony                                              Start a new Metadata Ceremony.                                                                                                                                         │
     │ import-targets                                        Import targets to RSTUF from exported CSV file.                                                                                                                        │
     ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-
 
 .. rstuf-cli-admin-ceremony
 
@@ -363,8 +362,6 @@ Metadata Management (``metadata``)
     ❯ rstuf admin metadata
 
     Usage: rstuf admin metadata [OPTIONS] COMMAND [ARGS]...
-
-    Token Management.
 
     ╭─ Options ───────────────────────────────────────────╮
     │  --help  -h    Show this message and exit.          │
@@ -766,7 +763,7 @@ See the below CSV file example:
      Import targets to RSTUF from exported CSV file.
 
     ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │ *                          --metadata-url  TEXT  RSTUF Metadata URL i.e.: http://127.0.0.1 . [required]                                                         │
+    │ *                          --api-url       TEXT  RSTUF Metadata URL i.e.: http://127.0.0.1 . [required]                                                         │
     │ *                          --db-uri        TEXT  RSTUF DB URI. i.e.: postgresql://postgres:secret@127.0.0.1:5433 [required]                                     │
     │ *                          --csv           TEXT  CSV file to import. Multiple --csv parameters are allowed. See rstuf CLI guide for more details. [required]    │
     │    --skip-publish-targets                       Skip publishing targets in TUF Metadata.                                                                        │
@@ -900,8 +897,6 @@ Artifact Addition (``add``)
 ---------------------------
 
 This command adds the provided artifact to the TUF Metadata using the RSTUF REST API.
-If the API requires authentication/authorization the user needs to authenticate accordingly for
-the command to be carried out successfully.
 
 .. code::
 

@@ -76,16 +76,16 @@ This variable receives a list separetad by `:`.
 
 You can disable a whole endpoint.
 For example:
-`RSTUF_DISABLED_ENDPOINTS = "/api/v1/targets"`
-Will disable all methods and all paths  related to v1 `targets`:
-GET `/api/v1/targets`, POST `/api/v1/targets`, POST `/api/v1/targets/publish` etc.
+`RSTUF_DISABLED_ENDPOINTS = "/api/v1/artifacts"`
+Will disable all methods and all paths  related to v1 `artifacts`:
+GET `/api/v1/artifacts`, POST `/api/v1/artifacts`, POST `/api/v1/artifacts/publish` etc.
 
 It is possible to disable a specific method endpoint with:
-`{'POST'}/api/v1/targets/publish`.
+`{'POST'}/api/v1/artifacts/publish`.
 
 Note: If you give both
-`RSTUF_DISABLE_ENDPOINTS={'POST'}/api/v1/targets/publish:/api/v1/targets` then
-the `/api/v1/targets` has a higher priority and will disable all v1 targets related endpoints.
+`RSTUF_DISABLE_ENDPOINTS={'POST'}/api/v1/artifacts/publish:/api/v1/artifacts` then
+the `/api/v1/artifacts` has a higher priority and will disable all v1 artifacts related endpoints.
 
 A list can be given as shown in the example bellow:
 `RSTUF_DISABLE_ENDPOINTS={'POST'}/api/v1/bootstrap/:/api/v1/metadata/:/api/v1/artifacts/:{'POST'}/api/v1/metadata/sign/`
