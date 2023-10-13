@@ -43,10 +43,10 @@ A successful RSTUF deployment will have an RSTUF HTTP(S) API service
 
 ``http://<IP ADDRESS>/api/v1/``
 
-Adding targets (artifacts)
+Adding artifacts
 ==========================
 
-Send requests to ``http://<IP ADDRESS>/api/v1/targets`` with method ``POST``
+Send requests to ``http://<IP ADDRESS>/api/v1/artifacts`` with method ``POST``
 with a JSON payload.
 
 .. note::
@@ -55,9 +55,9 @@ with a JSON payload.
 
 * This payload supports one or multiple artifacts (targets)
 
-* The `add targets payload schema <https://repository-service-tuf.github.io/repository-service-tuf-api/#/v1/post_api_v1_targets__post>`_
+* The `add targets payload schema <https://repository-service-tuf.github.io/repository-service-tuf-api/#/v1/post_api_v1_artifacts__post>`_
 
-Add targets payload
+Add artifacts payload
 -------------------
 
 .. code-block:: json
@@ -101,21 +101,21 @@ Add targets payload
       - ``release/projectA/file1.tar.gz``
 
 
-Removing targets (artifacts)
+Removing artifacts
 ============================
 
-Send requests to ``http://<IP ADDRESS>/api/v1/targets`` with method ``DELETE``
+Send requests to ``http://<IP ADDRESS>/api/v1/artifacts/delete`` with method ``POST``
 with a JSON payload.
 
 .. note::
     See the complete
     `API documentation <https://repository-service-tuf.github.io/repository-service-tuf-api/>`_
 
-* This payload supports one or multiple artifacts (targets)
+* This payload supports one or multiple artifacts
 
-* The `remove targets payload schema <https://repository-service-tuf.github.io/repository-service-tuf-api/#/v1/delete_api_v1_targets__delete>`_
+* The `remove artifacts payload schema <https://repository-service-tuf.github.io/repository-service-tuf-api/#/v1/post_delete_api_v1_artifacts_delete_post>`_
 
-Remove targets payload
+Remove artifacts payload
 ----------------------
 
 .. code-block:: json
@@ -142,7 +142,7 @@ Remove targets payload
 Advanced Usage
 ##############
 
-Managing adding/removing targets ("artifacts") tasks -- call-backs
+Managing adding/removing artifacts tasks -- call-backs
 ==================================================================
 
 Adding/removing artifacts to Repository Service for TUF (RSTUF) is an
@@ -189,22 +189,22 @@ The response will have a body with all task details
 See the `endpoint task documentation <https://repository-service-tuf.github.io/repository-service-tuf-api/#/v1/get_api_v1_task__get>`_
 for more details.
 
-Adding targets/artifacts for back-signing
+Adding artifacts for back-signing
 =========================================
 
-Repository Service for TUF (RSTUF) allows adding target files (artifacts)
-without publishing immediately to the TUF Metadata.
+Repository Service for TUF (RSTUF) allows adding artifacts without publishing
+immediately to the TUF Metadata.
 
 As example, an organization adds and removes artifacts while batch publishing daily.
 
 
 This feature requires adding the ``publish_targets`` parameter to
-:ref:`guide/general/usage:Add targets payload` or
-:ref:`guide/general/usage:Remove targets payload`.
+:ref:`guide/general/usage:Add artifacts payload` or
+:ref:`guide/general/usage:Remove artifacts payload`.
 
 Examples:
 
-Adding targets without publishing
+Adding artifacts without publishing
 
 .. code-block:: json
     :linenos:
@@ -225,7 +225,7 @@ Adding targets without publishing
         "publish_targets": false
     }
 
-Removing targets without publishing
+Removing artifacts without publishing
 
 .. code-block:: json
     :linenos:
@@ -236,7 +236,7 @@ Removing targets without publishing
         "publish_targets": false
     }
 
-To publish all targets added/removed without publishing, send a request to
+To publish all artifacts added/removed without publishing, send a request to
 ``http://<IP ADDRESS>/api/v1/targets/publish`` with method ``POST``.
 
 .. note::
