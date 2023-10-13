@@ -23,7 +23,7 @@ Using pip:
     Repository Service for TUF Command Line Interface (CLI).
 
     ╭─ Options ────────────────────────────────────────────────────────────────────────────────╮
-    │ --config   -c  TEXT  Repository Service for TUF config file. [default: $HOME/.rstuf.ini] │
+    │ --config   -c  TEXT  Repository Service for TUF config file. [default: $HOME/.rstuf.yml] │
     │ --version            Show the version and exit.                                          │
     │ --help     -h        Show this message and exit.                                         │
     ╰──────────────────────────────────────────────────────────────────────────────────────────╯
