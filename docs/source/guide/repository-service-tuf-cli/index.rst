@@ -47,13 +47,14 @@ It executes administrative commands to the Repository Service for TUF.
 
     Administrative Commands
 
-    ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │ --help  -h    Show this message and exit.                                                                                                                                                                                    │
-    ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-    ╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │ ceremony                                              Start a new Metadata Ceremony.                                                                                                                                         │
-    │ import-targets                                        Import targets to RSTUF from exported CSV file.                                                                                                                        │
-    ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Options ────────────────────────────────────────────────────────────────────╮
+    │ --help  -h    Show this message and exit.                                    │
+    ╰──────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Commands ───────────────────────────────────────────────────────────────────╮
+    │ ceremony                    Start a new Metadata Ceremony.                   │
+    │ import-artifacts            Import artifacts to RSTUF from exported CSV file.│
+    │ metadata                    Metadata management.                             │
+    ╰──────────────────────────────────────────────────────────────────────────────╯
 
 .. rstuf-cli-admin-ceremony
 
@@ -711,13 +712,14 @@ sign (``sign``)
 
 
 .. rstuf-cli-admin-import-targets
+.. rstuf-cli-admin-import-artifacts
 
-Import Targets (``import-targets``)
------------------------------------
+Import Artifacts (``import-artifacts``)
+---------------------------------------
 
-This feature imports a large number of targets directly to RSTUF Database.
+This feature imports a large number of artifacts directly to RSTUF Database.
 RSTUF doesn't recommend using this feature for regular flow, but in case you're
-onboarding an existent repository that contains a large number of targets.
+onboarding an existent repository that contains a large number of artifacts.
 
 This feature requires extra dependencies:
 
@@ -756,31 +758,31 @@ See the below CSV file example:
 
 .. code:: shell
 
-    ❯ rstuf admin import-targets -h
+    ❯ rstuf admin import-artifacts -h
 
-     Usage: rstuf admin import-targets [OPTIONS]
+     Usage: rstuf admin import-artifacts [OPTIONS]
 
-     Import targets to RSTUF from exported CSV file.
+     Import artifacts to RSTUF from exported CSV file.
 
     ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
     │ *                          --api-url       TEXT  RSTUF Metadata URL i.e.: http://127.0.0.1 . [required]                                                         │
     │ *                          --db-uri        TEXT  RSTUF DB URI. i.e.: postgresql://postgres:secret@127.0.0.1:5433 [required]                                     │
     │ *                          --csv           TEXT  CSV file to import. Multiple --csv parameters are allowed. See rstuf CLI guide for more details. [required]    │
-    │    --skip-publish-targets                       Skip publishing targets in TUF Metadata.                                                                        │
-    │    --help                  -h                   Show this message and exit.                                                                                     │
+    │    --skip-publish-artifacts                      Skip publishing artifacts in TUF Metadata.                                                                     │
+    │    --help                  -h                    Show this message and exit.                                                                                    │
     ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
-    ❯ rstuf admin import-targets --db-uri postgresql://postgres:secret@127.0.0.1:5433 --csv targets-1of2.csv --csv targets-2of2.csv --metadata-url http://127.0.0.1:8080/
-    Import status: Loading data from ../repository-service-tuf/tests/data/targets-1of2.csv
-    Import status: Importing ../repository-service-tuf/tests/data/targets-1of2.csv data
-    Import status: ../repository-service-tuf/tests/data/targets-1of2.csv imported
-    Import status: Loading data from ../repository-service-tuf/tests/data/targets-2of2.csv
-    Import status: Importing ../repository-service-tuf/tests/data/targets-2of2.csv data
-    Import status: ../repository-service-tuf/tests/data/targets-2of2.csv imported
+    ❯ rstuf admin import-artifacts --db-uri postgresql://postgres:secret@127.0.0.1:5433 --csv artifacts-1of2.csv --csv artifacts-2of2.csv --metadata-url http://127.0.0.1:8080/
+    Import status: Loading data from ../repository-service-tuf/tests/data/artifacts-1of2.csv
+    Import status: Importing ../repository-service-tuf/tests/data/artifacts-1of2.csv data
+    Import status: ../repository-service-tuf/tests/data/artifacts-1of2.csv imported
+    Import status: Loading data from ../repository-service-tuf/tests/data/artifacts-2of2.csv
+    Import status: Importing ../repository-service-tuf/tests/data/artifacts-2of2.csv data
+    Import status: ../repository-service-tuf/tests/data/artifacts-2of2.csv imported
     Import status: Commiting all data to the RSTUF database
     Import status: All data imported to RSTUF DB
-    Import status: Submitting action publish targets
-    Import status: Publish targets task id is dd1cbf2320ad4df6bda9ca62cdc0ef82
+    Import status: Submitting action publish artifacts
+    Import status: Publish artifacts task id is dd1cbf2320ad4df6bda9ca62cdc0ef82
     Import status: task STARTED
     Import status: task SUCCESS
     Import status: Finished.
