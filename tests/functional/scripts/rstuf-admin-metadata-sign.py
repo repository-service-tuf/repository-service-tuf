@@ -9,7 +9,7 @@ from repository_service_tuf import Dynaconf, cli
 
 def _run(input):
     folder_name = mkdtemp()
-    setting_file = os.path.join(folder_name, "rstuf.ini")
+    setting_file = os.path.join(folder_name, ".rstuf.yml")
     context = {"settings": Dynaconf(), "config": setting_file}
     runner = CliRunner()
     output = runner.invoke(
