@@ -20,7 +20,7 @@ def rstuf_requests(stop_requests, http_request):
     while not stop_requests.is_set():
         targets = []
         LOGGER.info("Adding artifacts")
-        for count in range(0, int(10)):
+        for count in range(10):
             filename = f"test/{names_generator.generate_name()}-{count}.tar.gz"
             target = {
                 "info": {
