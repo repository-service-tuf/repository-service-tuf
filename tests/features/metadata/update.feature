@@ -5,7 +5,7 @@ Feature: Update metadata
     Scenario: Updating Root metadata full signed
         Given RSTUF is running and operational
         Then the RSTUF is receiving multiple requests
-        When the RSTUF key holders send a full signed metadata
+        When the RSTUF key holders send a fully signed metadata
         Then the API requester should get status code '202' with 'task_id'
         Then the API requester gets from endpoint 'GET /api/v1/task' status 'SUCCESS'
         Then the '2.root.json' will be available in the TUF Metadata

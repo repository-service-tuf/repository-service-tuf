@@ -79,7 +79,7 @@ def rstuf_receiving_requests(http_request):
 
 
 @when(
-    "the RSTUF key holders send a full signed metadata",
+    "the RSTUF key holders send a fully signed metadata",
     target_fixture="response",
 )
 def send_signed_update_metadata(send_rstuf_requests, http_request):
