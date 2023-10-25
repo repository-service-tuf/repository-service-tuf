@@ -138,6 +138,7 @@ def task_is_finished(task_id, http_request):
 
     LOGGER.info("[METADATA UPDATE] Update Metadata to 2.root.json finished")
     assert count < 60, pytest.rstuf_thread.set()
+    # wait add artifacts continue 2 seconds after metadata update has finished
     time.sleep(2)
     pytest.rstuf_thread.set()
 
