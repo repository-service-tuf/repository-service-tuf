@@ -77,7 +77,7 @@ Talks
 =====
 
 * `PackagingCon 2023 <https://cfp.packaging-con.org/2023/talk/997FQK/>`_:
-  “Our stuff” - how to protect users from package compromise with RSTUF (October 2023, comming soon).
+  “Our stuff” - how to protect users from package compromise with RSTUF (October 2023, coming soon).
 * `EuroPython 2023 <https://ep2023.europython.eu/session/pep-458-a-solution-not-only-for-pypi>`_:
   `"PEP 458 a solution not only for PyPI" (video recoding) <https://www.youtube.com/watch?v=8pnOpfvhT9o>`_.
 
