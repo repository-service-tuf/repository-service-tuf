@@ -94,8 +94,8 @@ Posts
 Mentions
 ========
 
-* Open Source Summit EU 2023: at OpenSSF day Omkhar Arasaratnam, OpenSSF General Manager, mentions
-  Repository Service for TUF.
+* `"Open Source Summit EU 2023: at OpenSSF day Omkhar Arasaratnam, OpenSSF General Manager, mentions
+  Repository Service for TUF" <https://www.youtube.com/watch?v=WWY6SWaYhxI>`
 
   .. image:: ./_static/images/rstuf_openssf_day_openssf_eu_2023.jpg
     :width: 200
