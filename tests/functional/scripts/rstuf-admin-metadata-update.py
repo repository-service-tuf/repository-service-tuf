@@ -9,12 +9,12 @@ from repository_service_tuf import Dynaconf, cli
 
 def _run(input):
     folder_name = mkdtemp()
-    setting_file = os.path.join(folder_name, ".rstuf.yml")
+    setting_file = os.path.join(folder_name, "rstuf.yml")
     context = {"settings": Dynaconf(), "config": setting_file}
     runner = CliRunner()
     output = runner.invoke(
-        cli.admin.ceremony.ceremony,
-        ["--save"],
+        cli.admin.metadata.update,
+        "",
         input="\n".join(input),
         obj=context,
         catch_exceptions=False,
