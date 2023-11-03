@@ -56,7 +56,7 @@ distribution platform:
 
 .. readme-design-final
 
-Thanks to the REST API, integrating RSTUF into your existing content delivery
+Thanks to the REST API, integrating RSTUF into existing content delivery
 solutions is straightforward. Furthermore, RSTUF is designed for scalability
 and can support active repositories with multiple repository workers.
 

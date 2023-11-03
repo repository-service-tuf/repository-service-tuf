@@ -77,7 +77,7 @@ Talks
 =====
 
 * `PackagingCon 2023 <https://cfp.packaging-con.org/2023/talk/997FQK/>`_:
-  “Our stuff” - how to protect users from package compromise with RSTUF (October 2023, comming soon).
+  `“Our stuff” - how to protect users from package compromise with RSTUF <https://www.youtube.com/live/mYzqeS2d96A?si=cqQUH5J5wDPrOQFb&t=3801>`_.
 * `EuroPython 2023 <https://ep2023.europython.eu/session/pep-458-a-solution-not-only-for-pypi>`_:
   `"PEP 458 a solution not only for PyPI" (video recoding) <https://www.youtube.com/watch?v=8pnOpfvhT9o>`_.
 
@@ -94,11 +94,9 @@ Posts
 Mentions
 ========
 
-* Open Source Summit EU 2023: at OpenSSF day Omkhar Arasaratnam, OpenSSF General Manager, mentions
-  Repository Service for TUF.
+* `"Open Source Summit EU 2023: at OpenSSF day Omkhar Arasaratnam, OpenSSF General Manager, mentions
+  Repository Service for TUF" <https://youtu.be/WWY6SWaYhxI?si=bT34fgeQquWWh8ga>`_
 
-  .. image:: ./_static/images/rstuf_openssf_day_openssf_eu_2023.jpg
-    :width: 200
     :align: center
 
 
