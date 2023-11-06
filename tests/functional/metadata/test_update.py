@@ -88,15 +88,20 @@ def send_signed_update_metadata(send_rstuf_requests, http_request):
     # Wait some requests in the broker before run metadata update
     time.sleep(2)
     LOGGER.info("[METADATA UPDATE] Submiting Root Metadata Update")
-    with open("metadata-update-payload.json") as f:
-        paylaod_json = json.loads(f.read())
+    try:
+        with open("metadata-update-payload.json") as f:
+            paylaod_json = json.loads(f.read())
 
-    result = http_request(
-        "POST",
-        url="/api/v1/metadata",
-        json=paylaod_json,
-    )
-    return result
+        result = http_request(
+            "POST",
+            url="/api/v1/metadata",
+            json=paylaod_json,
+        )
+        return result
+    except Exception as e:
+        # Stop thread adding targets in a case of an exception.
+        pytest.rstuf_thread.set()
+        raise e
 
 
 @then(
@@ -105,11 +110,15 @@ def send_signed_update_metadata(send_rstuf_requests, http_request):
 )
 def task_is_received(response):
     assert response.status_code == 202, pytest.rstuf_thread.set()
-
-    json_response = response.json()
-    task_id = json_response["data"]["task_id"]
-    LOGGER.info(f"[METADATA UPDATE]  Metadata Updated by {task_id}")
-    return task_id
+    try:
+        json_response = response.json()
+        task_id = json_response["data"]["task_id"]
+        LOGGER.info(f"[METADATA UPDATE]  Metadata Updated by {task_id}")
+        return task_id
+    except Exception as e:
+        # Stop thread adding targets in a case of an exception.
+        pytest.rstuf_thread.set()
+        raise e
 
 
 @then(
@@ -125,7 +134,12 @@ def task_is_finished(task_id, http_request):
             url=f"/api/v1/task/?task_id={task_id}",
         )
 
-        data = response.json()["data"]
+        data = response.json().get("data")
+        if data is None:
+            count += 1
+            time.sleep(0.5)
+            continue
+
         state = data.get("state", None)
         status = data.get("result", {}).get("status")
         if state == "SUCCESS":
@@ -166,17 +180,24 @@ def root_metadata_2_root_is_available(http_request):
 def verify_targets_consistency(
     get_target_info, http_request, task_completed_within_threshold
 ):
-    # wait all artifact tasks to be complete and check the consistency
-    count = 1
-    for response_json in pytest.rstuf_added_targets:
-        task_completed_within_threshold(http_request, response_json, 180)
-        LOGGER.info(f"Task {count}/{len(pytest.rstuf_added_targets)} finshed!")
-        count += 1
+    try:
+        # wait all artifact tasks to be complete and check the consistency
+        count = 1
+        for response_json in pytest.rstuf_added_targets:
+            task_completed_within_threshold(http_request, response_json, 180)
+            LOGGER.info(
+                f"Task {count}/{len(pytest.rstuf_added_targets)} finshed!"
+            )
+            count += 1
 
-    for response_json in pytest.rstuf_added_targets:
-        for target in response_json["data"].get("targets"):
-            LOGGER.info(f"Verifying {target}")
-            assert target is not None, pytest.rstuf_thread.set()
-            assert (
-                get_target_info(target) is not None
-            ), pytest.rstuf_thread.set()
+        for response_json in pytest.rstuf_added_targets:
+            for target in response_json["data"].get("targets"):
+                LOGGER.info(f"Verifying {target}")
+                assert target is not None, pytest.rstuf_thread.set()
+                assert (
+                    get_target_info(target) is not None
+                ), pytest.rstuf_thread.set()
+    except Exception as e:
+        # Stop thread adding targets in a case of an exception.
+        pytest.rstuf_thread.set()
+        raise e
