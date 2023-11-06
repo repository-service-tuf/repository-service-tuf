@@ -8,7 +8,7 @@ Not for a Production Deploy.
 This release is for PoV/PoC of the project.
 
 Features:
-Token
+
 - [x] Bootstrap the Repository Service for TUF (Initial TUF Metadata)
 - [x] Storage Service: Local file system
 - [x] Key Vault Service: Local file system
@@ -61,13 +61,15 @@ Goal: Minimum Valuable Product
 Status: TBD
 
 First Production Deploy
-This release achive the minimum valuable product for users.
+This release achieves the minimum valuable product for users.
 
 - [x] Deployment Design Document (`Issue #227 <https://github.com/repository-service-tuf/repository-service-tuf/issues/227>`_)
 - [ ] Distributed asynchronous threshold signing (`Issue #327 <https://github.com/repository-service-tuf/repository-service-tuf/issues/327>`_)
-- [ ] Old Metadata retention (`Issue #29 <https://github.com/repository-service-tuf/repository-service-tuf/issues/29>`_)
 - [ ] Support to AWS S3 (Storage) and AWS KMS (Key Vault) (`Issue #24 <https://github.com/repository-service-tuf/repository-service-tuf/issues/24>`_)
-- [ ] Feature: support of HashiCorp Vault (`Issue #509 <https://github.com/repository-service-tuf/repository-service-tuf/issues/509>`_)
+- [ ] Support CLI using HSM for signing - Ceremony, Metadata Update and Sign (`Issue #351[cli] <https://github.com/repository-service-tuf/repository-service-tuf-cli/issues/351>`_)
+- [ ] Support of HashiCorp Vault (`Issue #509 <https://github.com/repository-service-tuf/repository-service-tuf/issues/509>`_)
+- [ ] Security Audit on RSTUF Project  (`Issue #246 <https://github.com/repository-service-tuf/repository-service-tuf/issues/546>`_)
+- [ ] Old Metadata retention (`Issue #29 <https://github.com/repository-service-tuf/repository-service-tuf/issues/29>`_)
 
 Components Milestones:
 
