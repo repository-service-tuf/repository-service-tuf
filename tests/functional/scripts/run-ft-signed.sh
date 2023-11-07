@@ -45,9 +45,6 @@ rstuf admin ceremony -b -u -f payload.json --api-server http://repository-servic
 # Get initial trusted Root
 rm metadata/1.root.json
 wget -P metadata/ http://web:8080/1.root.json
-if [[ ${UMBRELLA_PATH} != "." ]]; then
-    cp -r metadata ${UMBRELLA_PATH}/
-fi
 
 python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-update.py '{
     "File name or URL to the current root metadata": "metadata/1.root.json",
@@ -63,5 +60,11 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-update.py 
     "Do you want to modify root keys? [y/n]": "n",
     "Do you want to change the online key?": "n"
 }'
+
+# Copy files when UMBRELLA_PATH is not the current dir (FT triggered from components)
+if [[ ${UMBRELLA_PATH} != "." ]]; then
+    cp -r metadata ${UMBRELLA_PATH}/
+    cp metadata-update-payload.json ${UMBRELLA_PATH}/
+fi
 
 make -C ${UMBRELLA_PATH}/ functional-tests-exitfirst
