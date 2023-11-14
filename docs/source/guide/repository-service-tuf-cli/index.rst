@@ -765,7 +765,7 @@ See the below CSV file example:
      Import artifacts to RSTUF from exported CSV file.
 
     ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │ *                          --api-url       TEXT  RSTUF Metadata URL i.e.: http://127.0.0.1 . [required]                                                         │
+    │                            --api-server    TEXT  RSTUF Metadata URL i.e.: http://127.0.0.1 . [required]                                                         │
     │ *                          --db-uri        TEXT  RSTUF DB URI. i.e.: postgresql://postgres:secret@127.0.0.1:5433 [required]                                     │
     │ *                          --csv           TEXT  CSV file to import. Multiple --csv parameters are allowed. See rstuf CLI guide for more details. [required]    │
     │    --skip-publish-artifacts                      Skip publishing artifacts in TUF Metadata.                                                                     │
