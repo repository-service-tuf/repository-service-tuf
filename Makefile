@@ -55,7 +55,7 @@ lint:
 	rm requirements.commit
 
 functional-tests-exitfirst:
-	pytest --exitfirst --gherkin-terminal-reporter tests/functional/targets/test_performance.py::test_api_requester_multiple_request_and_targets[2-100-60] -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
+	pytest -n auto --exitfirst --gherkin-terminal-reporter tests -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
 
 functional-tests:
 	pytest --gherkin-terminal-reporter tests -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
