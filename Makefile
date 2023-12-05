@@ -55,7 +55,7 @@ lint:
 	rm requirements.commit
 
 functional-tests-exitfirst:
-	pytest --exitfirst -n auto tests -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
+	pytest --exitfirst --splits 5 --group 1 tests -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
 
 functional-tests:
 	pytest --gherkin-terminal-reporter tests -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
