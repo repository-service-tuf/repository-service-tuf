@@ -1,5 +1,7 @@
 #!/bin/bash -x
 
+PYTEST_GROUP=$2
+
 # Base FT
 . "${UMBRELLA_PATH}/tests/functional/scripts/ft-base.sh"
 
