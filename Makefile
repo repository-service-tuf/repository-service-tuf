@@ -65,9 +65,9 @@ functional-tests:
 # usage: `make ft-das CLI_VERSION=v0.8.0b1`
 ft-das:
 ifneq ($(CLI_VERSION),)
-	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh dev
+	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh dev $(PYTEST_GROUP)
 else
-	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh $(CLI_VERSION)
+	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh $(CLI_VERSION) $(PYTEST_GROUP)
 endif
 
 ft-signed:
