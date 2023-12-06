@@ -53,6 +53,9 @@ jobs:
   functional-das:
     name: "DAS"
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        pytest_group: [ 1, 2, 3, 4, 5 ]
 
     steps:
       - name: Checkout RSTUF Umbrella
@@ -70,7 +73,7 @@ jobs:
       - name: Bootstrap/Setup RSTUF using DAS and run Functional Tests
         timeout-minutes: 30
         run: |
-          docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh ${{ inputs.cli_version }}
+          docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh ${{ inputs.cli_version }} ${{ matrix.pytest_group }}
 
   functional-signed:
     name: "Full Signed"
