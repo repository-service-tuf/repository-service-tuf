@@ -67,4 +67,4 @@ if [[ ${UMBRELLA_PATH} != "." ]]; then
     cp metadata-update-payload.json ${UMBRELLA_PATH}/
 fi
 
-make -C ${UMBRELLA_PATH}/ functional-tests-exitfirst
+make -C ${UMBRELLA_PATH}/ functional-tests-exitfirst PYTEST_GROUP=${PYTEST_GROUP}
