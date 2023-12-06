@@ -1,7 +1,6 @@
 #!/bin/bash -x
 
 CLI_VERSION=$1
-PYTEST_GROUP=$2
 # Install required dependencies for Functional Tests
 apt update
 apt install -y make wget git
