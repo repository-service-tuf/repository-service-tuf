@@ -40,6 +40,7 @@ docs:
 	sphinx-build -T -E -b html docs/source docs/build/html
 
 requirements:
+	pipenv lock
 	pipenv requirements > requirements.txt
 
 reformat:
