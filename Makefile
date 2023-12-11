@@ -55,7 +55,11 @@ lint:
 	rm requirements.commit
 
 functional-tests-exitfirst:
-	pytest --exitfirst --splits 6 --group $(PYTEST_GROUP) --store-durations --durations-path=./.test_durations.$(PYTEST_GROUP) tests -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html --ignore tests/functional/targets/test_performance.py::test_api_requester_multiple_request_and_targets[50-50-600]
+	ifneq ($(SLOW),)
+		pytest --exitfirst --splits 6 --group $(PYTEST_GROUP) --store-durations --durations-path=./.test_durations.$(PYTEST_GROUP) tests -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html --ignore tests/functional/targets/test_performance.py::test_api_requester_multiple_request_and_targets[50-50-600]
+	else
+		pytest --exitfirst tests/functional/targets/test_performance.py::test_api_requester_multiple_request_and_targets[50-50-600] -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
+	endif
 
 functional-tests:
 	pytest --gherkin-terminal-reporter tests -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
