@@ -2,6 +2,9 @@
 
 PYTEST_GROUP=$2
 SLOW=$3
+echo $1
+echo $2
+echo $3
 echo $SLOW
 
 # Base FT
