@@ -5,6 +5,7 @@ echo "!!RUN-FT-DASH.SH RUNNING!!"
 echo $1
 echo $2
 PYTEST_GROUP=$2
+SLOW=$3
 
 # Base FT
 . "${UMBRELLA_PATH}/tests/functional/scripts/ft-base.sh"
@@ -92,4 +93,4 @@ if [[ ${UMBRELLA_PATH} != "." ]]; then
     cp metadata-update-payload.json ${UMBRELLA_PATH}/
 fi
 
-make -C ${UMBRELLA_PATH}/ functional-tests-exitfirst PYTEST_GROUP=${PYTEST_GROUP}
+make -C ${UMBRELLA_PATH}/ functional-tests-exitfirst PYTEST_GROUP=${PYTEST_GROUP} SLOW=${SLOW}

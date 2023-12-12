@@ -72,14 +72,14 @@ functional-tests:
 # usage: `make ft-das CLI_VERSION=v0.8.0b1`
 ft-das:
 ifneq ($(CLI_VERSION),)
-	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh dev $(PYTEST_GROUP)
+	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh dev $(PYTEST_GROUP) $(SLOW)
 else
-	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh $(CLI_VERSION) $(PYTEST_GROUP)
+	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh $(CLI_VERSION) $(PYTEST_GROUP) $(SLOW)
 endif
 
 ft-signed:
 ifneq ($(CLI_VERSION),)
-	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-signed.sh dev $(PYTEST_GROUP)
+	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-signed.sh dev $(PYTEST_GROUP) $(SLOW)
 else
-	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-signed.sh $(CLI_VERSION) $(PYTEST_GROUP)
+	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-signed.sh $(CLI_VERSION) $(PYTEST_GROUP) $(SLOW)
 endif
