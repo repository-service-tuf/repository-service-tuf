@@ -2,6 +2,7 @@
 
 PYTEST_GROUP=$2
 SLOW=$3
+echo $SLOW
 
 # Base FT
 . "${UMBRELLA_PATH}/tests/functional/scripts/ft-base.sh"

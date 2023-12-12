@@ -4,6 +4,7 @@
 echo "!!RUN-FT-DASH.SH RUNNING!!"
 echo $1
 echo $2
+echo $3
 PYTEST_GROUP=$2
 SLOW=$3
 
