@@ -58,7 +58,7 @@ lint:
 functional-tests-exitfirst:
 ifeq ($(SLOW),)
 	echo "Running fast tests"
-	pytest --exitfirst --splits 5 --group $(PYTEST_GROUP) --store-durations --durations-path=./.test_durations.$(PYTEST_GROUP) tests/functional -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
+	pytest --exitfirst --splits 3 --group $(PYTEST_GROUP) --store-durations --durations-path=./.test_durations.$(PYTEST_GROUP) tests/functional -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
 else
 	echo "Running slow tests"
 	pytest --exitfirst tests/performance -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
