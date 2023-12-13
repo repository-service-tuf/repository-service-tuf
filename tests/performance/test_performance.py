@@ -10,7 +10,7 @@ from pytest_bdd.parsers import parse
 
 
 @scenario(
-    "../../features/targets/performance.feature",
+    "../features/targets/performance.feature",
     "Multiple requests with multiple targets and timeout threshold",
 )
 def test_api_requester_multiple_request_and_targets():
