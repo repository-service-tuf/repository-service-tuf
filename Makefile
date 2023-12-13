@@ -58,10 +58,10 @@ lint:
 functional-tests-exitfirst:
 ifeq ($(SLOW),)
 	echo "Running fast tests"
-	pytest --exitfirst --splits 3 --group $(PYTEST_GROUP) --store-durations --durations-path=./.test_durations.$(PYTEST_GROUP) tests/functional -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
+	pytest --exitfirst --splits 5 --group $(PYTEST_GROUP) --store-durations --durations-path=./.test_durations.$(PYTEST_GROUP) -k "not test_api_requester_multiple_request_and_targets" tests -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
 else
 	echo "Running slow tests"
-	pytest --exitfirst tests/performance -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
+	pytest --exitfirst tests/functional/targets/test_performance.py::test_api_requester_multiple_request_and_targets -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
 endif
 
 functional-tests:
