@@ -1,5 +1,9 @@
 #!/bin/bash -x
 
+
+PYTEST_GROUP=$2
+SLOW=$3
+
 # Base FT
 . "${UMBRELLA_PATH}/tests/functional/scripts/ft-base.sh"
 
@@ -67,4 +71,4 @@ if [[ ${UMBRELLA_PATH} != "." ]]; then
     cp metadata-update-payload.json ${UMBRELLA_PATH}/
 fi
 
-make -C ${UMBRELLA_PATH}/ functional-tests-exitfirst
+make -C ${UMBRELLA_PATH}/ functional-tests-exitfirst PYTEST_GROUP=${PYTEST_GROUP} SLOW=${SLOW}
