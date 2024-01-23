@@ -64,12 +64,13 @@ First Production Deploy
 This release achieves the minimum valuable product for users.
 
 - [x] Deployment Design Document (`Issue #227 <https://github.com/repository-service-tuf/repository-service-tuf/issues/227>`_)
-- [ ] Distributed asynchronous threshold signing (`Issue #327 <https://github.com/repository-service-tuf/repository-service-tuf/issues/327>`_)
-- [ ] Support to AWS S3 (Storage) and AWS KMS (Key Vault) (`Issue #24 <https://github.com/repository-service-tuf/repository-service-tuf/issues/24>`_)
-- [ ] Support CLI using HSM for signing - Ceremony, Metadata Update and Sign (`Issue #351[cli] <https://github.com/repository-service-tuf/repository-service-tuf-cli/issues/351>`_)
+- [x] Support to AWS S3 (Storage) (`Issue # <https://github.com/repository-service-tuf/repository-service-tuf/issues/24>`)
+- [ ] AWS KMS (Key Vault) (`Issue #24 <https://github.com/repository-service-tuf/repository-service-tuf/issues/24>`_)
 - [ ] Support of HashiCorp Vault (`Issue #509 <https://github.com/repository-service-tuf/repository-service-tuf/issues/509>`_)
+- [ ] Distributed asynchronous threshold signing (`Issue #327 <https://github.com/repository-service-tuf/repository-service-tuf/issues/327>`_)
+- [ ] Support CLI using HSM for signing - Ceremony, Metadata Update and Sign (`Issue #351[cli] <https://github.com/repository-service-tuf/repository-service-tuf-cli/issues/351>`_)
+- [ ] Create/Remove custom delegate Target Roles (`Issue #354 <https://github.com/repository-service-tuf/repository-service-tuf/issues/354>`_)
 - [ ] Security Audit on RSTUF Project  (`Issue #246 <https://github.com/repository-service-tuf/repository-service-tuf/issues/546>`_)
-- [ ] Old Metadata retention (`Issue #29 <https://github.com/repository-service-tuf/repository-service-tuf/issues/29>`_)
 
 Components Milestones:
 
