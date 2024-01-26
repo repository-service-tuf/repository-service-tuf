@@ -175,13 +175,16 @@ storage service (`RSTUF_STORAGE_BACKEND`).
 
 In most use cases, the timeout of 60.0 seconds is sufficient.
 
-#### (Required) `RSTUF_KEYVAULT_BACKEND`
+#### `RSTUF_KEYVAULT_BACKEND`
 
-Select a supported type of Key Vault Service.
-
+Select a supported type of Key Vault Service. 
 Available types:
 
 * `LocalKeyVault` (container volume)
+
+**_NOTE:_** You can start the worker
+service without a keyvault backend, but you need to configure one before the 
+[bootstrap ceremony](https://repository-service-tuf.readthedocs.io/en/latest/guide/repository-service-tuf-cli/index.html#ceremony-ceremony).
 
 ##### `LocalKeyVault` (container volume)
 
