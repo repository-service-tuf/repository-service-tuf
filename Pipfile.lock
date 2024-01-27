@@ -1294,19 +1294,19 @@
         },
         "sphinx-autodoc-typehints": {
             "hashes": [
-                "sha256:3cabc2537e17989b2f92e64a399425c4c8bf561ed73f087bc7414a5003616a50",
-                "sha256:5ed05017d23ad4b937eab3bee9fae9ab0dd63f0b42aa360031f1fad47e47f673"
+                "sha256:70db10b391acf4e772019765991d2de0ff30ec0899b9ba137706dc0b3c4835e0",
+                "sha256:d3da7fa9a9761eff6ff09f8b1956ae3090a2d4f4ad54aebcade8e458d6340835"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==1.25.2"
+            "version": "==1.25.3"
         },
         "sphinx-data-viewer": {
             "hashes": [
-                "sha256:64974f7c2db47609d48a7182881985ec583de3bb520940ea9b3f46357a7afc53",
-                "sha256:cfb2fb706662a2f0003deee2055bb36d2f8c6516aa2bcc396188b1992f8c2902"
+                "sha256:9b82cf55a4c0358a4176e98c8a91e7a9b26a326930e18b10e53f0d393ebe5416",
+                "sha256:f83bccfc90a1e15303cb0e8159e36ecb17b5c7f71fcd5479ac4259f147417450"
             ],
             "markers": "python_version >= '3.6' and python_version < '4.0'",
-            "version": "==0.1.3"
+            "version": "==0.1.4"
         },
         "sphinx-jinja2-compat": {
             "hashes": [
