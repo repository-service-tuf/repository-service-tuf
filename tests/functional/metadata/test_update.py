@@ -141,7 +141,7 @@ def task_is_finished(task_id, http_request):
             continue
 
         state = data.get("state", None)
-        status = data.get("result", {}).get("status")
+        status = data.get("response", {}).get("status")
         if state == "SUCCESS":
             LOGGER.info(f"[METADATA UPDATE] {response.text}")
             assert status is True, pytest.rstuf_thread.set()

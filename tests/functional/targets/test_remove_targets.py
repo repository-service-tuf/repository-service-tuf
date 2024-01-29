@@ -142,8 +142,8 @@ def the_api_requester_tries_to_delete_all_targets(
 def the_api_requester_gets_deleted_and_not_found_lists(
     paths, non_existing_paths, api_response
 ):
-    deleted = api_response["data"]["result"]["details"]["deleted_targets"]
-    not_found = api_response["data"]["result"]["details"]["not_found_targets"]
+    deleted = api_response["data"]["response"]["details"]["deleted_targets"]
+    not_found = api_response["data"]["response"]["details"]["not_found_targets"]
     # remove quotes; example "[str, str]" -> [str, str]
     paths = ast.literal_eval(paths)
     non_existing_paths = ast.literal_eval(non_existing_paths)
