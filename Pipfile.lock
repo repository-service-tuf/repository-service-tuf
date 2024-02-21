@@ -1401,10 +1401,10 @@
         },
         "sphinxcontrib-plantuml": {
             "hashes": [
-                "sha256:8975778eed9c142a42ecdc4ecd83132dec0690c035cae788c123750ead526703"
+                "sha256:ce9362ad3d4bbcc4c30dfdfc308aacad2c07b344635316681a711269b8e00bea"
             ],
             "index": "pypi",
-            "version": "==0.27"
+            "version": "==0.28"
         },
         "sphinxcontrib-qthelp": {
             "hashes": [

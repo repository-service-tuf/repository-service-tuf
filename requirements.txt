@@ -88,7 +88,7 @@ sphinxcontrib-htmlhelp==2.0.5; python_version >= '3.9'
 sphinxcontrib-jquery==4.1; python_version >= '2.7'
 sphinxcontrib-jsmath==1.0.1; python_version >= '3.5'
 sphinxcontrib-needs==0.7.9; python_version >= '3.7' and python_version < '4.0'
-sphinxcontrib-plantuml==0.27
+sphinxcontrib-plantuml==0.28
 sphinxcontrib-qthelp==1.0.7; python_version >= '3.9'
 sphinxcontrib-serializinghtml==1.1.10; python_version >= '3.9'
 tabulate==0.9.0; python_version >= '3.7'
