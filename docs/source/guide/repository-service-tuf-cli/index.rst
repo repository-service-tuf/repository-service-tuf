@@ -25,6 +25,7 @@ Using pip:
     ╭─ Options ────────────────────────────────────────────────────────────────────────────────╮
     │ --config   -c  TEXT  Repository Service for TUF config file. [default: $HOME/.rstuf.yml] │
     │ --version            Show the version and exit.                                          │
+    │ --autocomplete       Enable tab autocompletion and exit.                                 │
     │ --help     -h        Show this message and exit.                                         │
     ╰──────────────────────────────────────────────────────────────────────────────────────────╯
     ╭─ Commands ───────────────────────────────────────────────────────────╮
