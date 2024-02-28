@@ -152,6 +152,17 @@ This environment variables needs to be passed to the container that calls
 the ``pytest`` or ``ft-<name>`` scripts.
 
 
+Splitting FT execution
+......................
+
+To speed up our FT execution time we use the
+`pytest-split <https://pypi.org/project/pytest-split/>`
+plugin that splits the test suite so that we can run tests across multiple jobs.
+
+We create a job for slow tests (such as performance tests) and another set of
+jobs that take advantage of the groups created by `pytest-split` to distribute
+and run the tests parallelly.
+
 Project organization
 ====================
 
