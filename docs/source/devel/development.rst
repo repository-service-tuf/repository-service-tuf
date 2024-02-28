@@ -85,6 +85,11 @@ the mocking technique in the UT. For mocking, we use ``monkeypatch`` from
 pytest and `pretend <https://github.com/alex/pretend>`_ to implement the
 stubbing technic.
 
+To speed up our UT execution time (both locally and on CI) we use the
+`pytest-xdist <https://pypi.org/project/pytest-xdist/>`
+plugin that distributes tests across multiple CPUs. To take advantage of this
+parallelism we maintain a UT suite that is independent of the order of test execution.
+
 More details will be in each :ref:`specific
 component <devel/development:Components Repositories>`.
 
