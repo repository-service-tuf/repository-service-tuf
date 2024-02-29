@@ -52,7 +52,7 @@ lint:
 	isort -l79 --profile black --check --diff tests/
 	black -l79 --check --diff tests/
 	pipenv requirements > requirements.commit
-	diff requirements.txt requirements.commit
+	diff -w requirements.txt requirements.commit
 	rm requirements.commit
 
 functional-tests-exitfirst:
