@@ -1,4 +1,5 @@
 """Performance and Consistence adding and removing targets feature tests."""
+
 import os
 import time
 from datetime import datetime
