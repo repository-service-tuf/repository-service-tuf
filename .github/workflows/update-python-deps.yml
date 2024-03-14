@@ -22,7 +22,7 @@ jobs:
           pipenv update -d
           make requirements
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@a4f52f8033a6168103c2538976c07b467e8163bc
+        uses: peter-evans/create-pull-request@70a41aba780001da0a30141984ae2a0c95d8704e
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "build: Update Python dependencies"
