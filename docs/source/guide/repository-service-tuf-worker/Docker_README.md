@@ -31,7 +31,6 @@ Here are some things you need to know:
   [Secure Systems Library](https://github.com/secure-systems-lab/securesystemslib).
   If you do not have a key we suggest you use the [RSTUF CLI tool to generate the key](https://repository-service-tuf.readthedocs.io/en/latest/guide/repository-service-tuf-cli/index.html).
 * This key must be the same one used during the [RSTUF CLI ceremony](https://repository-service-tuf.readthedocs.io/en/latest/guide/repository-service-tuf-cli/index.html#ceremony-ceremony).
-* This key must be available to RSTUF Worker using the `RSTUF_KEYVAULT_BACKEND`.
 
 For more information read the [Deployment documentation](https://repository-service-tuf.readthedocs.io/en/latest/guide/deployment/index.html).
 
@@ -41,10 +40,7 @@ For more information read the [Deployment documentation](https://repository-serv
 
 ```shell
 docker run --env="RSTUF_STORAGE_BACKEND=LocalStorage" \
-    --env="RSTUF_LOCAL_STORAGE_BACKEND_PATH=storage" \
-    --env="RSTUF_KEYVAULT_BACKEND=LocalKeyVault" \
-    --env="RSTUF_LOCAL_KEYVAULT_PATH=keyvault" \
-    --env="RSTUF_LOCAL_KEYVAULT_KEYS=online.key,strongPass" \
+    --env="RSTUF_LOCAL_STORAGE_BACKEND_PATH=/metadata" \
     --env="RSTUF_BROKER_SERVER=guest:guest@rabbitmq:5672" \
     --env="RSTUF_REDIS_SERVER=redis://redis" \
     --env="RSTUF_SQL_SERVER=postgresql://postgres:secret@postgres:5432" \
@@ -132,31 +128,31 @@ Available types:
 
 ##### `AWSS3` (AWS S3)
 
-* (Required) ``RSTUF_AWSS3_STORAGE_BUCKET``
+* (Required) ``RSTUF_AWS_STORAGE_BUCKET``
 
-  The name of the region associated with the S3.
+  The name of s3 bucket to use.
 
-* (Required) ``RSTUF_AWSS3_STORAGE_ACCESS_KEY``
+* (Required) ``RSTUF_AWS_ACCESS_KEY_ID``
 
   The access key to use when creating the client session to the S3.
 
   This environment variable supports container secrets when the ``/run/secrets``
   volume is added to the path.
-  Example: `RSTUF_AWSS3_STORAGE_ACCESS_KEY=/run/secrets/S3_ACCESS_KEY`
+  Example: `RSTUF_AWS_ACCESS_KEY_ID=/run/secrets/S3_ACCESS_KEY`
 
-* (Required) ``RSTUF_AWSS3_STORAGE_SECRET_KEY``
+* (Required) ``RSTUF_AWS_SECRET_ACCESS_KEY``
 
   The secret key to use when creating the client session to the S3.
 
   This environment variable supports container secrets when the ``/run/secrets``
   volume is added to the path.
-  Example: ``RSTUF_AWSS3_STORAGE_ACCESS_KEY=/run/secrets/S3_SECRET_KEY``
+  Example: ``RSTUF_AWS_SECRET_ACCESS_KEY=/run/secrets/S3_SECRET_KEY``
 
-* (Optional) ``RSTUF_AWSS3_STORAGE_REGION``
+* (Optional) ``RSTUF_AWS_DEFAULT_REGION``
 
   The name of the region associated with the S3.
 
-* (Optional) ``RSTUF_AWSS3_STORAGE_ENDPOINT_URL``
+* (Optional) ``RSTUF_AWS_ENDPOINT_URL``
 
   The complete URL to use for the constructed client. Normally, the
   client automatically constructs the appropriate URL to use when
@@ -177,13 +173,12 @@ In most use cases, the timeout of 60.0 seconds is sufficient.
 
 #### `RSTUF_KEYVAULT_BACKEND`
 
-Select a supported type of Key Vault Service. 
-Available types:
+Select a supported type of Key Vault Service.
 
 * `LocalKeyVault` (container volume)
 
 **_NOTE:_** You can start the worker
-service without a keyvault backend, but you need to configure one before the 
+service without a keyvault backend, but you need to configure one before the
 [bootstrap ceremony](https://repository-service-tuf.readthedocs.io/en/latest/guide/repository-service-tuf-cli/index.html#ceremony-ceremony).
 
 ##### `LocalKeyVault` (container volume)
@@ -232,7 +227,7 @@ service without a keyvault backend, but you need to configure one before the
 
   Example: ``RSTUF_LOCAL_KEYVAULT_KEYS=/run/secrets/ONLINE_KEY_1:/run/secrets/ONLINE_KEY_2``
 
-#### (Optional, *experimental*) `RSTUF_ONLINE_KEY_DIR`
+#### (Optional) `RSTUF_ONLINE_KEY_DIR`
 
 Directory path for online signing key file. Expected file format is unencrypted PKCS8/PEM.
 
@@ -244,8 +239,6 @@ Replaces `RSTUF_KEYVAULT_BACKEND` and related settings.
 Example:
 - `RSTUF_ONLINE_KEY_DIR=/run/secrets`
 - RSTUF worker expects related private key under  `/run/secrets/<file name>`
-
-
 
 
 #### (Optional) `RSTUF_WORKER_ID`
