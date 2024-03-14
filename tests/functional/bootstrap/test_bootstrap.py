@@ -7,8 +7,7 @@ from pytest_bdd import given, scenario, then, when
     "../../features/bootstrap/bootstrap.feature",
     "Bootstrap using RSTUF Command Line Interface (CLI)",
 )
-def test_bootstrap_using_rstuf_command_line_interface_cli():
-    ...
+def test_bootstrap_using_rstuf_command_line_interface_cli(): ...
 
 
 @given("the repository-service-tuf (rstuf) is installed")
@@ -44,8 +43,7 @@ def the_admin_gets(bootstrap):
     "../../features/bootstrap/bootstrap.feature",
     "Bootstrap using RSTUF Command Line Interface (CLI) with invalid payload",
 )
-def test_bootstrap_using_rstuf_cli_with_invalid_payload():
-    ...
+def test_bootstrap_using_rstuf_cli_with_invalid_payload(): ...
 
 
 @when(
