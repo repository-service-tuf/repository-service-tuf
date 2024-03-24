@@ -52,28 +52,34 @@ lint:
 	isort -l79 --profile black --check --diff tests/
 	black -l79 --check --diff tests/
 	pipenv requirements > requirements.commit
-	diff requirements.txt requirements.commit
+	diff -w requirements.txt requirements.commit
 	rm requirements.commit
 
 functional-tests-exitfirst:
-	pytest --exitfirst --gherkin-terminal-reporter tests -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
+ifeq ($(SLOW),)
+	echo "Running fast tests"
+	# `splits` and the `pytest-group` matrix on CI should match
+	pytest --exitfirst --splits 3 --group $(PYTEST_GROUP) --store-durations --durations-path=./.test_durations.$(PYTEST_GROUP) --deselect=tests/functional/targets/test_performance.py::test_api_requester_multiple_request_and_targets[50-50-600] tests -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
+else
+	echo "Running slow tests"
+	pytest --exitfirst tests/functional/targets/test_performance.py::test_api_requester_multiple_request_and_targets[50-50-600] -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
+endif
 
 functional-tests:
 	pytest --gherkin-terminal-reporter tests -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
-
 
 # CLI_VERSION enables using specific RSTUF CLI version, default: dev
 # usage: `make ft-das CLI_VERSION=v0.8.0b1`
 ft-das:
 ifneq ($(CLI_VERSION),)
-	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh dev
+	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh dev $(PYTEST_GROUP) $(SLOW)
 else
-	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh $(CLI_VERSION)
+	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh $(CLI_VERSION) $(PYTEST_GROUP) $(SLOW)
 endif
 
 ft-signed:
 ifneq ($(CLI_VERSION),)
-	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-signed.sh dev
+	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-signed.sh dev $(PYTEST_GROUP) $(SLOW)
 else
-	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-signed.sh $(CLI_VERSION)
+	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-signed.sh $(CLI_VERSION) $(PYTEST_GROUP) $(SLOW)
 endif

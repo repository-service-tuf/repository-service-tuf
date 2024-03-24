@@ -85,6 +85,11 @@ the mocking technique in the UT. For mocking, we use ``monkeypatch`` from
 pytest and `pretend <https://github.com/alex/pretend>`_ to implement the
 stubbing technic.
 
+To speed up our UT execution time (both locally and on CI) we use the
+`pytest-xdist <https://pypi.org/project/pytest-xdist/>`
+plugin that distributes tests across multiple CPUs. To take advantage of this
+parallelism we maintain a UT suite that is independent of the order of test execution.
+
 More details will be in each :ref:`specific
 component <devel/development:Components Repositories>`.
 
@@ -146,6 +151,17 @@ The functional tests has global environment variables that can be used:
 This environment variables needs to be passed to the container that calls
 the ``pytest`` or ``ft-<name>`` scripts.
 
+
+Splitting FT execution
+......................
+
+To speed up our FT execution time we use the
+`pytest-split <https://pypi.org/project/pytest-split/>`
+plugin that splits the test suite so that we can run tests across multiple jobs.
+
+We create a job for slow tests (such as performance tests) and another set of
+jobs that take advantage of the groups created by `pytest-split` to distribute
+and run the tests parallelly.
 
 Project organization
 ====================
