@@ -31,7 +31,7 @@ AddContainerTag("rstuf_repo_worker", $sprite="service_application", $legendText=
 AddContainerTag("queue", $sprite="queue_viewer", $legendText="Message Broker")
 AddContainerTag("ci_cd", $sprite="application_generic", $legendText="CI/CD, Artfact Management, etc")
 AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed TUF Metadata")
-AddContainerTag("download_target", $sprite="download", $legendText="Download file/target/package", $bgColor=Gray)
+AddContainerTag("download_artifact", $sprite="download", $legendText="Download file/artifact/package", $bgColor=Gray)
 AddContainerTag("queue_cluster", $sprite="cluster_server", $legendText="Broker Cluster")
 AddContainerTag("sql_db", $sprite="database_server", $legendText="SQL Server")
 

@@ -29,7 +29,7 @@ AddContainerTag("repo_worker", $sprite="service_application", $legendText="Repos
 AddContainerTag("queue", $sprite="queue_viewer", $legendText="Message Queue")
 AddContainerTag("ci_cd", $sprite="application_generic", $legendText="CI/CD, Artfact Management, etc")
 AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed TUF Metadata")
-AddContainerTag("download_target", $sprite="download", $legendText="Download file/target/package", $bgColor=Gray)
+AddContainerTag("download_artifact", $sprite="download", $legendText="Download file/artifact/package", $bgColor=Gray)
 AddContainerTag("terminal", $sprite="terminal,scale=0.5,color=#000000", $legendText="CLI")
 
 AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=0.75,color=#000000", $legendText="Repository Service for TUF CLI")

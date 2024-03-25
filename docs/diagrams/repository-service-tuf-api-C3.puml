@@ -29,7 +29,7 @@ AddContainerTag("repo_worker", $sprite="service_application", $legendText="Repos
 AddContainerTag("queue", $sprite="queue_viewer", $legendText="Message Queue")
 AddContainerTag("ci_cd", $sprite="application_generic", $legendText="CI/CD, Artfact Management, etc")
 AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed TUF Metadata")
-AddContainerTag("download_target", $sprite="download", $legendText="Download file/target/package", $bgColor=Gray)
+AddContainerTag("download_artifact", $sprite="download", $legendText="Download file/artifact/package", $bgColor=Gray)
 AddContainerTag("terminal", $sprite="terminal,scale=0.5,color=#000000", $legendText="CLI")
 
 AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=0.75,color=#000000", $legendText="Repository Service for TUF CLI")
@@ -44,12 +44,12 @@ System_Boundary(rstuf_rest_api, "REPOSITORY-SERVICE-TUF-API") #APPLICATION {
         Container_Boundary(api, "api") #DeepSkyBlue{
             Container(api_config, "config")
             Container(api_bootstrap, "bootstrap")
-            Container(api_targets, "targets")
+            Container(api_artifact, "artifact")
             Container(api_tasks, "tasks")
         }
         Container(config, "config")
         Container(bootstrap, "bootstrap")
-        Container(targets, "targets")
+        Container(artifact, "artifact")
         Container(tasks, "tasks")
         Container(metadata, "metadata")
 
@@ -68,9 +68,9 @@ Rel(ci_cd, rstuf_rest_api, "HTTPS + Tokens")
 
 Rel(api_bootstrap, bootstrap, " ")
 Rel(api_config, config, " ")
-Rel(api_targets, targets, " ")
+Rel(api_artifacts, artifacts, " ")
 Rel(api_tasks, tasks, " ")
-Rel(targets, metadata, " ")
+Rel(artifacts, metadata, " ")
 Rel(bootstrap, metadata, " ")
 Rel(tasks, metadata, " ")
 Rel(bootstrap, config, " ")
@@ -80,7 +80,7 @@ Rel(celery, broker, "Publisher")
 Rel_D(celery, redis, "Publisher, Consumer")
 Rel_D(dynaconf, redis, "Publisher, Consumer")
 
-Lay_R(bootstrap, targets)
+Lay_R(bootstrap, artifacts)
 Lay_R(dynaconf, celery)
 
 HIDE_STEREOTYPE()
