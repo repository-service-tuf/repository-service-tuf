@@ -917,6 +917,7 @@ This command adds the provided artifact to the TUF Metadata using the RSTUF REST
 .. rstuf-cli-artifact-download
 
 Artifact Download (``download``)
+--------------------------------
 
 This command allows downloading an artifact from a provided repository using the RSTUF REST API.
 
@@ -941,8 +942,8 @@ This command allows downloading an artifact from a provided repository using the
 
 .. rstuf-cli-artifact-repository
 
-Artifact Addition (``repository``)
-----------------------------------
+Artifact Repository (``repository``)
+------------------------------------
 
 This command provides artifact repository management for the RSTUF repository config.
 
