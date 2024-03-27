@@ -12,17 +12,17 @@ from pytest_bdd import given, scenario, then, when
 
 LOGGER = logging.getLogger(__name__)
 
-pytest.rstuf_added_targets = []
+pytest.rstuf_added_artifacts = []
 pytest.rstuf_thread = None
 
 
 def rstuf_requests(stop_requests, http_request):
     while not stop_requests.is_set():
-        targets = []
+        artifacts = []
         LOGGER.info("Adding artifacts")
         for count in range(10):
             filename = f"test/{names_generator.generate_name()}-{count}.tar.gz"
-            target = {
+            artifact = {
                 "info": {
                     "length": 54321,
                     "hashes": {
@@ -34,21 +34,21 @@ def rstuf_requests(stop_requests, http_request):
                 },
                 "path": filename,
             }
-            targets.append(target)
+            artifacts.append(artifact)
 
         result = http_request(
             "POST",
             url="/api/v1/artifacts",
-            json={"targets": targets},
+            json={"artifacts": artifacts},
         )
         data_result = result.json()["data"]
         LOGGER.info(f"Added task_id: {data_result['task_id']}")
-        pytest.rstuf_added_targets.append(result.json())
+        pytest.rstuf_added_artifacts.append(result.json())
         time.sleep(0.5)
 
     LOGGER.info(
         "Stop adding artifacts. "
-        f"Total requests: {len(pytest.rstuf_added_targets )}"
+        f"Total requests: {len(pytest.rstuf_added_artifacts )}"
     )
 
 
@@ -99,7 +99,7 @@ def send_signed_update_metadata(send_rstuf_requests, http_request):
         )
         return result
     except Exception as e:
-        # Stop thread adding targets in a case of an exception.
+        # Stop thread adding artifacts in a case of an exception.
         pytest.rstuf_thread.set()
         raise e
 
@@ -116,7 +116,7 @@ def task_is_received(response):
         LOGGER.info(f"[METADATA UPDATE]  Metadata Updated by {task_id}")
         return task_id
     except Exception as e:
-        # Stop thread adding targets in a case of an exception.
+        # Stop thread adding artifacts in a case of an exception.
         pytest.rstuf_thread.set()
         raise e
 
@@ -177,27 +177,27 @@ def root_metadata_2_root_is_available(http_request):
 
 
 @then("the user downloads will not have inconsistency during this process")
-def verify_targets_consistency(
+def verify_artifacts_consistency(
     get_target_info, http_request, task_completed_within_threshold
 ):
     try:
         # wait all artifact tasks to be complete and check the consistency
         count = 1
-        for response_json in pytest.rstuf_added_targets:
+        for response_json in pytest.rstuf_added_artifacts:
             task_completed_within_threshold(http_request, response_json, 180)
             LOGGER.info(
-                f"Task {count}/{len(pytest.rstuf_added_targets)} finshed!"
+                f"Task {count}/{len(pytest.rstuf_added_artifacts)} finshed!"
             )
             count += 1
 
-        for response_json in pytest.rstuf_added_targets:
-            for target in response_json["data"].get("targets"):
-                LOGGER.info(f"Verifying {target}")
-                assert target is not None, pytest.rstuf_thread.set()
+        for response_json in pytest.rstuf_added_artifacts:
+            for artifact in response_json["data"].get("artifacts"):
+                LOGGER.info(f"Verifying {artifact}")
+                assert artifact is not None, pytest.rstuf_thread.set()
                 assert (
-                    get_target_info(target) is not None
+                    get_target_info(artifact) is not None
                 ), pytest.rstuf_thread.set()
     except Exception as e:
-        # Stop thread adding targets in a case of an exception.
+        # Stop thread adding artifacts in a case of an exception.
         pytest.rstuf_thread.set()
         raise e

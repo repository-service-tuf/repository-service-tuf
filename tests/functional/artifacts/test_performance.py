@@ -1,4 +1,4 @@
-"""Performance and Consistence adding and removing targets feature tests."""
+"""Performance and Consistence adding and removing artifacts feature tests."""
 
 import os
 import time
@@ -11,26 +11,26 @@ from pytest_bdd.parsers import parse
 
 
 @scenario(
-    "../../features/targets/performance.feature",
-    "Multiple requests with multiple targets and timeout threshold",
+    "../../features/artifacts/performance.feature",
+    "Multiple requests with multiple artifacts and timeout threshold",
 )
-def test_api_requester_multiple_request_and_targets():
-    """Multiple requests with multiple targets and timeout threshold"""
+def test_api_requester_multiple_request_and_artifacts():
+    """Multiple requests with multiple artifacts and timeout threshold"""
 
 
 @given(
     parse(
-        "the API requester sends {num_requests} requests with {num_targets} "
-        "targets to RSTUF"
+        "the API requester sends {num_requests} requests with {num_artifacts} "
+        "artifacts to RSTUF"
     ),
     target_fixture="multiple_requests",
 )
-def send_requests_with_targets(num_requests, num_targets, http_request):
-    def multiple_targets(number_of_targets):
-        targets = []
-        for count in range(0, int(number_of_targets)):
+def send_requests_with_artifacts(num_requests, num_artifacts, http_request):
+    def multiple_artifacts(number_of_artifacts):
+        artifacts = []
+        for count in range(0, int(number_of_artifacts)):
             filename = f"test/{names_generator.generate_name()}-{count}.tar.gz"
-            target = {
+            artifact = {
                 "info": {
                     "length": 54321,
                     "hashes": {
@@ -42,25 +42,27 @@ def send_requests_with_targets(num_requests, num_targets, http_request):
                 },
                 "path": filename,
             }
-            targets.append(target)
+            artifacts.append(artifact)
 
         result = http_request(
             "POST",
             url="/api/v1/artifacts",
-            json={"targets": targets},
+            json={"artifacts": artifacts},
         )
         return result
 
     count = 0
     tasks = []
     while count < int(num_requests):
-        task_result = multiple_targets(number_of_targets=int(num_targets))
+        task_result = multiple_artifacts(
+            number_of_artifacts=int(num_artifacts)
+        )
         task_data = task_result.json()["data"]
         tasks.append(
             {
                 "task_id": task_data["task_id"],
-                "num_targets": len(task_data["targets"]),
-                "targets": task_data["targets"],
+                "num_artifacts": len(task_data["artifacts"]),
+                "artifacts": task_data["artifacts"],
                 "last_update": task_data.get("last_update", None),
             }
         )
@@ -105,11 +107,11 @@ def get_tasks(multiple_requests, http_request, timeout):
 
 
 @then(
-    "the downloader using TUF client expects targets available in the "
+    "the downloader using TUF client expects artifacts available in the "
     "Metadata Repository"
 )
 def consistence(tasks_result, get_target_info):
     for task_result in tasks_result:
-        for target in task_result.get("targets"):
-            assert target is not None
-            assert get_target_info(target) is not None
+        for artifact in task_result.get("artifacts"):
+            assert artifact is not None
+            assert get_target_info(artifact) is not None

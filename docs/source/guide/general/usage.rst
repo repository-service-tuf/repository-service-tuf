@@ -55,7 +55,7 @@ with a JSON payload.
 
 * This payload supports one or multiple artifacts (targets)
 
-* The `add targets payload schema <https://repository-service-tuf.github.io/repository-service-tuf-api/#/v1/post_api_v1_artifacts__post>`_
+* The `add artifacts payload schema <https://repository-service-tuf.github.io/repository-service-tuf-api/#/v1/post_api_v1_artifacts__post>`_
 
 Add artifacts payload
 -------------------
@@ -64,7 +64,7 @@ Add artifacts payload
     :linenos:
 
     {
-        "targets": [
+        "artifacts": [
             {
             "info": {
                 "length": "<LENGTH>",
@@ -122,7 +122,7 @@ Remove artifacts payload
     :linenos:
 
     {
-        "targets": ["<PATH>"]
+        "artifacts": ["<PATH>"]
     }
 
 .. list-table:: Required parameters
@@ -151,7 +151,7 @@ asynchronous process.
 Submitting a request for adding/removing will return an HTTP status code 202,
 meaning the task is submitted. As part of the body, there is the ``task id``.
 
-Response body adding/removing targets, ``task id``:
+Response body adding/removing artifacts, ``task id``:
 
 .. code-block:: json
 
@@ -161,7 +161,7 @@ Response body adding/removing targets, ``task id``:
         },
     }
 
-This body has more details such as targets, last_update, etc. See the
+This body has more details such as artifacts, last_update, etc. See the
 `endpoint response documentation <https://repository-service-tuf.github.io/repository-service-tuf-api/>`_
 
 To retrieve the task status, send requests to
@@ -198,7 +198,7 @@ immediately to the TUF Metadata.
 As example, an organization adds and removes artifacts while batch publishing daily.
 
 
-This feature requires adding the ``publish_targets`` parameter to
+This feature requires adding the ``publish_artifacts`` parameter to
 :ref:`guide/general/usage:Add artifacts payload` or
 :ref:`guide/general/usage:Remove artifacts payload`.
 
@@ -211,7 +211,7 @@ Adding artifacts without publishing
     :emphasize-lines: 13
 
     {
-        "targets": [
+        "artifacts": [
             {
             "info": {
                 "length": "<LENGTH>",
@@ -222,7 +222,7 @@ Adding artifacts without publishing
             "path": "<PATH>"
             }
         ],
-        "publish_targets": false
+        "publish_artifacts": false
     }
 
 Removing artifacts without publishing
@@ -232,12 +232,12 @@ Removing artifacts without publishing
     :emphasize-lines: 3
 
     {
-        "targets": ["<PATH>"],
-        "publish_targets": false
+        "artifacts": ["<PATH>"],
+        "publish_artifacts": false
     }
 
 To publish all artifacts added/removed without publishing, send a request to
-``http://<IP ADDRESS>/api/v1/targets/publish`` with method ``POST``.
+``http://<IP ADDRESS>/api/v1/artifacts/publish`` with method ``POST``.
 
 .. note::
     See the complete
@@ -284,31 +284,31 @@ example:
 - improve the security of a repository by increasing the Root role threshold
 
 
-Importing existing targets
+Importing existing artifacts
 ==========================
 
 When adopting Repository Service for TUF (RSTUF), with a
-large number of targets (artifacts/packages/files/etc.), using
-the "import targets" feature is recommended.
+large number of artifacts (artifacts/packages/files/etc.), using
+the "import artifacts" feature is recommended.
 
-Existing targets can be sent using the REST API, however it
-will be slower than using the "import targets" feature.
+Existing artifacts can be sent using the REST API, however it
+will be slower than using the "import artifacts" feature.
 
-The "import targets" feature can be used to add targets directly to the RSTUF
+The "import artifacts" feature can be used to add artifacts directly to the RSTUF
 database skipping the standard processing of the API.
-Normally, when adding a target through the API there will be an overhead of
-multiple additional operations which for a large number of targets can prove
+Normally, when adding an artifact through the API there will be an overhead of
+multiple additional operations which for a large number of artifacts can prove
 to be significant.
 
-Below are sample benchmarks of the "import targets" feature:
+Below are sample benchmarks of the "import artifacts" feature:
 
 * Running in a Macbook Pro (2019) 2,4 GHz 8-Core Intel Core i9/32GB 2667 MHz DDR4:
 
-    - Adding 500,000 targets: ~40 minutes
-       + Loaded 1 of 1 file with 500,000 targets
-    - Adding 1,000,000 targets: ~55 minutes
-       + Loaded 1 of 2 file with 500,000 targets
-       + Loaded 2 of 2 file with 500,000 targets
+    - Adding 500,000 artifacts: ~40 minutes
+       + Loaded 1 of 1 file with 500,000 artifacts
+    - Adding 1,000,000 artifacts: ~55 minutes
+       + Loaded 1 of 2 file with 500,000 artifacts
+       + Loaded 2 of 2 file with 500,000 artifacts
 
 
 .. warning::
@@ -316,18 +316,18 @@ Below are sample benchmarks of the "import targets" feature:
     Use the API flow integration to the release process (CI/CD or Distribution
     Platform).
 
-    Do not use "import targets" as a replacement for the standard procedure to
-    add targets throughout the RSTUF API or CLI tool after RSTUF is deployed.
+    Do not use "import artifacts" as a replacement for the standard procedure to
+    add artifacts throughout the RSTUF API or CLI tool after RSTUF is deployed.
     This feature should only be used before going live with RSTUF.
 
 
-RSTUF-CLI contains the :ref:`guide/repository-service-tuf-cli/index:Import Targets  (``import-targets\`\`)` feature.
+RSTUF-CLI contains the :ref:`guide/repository-service-tuf-cli/index:Import Artifacts  (``import-artifacts\`\`)` feature.
 
 CLI usage
 ---------
 
 .. include:: ../repository-service-tuf-cli/index.rst
-    :start-after: rstuf-cli-admin-import-targets
+    :start-after: rstuf-cli-admin-import-artifacts
     :end-before: rstuf-cli-key
 
 

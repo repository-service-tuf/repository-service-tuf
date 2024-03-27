@@ -1,12 +1,12 @@
-Feature: Adding targets in Repository Service for TUF (RSTUF)
+Feature: Adding artifacts in Repository Service for TUF (RSTUF)
     User has deployed RSTUF,
     User has run the ceremony and completed bootstrap successfully
 
-    Scenario Outline: Adding a target using RSTUF API
-        When the API requester adds a new target with <length>, <hashes>, <custom> and <path>
+    Scenario Outline: Adding an artifact using RSTUF API
+        When the API requester adds a new artifact with <length>, <hashes>, <custom> and <path>
         Then the API requester should get status code '202' with 'task_id'
         Then the API requester gets from endpoint 'GET /api/v1/task' status 'Task finished' within 90 seconds
-        Then the user downloads the new target <path> using TUF client from the metadata repository
+        Then the user downloads the new artifact <path> using TUF client from the metadata repository
 
         Examples:
 	             | length  |  hashes                                                            | custom           | path               |
