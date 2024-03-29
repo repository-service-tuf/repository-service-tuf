@@ -44,12 +44,12 @@ System_Boundary(rstuf_rest_api, "REPOSITORY-SERVICE-TUF-API") #APPLICATION {
         Container_Boundary(api, "api") #DeepSkyBlue{
             Container(api_config, "config")
             Container(api_bootstrap, "bootstrap")
-            Container(api_artifact, "artifact")
+            Container(api_artifacts, "artifacts")
             Container(api_tasks, "tasks")
         }
         Container(config, "config")
         Container(bootstrap, "bootstrap")
-        Container(artifact, "artifact")
+        Container(artifacts, "artifacts")
         Container(tasks, "tasks")
         Container(metadata, "metadata")
 

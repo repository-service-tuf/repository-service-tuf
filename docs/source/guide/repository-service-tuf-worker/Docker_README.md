@@ -24,7 +24,7 @@ Other requirements include:
 
 ### Online Key
 The RSTUF Worker requires an online key which is used for signing the TUF
-metadata when a target is added or removed.
+metadata when an artifact is added or removed.
 
 Here are some things you need to know:
 * The key must be compatible with

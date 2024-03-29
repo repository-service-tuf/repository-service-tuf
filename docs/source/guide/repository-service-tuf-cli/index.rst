@@ -712,7 +712,6 @@ sign (``sign``)
     Metadata Signed! 🔑
 
 
-.. rstuf-cli-admin-import-targets
 .. rstuf-cli-admin-import-artifacts
 
 Import Artifacts (``import-artifacts``)
@@ -733,8 +732,8 @@ by RSTUF CLI.
 
 This content requires the following data:
 
-- `path <https://theupdateframework.github.io/specification/latest/#targetpath>`_: The target path
-- `size <https://theupdateframework.github.io/specification/latest/#targets-obj-length>`_: The target size
+- `path <https://theupdateframework.github.io/specification/latest/#targetpath>`_: The artifact path
+- `size <https://theupdateframework.github.io/specification/latest/#targets-obj-length>`_: The artifact size
 - `hash-type <https://theupdateframework.github.io/specification/latest/#targets-obj-length>`_: The defined hash as a metafile. Example: blak2b-256
 - `hash <https://theupdateframework.github.io/specification/latest/#targets-obj-length>`_: The hash
 
