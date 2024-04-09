@@ -2,7 +2,7 @@
 
 import os
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 
 import dateutil.parser
 import names_generator
@@ -85,9 +85,9 @@ def get_tasks(multiple_requests, http_request, timeout):
         time.sleep(3)
         for task in tasks:
             if os.getenv("PERFORMANCE", "true").lower() == "true":
-                total_time_now = datetime.utcnow() - dateutil.parser.parse(
-                    task["last_update"]
-                )
+                total_time_now = datetime.now(
+                    tz=timezone.utc
+                ) - dateutil.parser.parse(task["last_update"])
                 assert total_time_now.total_seconds() <= int(timeout)
 
             response = http_request(
