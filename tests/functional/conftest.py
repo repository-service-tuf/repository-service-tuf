@@ -3,7 +3,7 @@ import re
 import shutil
 import subprocess
 import tempfile
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List
 
 import dateutil.parser
@@ -87,7 +87,7 @@ def task_completed_within_threshold():
         )
         task_response_json = None
         while (
-            datetime.utcnow() - task_submitted
+            datetime.now(tz=timezone.utc) - task_submitted
         ).total_seconds() <= threshold:
             response = http_request(
                 method="GET",
@@ -105,7 +105,9 @@ def task_completed_within_threshold():
         perfomance_fail = os.getenv("PERFORMANCE", "true").lower() == "true"
         if (
             perfomance_fail
-            and (datetime.utcnow() - task_submitted).total_seconds()
+            and (
+                datetime.now(tz=timezone.utc) - task_submitted
+            ).total_seconds()
             > threshold
         ):
             raise TimeoutError(
