@@ -772,7 +772,7 @@ See the below CSV file example:
     │    --help                  -h                    Show this message and exit.                                                                                    │
     ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
-    ❯ rstuf admin import-artifacts --db-uri postgresql://postgres:secret@127.0.0.1:5433 --csv artifacts-1of2.csv --csv artifacts-2of2.csv --metadata-url http://127.0.0.1:8080/
+    ❯ rstuf admin import-artifacts --db-uri postgresql://postgres:secret@127.0.0.1:5433 --csv artifacts-1of2.csv --csv artifacts-2of2.csv --api-server http://127.0.0.1:80/
     Import status: Loading data from ../repository-service-tuf/tests/data/artifacts-1of2.csv
     Import status: Importing ../repository-service-tuf/tests/data/artifacts-1of2.csv data
     Import status: ../repository-service-tuf/tests/data/artifacts-1of2.csv imported
