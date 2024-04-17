@@ -58,7 +58,7 @@ services:
       - RSTUF_KEYVAULT_BACKEND=LocalKeyVault
       - RSTUF_LOCAL_STORAGE_BACKEND_PATH=/var/opt/repository-service-tuf/storage
       - RSTUF_LOCAL_KEYVAULT_PATH=/var/opt/repository-service-tuf/key_storage
-      - RSTUF_LOCAL_KEYVAULT_KEYS=online.key,strongPass
+      - RSTUF_LOCAL_KEYVAULT_KEYS=online2.key,strongPass:online.key,strongPass
       - RSTUF_BROKER_SERVER=redis://redis
       - RSTUF_REDIS_SERVER=redis://redis
       - RSTUF_SQL_SERVER=postgres:secret@postgres:5432

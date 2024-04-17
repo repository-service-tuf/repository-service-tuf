@@ -81,7 +81,12 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-update.py 
     "Days to extend root`s expiration starting from today (365)": "",
     "New root expiration: YYYY-M-DD. Do you agree?": "y",
     "Do you want to modify root keys? [y/n]": "n",
-    "Do you want to change the online key?": "n"
+    "Do you want to change the online key?": "y",
+    "(Online Key) Choose online`s key type [ed25519/ecdsa/rsa] (ed25519):": "",
+    "(Online Key) Enter the online`s private key path": "tests/files/key_storage/online2.key",
+    "(Online Key) Enter the online`s private key password": "strongPass",
+    "(Online Key) [Optional] Give a name/tag to the online`s key": "online2",
+    "(Online Key) Do you want to change the online key? [y/n]": "n"
 }'
 
 # Copy files when UMBRELLA_PATH is not the current dir (FT triggered from components)
