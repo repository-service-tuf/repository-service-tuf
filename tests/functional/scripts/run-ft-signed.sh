@@ -7,68 +7,57 @@ SLOW=$3
 # Base FT
 . "${UMBRELLA_PATH}/tests/functional/scripts/ft-base.sh"
 
-# Execute the Ceremony full signed
+# Execute the Ceremony using DAS
 python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-ceremony.py '{
-    "Do you want more information about roles and responsibilities?": "n",
-    "Do you want to start the ceremony?": "y",
-    "What is the metadata expiration for the root role?(Days)": "365",
-    "What is the number of keys for the root role?": "2",
-    "What is the key threshold for root role signing?": "1",
-    "What is the metadata expiration for the targets role?": "365",
-    "Show example?": "n",
-    "Choose the number of delegated hash bin roles": "4",
-    "What is the targets base URL": "http://rstuf.org/downloads",
-    "What is the metadata expiration for the snapshot role?(Days)": "1",
-    "What is the metadata expiration for the timestamp role?(Days)": "1",
-    "What is the metadata expiration for the bins role?(Days)": "1",
-    "(online) Select the ONLINE`s key type [ed25519/ecdsa/rsa] (ed25519)": "",
-    "(online) Enter ONLINE`s key id": "f7a6872f297634219a80141caa2ec9ae8802098b07b67963272603e36cc19fd8",
-    "(online) Enter ONLINE`s public key hash": "9fe7ddccb75b977a041424a1fdc142e01be4abab918dc4c611fbfe4a3360a9a8",
-    "Give a name/tag to the key [Optional]": "online v1",
-    "Ready to start loading the root keys?": "y",
-    "(root 1) Select the root`s key type [ed25519/ecdsa/rsa] (ed25519)": "ed25519",
-    "(root 1) Enter the root`s private key path": "tests/files/key_storage/JanisJoplin.key",
-    "(root 1) Enter the root`s private key password": "strongPass",
-    "(root 1) [Optional] Give a name/tag to the key": "JJ",
-    "(root 2) Select to use private key or public info? [private/public] (public)": "private",
-    "(root 2) Select the root`s key type [ed25519/ecdsa/rsa] (ed25519)": "",
-    "(root 2) Enter the root`s private key path": "tests/files/key_storage/JimiHendrix.key",
-    "(root 2) Enter the root`s private key password": "strongPass",
-    "(root 2) [Optional] Give a name/tag to the key": "JH",
-    "Is the online key configuration correct? [y/n]": "y",
-    "Is the root configuration correct? [y/n]": "y",
-    "Is the targets configuration correct? [y/n]": "y",
-    "Is the snapshot configuration correct? [y/n]": "y",
-    "Is the timestamp configuration correct? [y/n]": "y",
-    "Is the bins configuration correct? [y/n]": "y"
+    "Please enter days until expiry for timestamp role (1)": "",
+    "Please enter days until expiry for snapshot role (1)": "",
+    "Please enter days until expiry for targets role (1)": "",
+    "Please enter days until expiry for bins role (1)": "",
+    "Please enter number of delegated hash bins [2/4/8/16/32/64/128/256/512/1024/2048/4096/8192/16384] (256)": "2",
+    "Please enter days until expiry for root role (365)": "",
+    "Please enter root threshold": "1",
+    "Please enter days until expiry for root role (365)": "",
+    "(root 1) Please enter path to public key": "tests/files/key_storage/JJ.pub",
+    "(root 1) Please enter key name": "JanisJoplin",
+    "Please press 0 to add key, or remove key by entering its index. Press enter to continue": "0",
+    "(root 2) Please enter path to public key:": "tests/files/key_storage/JH.pub",
+    "(root 2) Please enter key name": "JoeCocker",
+    "(Finish root keys) Please press 0 to add key, or remove key by entering its index. Press enter to continue": "",
+    "(online key) Please enter path to public key": "tests/files/key_storage/0d9d3d4bad91c455bc03921daa95774576b86625ac45570d0cac025b08e65043.pub",
+    "(online key) Please enter key name": "online1",
+    "Please enter signing key index": "1",
+    "(root 1) Please enter path to encrypted private key": "tests/files/key_storage/JJ.ecdsa",
+    "Please enter password": "hunter2",
+    "something": ""
 }'
 
-# Bootstrap using full signed payload
-rstuf admin ceremony -b -u -f payload.json --api-server http://repository-service-tuf-api
+# Bootstrap using legacy with DAS
+rstuf admin-legacy ceremony -b -u -f ceremony-payload.json --api-server http://repository-service-tuf-api
+
 
 # Get initial trusted Root
 rm metadata/1.root.json
 wget -P metadata/ http://web:8080/1.root.json
 
+
+# Run metadata update to be used later (during FT)
 python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-update.py '{
-    "File name or URL to the current root metadata": "metadata/1.root.json",
-    "(Authz threshold 1/2) Choose root key type [ed25519/ecdsa/rsa] (ed25519)": "",
-    "(Authz threshold 1/2) Enter the root`s private key path": "tests/files/key_storage/JanisJoplin.key",
-    "(Authz threshold 1/2) Enter the root`s private key password": "strongPass",
-    "(Authz threshold 2/2) Choose root key type [ed25519/ecdsa/rsa] (ed25519)": "",
-    "(Authz threshold 2/2) Enter the root`s private key path": "tests/files/key_storage/JanisJoplin.key",
-    "(Authz threshold 2/2) Enter the root`s private key password": "strongPass",
-    "Do you want to extend the root`s expiration?": "y",
-    "Days to extend root`s expiration starting from today (365)": "",
-    "New root expiration: YYYY-M-DD. Do you agree?": "y",
-    "Do you want to modify root keys? [y/n]": "n",
-    "Do you want to change the online key?": "n"
+  "Root expires on 04/16/25. Do you want to change the expiry date? [y/n]": "",
+  "Please enter days until expiry for root role (365)": "",
+  "Root signature threshold is 1. Do you want to change the threshold? [y/n] (n)": "",
+  "Please press 0 to add key, or remove key by entering its index. Press enter to continue": "",
+  "Do you want to change the online key? [y/n] (y)": "y",
+  "Please enter path to public key": "tests/files/key_storage/cb20fa1061dde8e6267e0bef0981766aaadae168e917030f7f26edc7a0bab9c2.pub",
+  "Please enter key name": "online2",
+  "Please enter signing key index": "1",
+  "(root 1) Please enter path to public key": "tests/files/key_storage/JJ.ecdsa",
+  "Please enter password": "hunter2"
 }'
 
 # Copy files when UMBRELLA_PATH is not the current dir (FT triggered from components)
 if [[ ${UMBRELLA_PATH} != "." ]]; then
     cp -r metadata ${UMBRELLA_PATH}/
-    cp metadata-update-payload.json ${UMBRELLA_PATH}/
+    cp update-payload.json ${UMBRELLA_PATH}/
 fi
 
 make -C ${UMBRELLA_PATH}/ functional-tests-exitfirst PYTEST_GROUP=${PYTEST_GROUP} SLOW=${SLOW}

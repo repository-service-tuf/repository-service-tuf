@@ -89,7 +89,7 @@ def send_signed_update_metadata(send_rstuf_requests, http_request):
     time.sleep(2)
     LOGGER.info("[METADATA UPDATE] Submiting Root Metadata Update")
     try:
-        with open("metadata-update-payload.json") as f:
+        with open("update-payload.json") as f:
             paylaod_json = json.loads(f.read())
 
         result = http_request(
