@@ -62,7 +62,7 @@ jobs:
         uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f
 
       - name: RSTUF Deployment with docker compose
-        uses: isbang/compose-action@178aeba5c9dbeed89ffffbb3e6548ec08e9839cf
+        uses: isbang/compose-action@802a148945af6399a338c7906c267331b39a71af
         with:
           compose-file: ${{ inputs.docker_compose }}
         env:
@@ -84,7 +84,7 @@ jobs:
         uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f
 
       - name: RSTUF Deployment with docker compose
-        uses: isbang/compose-action@178aeba5c9dbeed89ffffbb3e6548ec08e9839cf
+        uses: isbang/compose-action@802a148945af6399a338c7906c267331b39a71af
         with:
           compose-file: ${{ inputs.docker_compose }}
         env:
@@ -109,7 +109,7 @@ jobs:
         uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f
 
       - name: RSTUF Deployment
-        uses: isbang/compose-action@178aeba5c9dbeed89ffffbb3e6548ec08e9839cf
+        uses: isbang/compose-action@802a148945af6399a338c7906c267331b39a71af
         with:
           compose-file: ${{ inputs.docker_compose }}
         env:
@@ -133,7 +133,7 @@ jobs:
         uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f
 
       - name: RSTUF Deployment
-        uses: isbang/compose-action@178aeba5c9dbeed89ffffbb3e6548ec08e9839cf
+        uses: isbang/compose-action@802a148945af6399a338c7906c267331b39a71af
         with:
           compose-file: ${{ inputs.docker_compose }}
         env:
