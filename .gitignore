@@ -1,11 +1,13 @@
 # RSTUF Specifics
 test-report.html
 test-report.json
-./metadata/
+metadata/
 payload.json
+update-payload.json
+ceremony-payload.json
+metadata-update-payload.json
 .rstuf.yml
 assets/
-metadata-update-payload.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

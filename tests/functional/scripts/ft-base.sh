@@ -3,7 +3,7 @@
 CLI_VERSION=$1
 # Install required dependencies for Functional Tests
 apt update
-apt install -y make wget git
+apt install -y make wget git curl jq
 pip install -r ${UMBRELLA_PATH}/requirements.txt
 
 # Install CLI

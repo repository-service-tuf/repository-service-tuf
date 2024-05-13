@@ -13,8 +13,8 @@ def _run(input):
     context = {"settings": Dynaconf(), "config": setting_file}
     runner = CliRunner()
     output = runner.invoke(
-        cli.admin.metadata.update,
-        "",
+        cli.admin.update.update,
+        ["metadata/1.root.json", "-s"],
         input="\n".join(input),
         obj=context,
         catch_exceptions=False,
