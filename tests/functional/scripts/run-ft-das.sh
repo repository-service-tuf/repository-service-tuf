@@ -7,6 +7,15 @@ SLOW=$3
 # Base FT
 . "${UMBRELLA_PATH}/tests/functional/scripts/ft-base.sh"
 
+
+# Define the base URL for the metadata
+curl http://web:8080
+if [[ $? -eq 0 ]]; then
+    export METADATA_BASE_URL=http://web:8080
+else
+    export METADATA_BASE_URL=http://localstack:4566/tuf-metadata
+fi
+
 # Execute the Ceremony using DAS
 python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-ceremony.py '{
     "Please enter days until expiry for timestamp role (1)": "",
@@ -61,7 +70,7 @@ sleep 3 # wait for the metadata to be updated
 # Remove the DAS root metadata
 rm metadata/1.root.json
 # Get the updated root metadata (version 1)
-wget -P metadata/ http://web:8080/1.root.json
+wget -P metadata/ ${METADATA_BASE_URL}/1.root.json
 # Copy files when UMBRELLA_PATH is not the current dir (FT triggered from components)
 if [[ ${UMBRELLA_PATH} != "." ]]; then
     cp -r metadata ${UMBRELLA_PATH}/
