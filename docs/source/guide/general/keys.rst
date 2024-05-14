@@ -65,14 +65,3 @@ supported `Key Vault Service <https://repository-service-tuf.readthedocs.io/en/l
 
 .. note::
     Targets, Snapshot, and Timestamp's metadata use the online key for signing.
-
-Generating Keys with RSTUF
-##########################
-
-RSTUF Command Line Interface (CLI) provides a feature for
-:ref:`guide/repository-service-tuf-cli/index:Key Generation (``generate\`\`)`
-
-
-.. include:: ../repository-service-tuf-cli/index.rst
-    :start-after: Key Generation (``generate``)
-    :end-before: Key Information (``info``)

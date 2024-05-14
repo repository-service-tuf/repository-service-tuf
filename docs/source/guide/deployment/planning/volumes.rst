@@ -30,20 +30,3 @@ environment variable when ``RSTUF_STORAGE_BACKEND=LocalStorage``
     This volume contains the public TUF metadata used by TUF clients.
     Sharing this content using a Web Server is an easy way to achieve it.
     See :ref:`guide/deployment/planning/deployment:[Optional] Content Server: Webserver`
-
-LocalKeyVault [Optional]
-========================
-
-The ``LocalKeyVault`` is a type of RSTUF Worker
-:ref:`RSTUF_KEYVAULT_BACKEND <guide/repository-service-tuf-worker/Docker_README:(Required) `RSTUF_KEYVAULT_BACKEND\`>`
-
-It can be used to store the online key for signing the TUF metadata.
-
-Share the persistent volume with all RSTUF Workers and mount it on the
-container's path defined in the required variable
-:ref:`RSTUF_LOCAL_KEYVAULT_PATH <guide/repository-service-tuf-worker/Docker_README:(Required) `RSTUF_KEYVAULT_BACKEND\`>`
-environment variable when ``RSTUF_KEYVAULT_BACKEND=LocalKeyVault``
-
-.. Warning::
-    DO NOT EXPOSE THIS VOLUME.
-    Restrict the volume to RSTUF Worker(s) only.

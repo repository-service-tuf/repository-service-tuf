@@ -36,13 +36,6 @@ See the chapter :ref:`guide/general/keys:Signing Keys`
 
 .. centered:: Skip this section if an online key has already been generated.
 
-RSTUF Command Line Interface (CLI) provides a feature for
-:ref:`guide/repository-service-tuf-cli/index:Key Generation (``generate\`\`)`
-
-.. include:: ../../repository-service-tuf-cli/index.rst
-    :start-after: Key Generation (``generate``)
-    :end-before: Key Information (``info``)
-
 Steps
 =====
 
@@ -51,7 +44,7 @@ Steps
   .. code:: shell
 
     $ mkdir local-keyvault
-    $ cp path/my/online.key local-keyvault/
+    $ cp path/my/keys/0d9d3d4bad91c455bc03921daa95774576b86625ac45570d0cac025b08e65043 local-keyvault/
 
 2. Create a Docker Compose (functional example below)
 
@@ -84,7 +77,7 @@ Steps
      environment variables:
 
      - Storage backend: ``RSTUF_STORAGE_BACKEND``, ``RSTUF_LOCAL_STORAGE_BACKEND_PATH``
-     - Key Vault backend: ``RSTUF_KEYVAULT_BACKEND``, ``RSTUF_LOCAL_KEYVAULT_PATH``, ``RSTUF_LOCAL_KEYVAULT_KEYS``
+     - Online Key directory: ``RSTUF_ONLINE_KEY_DIR``
      - Broker Server: ``RSTUF_BROKER_SERVER``
      - Redis Server: ``RSTUF_REDIS_SERVER``
      - SQL (Postgres) Server: ``RSTUF_SQL_SERVER``
