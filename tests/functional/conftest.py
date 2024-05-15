@@ -21,7 +21,7 @@ def rstuf_cli():
             capture_output=True,
         )
 
-        output = result.stdout if len(result.stdout) > 0 else result.stderr
+        output = result.stdout + result.stderr
         return result.returncode, ansi_escape.sub("", output.decode("utf-8"))
 
     return _run_rstuf_cli
