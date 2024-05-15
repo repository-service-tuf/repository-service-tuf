@@ -171,70 +171,12 @@ storage service (`RSTUF_STORAGE_BACKEND`).
 
 In most use cases, the timeout of 60.0 seconds is sufficient.
 
-#### `RSTUF_KEYVAULT_BACKEND`
-
-Select a supported type of Key Vault Service.
-
-* `LocalKeyVault` (container volume)
-
-**_NOTE:_** You can start the worker
-service without a keyvault backend, but you need to configure one before the
-[bootstrap ceremony](https://repository-service-tuf.readthedocs.io/en/latest/guide/repository-service-tuf-cli/index.html#ceremony-ceremony).
-
-##### `LocalKeyVault` (container volume)
-
-* (Required) ``RSTUF_LOCAL_KEYVAULT_PATH``
-
-  Define the path for the container volume mounted
-  Example: ``RSTUF_LOCAL_KEYVAULT_PATH=/var/opt/repository-service-tuf/key_storage``
-
-* (Required) ``RSTUF_LOCAL_KEYVAULT_KEYS``
-
-  Define the key(s) with format ``<file>,<password>,<(optional) type>``
-
-  - `file`: defines the key file
-    + `base64|<key content in base64>` allows to inform directly the key content.
-      It will dynamically manage and write a key file in
-      ``RSTUF_LOCAL_KEYVAULT_PATH`` (write permissions required).
-
-      Requires content as base64.
-
-      Example: ``RSTUF_LOCAL_KEYVAULT_KEYS=base64|LnRveC8KdmVudi8KLmlkZWEvCi52c2NvZGUvC...,strongPass,rsa``
-
-  - `password`: credential used to load the key
-  - (optional) `type`: The key type. Default: `ed25519`
-
-    [Note: At the moment RSTUF Worker supports `ed25519`, `rsa`, `ecdsa`]
-
-    Example: ``RSTUF_LOCAL_KEYVAULT_KEYS=online.key,strongPass,rsa``
-
-  Accepts multiple keys separated by "``:``".
-
-  It accepts multiple keys, but RSTUF supports the usage of only one
-  online key for signing.
-
-  The Local Key Vault will find the key that matches the online key
-  defined in the root metadata.
-
-  Allowing multiple keys is helpful for performing metadata/key
-  rotation without disruption.
-
-  Example: ``RSTUF_LOCAL_KEYVAULT_KEYS=online.key,strongPass:online-rsa.key,newStrongPass,rsa``
-
-  This environment variable supports container secrets when the
-  ``/run/secrets`` volume is added to the path. The content must be
-  in the standard format ``<file>,<password>,<(optional) type>``
-
-  Example: ``RSTUF_LOCAL_KEYVAULT_KEYS=/run/secrets/ONLINE_KEY_1:/run/secrets/ONLINE_KEY_2``
-
 #### (Optional) `RSTUF_ONLINE_KEY_DIR`
 
 Directory path for online signing key file. Expected file format is unencrypted PKCS8/PEM.
 
 Make sure to use the secrets management service of your deployment platform to
 protect the private key!
-
-Replaces `RSTUF_KEYVAULT_BACKEND` and related settings.
 
 Example:
 - `RSTUF_ONLINE_KEY_DIR=/run/secrets`
