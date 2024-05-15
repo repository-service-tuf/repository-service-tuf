@@ -158,7 +158,7 @@ You can do it using the rstuf admin-legacy
     .Bootstrap status:  SUCCESS
     Bootstrap completed using `ceremony-payload.json`. 🔐 🎉
 
-Alternatively, you can use curl to send the payload to the RSTUF API.
+Alternatively, you can use the refactored `rstuf admin` and use curl to send the payload to the RSTUF API.
 
 .. code::
 
