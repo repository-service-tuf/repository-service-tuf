@@ -114,7 +114,7 @@ requires the payload.
 
 .. note::
     The payload (``ceremony-payload.json``) contains only public data, it does
-    not contain private keys.
+    not contain any private keys.
 
 This process is appropriate when performing the Ceremony on a disconnected computer
 to RSTUF API to perform the :ref:`guide/deployment/setup:Bootstrap` later as a
