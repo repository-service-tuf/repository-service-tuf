@@ -29,7 +29,7 @@ metadata when an artifact is added or removed.
 Here are some things you need to know:
 * The key must be compatible with
   [Secure Systems Library](https://github.com/secure-systems-lab/securesystemslib).
-  If you do not have a key we suggest you use the [RSTUF CLI tool to generate the key](https://repository-service-tuf.readthedocs.io/en/latest/guide/repository-service-tuf-cli/index.html).
+
 * This key must be the same one used during the [RSTUF CLI ceremony](https://repository-service-tuf.readthedocs.io/en/latest/guide/repository-service-tuf-cli/index.html#ceremony-ceremony).
 
 For more information read the [Deployment documentation](https://repository-service-tuf.readthedocs.io/en/latest/guide/deployment/index.html).
