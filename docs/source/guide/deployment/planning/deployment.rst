@@ -38,7 +38,7 @@ Message Queue/Broker: Redis or RabbitMQ server
 
 RSTUF API and RSTUF Worker will use the message queue/broker.
 
-RSTUF supports Redis or RabbitMQ server. 
+RSTUF supports Redis or RabbitMQ server.
 
 RSTUF uses Celery. For more details, see the `summary about Celery and these two
 brokers <https://docs.celeryq.dev/en/stable/getting-started/backends-and-brokers/index.html#summaries>`_.
@@ -158,17 +158,6 @@ RSTUF
 
 RSTUF Worker configuration
 ==========================
-
-Key Vault Backend Service
--------------------------
-
-The Key Vault Backend Service is responsible for storing the
-:ref:`guide/general/keys:Online Key`.
-
-* :ref:`guide/repository-service-tuf-worker/Docker_README:(Required) `RSTUF_KEYVAULT_BACKEND\``
-
-.. Warning::
-    DO NOT EXPOSE THIS CONTENT. It must be restricted to the RSTUF Workers.
 
 Storage Backend Service
 -----------------------

@@ -16,21 +16,6 @@ spec:
       storage: 100Mi
 status: {}
 ---
-# RSTUF KeyVault (backend keyvault)
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  labels:
-    io.kompose.service: rstuf-keystorage
-  name: rstuf-keystorage
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
-status: {}
----
 # Redis persistent data volume
 apiVersion: v1
 kind: PersistentVolumeClaim

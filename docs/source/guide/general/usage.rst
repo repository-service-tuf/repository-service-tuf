@@ -266,9 +266,6 @@ The Metadata Update ceremony is a guided process allowing you to:
 - change the Root role key threshold
 - change the Root expiration
 
-Before starting the Metadata Update Ceremony authorization is required with
-at least one private root key to be fully loaded.
-
 The changes a user is allowed to make are not limited to the Root role, but
 also include the keys used by all other roles as well.
 

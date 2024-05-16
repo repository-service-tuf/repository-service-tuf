@@ -44,14 +44,6 @@ Online Key
 This deployment requires the :ref:`guide/general/keys:Online Key`.
 See the chapter :ref:`guide/general/keys:Signing Keys`
 
-.. centered:: Skip if the online key has been generated.
-
-RSTUF Command Line Interface (CLI) provides a feature for
-:ref:`guide/repository-service-tuf-cli/index:Key Generation (``generate\`\`)`
-
-.. include:: ../../repository-service-tuf-cli/index.rst
-    :start-after: Key Generation (``generate``)
-
 Secrets
 #######
 
@@ -67,17 +59,8 @@ Generating the secrets for RSTUF Online Key
 
 .. code:: shell
 
-  ❯ base64 -i tests/files/key_storage/online.key
-  YWI2ODU0YzE5MjlmNjYxNTc4MTBhNDBjMjQ1ZGU0NGJAQEBAMTAwMDAwQEBAQGUxZTk4MzMyZTZiYmNkM2M2ZjdmMGFiZjczNTdmNDNmZGJhN2QwMTRkYzYwMDk2YzNkODRkZjIyYTc3NDUwYmVAQEBANDgxNWEzNTgxZTBmNGM3MDU2OThmZTczMmE2ZWEwNDRAQEBAMmJmYjEwMmNjZTg4OWE0ZWRmZDA0YjU0NGQ1MTE2M2FjNGU0NTY4OWU3NmU3ZTdlZTNmMDQ3ZmE0MTQwM2ZiNmViYzI3MDdjMjM3NzgyNjJkNTQwMGU3YWZlYmQ4MWQ0NmE2OWEwZGUwOWZmNjk0N2Y0YzlkY2QzMzkwODlhYTkyNDA0NTI2M2ZjODg0Yzg1MDFiN2NjYjU5MDZjZTMzYjcyY2JkMDc1NWYwYjhhMzVlYzc1M2E1MDAyMmNkM2RkZDU5MjcxMGQyNjlhYjk0ZjMzOTBhYjVmOWZjNTRlOGUzZGJmMzBjMGUxNjNmYmRhYWQ3NzViMjE4MzdmMzcwODdkNDAxN2NhYjA2YjU1NjI1NmE5ODQwNjBmYmEwMWQ5ZDQ0MjdiNzQ1OTZiODQ5N2RmYjM3ZWRiMTUwZmE2OThkMmNiNzVmYWVkYjhiNTFiZmRjZjUwZDNhM2JlNDM3MThkM2FkM2E1YTU5MTNlY2YyNTA4NzUzYTAxOGVlM2Y5NTI0MmRhNjhjMmMyZjYxNDlmZGJkMmU4OGQ1OTBmYmY0N2YzYTE0MWJhMDVkMjRhYTA1MDg1Mjg3NDMwZDg0MmQwZmI3NmE0YzBjNjgxN2ZkNmVjYjM1NGM1YmNmZWUyYTk4NTRhNTc4NTMwYTI4ZDkxMDE4MzYxMmZhYzBiMjkwMmM1ZGNmODI3ZTA0YTkwODIwYmRhNGYyNWJkMjYzMWQ2ODlmYWYwMWM4MTMzNWI2OGMzYjkwMjEzYjlhMDRjNWFjZGM5OTdmNTA1YmJkNDA5NzZiNTU2Y2NhNmEzYjU0ZjI3MGE3ZWI2YjBkOWI2ZjE5YmUyOWQ2YWI4ZDRhMzFhZWRmYmI3MmE0YzhjZDk2Y2ExY2JmZmU5MDExOGJh
-
-2. Create a base 64 entry for the secrets. See ``LocalKeyVault`` in
-   :ref:`RSTUF_KEYVAULT_BACKEND <guide/repository-service-tuf-worker/Docker_README:(Required) `RSTUF_KEYVAULT_BACKEND\`>`
-
-.. code:: shell
-
-    ❯ echo -n "base64|YWI2ODU0YzE5MjlmNjYxNTc4MTBhNDBjMjQ1ZGU0NGJAQEBAMTAwMDAwQEBAQGUxZTk4MzMyZTZiYmNkM2M2ZjdmMGFiZjczNTdmNDNmZGJhN2QwMTRkYzYwMDk2YzNkODRkZjIyYTc3NDUwYmVAQEBANDgxNWEzNTgxZTBmNGM3MDU2OThmZTczMmE2ZWEwNDRAQEBAMmJmYjEwMmNjZTg4OWE0ZWRmZDA0YjU0NGQ1MTE2M2FjNGU0NTY4OWU3NmU3ZTdlZTNmMDQ3ZmE0MTQwM2ZiNmViYzI3MDdjMjM3NzgyNjJkNTQwMGU3YWZlYmQ4MWQ0NmE2OWEwZGUwOWZmNjk0N2Y0YzlkY2QzMzkwODlhYTkyNDA0NTI2M2ZjODg0Yzg1MDFiN2NjYjU5MDZjZTMzYjcyY2JkMDc1NWYwYjhhMzVlYzc1M2E1MDAyMmNkM2RkZDU5MjcxMGQyNjlhYjk0ZjMzOTBhYjVmOWZjNTRlOGUzZGJmMzBjMGUxNjNmYmRhYWQ3NzViMjE4MzdmMzcwODdkNDAxN2NhYjA2YjU1NjI1NmE5ODQwNjBmYmEwMWQ5ZDQ0MjdiNzQ1OTZiODQ5N2RmYjM3ZWRiMTUwZmE2OThkMmNiNzVmYWVkYjhiNTFiZmRjZjUwZDNhM2JlNDM3MThkM2FkM2E1YTU5MTNlY2YyNTA4NzUzYTAxOGVlM2Y5NTI0MmRhNjhjMmMyZjYxNDlmZGJkMmU4OGQ1OTBmYmY0N2YzYTE0MWJhMDVkMjRhYTA1MDg1Mjg3NDMwZDg0MmQwZmI3NmE0YzBjNjgxN2ZkNmVjYjM1NGM1YmNmZWUyYTk4NTRhNTc4NTMwYTI4ZDkxMDE4MzYxMmZhYzBiMjkwMmM1ZGNmODI3ZTA0YTkwODIwYmRhNGYyNWJkMjYzMWQ2ODlmYWYwMWM4MTMzNWI2OGMzYjkwMjEzYjlhMDRjNWFjZGM5OTdmNTA1YmJkNDA5NzZiNTU2Y2NhNmEzYjU0ZjI3MGE3ZWI2YjBkOWI2ZjE5YmUyOWQ2YWI4ZDRhMzFhZWRmYmI3MmE0YzhjZDk2Y2ExY2JmZmU5MDExOGJh,strongPassword" | base64
-    YmFzZTY0fFlXSTJPRFUwWXpFNU1qbG1Oall4TlRjNE1UQmhOREJqTWpRMVpHVTBOR0pBUUVCQU1UQXdNREF3UUVCQVFHVXhaVGs0TXpNeVpUWmlZbU5rTTJNMlpqZG1NR0ZpWmpjek5UZG1ORE5tWkdKaE4yUXdNVFJrWXpZd01EazJZek5rT0RSa1pqSXlZVGMzTkRVd1ltVkFRRUJBTkRneE5XRXpOVGd4WlRCbU5HTTNNRFUyT1RobVpUY3pNbUUyWldFd05EUkFRRUJBTW1KbVlqRXdNbU5qWlRnNE9XRTBaV1JtWkRBMFlqVTBOR1ExTVRFMk0yRmpOR1UwTlRZNE9XVTNObVUzWlRkbFpUTm1NRFEzWm1FME1UUXdNMlppTm1WaVl6STNNRGRqTWpNM056Z3lOakprTlRRd01HVTNZV1psWW1RNE1XUTBObUUyT1dFd1pHVXdPV1ptTmprME4yWTBZemxrWTJRek16a3dPRGxoWVRreU5EQTBOVEkyTTJaak9EZzBZemcxTURGaU4yTmpZalU1TURaalpUTXpZamN5WTJKa01EYzFOV1l3WWpoaE16VmxZemMxTTJFMU1EQXlNbU5rTTJSa1pEVTVNamN4TUdReU5qbGhZamswWmpNek9UQmhZalZtT1daak5UUmxPR1V6WkdKbU16QmpNR1V4TmpObVltUmhZV1EzTnpWaU1qRTRNemRtTXpjd09EZGtOREF4TjJOaFlqQTJZalUxTmpJMU5tRTVPRFF3TmpCbVltRXdNV1E1WkRRME1qZGlOelExT1RaaU9EUTVOMlJtWWpNM1pXUmlNVFV3Wm1FMk9UaGtNbU5pTnpWbVlXVmtZamhpTlRGaVptUmpaalV3WkROaE0ySmxORE0zTVRoa00yRmtNMkUxWVRVNU1UTmxZMll5TlRBNE56VXpZVEF4T0dWbE0yWTVOVEkwTW1SaE5qaGpNbU15WmpZeE5EbG1aR0prTW1VNE9HUTFPVEJtWW1ZME4yWXpZVEUwTVdKaE1EVmtNalJoWVRBMU1EZzFNamczTkRNd1pEZzBNbVF3Wm1JM05tRTBZekJqTmpneE4yWmtObVZqWWpNMU5HTTFZbU5tWldVeVlUazROVFJoTlRjNE5UTXdZVEk0WkRreE1ERTRNell4TW1aaFl6QmlNamt3TW1NMVpHTm1PREkzWlRBMFlUa3dPREl3WW1SaE5HWXlOV0prTWpZek1XUTJPRGxtWVdZd01XTTRNVE16TldJMk9HTXpZamt3TWpFellqbGhNRFJqTldGalpHTTVPVGRtTlRBMVltSmtOREE1TnpaaU5UVTJZMk5oTm1FellqVTBaakkzTUdFM1pXSTJZakJrT1dJMlpqRTVZbVV5T1dRMllXSTRaRFJoTXpGaFpXUm1ZbUkzTW1FMFl6aGpaRGsyWTJFeFkySm1abVU1TURFeE9HSmgsc3Ryb25nUGFzc3dvcmQ=
-
+  ❯ base64 -i tests/files/keys/0d9d3d4bad91c455bc03921daa95774576b86625ac45570d0cac025b08e65043
+  YWI2ODU0YzE5MjlmNjYxNTc4MTBhNDBjMjQ1ZGU0NGJAQEBAMTAwMDAwQEBAQGUxZTk4MzMyZTZiYmNkM2M2ZjdmMGFiZjczNTdmNDNmZGJhN2QwMTRkYzYwMDk2YzNkODRkZjIyYTc3NDUwYmVAQEBANDgxNWEzNTgxZTB
 
 
 postgrespassword secret
@@ -135,17 +118,6 @@ type as ``LocalStorage`` which requires a
 * WebServer will use the same volume the HTTP root document (htdocs) to
   expose the TUF Metadata at ``http://webserver/``
 
-rstuf-keystorage persistent volume
-==================================
-
-RSTUF Workers will use the :ref:`guide/deployment/planning/deployment:Key Vault Backend Service`
-type as ``LocalKeyVault`` which requires a
-:ref:`guide/deployment/planning/volumes:LocalKeyVault [Optional]`
-
-* RSTUF Workers will use the ``RSTUF_KEYVAULT_BACKEND_PATH`` as this volume
-
-* The online keys will be uploaded to this volume
-
 redis-data persistent volume
 ============================
 
@@ -173,14 +145,12 @@ Applying Volumes
 
     ❯ kubectl apply -f volumes.yml
     persistentvolumeclaim/rstuf-storage created
-    persistentvolumeclaim/rstuf-keystorage created
     persistentvolumeclaim/redis-data created
     persistentvolumeclaim/postgres-data created
 
     ❯ kubectl get pv
     NAME                   CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                     REASON   AGE
     pvc-5184d98009604a73   10Gi       RWO            Retain           Bound    default/redis-data                  7s
-    pvc-70548101b01f440e   10Gi       RWO            Retain           Bound    default/rstuf-keystorage            9s
     pvc-79aff76456bd433f   10Gi       RWO            Retain           Bound    default/rstuf-storage               9s
     pvc-c3ee2645d4114816   10Gi       RWO            Retain           Bound    default/postgres-data               8s
 
@@ -273,10 +243,7 @@ rstuf-worker deployment
 =======================
 
 * RSTUF Worker will use:
-
-  - :ref:`guide/deployment/guide/kubernetes:rstuf-keystorage persistent volume`
-    mounted on ``/var/opt/repository-service-tuf/keystorage``
-
+  
   - :ref:`guide/deployment/guide/kubernetes:rstuf-storage persistent volume`
     mounted on ``/var/opt/repository-service-tuf/storage``
 
@@ -288,12 +255,7 @@ rstuf-worker deployment
     (``postgres:5432``), ``RSTUF_SQL_USER`` as ``postgres``, and
     ``RSTUF_SQL_PASSWORD`` as the :ref:`guide/deployment/guide/kubernetes:postgrespassword secret`.
 
-  - environment variable ``RSTUF_KEYVAULT_BACKEND`` as ``LocalKeyVault``
-
-  - environment variable ``RSTUF_LOCAL_KEYVAULT_PATH`` as
-    ``/var/opt/repository-service-tuf/keystorage``
-
-  - environment variable ``RSTUF_LOCAL_KEYVAULT_KEYS`` as
+  - environment variable ``RSTUF_ONLINE_KEY_DIR`` as
     :ref:`guide/deployment/guide/kubernetes:onlinekey secret`
 
   - environment variable ``RSTUF_STORAGE_BACKEND`` as ``LocalStorage``

@@ -37,16 +37,6 @@ provides an interactive guided process to perform the
     ❯ rstuf admin ceremony -h
 
 
-A video demonstrating this process is available.
-
-   .. raw:: html
-
-      <div style="position: relative; padding-bottom: 56.25%; height: 0; margin-bottom: 2em; overflow: hidden; max-width: 100%; height: auto;">
-         <iframe src="https://www.youtube.com/embed/j18NvkNfs2A" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
-      </div>
-
-
-
 Ceremony
 ========
 
@@ -108,11 +98,6 @@ TUF service.
         The target role delegates trust to the hash bin roles to
         reduce the metadata overhead for clients.
 
-    * Targets base URL
-
-        The base URL path for downloading all artifacts.
-        Example: https://www.example.com/download/
-
     * Signing
 
         This process will also require the Online Key and Root Key(s) (offline) for
@@ -124,12 +109,12 @@ Disconnected
 ------------
 
 The disconnected Ceremony will only generate the required JSON payload
-(``payload.json``) file. The :ref:`guide/deployment/setup:Bootstrap` requires the
-payload.
+(``ceremony-payload.json``) file. The :ref:`guide/deployment/setup:Bootstrap`
+requires the payload.
 
 .. note::
-    The payload (``payload.json``) contains only public data, it does not contain
-    private keys.
+    The payload (``ceremony-payload.json``) contains only public data, it does
+    not contain any private keys.
 
 This process is appropriate when performing the Ceremony on a disconnected computer
 to RSTUF API to perform the :ref:`guide/deployment/setup:Bootstrap` later as a
@@ -137,36 +122,44 @@ separate step.
 
 .. code::
 
-    ❯ rstuf admin ceremony
+    ❯ rstuf admin ceremony -s
+    Saved result to 'ceremony-payload.json'
+
+If the Ceremony is done disconnected, the next step is to perform the bootstrap.
 
 
 Connected
 ---------
 
+.. note::
 
-The connected Ceremony generates the JSON payload file and run the Bootstrap
-request to RSTUF API.
-
-This process is appropriate when performing the Ceremony on a computer
-connected to RSTUF API. It does not require a
-:ref:`guide/deployment/setup:Bootstrap` step.
-
-.. code::
-
-    ❯ rstuf admin ceremony -b
+    Apollogies, this feature has been refactored and is not available in the
+    current version of the RSTUF CLI.
+    Please use the Ceremony :ref:`guide/deployment/setup:Disconnected`.
 
 
 Bootstrap
 =========
 
-If a Ceremony :ref:`guide/deployment/setup:Connected` is complete, skip this,
-as the RSTUF service is ready.
+.. If a Ceremony :ref:`guide/deployment/setup:Connected` is complete, skip this,
+.. as the RSTUF service is ready.
 
-If a Ceremony :ref:`guide/deployment/setup:Disconnected` is complete, it
-requires running the Bootstrap from a computer connected to the RSTUF API.
+To perform the boostrap you require the payload generated during the
+:ref:`guide/deployment/setup:Bootstrap`.
 
+You can do it using the rstuf admin-legacy
 
 .. code::
 
-    ❯ rstuf admin ceremony -b -u
+    ❯ rstuf admi-legacy ceremony -b -u -f ceremony-payload.json --api-url https://rstuf-api-url
+    Starting online bootstrap
+    Bootstrap status: ACCEPTED (c1d2356d25784ecf90ce373dc65b05c7)
+    Bootstrap status:  STARTED
+    .Bootstrap status:  SUCCESS
+    Bootstrap completed using `ceremony-payload.json`. 🔐 🎉
 
+Alternatively, you can use the refactored `rstuf admin` and use curl to send the payload to the RSTUF API.
+
+.. code::
+
+    ❯ curl -X POST -d @ceremony-payload.json https://rstuf-api-url/api/v1/bootstrap

@@ -159,15 +159,8 @@ spec:
                 secretKeyRef:
                   name: postgrespassword
                   key: password
-            - name: RSTUF_KEYVAULT_BACKEND
-              value: LocalKeyVault
-            - name: RSTUF_LOCAL_KEYVAULT_PATH
-              value: /var/opt/repository-service-tuf/keystorage/
-            - name: RSTUF_LOCAL_KEYVAULT_KEYS
-              valueFrom:
-                secretKeyRef:
-                  name: onlinekey
-                  key: keys
+            - name: RSTUF_ONLINE_KEY_DIR
+              value: /run/secrets
             - name: RSTUF_STORAGE_BACKEND
               value: LocalStorage
             - name: RSTUF_LOCAL_STORAGE_BACKEND_PATH
@@ -177,8 +170,8 @@ spec:
           resources: {}
           tty: true
           volumeMounts:
-            - name: onlinekey
-              mountPath: "/run/secrets/onlinekey"
+            - name: 0d9d3d4bad91c455bc03921daa95774576b86625ac45570d0cac025b08e65043
+              mountPath: "/run/secrets/0d9d3d4bad91c455bc03921daa95774576b86625ac45570d0cac025b08e65043"
               readOnly: true
             - name: postgrespassword
               mountPath: "/run/secrets/postgrespassword"
