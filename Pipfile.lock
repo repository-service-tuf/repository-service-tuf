@@ -316,11 +316,11 @@
         },
         "domdf-python-tools": {
             "hashes": [
-                "sha256:a1fd255ea29f767b08de462d2da39d360262304389227d980bc307ee8aa3366a",
-                "sha256:ad2c763c8d00850a7fa92ad95e9891a1918281ea25322c4dbb1734fd32f905dd"
+                "sha256:9821d76505e16c0fab60b37be90b8acf401c9604f7119cf6bce314f848461c7e",
+                "sha256:f45e34cf4d3363af59c32da28a9de9480ed916eff06bd0cf9a1644b6b460fb88"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==3.8.0.post2"
+            "version": "==3.8.1"
         },
         "dynaconf": {
             "hashes": [
@@ -1185,11 +1185,11 @@
         },
         "requests": {
             "hashes": [
-                "sha256:58cd2187c01e70e6e26505bca751777aa9f2ee0b7f4300988b709f44e013003f",
-                "sha256:942c5a758f98d790eaed1a29cb6eefc7ffb0d1cf7af05c3d2791656dbd6ad1e1"
+                "sha256:21ac9465cdf8c1650fe1ecde8a71669a93d4e6f147550483a2967d08396a56a5",
+                "sha256:eb97e87e64c79e64e5b8ac75cee9dd1f97f49e289b083ee6be96268930725685"
             ],
-            "markers": "python_version >= '3.7'",
-            "version": "==2.31.0"
+            "markers": "python_version >= '3.8'",
+            "version": "==2.32.1"
         },
         "requests-file": {
             "hashes": [
