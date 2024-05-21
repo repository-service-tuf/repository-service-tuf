@@ -58,6 +58,7 @@ sleep 3 # wait for the metadata to be updated
 # Remove the DAS root metadata
 rm metadata/1.root.json
 # Get the updated root metadata (version 1)
+mkdir metadata
 wget -P metadata/ ${METADATA_BASE_URL}/1.root.json
 # Copy files when UMBRELLA_PATH is not the current dir (FT triggered from components)
 if [[ ${UMBRELLA_PATH} != "." ]]; then
