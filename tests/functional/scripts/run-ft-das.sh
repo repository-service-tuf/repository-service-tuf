@@ -45,31 +45,20 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-ceremony.py '{
 # Bootstrap using legacy with DAS
 rstuf admin-legacy ceremony -b -u -f ceremony-payload.json --api-server http://repository-service-tuf-api
 
-
-# Get initial trusted Root available for signing
-mkdir metadata
-curl http://repository-service-tuf-api/api/v1/metadata/sign | jq .data.metadata.root > metadata/1.root.json
-
-# Copy files when UMBRELLA_PATH is not the current dir (FT triggered from components)
-if [[ ${UMBRELLA_PATH} != "." ]]; then
-    cp -r metadata ${UMBRELLA_PATH}/
-fi
-
 # Finish the DAS signing the Root Metadata (bootstrap)
 python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-sign.py '{
+    "API URL address:": "http://repository-service-tuf-api",
     "Please enter signing key index::": "1",
     "Please enter path to encrypted private key": "tests/files/key_storage/JH.ed25519",
     "Please enter password": "hunter2"
 }'
-
-# Send signature to RSTUF API
-curl -X POST -H "Content-Type: application/json" -d @sign-payload.json http://repository-service-tuf-api/api/v1/metadata/sign
 
 # Get initial trusted Root
 sleep 3 # wait for the metadata to be updated
 # Remove the DAS root metadata
 rm metadata/1.root.json
 # Get the updated root metadata (version 1)
+mkdir metadata
 wget -P metadata/ ${METADATA_BASE_URL}/1.root.json
 # Copy files when UMBRELLA_PATH is not the current dir (FT triggered from components)
 if [[ ${UMBRELLA_PATH} != "." ]]; then

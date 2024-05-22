@@ -14,7 +14,7 @@ def _run(input):
     runner = CliRunner()
     output = runner.invoke(
         cli.admin.sign.sign,
-        ["metadata/1.root.json", "-s"],
+        ["-s"],
         input="\n".join(input),
         obj=context,
         catch_exceptions=False,
