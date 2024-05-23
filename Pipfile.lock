@@ -1411,10 +1411,10 @@
         },
         "sphinxcontrib-plantuml": {
             "hashes": [
-                "sha256:97a4f2a26af91db88770ccf8a3b2e03305bcda7ec41a7f969fc8cb27b84a3c44"
+                "sha256:2a1266ca43bddf44640ae44107003df4490de2b3c3154a0d627cfb63e9a169bf"
             ],
             "index": "pypi",
-            "version": "==0.29"
+            "version": "==0.30"
         },
         "sphinxcontrib-qthelp": {
             "hashes": [
@@ -1461,7 +1461,7 @@
                 "sha256:83f085bd5ca59c80295fc2a82ab5dac679cbe02b9f33f7d83af68e241bea51b0",
                 "sha256:c1f94d72897edaf4ce775bb7558d5b79d8126906a14ea5ed1635921406c0387a"
             ],
-            "markers": "python_version < '3.11'",
+            "markers": "python_version >= '3.8'",
             "version": "==4.11.0"
         },
         "urllib3": {
