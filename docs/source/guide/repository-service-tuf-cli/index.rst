@@ -179,11 +179,19 @@ sign (``sign``)
     Usage: rstuf admin metadata sign [OPTIONS] ROOT_IN [PREV_ROOT_IN]
 
     Add one signature to root metadata.
+    There are two ways to use this command:
+    1) utilizing access to the RSTUF API and signing pending metadata roles
+    2) provide a local file using the SIGNING_JSON_INPUT_FILE argument
+    When using method 2:
+     - 'SIGNING_JSON_INPUT_FILE' must be a file containing the JSON response from the 'GET /api/v1/metadata/sign' API endpoint.
+     - '--api_server' will be ignored.
+     - the result of the command will be saved into the 'sign-payload.json' file unless a different name is provided with '--save'.
 
-    ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │ --save  -s  FILENAME  Write json result to FILENAME (default: 'sign-payload.json')                                   │
-    │ --help  -h            Show this message and exit.                                                                    │
-    ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────────────────╮
+│ --api-server      TEXT      URL to an RSTUF API.                                         │
+│ --save        -s  FILENAME  Write json result to FILENAME (default: 'sign-payload.json') │
+│ --help        -h            Show this message and exit.                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────╯
 
 
 
