@@ -47,7 +47,6 @@ rstuf admin-legacy ceremony -b -u -f ceremony-payload.json --api-server http://r
 
 # Finish the DAS signing the Root Metadata (bootstrap)
 python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-sign.py '{
-    "API URL address:": "http://repository-service-tuf-api",
     "Please enter signing key index::": "1",
     "Please enter path to encrypted private key": "tests/files/key_storage/JH.ed25519",
     "Please enter password": "hunter2"
@@ -89,4 +88,3 @@ if [[ ${UMBRELLA_PATH} != "." ]]; then
 fi
 
 make -C ${UMBRELLA_PATH}/ functional-tests-exitfirst PYTEST_GROUP=${PYTEST_GROUP} SLOW=${SLOW}
-

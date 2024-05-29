@@ -14,7 +14,7 @@ def _run(input):
     runner = CliRunner()
     output = runner.invoke(
         cli.admin.sign.sign,
-        ["-s"],
+        ["-s", "--api-server", "http://repository-service-tuf-api"],
         input="\n".join(input),
         obj=context,
         catch_exceptions=False,
