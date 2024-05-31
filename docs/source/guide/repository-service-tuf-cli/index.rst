@@ -176,7 +176,7 @@ sign (``sign``)
 
     ❯ rstuf admin metadata sign -h
 
-    Usage: rstuf admin metadata sign [OPTIONS] ROOT_IN [PREV_ROOT_IN]
+    Usage: rstuf admin metadata sign [OPTIONS] [SIGNING_JSON_INPUT_FILE]
 
     Add one signature to root metadata.
     There are two ways to use this command:
@@ -184,7 +184,7 @@ sign (``sign``)
     2) provide a local file using the SIGNING_JSON_INPUT_FILE argument
     When using method 2:
      - 'SIGNING_JSON_INPUT_FILE' must be a file containing the JSON response from the 'GET /api/v1/metadata/sign' API endpoint.
-     - '--api_server' will be ignored.
+     - '--api-server' will be ignored.
      - the result of the command will be saved into the 'sign-payload.json' file unless a different name is provided with '--save'.
 
 ╭─ Options ────────────────────────────────────────────────────────────────────────────────╮
