@@ -1304,11 +1304,11 @@
         },
         "sphinx-autodoc-typehints": {
             "hashes": [
-                "sha256:46f1a710b3ed35904f63a77c5e68334c5ee1c2e22828b75fdcd147f1c52c199b",
-                "sha256:51bf8dc77c4fba747e32f0735002a91500747d0553cae616863848e8f5e49fe8"
+                "sha256:0072b65f5ab2818c229d6d6c2cc993770af55d36bb7bfb16001e2fce4d14880c",
+                "sha256:22427d74786274add2b6d4afccb8b3c8c1843f48a704550f15a35fd948f8a4de"
             ],
             "markers": "python_version >= '3.9'",
-            "version": "==2.1.0"
+            "version": "==2.1.1"
         },
         "sphinx-data-viewer": {
             "hashes": [
@@ -1461,7 +1461,7 @@
                 "sha256:6024b58b69089e5a89c347397254e35f1bf02a907728ec7fee9bf0fe837d203a",
                 "sha256:915f5e35ff76f56588223f15fdd5938f9a1cf9195c0de25130c627e4d597f6d1"
             ],
-            "markers": "python_version >= '3.8'",
+            "markers": "python_version < '3.11'",
             "version": "==4.12.1"
         },
         "urllib3": {
