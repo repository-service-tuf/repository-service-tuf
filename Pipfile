@@ -23,8 +23,10 @@ pytest-bdd-html = "*"
 pytest-html = "*"
 sphinx-toolbox = "*"
 py = "*"
+psycopg2 = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.10"
+python_version = "3.11"

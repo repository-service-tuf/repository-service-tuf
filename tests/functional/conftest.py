@@ -85,6 +85,7 @@ def task_completed_within_threshold():
             response_json["data"]["last_update"]
         )
         task_response_json = None
+        task_submitted = task_submitted.replace(tzinfo=timezone.utc)
         while (
             datetime.now(tz=timezone.utc) - task_submitted
         ).total_seconds() <= threshold:

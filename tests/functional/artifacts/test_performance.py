@@ -87,8 +87,9 @@ def get_tasks(multiple_requests, http_request, timeout):
             if os.getenv("PERFORMANCE", "true").lower() == "true":
                 total_time_now = datetime.now(
                     tz=timezone.utc
-                ) - dateutil.parser.parse(task["last_update"])
+                ) - dateutil.parser.parse(task["last_update"]).replace(tzinfo=timezone.utc)
                 assert total_time_now.total_seconds() <= int(timeout)
+                #task_submitted.replace(tzinfo=timezone.utc)
 
             response = http_request(
                 "GET",
