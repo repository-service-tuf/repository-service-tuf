@@ -19,12 +19,11 @@ fi
 python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-ceremony.py '{
     "Please enter days until expiry for timestamp role (1)": "",
     "Please enter days until expiry for snapshot role (1)": "",
-    "Please enter days until expiry for targets role (1)": "",
+    "Please enter days until expiry for targets role (365)": "",
     "Please enter days until expiry for bins role (1)": "",
     "Please enter number of delegated hash bins [2/4/8/16/32/64/128/256/512/1024/2048/4096/8192/16384] (256)": "2",
     "Please enter days until expiry for root role (365)": "",
     "Please enter root threshold": "2",
-    "Please enter days until expiry for root role (365)": "",
     "(root 1) Please enter path to public key": "tests/files/key_storage/JJ.pub",
     "(root 1) Please enter key name": "JanisJoplin",
     "Please press 0 to add key, or remove key by entering its index": "0",
@@ -38,8 +37,7 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-ceremony.py '{
     "Please enter password": "hunter2",
     "Please enter signing key index, or press enter to continue": "1",
     "(root 2) Please enter path to encrypted private key": "tests/files/key_storage/JH.ed25519",
-    "Please enter password": "hunter2",
-    "something": ""
+    "Please enter password": "hunter2"
 }'
 
 # Bootstrap using legacy with DAS
