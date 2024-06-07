@@ -34,10 +34,10 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-ceremony.py '{
     "(online key) Please enter key name": "online1",
     "Please enter signing key index": "1",
     "(root 1) Please enter path to encrypted private key": "tests/files/key_storage/JJ.ecdsa",
-    "Please enter password": "hunter2",
+    "(root 1) Please enter password": "hunter2",
     "Please enter signing key index, or press enter to continue": "1",
     "(root 2) Please enter path to encrypted private key": "tests/files/key_storage/JH.ed25519",
-    "Please enter password": "hunter2"
+    "(root 2) Please enter password": "hunter2"
 }'
 
 # Bootstrap using legacy with DAS
