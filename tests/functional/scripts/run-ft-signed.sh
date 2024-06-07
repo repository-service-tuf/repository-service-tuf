@@ -51,7 +51,7 @@ wget -P metadata/ ${METADATA_BASE_URL}/1.root.json
 
 # Run metadata update to be used later (during FT)
 python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-update.py '{
-  "Root expires on 04/16/25. Do you want to change the expiry date? [y/n]": "",
+  "Root expires on 04/16/25. Do you want to change the expiry date? [y/n] (y)": "",
   "Please enter days until expiry for root role (365)": "",
   "Root signature threshold is 1. Do you want to change the threshold? [y/n] (n)": "",
   "Please press 0 to add key, or remove key by entering its index. Press enter to continue": "",
@@ -59,8 +59,11 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-update.py 
   "Please enter path to public key": "tests/files/key_storage/cb20fa1061dde8e6267e0bef0981766aaadae168e917030f7f26edc7a0bab9c2.pub",
   "Please enter key name": "online2",
   "Please enter signing key index": "1",
-  "(root 1) Please enter path to public key": "tests/files/key_storage/JJ.ecdsa",
-  "Please enter password": "hunter2"
+  "(root 1) Please enter path to encrypted private key": "tests/files/key_storage/JJ.ecdsa",
+  "(root 1) Please enter password": "hunter2",
+  "Please enter signing key index, or press enter to continue": "1",
+  "(root 2) Please enter path to encrypted private key": "tests/files/key_storage/JH.ed25519",
+  "(root 2) Please enter password": "hunter2"
 }'
 
 # Copy files when UMBRELLA_PATH is not the current dir (FT triggered from components)
