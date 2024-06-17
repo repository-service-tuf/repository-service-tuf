@@ -15,7 +15,7 @@ else
     export METADATA_BASE_URL=http://localstack:4566/tuf-metadata
 fi
 
-# Execute the Ceremony using DAS
+# Execute the Ceremony and Bootstrap RSTUF API
 python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-ceremony.py '{
     "Please enter days until expiry for timestamp role (1)": "",
     "Please enter days until expiry for snapshot role (1)": "",
@@ -39,10 +39,6 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-ceremony.py '{
     "(root 2) Please enter path to encrypted private key": "tests/files/key_storage/JH.ed25519",
     "(root 2) Please enter password": "hunter2"
 }'
-
-# Bootstrap using legacy with DAS
-rstuf admin-legacy ceremony -b -u -f ceremony-payload.json --api-server http://repository-service-tuf-api
-
 
 # Get initial trusted Root
 rm metadata/1.root.json
