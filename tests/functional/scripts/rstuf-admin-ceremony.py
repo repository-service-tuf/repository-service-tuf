@@ -14,7 +14,7 @@ def _run(input):
     runner = CliRunner()
     output = runner.invoke(
         cli.admin.ceremony.ceremony,
-        ["-s"],
+        ["--out"],
         input="\n".join(input),
         obj=context,
         catch_exceptions=False,
