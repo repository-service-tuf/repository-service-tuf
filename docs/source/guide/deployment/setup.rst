@@ -78,14 +78,15 @@ TUF service.
             :ref:`guide/deployment/setup:Ceremony`.
 
         .. note::
-            RSTUF requires at least the threshold number of Root key(s) for
+            RSTUF requires at least a threshold number of Root key(s) defined
+            to finish the ceremony. The same applies when performing
             :ref:`guide/general/usage:Metadata Update`.
 
 
     * Root key threshold
 
         The minimum number of keys required to update and sign the TUF Root
-        metadata.
+        metadata. It's required to be at least 2.
 
     * Targets, BINS, Snapshot, and Timestamp metadata expiration policy
 
@@ -122,7 +123,7 @@ separate step.
 
 .. code::
 
-    ❯ rstuf admin ceremony -s
+    ❯ rstuf admin ceremony --out
     Saved result to 'ceremony-payload.json'
 
 If the Ceremony is done disconnected, the next step is to perform the bootstrap.
@@ -131,18 +132,22 @@ If the Ceremony is done disconnected, the next step is to perform the bootstrap.
 Connected
 ---------
 
-.. note::
+The connected Ceremony generates the JSON payload file and run the Bootstrap
+request to RSTUF API.
 
-    Apollogies, this feature has been refactored and is not available in the
-    current version of the RSTUF CLI.
-    Please use the Ceremony :ref:`guide/deployment/setup:Disconnected`.
+This process is appropriate when performing the Ceremony on a computer
+connected to RSTUF API. It does not require a
+:ref:`guide/deployment/setup:Bootstrap` step.
+
+.. code::
+    ❯ rstuf admin --api-server https://rstuf-api-url ceremony
 
 
 Bootstrap
 =========
 
-.. If a Ceremony :ref:`guide/deployment/setup:Connected` is complete, skip this,
-.. as the RSTUF service is ready.
+If a Ceremony :ref:`guide/deployment/setup:Connected` is complete, skip this,
+as the RSTUF service is ready.
 
 To perform the boostrap you require the payload generated during the
 :ref:`guide/deployment/setup:Bootstrap`.
@@ -151,7 +156,7 @@ You can do it using the rstuf admin-legacy
 
 .. code::
 
-    ❯ rstuf admi-legacy ceremony -b -u -f ceremony-payload.json --api-url https://rstuf-api-url
+    ❯ rstuf admin-legacy ceremony -b -u -f ceremony-payload.json --api-url https://rstuf-api-url
     Starting online bootstrap
     Bootstrap status: ACCEPTED (c1d2356d25784ecf90ce373dc65b05c7)
     Bootstrap status:  STARTED
