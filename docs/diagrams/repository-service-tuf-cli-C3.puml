@@ -51,6 +51,12 @@ System_Boundary(trs_cli, "Repository Service for TUF CLI") #APPLICATION {
                     Container(sign, "sign")
 
                 }
+                Container_Boundary(send, "send"){
+                    Container(bootstrap, "bootstrap")
+                    Container(update, "update")
+                    Container(sign, "sign")
+
+                }
             }
             Container_Boundary(key, "key") {
                 Container(key_generate, "generate")
@@ -77,12 +83,14 @@ Rel(info, tuf, " ")
 Rel(ceremony, api_client, " ")
 Rel(metadata, tuf, " ")
 Rel(metadata, api_client, " ")
+Rel(send, api_client, " ")
 Rel(api_client, requests, " ")
 Rel(dynaconf, user, " ", $tags="os")
 Rel_U(ceremony, click, " ")
 Rel_U(key_generate, click, " ")
 Rel_U(info, click, " ")
 Rel_U(metadata, click, " ")
+Rel_U(send, click, " ")
 Rel(requests, tuf_repository_service_api, " ")
 
 HIDE_STEREOTYPE()
