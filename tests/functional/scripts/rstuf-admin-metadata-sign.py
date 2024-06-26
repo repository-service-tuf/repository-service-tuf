@@ -2,18 +2,25 @@ import json
 import os
 import sys
 from tempfile import mkdtemp
+from unittest import mock
 
 from click.testing import CliRunner
 from repository_service_tuf import Dynaconf, cli
 
 
-def _run(input):
+def _run(input, selection):
     folder_name = mkdtemp()
     setting_file = os.path.join(folder_name, ".rstuf.yml")
     test_settings = Dynaconf()
     test_settings.SERVER = "http://repository-service-tuf-api"
     context = {"settings": test_settings, "config": setting_file}
+
     runner = CliRunner()
+
+    # key selection
+    cli.admin.helpers._select = mock.MagicMock()
+    cli.admin.helpers._select.side_effect = selection
+
     output = runner.invoke(
         cli.admin.sign.sign,
         ["--out"],
@@ -27,11 +34,12 @@ def _run(input):
 
 def main():
     input_dict = json.loads(sys.argv[1])
-    input = [i for i in input_dict.values()]
+    input = [v for k, v in input_dict.items() if not k.startswith("[select]")]
+    selection = [v for k, v in input_dict.items() if k.startswith("[select]")]
 
     print("Using parameters:")
     print(json.dumps(input_dict, indent=2))
-    output = _run(input)
+    output = _run(input, selection)
 
     print(f"\nExit code: {output.exit_code}")
     print("\nOutput: ")
