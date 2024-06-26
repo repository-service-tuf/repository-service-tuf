@@ -27,26 +27,28 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-ceremony.py '{
     "Please enter root threshold": "2",
     "(root 1) Please enter path to public key": "tests/files/key_storage/JJ.pub",
     "(root 1) Please enter key name": "JanisJoplin",
-    "(root 2) Please press 0 to add key, or remove key by entering its index": "0",
     "(root 2) Please enter path to public key:": "tests/files/key_storage/JH.pub",
     "(root 2) Please enter key name": "JimiHendrix",
-    "(root 3) Please press 0 to add key, or remove key by entering its index. Press enter to continue": "0",
     "(root 3) Please enter path to public key:": "tests/files/key_storage/JC.pub",
     "(root 3) Please enter key name": "JoeCocker",
-    "(Finish root keys) Please press 0 to add key, or remove key by entering its index. Press enter to continue": "",
     "(online key) Please enter path to public key": "tests/files/key_storage/0d9d3d4bad91c455bc03921daa95774576b86625ac45570d0cac025b08e65043.pub",
     "(online key) Please enter key name": "online1",
-    "(Sign 1) Please enter signing key index": "1",
     "(Sign 1) Please enter path to encrypted private key": "tests/files/key_storage/JJ.ecdsa",
-    "(Sign 1) Please enter password": "hunter2",
-    "(Sign 1) Please enter signing key index, or press enter to continue": "\n"
+    "(Sign 1) Please enter password": "hunter2"
+}' '{
+    "Info: 1 key missing for threshold 2 (add/remove)": "add",
+    "Info: Threshold 2 is met, more keys can be added (continue/add/remove)": "add",
+    "Info: Threshold 2 is met, more keys can be added (continue/add/remove)": "continue",
+    "Select a key for signing (JanisJoplin/JimiHendrix/JoeCocker)": "JanisJoplin",
+    "Select a key for signing or continue (continue/JimiHendrix/JoeCocker)": "continue"
 }'
 
 # Finish the DAS signing the Root Metadata (bootstrap)
 python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-sign.py '{
-    "Please enter signing key index::": "1",
     "Please enter path to encrypted private key": "tests/files/key_storage/JH.ed25519",
     "Please enter password": "hunter2"
+}' '{
+    "Select a key for signing or continue (continue/JimiHendrix/JoeCocker)": "JimiHendrix"
 }'
 
 # Get initial trusted Root
@@ -66,17 +68,17 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-update.py 
   "Root expires on 04/16/25. Do you want to change the expiry date? [y/n]": "",
   "Please enter days until expiry for root role (365)": "",
   "Root signature threshold is 1. Do you want to change the threshold? [y/n] (n)": "",
-  "Please press 0 to add key, or remove key by entering its index. Press enter to continue": "",
   "Do you want to change the online key? [y/n] (y)": "y",
   "Please enter path to public key": "tests/files/key_storage/cb20fa1061dde8e6267e0bef0981766aaadae168e917030f7f26edc7a0bab9c2.pub",
   "Please enter key name": "online2",
-  "Please enter signing key index": "1",
   "(Sign 1) Please enter path to public key": "tests/files/key_storage/JJ.ecdsa",
   "(Sign 1) Please enter password": "hunter2",
-  "(Sign 1) Please enter signing key index": "1",
   "(Sign 2) Please enter path to public key": "tests/files/key_storage/JH.ed25519",
   "(Sign 2) Please enter password": "hunter2",
-  "(Sign 2) Please enter signing key index, or press enter to continue": "\n"
+}' '{
+  "Info: Threshold 2 is met, more keys can be added (continue/addremove)": "continue",
+  "Select a key for signing (JanisJoplin/JimiHendrix)": "JanisJoplin",
+  "Select a key for signing (continue/JimiHendrix)": "JimiHendrix"
 }'
 
 # Copy files when UMBRELLA_PATH is not the current dir (FT triggered from components)

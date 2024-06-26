@@ -2,16 +2,23 @@ import json
 import os
 import sys
 from tempfile import mkdtemp
+from unittest import mock
 
 from click.testing import CliRunner
 from repository_service_tuf import Dynaconf, cli
 
 
-def _run(input):
+def _run(input, selection):
     folder_name = mkdtemp()
     setting_file = os.path.join(folder_name, "rstuf.yml")
     context = {"settings": Dynaconf(), "config": setting_file}
+
     runner = CliRunner()
+
+    # key selection
+    cli.admin.helpers._select = mock.MagicMock()
+    cli.admin.helpers._select.side_effect = selection
+
     output = runner.invoke(
         cli.admin.update.update,
         ["metadata/1.root.json", "-s"],
@@ -25,11 +32,13 @@ def _run(input):
 
 def main():
     input_dict = json.loads(sys.argv[1])
+    selection_dict = json.loads(sys.argv[2])
     input = [i for i in input_dict.values()]
+    selection = [i for i in selection_dict.values()]
 
     print("Using parameters:")
     print(json.dumps(input_dict, indent=2))
-    output = _run(input)
+    output = _run(input, selection)
 
     print(f"\nExit code: {output.exit_code}")
     print("\nOutput: ")
