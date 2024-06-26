@@ -30,7 +30,7 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-ceremony.py '{
     "[select] Info: 1 key missing for threshold 2 (add/remove)": "add",
     "(root 2) Please enter path to public key:": "tests/files/key_storage/JH.pub",
     "(root 2) Please enter key name": "JimiHendrix",
-    "[select] Info: Threshold 2 is met, more keys can be added (continue/add/remove)": "add",
+    "[select] (extra key) Info: Threshold 2 is met, more keys can be added (continue/add/remove)": "add",
     "(root 3) Please enter path to public key:": "tests/files/key_storage/JC.pub",
     "(root 3) Please enter key name": "JoeCocker",
     "[select] Info: Threshold 2 is met, more keys can be added (continue/add/remove)": "continue",
@@ -65,16 +65,16 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-update.py 
   "Root expires on 04/16/25. Do you want to change the expiry date? [y/n]": "",
   "Please enter days until expiry for root role (365)": "",
   "Root signature threshold is 1. Do you want to change the threshold? [y/n] (n)": "",
+  "[select] Info: Threshold 2 is met, more keys can be added (continue/add/remove)": "continue",
   "Do you want to change the online key? [y/n] (y)": "y",
   "Please enter path to public key": "tests/files/key_storage/cb20fa1061dde8e6267e0bef0981766aaadae168e917030f7f26edc7a0bab9c2.pub",
   "Please enter key name": "online2",
-  "[select] Info: Threshold 2 is met, more keys can be added (continue/add/remove)": "continue",
   "[select] Select a key for signing (JanisJoplin/JimiHendrix)": "JanisJoplin",
   "(Sign 1) Please enter path to public key": "tests/files/key_storage/JJ.ecdsa",
   "(Sign 1) Please enter password": "hunter2",
   "[select] Select a key for signing (continue/JimiHendrix)": "JimiHendrix",
   "(Sign 2) Please enter path to public key": "tests/files/key_storage/JH.ed25519",
-  "(Sign 2) Please enter password": "hunter2",
+  "(Sign 2) Please enter password": "hunter2"
 }'
 
 # Copy files when UMBRELLA_PATH is not the current dir (FT triggered from components)
