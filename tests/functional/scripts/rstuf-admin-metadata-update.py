@@ -32,9 +32,8 @@ def _run(input, selection):
 
 def main():
     input_dict = json.loads(sys.argv[1])
-    selection_dict = json.loads(sys.argv[2])
-    input = [i for i in input_dict.values()]
-    selection = [i for i in selection_dict.values()]
+    input = [v for k, v in input_dict.items() if not k.startswith("[select]")]
+    selection = [v for k, v in input_dict.items() if k.startswith("[select]")]
 
     print("Using parameters:")
     print(json.dumps(input_dict, indent=2))
