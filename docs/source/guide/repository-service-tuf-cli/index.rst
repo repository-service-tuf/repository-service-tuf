@@ -129,12 +129,19 @@ You can do the Ceremony offline. This means on a disconnected computer
 
     Usage: rstuf admin ceremony [OPTIONS]
 
-    Bootstrap Ceremony to create initial root metadata and RSTUF config.
+    Perform ceremony and send result to API to trigger bootstrap.
+    * If `--out [FILENAME]` is passed, result is written to local FILENAME
+    (in addition to being sent to API).
 
-    ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────╮
-    │ --out          FILENAME  Write output json result to FILENAME (default: 'ceremony-payload.json')    │
-    │ --help     -h            Show this message and exit.                                                │
-    ╰─────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    * If `--dry-run` is passed, result is not sent to API.
+    You can still pass `--out [FILENAME]` to store the result locally.
+    The `--api-server` admin option and `SERVER` from config will be ignored.
+
+    ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │ --out          FILENAME  Write output json result to FILENAME (default: 'ceremony-payload.json')                                        │
+    │ --dry-run                Run ceremony in dry-run mode without sending result to API. Ignores options and configurations related to API. │
+    │ --help     -h            Show this message and exit.                                                                                    │
+    ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
 There are four steps in the ceremony.
 
@@ -180,13 +187,18 @@ sign (``sign``)
 
     Usage: rstuf admin metadata sign [OPTIONS]
 
-    Add one signature to root metadata.
+    Perform sign for pending event and send result to API.
+    * If `--in FILENAME` is passed, input is not read from API but from local FILENAME.
+    * If `--out [FILENAME]` is passed, result is written to local FILENAME (in addition to being sent to API).
+    * If `--dry-run` is passed, result is not sent to API. You can still pass `--out [FILENAME]` to store the result locally.
+    * If `--in` and `--dry-run` is passed, `--api-server` admin option and `SERVER` from config will be ignored.
 
-    ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │ --in        FILENAME  Input file containing the JSON response from the 'GET /api/v1/metadata/sign' RSTUF API endpoint.  │
-    │ --out       FILENAME  Write output JSON result to FILENAME (default: 'sign-payload.json')                               │
-    │ --help  -h            Show this message and exit.                                                                       │
-    ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │ --in           FILENAME  Input file containing the JSON response from the 'GET /api/v1/metadata/sign' RSTUF API endpoint.            │
+    │ --out          FILENAME  Write output JSON result to FILENAME (default: 'sign-payload.json')                                         │
+    │ --dry-run                Run sign in dry-run mode without sending result to API. Ignores options and configurations related to API.  │
+    │ --help     -h            Show this message and exit.                                                                                 │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
 .. rstuf-cli-admin-send
 
