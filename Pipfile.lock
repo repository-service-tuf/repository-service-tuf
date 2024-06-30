@@ -316,11 +316,11 @@
         },
         "domdf-python-tools": {
             "hashes": [
-                "sha256:9821d76505e16c0fab60b37be90b8acf401c9604f7119cf6bce314f848461c7e",
-                "sha256:f45e34cf4d3363af59c32da28a9de9480ed916eff06bd0cf9a1644b6b460fb88"
+                "sha256:1f8a96971178333a55e083e35610d7688cd7620ad2b99790164e1fc1a3614c18",
+                "sha256:4e1ef365cbc24627d6d1e90cf7d46d8ab8df967e1237f4a26885f6986c78872e"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==3.8.1"
+            "version": "==3.9.0"
         },
         "dynaconf": {
             "hashes": [
