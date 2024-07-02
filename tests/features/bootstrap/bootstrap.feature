@@ -6,7 +6,7 @@ Feature: Bootstrap Repository Service for TUF (RSTUF)
     Scenario: Bootstrap using RSTUF Command Line Interface (CLI)
         Given the repository-service-tuf (rstuf) is installed
         When the admin run rstuf for ceremony bootstrap
-        Then the admin gets "Bootstrap status: SUCCESS" and "Bootstrap finished." or "System LOCKED for bootstrap."
+        Then the admin gets "Bootstrap status: SUCCESS" and "Bootstrap finished." or "System already has a Metadata"
 
     Scenario: Bootstrap using RSTUF Command Line Interface (CLI) with invalid payload
         Given the repository-service-tuf (rstuf) is installed

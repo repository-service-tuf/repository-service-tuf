@@ -19,24 +19,20 @@ def the_tufrepositoryservice_rstufcli_is_installed(rstuf_cli):
 @when("the admin run rstuf for ceremony bootstrap", target_fixture="bootstrap")
 def the_administrator_uses_rstufcli_bootstrap(rstuf_cli):
     rc, output = rstuf_cli(
-        "admin-legacy ceremony -b -u -f payload.json --api-server "
-        "http://repository-service-tuf-api"
+        "admin --api-server http://repository-service-tuf-api send bootstrap "
+        "ceremony-payload.json"
     )
     return rc, output
 
 
 @then(
-    'the admin gets "Bootstrap status: SUCCESS" and "Bootstrap finished." or '
-    '"System LOCKED for bootstrap."'
+    'the admin gets "Bootstrap status: SUCCESS" and '
+    '"Bootstrap finished." or "System already has a Metadata"'
 )
 def the_admin_gets(bootstrap):
     _, output = bootstrap
 
-    assert "SUCCESS" in output or "System LOCKED for bootstrap." in output
-    assert (
-        "Bootstrap finished." in output
-        or "System LOCKED for bootstrap." in output
-    )
+    assert "SUCCESS" in output or "System already has a Metadata" in output
 
 
 @scenario(
@@ -52,8 +48,8 @@ def test_bootstrap_using_rstuf_cli_with_invalid_payload(): ...
 )
 def the_administrator_uses_rstufcli_bootstrap_invalid_payload(rstuf_cli):
     rc, output = rstuf_cli(
-        "admin-legacy ceremony -b -u -f tests/data/payload-invalid.json "
-        "--api-server http://repository-service-tuf-api"
+        "admin --api-server http://repository-service-tuf-api send bootstrap "
+        "tests/data/payload-invalid.json "
     )
 
     return rc, output
