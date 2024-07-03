@@ -66,6 +66,7 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-update.py 
 if [[ ${UMBRELLA_PATH} != "." ]]; then
     cp -r metadata ${UMBRELLA_PATH}/
     cp update-payload.json ${UMBRELLA_PATH}/
+    cp ceremony-payload.json ${UMBRELLA_PATH}/
 fi
 
 make -C ${UMBRELLA_PATH}/ functional-tests-exitfirst PYTEST_GROUP=${PYTEST_GROUP} SLOW=${SLOW}

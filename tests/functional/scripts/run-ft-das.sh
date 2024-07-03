@@ -80,6 +80,7 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-update.py 
 # Copy files when UMBRELLA_PATH is not the current dir (FT triggered from components)
 if [[ ${UMBRELLA_PATH} != "." ]]; then
     cp update-payload.json ${UMBRELLA_PATH}/
+    cp ceremony-payload.json ${UMBRELLA_PATH}/
 fi
 
 make -C ${UMBRELLA_PATH}/ functional-tests-exitfirst PYTEST_GROUP=${PYTEST_GROUP} SLOW=${SLOW}
