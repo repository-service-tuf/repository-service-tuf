@@ -21,7 +21,7 @@ def _run(input, selection):
 
     output = runner.invoke(
         cli.admin.update.update,
-        ["metadata/1.root.json", "--out"],
+        ["metadata/1.root.json", "-s"],
         input="\n".join(input),
         obj=context,
         catch_exceptions=False,
