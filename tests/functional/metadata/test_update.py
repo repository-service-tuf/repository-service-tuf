@@ -150,17 +150,15 @@ def task_is_finished(task_id, http_request):
             count += 1
             time.sleep(0.5)
 
-    # We have published two versions of root - one during bootstrap
-    # and one after "metadata update" prior to running ft tests.
-    LOGGER.info("[METADATA UPDATE] Update Metadata to 3.root.json finished")
+    LOGGER.info("[METADATA UPDATE] Update Metadata to 2.root.json finished")
     assert count < 60, pytest.rstuf_thread.set()
     # wait add artifacts continue 2 seconds after metadata update has finished
     time.sleep(2)
     pytest.rstuf_thread.set()
 
 
-@then("the '3.root.json' will be available in the TUF Metadata")
-def root_metadata_3_root_is_available(http_request):
+@then("the '2.root.json' will be available in the TUF Metadata")
+def root_metadata_2_root_is_available(http_request):
     # double check if the new version is available in the metadata storage
     metadata_base_url = os.getenv("METADATA_BASE_URL") or "http://web:8080"
     count = 0
@@ -169,12 +167,12 @@ def root_metadata_3_root_is_available(http_request):
             "GET",
             host=metadata_base_url,
         )
-        if "3.root.json" in response.text:
+        if "2.root.json" in response.text:
             break
         else:
             count += 1
             time.sleep(0.5)
-    LOGGER.info("[METADATA UPDATE] Metadata Update available (3.root.json)")
+    LOGGER.info("[METADATA UPDATE] Metadata Update available (2.root.json)")
     assert count < 60, pytest.rstuf_thread.set()
 
 
