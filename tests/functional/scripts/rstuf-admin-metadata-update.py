@@ -11,9 +11,7 @@ from repository_service_tuf import Dynaconf, cli
 def _run(input, selection):
     folder_name = mkdtemp()
     setting_file = os.path.join(folder_name, "rstuf.yml")
-    test_settings = Dynaconf()
-    test_settings.SERVER = "http://repository-service-tuf-api"
-    context = {"settings": test_settings, "config": setting_file}
+    context = {"settings": Dynaconf(), "config": setting_file}
 
     runner = CliRunner()
 
