@@ -21,7 +21,9 @@ def _run(input, selection):
 
     output = runner.invoke(
         cli.admin.update.update,
-        ["metadata/1.root.json", "-s"],
+        # we run --dry-run to avoid sending the result to the API, as it is
+        # used by the FT
+        ["--in", "metadata/1.root.json", "--out", "--dry-run"],
         input="\n".join(input),
         obj=context,
         catch_exceptions=False,
