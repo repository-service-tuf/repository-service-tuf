@@ -55,28 +55,31 @@ Components Milestones:
 - `repository-service-tuf-cli v0.4.0b1 <https://github.com/repository-service-tuf/repository-service-tuf-cli/milestone/3>`_
 
 
-Goal: Minimum Valuable Product
+Goal: Minimum Valuable Project
 ==============================
 
-Status: TBD
+Status: September 2024
 
 First Production Deploy
-This release achieves the minimum valuable product for users.
+This release achieves the minimum valuable project for users.
 
 - [x] Deployment Design Document (`Issue #227 <https://github.com/repository-service-tuf/repository-service-tuf/issues/227>`_)
 - [x] Support to AWS S3 (Storage) (`Issue # <https://github.com/repository-service-tuf/repository-service-tuf/issues/24>`)
-- [ ] AWS KMS (Key Vault) (`Issue #24 <https://github.com/repository-service-tuf/repository-service-tuf/issues/24>`_)
-- [ ] Support of HashiCorp Vault (`Issue #509 <https://github.com/repository-service-tuf/repository-service-tuf/issues/509>`_)
-- [ ] Distributed asynchronous threshold signing (`Issue #327 <https://github.com/repository-service-tuf/repository-service-tuf/issues/327>`_)
-- [ ] Support CLI using HSM for signing - Ceremony, Metadata Update and Sign (`Issue #351[cli] <https://github.com/repository-service-tuf/repository-service-tuf-cli/issues/351>`_)
+- [x] Distributed asynchronous threshold signing (`Issue #327 <https://github.com/repository-service-tuf/repository-service-tuf/issues/327>`_)
+- [ ] Support to multiple Key Vaults for online Key during Ceremony/Metadata Update
+      - [ ] AWS KMS (`Issue #24 <https://github.com/repository-service-tuf/repository-service-tuf/issues/24>`_)
+      - [ ] Support of HashiCorp Vault (`Issue #509 <https://github.com/repository-service-tuf/repository-service-tuf/issues/509>`_)
+- [ ] Support for Root Signing (Ceremony, Metadata Update and Sign)
+      - [ ] HSM (Yubikey) (`Issue #351[cli] <https://github.com/repository-service-tuf/repository-service-tuf-cli/issues/351>`_)
+      - [x] SigStore (`Issue #657[cli] <https://github.com/repository-service-tuf/repository-service-tuf-cli/issues/657>`_)
 - [ ] Create/Remove custom delegate Target Roles (`Issue #354 <https://github.com/repository-service-tuf/repository-service-tuf/issues/354>`_)
 - [ ] Security Audit on RSTUF Project  (`Issue #246 <https://github.com/repository-service-tuf/repository-service-tuf/issues/546>`_)
 
 Components Milestones:
 
-- `repository-service-tuf-api v1.Y.Z <https://github.com/repository-service-tuf/repository-service-tuf-api/milestone/4>`_
-- `repository-service-tuf-worker v1.Y.Z <https://github.com/repository-service-tuf/repository-service-tuf-worker/milestone/4>`_
-- `repository-service-tuf-cli v1.Y.Z <https://github.com/repository-service-tuf/repository-service-tuf-cli/milestone/4>`_
+- `repository-service-tuf-api v1.0.0rc1 <https://github.com/repository-service-tuf/repository-service-tuf-api/milestone/4>`_
+- `repository-service-tuf-worker v1.0.0rc1 <https://github.com/repository-service-tuf/repository-service-tuf-worker/milestone/4>`_
+- `repository-service-tuf-cli v1.0.0rc1 <https://github.com/repository-service-tuf/repository-service-tuf-cli/milestone/4>`_
 
 
 Goal: End-to-End Signing
