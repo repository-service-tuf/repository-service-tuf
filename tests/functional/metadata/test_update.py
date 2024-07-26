@@ -5,10 +5,14 @@ import logging
 import os
 import threading
 import time
+from tempfile import mkdtemp
+from unittest import mock
 
 import names_generator
 import pytest
+from click.testing import CliRunner
 from pytest_bdd import given, scenario, then, when
+from repository_service_tuf import Dynaconf, cli
 
 LOGGER = logging.getLogger(__name__)
 
@@ -54,10 +58,10 @@ def rstuf_requests(stop_requests, http_request):
 
 @scenario(
     "../../features/metadata/update.feature",
-    "Updating Root metadata full signed",
+    "Metadata Update and Signing",
 )
-def test_updating_root_metadata_full_signed():
-    """Updating Root metadata full signed."""
+def test_sign_root_metadata_updated():
+    """Metadata Update and Signing"""
 
 
 @given("RSTUF is running and operational")
@@ -79,7 +83,7 @@ def rstuf_receiving_requests(http_request):
 
 
 @when(
-    "the RSTUF key holders send a fully signed metadata",
+    "the RSTUF Admin User send a metadata update",
     target_fixture="response",
 )
 def send_signed_update_metadata(send_rstuf_requests, http_request):
@@ -113,7 +117,7 @@ def task_is_received(response):
     try:
         json_response = response.json()
         task_id = json_response["data"]["task_id"]
-        LOGGER.info(f"[METADATA UPDATE]  Metadata Updated by {task_id}")
+        LOGGER.info(f"[METADATA UPDATE] Metadata Updated by {task_id}")
         return task_id
     except Exception as e:
         # Stop thread adding artifacts in a case of an exception.
@@ -121,40 +125,59 @@ def task_is_received(response):
         raise e
 
 
-@then(
-    "the API requester gets from endpoint 'GET /api/v1/task' status 'SUCCESS'"
-)
-def task_is_finished(task_id, http_request):
+@then("the Admin User runs the CLI to sign the metadata")
+def user_signs_the_metadata(http_request, task_id):
     count = 0
-
-    # check for the metadata update task
+    # Verify if task is processed
     while count < 60:
-        response = http_request(
-            "GET",
-            url=f"/api/v1/task/?task_id={task_id}",
-        )
-
-        data = response.json().get("data")
-        if data is None:
-            count += 1
-            time.sleep(0.5)
-            continue
-
-        state = data.get("state", None)
-        status = data.get("result", {}).get("status")
+        response = http_request("GET", url=f"/api/v1/task?task_id={task_id}")
+        data = response.json().get("data", {})
+        state = data.get("state", "")
+        details = data.get("result", {}).get("details", {})
+        LOGGER.info(f"[METADATA UPDATE] Task state: {data}")
         if state == "SUCCESS":
-            LOGGER.info(f"[METADATA UPDATE] {response.text}")
-            assert status is True, pytest.rstuf_thread.set()
-            break
+            if "Root v2 is pending signatures" == details.get("update"):
+                LOGGER.info("[METADATA UPDATE] Root available for signing")
+                break
+            else:
+                LOGGER.info("[METADATA UPDATE] Root Full signed")
+                pytest.rstuf_thread.set()
+                break
+
         else:
             count += 1
             time.sleep(0.5)
 
-    LOGGER.info("[METADATA UPDATE] Update Metadata to 2.root.json finished")
     assert count < 60, pytest.rstuf_thread.set()
-    # wait add artifacts continue 2 seconds after metadata update has finished
-    time.sleep(2)
-    pytest.rstuf_thread.set()
+
+    runner = CliRunner()
+    # key selection
+    cli.admin.helpers._select = mock.MagicMock()
+    cli.admin.helpers._select.side_effect = ["JimiHendrix"]
+
+    # CLI settings
+    folder_name = mkdtemp()
+    setting_file = os.path.join(folder_name, ".rstuf.yml")
+    test_settings = Dynaconf()
+    test_settings.SERVER = "http://repository-service-tuf-api"
+    context = {"settings": test_settings, "config": setting_file}
+
+    # CLI input
+    input = ["tests/files/key_storage/JH.ed25519", "hunter2"]
+    try:
+        LOGGER.info("[METADATA UPDATE] Signing Metadata if available")
+        runner.invoke(
+            cli.admin.sign.sign,
+            [],
+            input="\n".join(input),
+            obj=context,
+            catch_exceptions=True,
+        )
+    except ValueError as e:
+        # TODO: Fix this exception handling
+        # It happens when the runner is closed, but doesn't affect the test
+        if "I/O operation on closed file." in str(e):
+            pass
 
 
 @then("the '2.root.json' will be available in the TUF Metadata")
@@ -168,11 +191,17 @@ def root_metadata_2_root_is_available(http_request):
             host=metadata_base_url,
         )
         if "2.root.json" in response.text:
+            LOGGER.info(
+                "[METADATA UPDATE] Metadata Update available (2.root.json)"
+            )
+            # wait add artifacts continue 2 seconds after metadata update
+            time.sleep(2)
+            pytest.rstuf_thread.set()
             break
         else:
             count += 1
             time.sleep(0.5)
-    LOGGER.info("[METADATA UPDATE] Metadata Update available (2.root.json)")
+
     assert count < 60, pytest.rstuf_thread.set()
 
 

@@ -1,7 +1,6 @@
 # RSTUF Specifics
 test-report.html
 test-report.json
-metadata/
 payload.json
 update-payload.json
 ceremony-payload.json
