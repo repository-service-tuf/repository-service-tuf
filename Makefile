@@ -56,7 +56,7 @@ lint:
 	rm requirements.commit
 
 functional-tests-exitfirst:
-ifneq ($(GITHUB_ACTION),)
+ifeq ($(GITHUB_ACTION),)
 	echo "Running tests locally"
 	pytest --exitfirst --gherkin-terminal-reporter tests -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
 else ifeq ($(SLOW),)
