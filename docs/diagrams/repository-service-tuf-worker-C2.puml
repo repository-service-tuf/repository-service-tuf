@@ -56,14 +56,8 @@ Container_Boundary(repository_storage, "Storage Service"){
     Container_Ext(aws_s3, "AWS S3", "Storage", $tags="aws_s3") #Grey
     Container_Ext(azure_blob, "Azure Blob", "Storage", $tags="azure_blob") #Grey
 }
-Container_Boundary(key_storage, "Key Vault Service"){
-    Container_Ext(key_fs, "Filesystem", "Storage", $tags="storage_service") #Grey
-    Container_Ext(aws_kms, "AWS KMS", "Storage", $tags="aws_kms") #Grey
-    Container_Ext(azure_kv, "Azure Key Vault", "Storage", $tags="azure_kv") #Grey
-}
 Rel_D(broker, repository_service_tuf_worker, "Consumer", "Tasks")
 Rel_U(repository_service_tuf_worker, broker, "Publisher", "Tasks Results")
-Rel_U(key_storage, repository_service_tuf_worker, "Read", "Online Keys")
 BiRel_U(repository_service_tuf_worker, redis, "Repository Configuration", "Consumer")
 BiRel_U(repository_service_tuf_worker, sql, "TargetsFiles, TargetsRoles", "")
 BiRel_R(repository_service_tuf_worker, data_dir, "Write/Read", "Service settings")

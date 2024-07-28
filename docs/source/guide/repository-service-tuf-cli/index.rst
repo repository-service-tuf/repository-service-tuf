@@ -81,12 +81,6 @@ In this file, the following optional settings can be configured:
 Administration (``admin``)
 ==========================
 
-
-.. note::
-
-    Find the legacy administrative commands in the ``admin-legacy`` command.
-    The guide is available in :doc:`admin_legacy`.
-
 It executes administrative commands to the Repository Service for TUF.
 
 .. code:: shell
@@ -137,11 +131,11 @@ You can do the Ceremony offline. This means on a disconnected computer
     You can still pass `--out [FILENAME]` to store the result locally.
     The `--api-server` admin option and `SERVER` from config will be ignored.
 
-    ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │ --out          FILENAME  Write output json result to FILENAME (default: 'ceremony-payload.json')                                        │
-    │ --dry-run                Run ceremony in dry-run mode without sending result to API. Ignores options and configurations related to API. │
-    │ --help     -h            Show this message and exit.                                                                                    │
-    ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Options ─────────────────────────────────────────────────────────────────────────────────────────╮
+    │ --out          FILENAME  Write output json result to FILENAME (default: 'ceremony-payload.json')  │
+    │ --dry-run                Run ceremony in dry-run mode without sending result to API.              │
+    │ --help     -h            Show this message and exit.                                              │
+    ╰───────────────────────────────────────────────────────────────────────────────────────────────────╯
 
 There are four steps in the ceremony.
 
@@ -191,14 +185,44 @@ sign (``sign``)
     * If `--in FILENAME` is passed, input is not read from API but from local FILENAME.
     * If `--out [FILENAME]` is passed, result is written to local FILENAME (in addition to being sent to API).
     * If `--dry-run` is passed, result is not sent to API. You can still pass `--out [FILENAME]` to store the result locally.
-    * If `--in` and `--dry-run` is passed, `--api-server` admin option and `SERVER` from config will be ignored.
+    * If `--in` and `--dry-run` are passed, `--api-server` admin option and `SERVER` from config will be ignored.
 
-    ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │ --in           FILENAME  Input file containing the JSON response from the 'GET /api/v1/metadata/sign' RSTUF API endpoint.            │
-    │ --out          FILENAME  Write output JSON result to FILENAME (default: 'sign-payload.json')                                         │
-    │ --dry-run                Run sign in dry-run mode without sending result to API. Ignores options and configurations related to API.  │
-    │ --help     -h            Show this message and exit.                                                                                 │
-    ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │ --in           FILENAME  Input file containing the JSON response from the 'GET /api/v1/metadata/sign' RSTUF API endpoint.  │
+    │ --out          FILENAME  Write output JSON result to FILENAME (default: 'sign-payload.json')                               │
+    │ --dry-run                Run sign in dry-run mode without sending result to API.                                           │
+    │ --help     -h            Show this message and exit.                                                                       │
+    ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+.. rstuf-cli-admin-metadata-update
+
+update (``update``)
+...................
+
+.. code:: shell
+
+
+    ❯ rstuf admin metadata update -h
+
+    Usage: rstuf admin metadata update [OPTIONS]
+
+    Perform metadata update and send result to API.
+    * If `--metadata-url TEXT` is passed, the latest root will be fetched from metadata storage.
+    * If `--in FILENAME` is passed, input is not read from API but from local FILENAME.
+    * If both `--metadata-url TEXT` and `--in FILENAME` are passed, then `--metadata-url TEXT` will have higher priority.
+    * If `--out [FILENAME]` is passed, result is written to local FILENAME (in addition to being sent to API).
+    * If `--dry-run` is passed, result is not sent to API. You can still pass `--out [FILENAME]` to store the result locally.
+    * If `--in` and `--dry-run` are passed, `--api-server` admin option and `SERVER` from config will be ignored.
+
+    ╭─ Options ──────────────────────────────────────────────────────────────────────────────────────╮
+    │ --in                FILENAME  Input file containing current trusted root JSON.                 │
+    │ --metadata-url      TEXT      URL to the RSTUF API metadata storage.                           │
+    │ --out               FILENAME  Write json result to FILENAME (default: 'update-payload.json')   │
+    │ --dry-run                     Run update in dry-run mode without sending result to API.        │
+    │ --help          -h            Show this message and exit.                                      │
+    ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
+
 
 .. rstuf-cli-admin-send
 
