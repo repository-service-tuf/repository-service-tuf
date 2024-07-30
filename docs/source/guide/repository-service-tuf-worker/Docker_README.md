@@ -43,7 +43,7 @@ docker run --env="RSTUF_STORAGE_BACKEND=LocalStorage" \
     --env="RSTUF_LOCAL_STORAGE_BACKEND_PATH=/metadata" \
     --env="RSTUF_BROKER_SERVER=guest:guest@rabbitmq:5672" \
     --env="RSTUF_REDIS_SERVER=redis://redis" \
-    --env="RSTUF_SQL_SERVER=postgresql://postgres:secret@postgres:5432" \
+    --env="RSTUF_DB_SERVER=postgresql://postgres:secret@postgres:5432" \
     ghcr.io/repository-service-tuf/repository-service-tuf-worker:latest \
 ```
 
@@ -68,7 +68,7 @@ The result backend must to be compatible with Celery. See
 
 Example: `redis://redis`
 
-#### (Required) `RSTUF_SQL_SERVER`
+#### (Deprecated see `RSTUF_DB_SERVER`) `RSTUF_SQL_SERVER`
 
 RSTUF requires [PostgreSQL](https://www.postgresql.org).
 
@@ -76,13 +76,14 @@ Example: `postgres:secret@postgres:5432`
 
 * Optional variables:
 
-  * `RSTUF_SQL_USER` optional information about the user name
+  * `RSTUF_SQL_USER` (Deprecated see `RSTUF_DB_USER`) optional information
+    about the user name
 
     If using this optional variable:
     - Do not include the user in the `RSTUF_SQL_SERVER`.
     - The `RSTUF_SQL_PASSWORD` becomes required
 
-  * `RSTUF_SQL_PASSWORD` use this variable to provide the password separately.
+  * `RSTUF_SQL_PASSWORD` (Deprecated see `RSTUF_DB_PASSWORD`) use this variable to provide the password separately.
     - Do not include the password in the `RSTUF_SQL_SERVER`
     - This environment variable supports container secrets when the `/run/secrets`
       volume is added to the path.
@@ -92,6 +93,32 @@ Example: `postgres:secret@postgres:5432`
   RSTUF_SQL_SERVER=sqlserver:5432
   RSTUF_SQL_USER=postgres
   RSTUF_SQL_PASSWORD=/run/secrets/POSTGRES_PASSWORD
+  ```
+
+#### (Required) `RSTUF_DB_SERVER`
+
+RSTUF requires [PostgreSQL](https://www.postgresql.org).
+
+Example: `postgres:secret@postgres:5432`
+
+* Optional variables:
+
+  * `RSTUF_DB_USER` optional information about the user name
+
+    If using this optional variable:
+    - Do not include the user in the `RSTUF_DB_SERVER`.
+    - The `RSTUF_DB_PASSWORD` becomes required
+
+  * `RSTUF_DB_PASSWORD` use this variable to provide the password separately.
+    - Do not include the password in the `RSTUF_DB_SERVER`
+    - This environment variable supports container secrets when the `/run/secrets`
+      volume is added to the path.
+
+  Example:
+  ```
+  RSTUF_DB_SERVER=sqlserver:5432
+  RSTUF_DB_USER=postgres
+  RSTUF_DB_PASSWORD=/run/secrets/POSTGRES_PASSWORD
   ```
 
 #### (Optional) `RSTUF_REDIS_SERVER_PORT`
