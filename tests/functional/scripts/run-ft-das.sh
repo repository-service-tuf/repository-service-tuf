@@ -72,9 +72,7 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-update.py 
   "[select] Select a key for signing (JanisJoplin/JimiHendrix)": "JanisJoplin",
   "(Sign 1) Please enter path to public key": "tests/files/key_storage/JJ.ecdsa",
   "(Sign 1) Please enter password": "hunter2",
-  "[select] Select a key for signing (continue/JimiHendrix)": "JimiHendrix",
-  "(Sign 2) Please enter path to public key": "tests/files/key_storage/JH.ed25519",
-  "(Sign 2) Please enter password": "hunter2"
+  "[select] Select a key for signing (continue/JimiHendrix)": "continue"
 }'
 
 # Copy files when UMBRELLA_PATH is not the current dir (FT triggered from components)
