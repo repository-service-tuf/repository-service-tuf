@@ -83,7 +83,7 @@ def rstuf_receiving_requests(http_request):
 
 
 @when(
-    "the RSTUF Admin User send a metadata update",
+    "the RSTUF Admin User sends a metadata update",
     target_fixture="response",
 )
 def send_signed_update_metadata(send_rstuf_requests, http_request):
