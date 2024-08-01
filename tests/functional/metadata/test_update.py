@@ -48,7 +48,7 @@ def rstuf_requests(stop_requests, http_request):
         data_result = result.json()["data"]
         LOGGER.info(f"Added task_id: {data_result['task_id']}")
         pytest.rstuf_added_artifacts.append(result.json())
-        time.sleep(0.5)
+        time.sleep(1.5)
 
     LOGGER.info(
         "Stop adding artifacts. "
