@@ -182,8 +182,8 @@ When integrating RSTUF into a specific content management or
 distribution platform, restrict the API access to the hosts where this
 integration is done.
 
-If it becomes necessary to expose public RSTUF API, deploy RSTUF API containers with
-disabled administrative endpoints.
+If it becomes necessary to expose public RSTUF API, deploy RSTUF API containers
+with disabled administrative endpoints.
 
 See:
 
@@ -193,12 +193,11 @@ See:
 Authentication/Authorization
 ----------------------------
 
-Use the Authentication/Authorization to restrict scopes
+Utilize authentication and authorization to restrict access and define scopes
+for the API. Since the RSTUF API does not include built-in authentication or
+authorization, we recommend using a trusted service, such as an API Gateway,
+to manage these functions.
 
-Use an API Gateway to manage API endpoints' access.
-
-RSTUF API has a built-in authentication service, however this feature is
-not for production. Using external authentication technology is recommended.
 
 SSL/HTTPS
 ---------
