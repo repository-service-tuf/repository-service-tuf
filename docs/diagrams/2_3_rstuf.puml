@@ -33,7 +33,7 @@ AddContainerTag("ci_cd", $sprite="application_generic", $legendText="CI/CD, Artf
 AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed TUF Metadata")
 AddContainerTag("download_artifact", $sprite="download", $legendText="Download file/artifact/package", $bgColor=Gray)
 AddContainerTag("queue_cluster", $sprite="cluster_server", $legendText="Broker Cluster")
-AddContainerTag("sql_db", $sprite="database_server", $legendText="SQL Server")
+AddContainerTag("db_db", $sprite="database_server", $legendText="db Server")
 
 AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=1.0,color=#438DD5", $legendText="CLI")
 AddRelTag("bowser", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="management_console,scale=0.5", $legendText="Browser")
