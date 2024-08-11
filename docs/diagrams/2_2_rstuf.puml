@@ -32,7 +32,7 @@ AddContainerTag("ci_cd", $sprite="application_generic", $legendText="CI/CD, Artf
 AddContainerTag("metadata_web", $sprite="web_services", $legendText="Web exposed TUF Metadata")
 AddContainerTag("download_artifact", $sprite="download", $legendText="Download file/artifact/package", $bgColor=Gray)
 AddContainerTag("terminal", $sprite="terminal,scale=0.5,color=#000000", $legendText="CLI")
-AddContainerTag("sql_db", $sprite="database_server", $legendText="SQL Server")
+AddContainerTag("db", $sprite="database_server", $legendText="db Server")
 
 AddRelTag("terminal", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="terminal,scale=0.75,color=#438DD5", $legendText="Repository Service for TUF CLI")
 AddRelTag("bowser", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="management_console,scale=0.5", $legendText="Browser")
@@ -49,7 +49,7 @@ System_Boundary(build_systems, "CD/Build Systems") {
     }
     Container(queue, "Broker/Backend", "RabbitMQ, Redis, etc", $tags="queue") #Grey
     Container(ci_cd, "CI/CD", "Jenkis, Github, Gitlab, etc", $tags="ci_cd") #Grey
-    ContainerDb(sql, "SQL Server", "SQL Server", $tags="sql_db") #Grey
+    ContainerDb(db, "DB Server", "db Server", $tags="db") #Grey
     ContainerDb(key_service, "Key Service", "Local/SaaS Vault", $tags="key_service") #Grey
     ContainerDb(storage_service, "Storage Service", "Local/SaaS Storage", $tags="storage_service") #Grey
 }
@@ -60,11 +60,11 @@ System_Boundary(files, "Download / Repository files") {
 }
 
 Rel(administration_user, rstuf_rest_api, "REPOSITORY-SERVICE-TUF-CLI", $tags="terminal")
-Rel_R(ci_cd, rstuf_rest_api, "HTTPS + Tokens")
+Rel_R(ci_cd, rstuf_rest_api, "HTTPS")
 Rel_U(queue, rstuf_repo_worker, "Consumer", "Tasks")
 Rel_D(rstuf_rest_api, queue, "Producer", "Tasks")
-Rel_R(rstuf_repo_worker, sql, "SQL", "TargetFiles")
-Rel_D(rstuf_repo_worker, key_service, "Read/Write", "Online Keys")
+Rel(db, rstuf_repo_worker, "db", "TargetFiles")
+Rel_U(key_service, rstuf_repo_worker, "Read", "Online Keys")
 Rel_D(rstuf_repo_worker, storage_service, "Read/Write", "Repository Metadata")
 
 Rel_D(storage_service, webserver, "Render/Share/View", $tags="share")
