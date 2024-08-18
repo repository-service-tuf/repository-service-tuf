@@ -72,6 +72,7 @@ This release achieves the minimum valuable project for users.
 - [ ] Support for Root Signing (Ceremony, Metadata Update and Sign)
       - [ ] HSM (Yubikey) (`Issue #351[cli] <https://github.com/repository-service-tuf/repository-service-tuf-cli/issues/351>`_)
       - [x] SigStore (`Issue #657[cli] <https://github.com/repository-service-tuf/repository-service-tuf-cli/issues/657>`_)
+- [ ] Improve new admin CLI UI & UX. (`Issue #532[cli] <https://github.com/repository-service-tuf/repository-service-tuf-cli/issues/532>`_)
 - [ ] Create/Remove custom delegate Target Roles (`Issue #354 <https://github.com/repository-service-tuf/repository-service-tuf/issues/354>`_)
 - [ ] Security Audit on RSTUF Project  (`Issue #246 <https://github.com/repository-service-tuf/repository-service-tuf/issues/546>`_)
 
