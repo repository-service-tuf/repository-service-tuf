@@ -70,9 +70,13 @@ Example: `redis://redis`
 
 #### (Deprecated see `RSTUF_DB_SERVER`) `RSTUF_SQL_SERVER`
 
-RSTUF requires [PostgreSQL](https://www.postgresql.org).
+RSTUF requires [PostgreSQL](https://www.postgresql.org) or [MySQL/MariaDB](https://mariadb.org).
 
-Example: `postgres:secret@postgres:5432`
+Scheme
+  - PostgreSQL: `postgresql://`
+  - MySQL/MariaDB: `mysql+pymysql://`
+
+Example: `postgresql://mypgsql:5432` or `mysql+pymysql://mymysql:3306`
 
 * Optional variables:
 
@@ -97,9 +101,13 @@ Example: `postgres:secret@postgres:5432`
 
 #### (Required) `RSTUF_DB_SERVER`
 
-RSTUF requires [PostgreSQL](https://www.postgresql.org).
+RSTUF requires [PostgreSQL](https://www.postgresql.org) or [MySQL/MariaDB](https://mariadb.org).
 
-Example: `postgres:secret@postgres:5432`
+Scheme
+  - PostgreSQL: `postgresql://`
+  - MySQL/MariaDB: `mysql+pymysql://`
+
+Example: `postgresql://mypgsql:5432` or `mysql+pymysql://mymysql:3306`
 
 * Optional variables:
 
@@ -116,7 +124,7 @@ Example: `postgres:secret@postgres:5432`
 
   Example:
   ```
-  RSTUF_DB_SERVER=sqlserver:5432
+  RSTUF_DB_SERVER=postgresql://mypgsql:5432
   RSTUF_DB_USER=postgres
   RSTUF_DB_PASSWORD=/run/secrets/POSTGRES_PASSWORD
   ```
