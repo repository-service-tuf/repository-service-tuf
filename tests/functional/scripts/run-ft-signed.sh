@@ -53,6 +53,7 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-update.py 
   "Root expires on 04/16/25. Do you want to change the expiry date? [y/n] (y)": "",
   "Please enter days until expiry for root role (365)": "",
   "Root signature threshold is 1. Do you want to change the threshold? [y/n] (n)": "",
+  "[select] Info: Threshold 2 is met, more keys can be added.": "continue",
   "Do you want to change the online key? [y/n] (y)": "y",
   "[select] Select Online Key type": "Key PEM File",
   "Please enter path to public key": "tests/files/key_storage/cb20fa1061dde8e6267e0bef0981766aaadae168e917030f7f26edc7a0bab9c2.pub",
