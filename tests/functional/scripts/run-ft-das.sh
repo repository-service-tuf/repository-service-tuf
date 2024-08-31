@@ -75,7 +75,7 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-update.py 
   "Please enter path to public key": "tests/files/key_storage/cb20fa1061dde8e6267e0bef0981766aaadae168e917030f7f26edc7a0bab9c2.pub",
   "Please enter key name": "online2",
   "[select] Select a key for signing (JanisJoplin/JimiHendrix)": "JanisJoplin",
-  "(Sign 1) Please enter path to public key": "tests/files/key_storage/JJ.ecdsa",
+  "(Sign 1) Please enter path to encrypted private key": "tests/files/key_storage/JJ.ecdsa",
   "(Sign 1) Please enter password": "hunter2",
   "[select] Select a key for signing (continue/JimiHendrix)": "continue"
 }'
