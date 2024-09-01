@@ -66,9 +66,9 @@ This release achieves the minimum valuable project for users.
 - [x] Deployment Design Document (`Issue #227 <https://github.com/repository-service-tuf/repository-service-tuf/issues/227>`_)
 - [x] Support to AWS S3 (Storage) (`Issue # <https://github.com/repository-service-tuf/repository-service-tuf/issues/24>`)
 - [x] Distributed asynchronous threshold signing (`Issue #327 <https://github.com/repository-service-tuf/repository-service-tuf/issues/327>`_)
-- [ ] Support to multiple Key Vaults for online Key during Ceremony/Metadata Update
-      - [ ] AWS KMS (`Issue #24 <https://github.com/repository-service-tuf/repository-service-tuf/issues/24>`_)
-      - [ ] Support of HashiCorp Vault (`Issue #509 <https://github.com/repository-service-tuf/repository-service-tuf/issues/509>`_)
+- [x] Support to multiple Key Vaults for online Key during Ceremony/Metadata Update
+      - [x] AWS KMS (`Issue #24 <https://github.com/repository-service-tuf/repository-service-tuf/issues/24>`_)
+      - [x] Support of HashiCorp Vault (`Issue #509 <https://github.com/repository-service-tuf/repository-service-tuf/issues/509>`_)
 - [ ] Support for Root Signing (Ceremony, Metadata Update and Sign)
       - [ ] HSM (Yubikey) (`Issue #351[cli] <https://github.com/repository-service-tuf/repository-service-tuf-cli/issues/351>`_)
       - [x] SigStore (`Issue #657[cli] <https://github.com/repository-service-tuf/repository-service-tuf-cli/issues/657>`_)

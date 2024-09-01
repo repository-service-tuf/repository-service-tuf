@@ -14,6 +14,19 @@ if [[ $? -eq 0 ]]; then
     export METADATA_BASE_URL=http://web:8080
 else
     export METADATA_BASE_URL=http://localstack:4566/tuf-metadata
+    export AWS_DEFAULT_REGION=us-east-1
+    export AWS_ACCESS_KEY_ID=foo
+    export AWS_SECRET_ACCESS_KEY=bar
+    export AWS_ENDPOINT_URL=http://localstack:4566
+    pip install awscli-local awscli
+    awslocal kms create-key \
+        --key-spec RSA_4096 \
+        --key-usage SIGN_VERIFY
+
+    awslocal kms create-alias \
+        --alias-name alias/kms-rstuf-online-1 \
+        --target-key-id $(awslocal kms list-keys --query "Keys[0].KeyId" --output text)
+
 fi
 
 # Execute the Ceremony using DAS and send result to RSTUF API
@@ -65,20 +78,43 @@ if [[ ${UMBRELLA_PATH} != "." ]]; then
 fi
 
 # Run metadata update to be used later (during FT)
-python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-update.py '{
-  "Root expires on 04/16/25. Do you want to change the expiry date? [y/n]": "",
-  "Please enter days until expiry for root role (365)": "",
-  "Root signature threshold is 1. Do you want to change the threshold? [y/n] (n)": "",
-  "[select] Info: Threshold 2 is met, more keys can be added (continue/add/remove)": "continue",
-  "Do you want to change the online key? [y/n] (y)": "y",
-  "[select] Select Online Key type": "Key PEM File",
-  "Please enter path to public key": "tests/files/key_storage/cb20fa1061dde8e6267e0bef0981766aaadae168e917030f7f26edc7a0bab9c2.pub",
-  "Please enter key name": "online2",
-  "[select] Select a key for signing (JanisJoplin/JimiHendrix)": "JanisJoplin",
-  "(Sign 1) Please enter path to encrypted private key": "tests/files/key_storage/JJ.ecdsa",
-  "(Sign 1) Please enter password": "hunter2",
-  "[select] Select a key for signing (continue/JimiHendrix)": "continue"
-}'
+if [[ ${METADATA_BASE_URL} =~ "localstack" ]]; then
+    echo "###############################################"
+    echo "### Running metadata update for AWS KMS Key ###"
+    echo "###############################################"
+    python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-update.py '{
+    "Root expires on 04/16/25. Do you want to change the expiry date? [y/n]": "",
+    "Please enter days until expiry for root role (365)": "",
+    "Root signature threshold is 1. Do you want to change the threshold? [y/n] (n)": "",
+    "[select] Info: Threshold 2 is met, more keys can be added (continue/add/remove)": "continue",
+    "Do you want to change the online key? [y/n] (y)": "y",
+    "[select] Select Online Key type": "AWS KMS",
+    "AWS KMS KeyID": "alias/kms-rstuf-online-1",
+    "Please enter key name": "online kms 1",
+    "[select] Select a key for signing (JanisJoplin/JimiHendrix)": "JanisJoplin",
+    "(Sign 1) Please enter path to encrypted private key": "tests/files/key_storage/JJ.ecdsa",
+    "(Sign 1) Please enter password": "hunter2",
+    "[select] Select a key for signing (continue/JimiHendrix)": "continue"
+    }'
+else
+    echo "################################################"
+    echo "### Running metadata update for Key PEM File ###"
+    echo "################################################"
+    python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-update.py '{
+    "Root expires on 04/16/25. Do you want to change the expiry date? [y/n]": "",
+    "Please enter days until expiry for root role (365)": "",
+    "Root signature threshold is 1. Do you want to change the threshold? [y/n] (n)": "",
+    "[select] Info: Threshold 2 is met, more keys can be added (continue/add/remove)": "continue",
+    "Do you want to change the online key? [y/n] (y)": "y",
+    "[select] Select Online Key type": "Key PEM File",
+    "Please enter path to public key": "tests/files/key_storage/cb20fa1061dde8e6267e0bef0981766aaadae168e917030f7f26edc7a0bab9c2.pub",
+    "Please enter key name": "online2",
+    "[select] Select a key for signing (JanisJoplin/JimiHendrix)": "JanisJoplin",
+    "(Sign 1) Please enter path to encrypted private key": "tests/files/key_storage/JJ.ecdsa",
+    "(Sign 1) Please enter password": "hunter2",
+    "[select] Select a key for signing (continue/JimiHendrix)": "continue"
+    }'
+fi
 
 # Copy files when UMBRELLA_PATH is not the current dir (FT triggered from components)
 if [[ ${UMBRELLA_PATH} != "." ]]; then
