@@ -56,10 +56,7 @@ lint:
 	rm requirements.commit
 
 functional-tests-exitfirst:
-ifeq ($(GITHUB_ACTION),)
-	echo "Running tests locally"
-	pytest --exitfirst --gherkin-terminal-reporter tests -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
-else ifeq ($(SLOW),)
+ifeq ($(SLOW),)
 	echo "Running fast tests"
 	# `splits` and the `pytest-group` matrix on CI should match
 	pytest --exitfirst --splits 3 --group $(PYTEST_GROUP) --store-durations --durations-path=./.test_durations.$(PYTEST_GROUP) --deselect=tests/functional/artifacts/test_performance.py tests -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
