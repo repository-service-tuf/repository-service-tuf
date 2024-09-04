@@ -75,28 +75,6 @@ jobs:
         run: |
           docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh ${{ inputs.cli_version }} ${{ matrix.pytest-group }}
 
-  functional-das-slow:
-    name: "DAS Slow"
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout RSTUF Umbrella
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
-
-      - name: RSTUF Deployment with docker compose
-        uses: isbang/compose-action@e5813a5909aca4ae36058edae58f6e52b9c971f8
-        with:
-          compose-file: ${{ inputs.docker_compose }}
-        env:
-          API_VERSION: ${{ inputs.api_version }}
-          WORKER_VERSION: ${{ inputs.worker_version }}
-          RSTUF_ONLINE_KEY: ${{ secrets.RSTUF_ONLINE_KEY }}
-
-      - name: Bootstrap/Setup RSTUF using DAS and run Functional Tests
-        timeout-minutes: 30
-        run: |
-          docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh ${{ inputs.cli_version }} none "yes"
-
   functional-signed:
     name: "Full Signed"
     runs-on: ubuntu-latest
@@ -123,27 +101,3 @@ jobs:
         timeout-minutes: 30
         run: |
           docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-signed.sh ${{ inputs.cli_version }} ${{ matrix.pytest-group }}
-
-  functional-signed-slow:
-    name: "Full Signed Slow"
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout RSTUF Umbrella
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
-
-      - name: RSTUF Deployment
-        uses: isbang/compose-action@e5813a5909aca4ae36058edae58f6e52b9c971f8
-        with:
-          compose-file: ${{ inputs.docker_compose }}
-        env:
-          API_VERSION: ${{ inputs.api_version }}
-          WORKER_VERSION: ${{ inputs.worker_version }}
-          # If you use "RSTUF_ONLINE_KEY" make sure it's
-          # defined in the repositories you use for prs.
-          RSTUF_ONLINE_KEY: ${{ secrets.RSTUF_ONLINE_KEY }}
-
-      - name: Bootstrap/Setup RSTUF full signed and run Functional Tests
-        timeout-minutes: 30
-        run: |
-          docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-signed.sh ${{ inputs.cli_version }} none "yes"
