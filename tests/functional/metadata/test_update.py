@@ -151,9 +151,9 @@ def user_signs_the_metadata(http_request, task_id):
     assert count < 60, pytest.rstuf_thread.set()
 
     runner = CliRunner()
-    # key selection
+    # role and key selection
     cli.admin.helpers._select = mock.MagicMock()
-    cli.admin.helpers._select.side_effect = ["JimiHendrix"]
+    cli.admin.helpers._select.side_effect = ["root", "JimiHendrix"]
 
     # CLI settings
     folder_name = mkdtemp()
@@ -195,7 +195,7 @@ def root_metadata_2_root_is_available(http_request):
                 "[METADATA UPDATE] Metadata Update available (2.root.json)"
             )
             # wait add artifacts continue 2 seconds after metadata update
-            time.sleep(2)
+            time.sleep(5)
             pytest.rstuf_thread.set()
             break
         else:
