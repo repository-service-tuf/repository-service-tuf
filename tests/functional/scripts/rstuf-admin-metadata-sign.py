@@ -22,7 +22,7 @@ def _run(input, selection):
     cli.admin.helpers._select.side_effect = selection
 
     output = runner.invoke(
-        cli.admin.sign.sign,
+        cli.admin.metadata.sign.sign,
         ["--out"],
         input="\n".join(input),
         obj=context,

@@ -34,6 +34,7 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-ceremony.py '{
     "Please enter days until expiry for timestamp role (1)": "",
     "Please enter days until expiry for snapshot role (1)": "",
     "Please enter days until expiry for targets role (365)": "",
+    "[select] RSTUF supports two types of delegations": "Bins (online key only)",
     "Please enter days until expiry for bins role (1)": "",
     "Please enter number of delegated hash bins [2/4/8/16/32/64/128/256/512/1024/2048/4096/8192/16384] (256)": "2",
     "Please enter days until expiry for root role (365)": "",
@@ -61,6 +62,7 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-ceremony.py '{
 
 # Finish the DAS signing the Root Metadata (bootstrap)
 python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-sign.py '{
+    "[select] Select role for signing": "root",
     "[select] Select a key for signing or continue (continue/JimiHendrix/JoeCocker)": "JimiHendrix",
     "Please enter path to encrypted private key": "tests/files/key_storage/JH.ed25519",
     "Please enter password": "hunter2"

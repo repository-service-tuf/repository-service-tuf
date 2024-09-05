@@ -1,0 +1,82 @@
+{
+ "signatures": [
+  {
+   "keyid": "50d7e110ad65f3b2dba5c3cfc8c5ca259be9774cc26be3410044ffd4be3aa5f3",
+   "sig": "3045022100f4a5febffdfda947ce2042469945fd691e97f62cabe2658a03f7181262c596a7022041615e9007961093d5c47b1816f1bbadd93354b1e4790339b16ebec8d3f8ad17"
+  },
+  {
+   "keyid": "c6d8bf2e4f48b41ac2ce8eca21415ca8ef68c133b47fc33df03d4070a7e1e9cc",
+   "sig": "5b12973f7e475d15bdc9fed004aa2b366244696ea7adc4e34ffefc32ce41e68519e0ed5c0561ca2f233ffde0c97203a571fa01d0d9c1ef3ee3c8648c9a36bf0e"
+  }
+ ],
+ "signed": {
+  "_type": "root",
+  "consistent_snapshot": true,
+  "expires": "2025-09-06T21:02:13Z",
+  "keys": {
+   "0d9d3d4bad91c455bc03921daa95774576b86625ac45570d0cac025b08e65043": {
+    "keytype": "rsa",
+    "keyval": {
+     "public": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwJNtmJy0bky0VZHhJoVw\nVR0oIto8ndLLicnaHPDUfFsv2dTP50uLiYuYhU/RLTh+PIMm9dU5gvfSQ0YIUFHO\nfdcDCBaMNYR9z9c9kvWkfgxP4H7cMdy9ev3yh4pL+ua64AT1598QxmF0RSp9p8P4\nUDPJC4XsgVz3kKeCSQAgz02MJ+KdHyTDP+rgOuWQfVL8bz53puMSSFojiaEJTmZQ\n7eBnI2n6UF6AAV6eo6Dc4cgPQLSjhDqcfoHCyk/AzpTQO5EV+ahofYmV/kQQtr7g\nz8MQXoKRwCbfIcWhPyfPNReOo7fqVK3uK3kkD1ouoNSr9DFRcnUbsX4QR/CQLcoP\nXwIDAQAB\n-----END PUBLIC KEY-----\n"
+    },
+    "scheme": "rsassa-pss-sha256",
+    "x-rstuf-key-name": "online1",
+    "x-rstuf-online-key-uri": "fn:0d9d3d4bad91c455bc03921daa95774576b86625ac45570d0cac025b08e65043"
+   },
+   "2f685fa7546f1856b123223ab086b3def14c89d24eef18f49c32508c2f60e241": {
+    "keytype": "rsa",
+    "keyval": {
+     "public": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwhX6rioiL/cX5Ys32InF\nU52H8tL14QeX0tacZdb+AwcH6nIh97h3RSHvGD7Xy6uaMRmGldAnSVYwJHqoJ5j2\nynVzU/RFpr+6n8Ps0QFg5GmlEqZboFjLbS0bsRQcXXnqJNsVLEPT3ULvu1rFRbWz\nAMFjNtNNk5W/u0GEzXn3D03jIdhD8IKAdrTRf0VMD9TRCXLdMmEU2vkf1NVUnOTb\n/dRX5QA8TtBylVnouZknbavQ0J/pPlHLfxUgsKzodwDlJmbPG9BWwXqQCmP0DgOG\nNIZ1X281MOBaGbkNVEuntNjCSaQxQjfALVVU5NAfal2cwMINtqaoc7Wa+TWvpFEI\nWwIDAQAB\n-----END PUBLIC KEY-----\n"
+    },
+    "scheme": "rsassa-pss-sha256",
+    "x-rstuf-key-name": "JoeCocker"
+   },
+   "50d7e110ad65f3b2dba5c3cfc8c5ca259be9774cc26be3410044ffd4be3aa5f3": {
+    "keytype": "ecdsa",
+    "keyval": {
+     "public": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEcLYSZyFGeKdWNt5dWFbnv6N9NyHC\noUNLcG6GZIxLwN8Q8MUdHdOOxGkDnyBRSJpIZ/r/oDECSTwfCYhdogweLA==\n-----END PUBLIC KEY-----\n"
+    },
+    "scheme": "ecdsa-sha2-nistp256",
+    "x-rstuf-key-name": "JanisJoplin"
+   },
+   "c6d8bf2e4f48b41ac2ce8eca21415ca8ef68c133b47fc33df03d4070a7e1e9cc": {
+    "keytype": "ed25519",
+    "keyval": {
+     "public": "4f66dabebcf30628963786001984c0b75c175cdcf3bc4855933a2628f0cd0a0f"
+    },
+    "scheme": "ed25519",
+    "x-rstuf-key-name": "JimiHendrix"
+   }
+  },
+  "roles": {
+   "root": {
+    "keyids": [
+     "50d7e110ad65f3b2dba5c3cfc8c5ca259be9774cc26be3410044ffd4be3aa5f3",
+     "c6d8bf2e4f48b41ac2ce8eca21415ca8ef68c133b47fc33df03d4070a7e1e9cc",
+     "2f685fa7546f1856b123223ab086b3def14c89d24eef18f49c32508c2f60e241"
+    ],
+    "threshold": 2
+   },
+   "snapshot": {
+    "keyids": [
+     "0d9d3d4bad91c455bc03921daa95774576b86625ac45570d0cac025b08e65043"
+    ],
+    "threshold": 1
+   },
+   "targets": {
+    "keyids": [
+     "0d9d3d4bad91c455bc03921daa95774576b86625ac45570d0cac025b08e65043"
+    ],
+    "threshold": 1
+   },
+   "timestamp": {
+    "keyids": [
+     "0d9d3d4bad91c455bc03921daa95774576b86625ac45570d0cac025b08e65043"
+    ],
+    "threshold": 1
+   }
+  },
+  "spec_version": "1.0.31",
+  "version": 1
+ }
+}

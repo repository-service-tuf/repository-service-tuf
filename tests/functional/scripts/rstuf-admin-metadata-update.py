@@ -20,7 +20,7 @@ def _run(input, selection):
     cli.admin.helpers._select.side_effect = selection
 
     output = runner.invoke(
-        cli.admin.update.update,
+        cli.admin.metadata.update.update,
         # we run --dry-run to avoid sending the result to the API, as it is
         # used by the FT
         ["--in", "metadata/1.root.json", "--out", "--dry-run"],
