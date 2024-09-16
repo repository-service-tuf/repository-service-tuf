@@ -20,6 +20,7 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-ceremony.py '{
     "Please enter days until expiry for timestamp role (1)": "",
     "Please enter days until expiry for snapshot role (1)": "",
     "Please enter days until expiry for targets role (365)": "",
+    "[select] RSTUF supports two types of delegations": "Bins (online key only)",
     "Please enter days until expiry for bins role (1)": "",
     "Please enter number of delegated hash bins [2/4/8/16/32/64/128/256/512/1024/2048/4096/8192/16384] (256)": "2",
     "Please enter days until expiry for root role (365)": "",
