@@ -157,15 +157,9 @@ You can do it using the rstuf admin-legacy
 
 .. code::
 
-    ❯ rstuf admin-legacy ceremony -b -u -f ceremony-payload.json --api-url https://rstuf-api-url
+    ❯ rstuf admin --api-server http://rstuf-api-url send bootstrap ceremony-payload.json
     Starting online bootstrap
     Bootstrap status: ACCEPTED (c1d2356d25784ecf90ce373dc65b05c7)
     Bootstrap status:  STARTED
-    .Bootstrap status:  SUCCESS
+    Bootstrap status:  SUCCESS
     Bootstrap completed using `ceremony-payload.json`. 🔐 🎉
-
-Alternatively, you can use the refactored `rstuf admin` and use curl to send the payload to the RSTUF API.
-
-.. code::
-
-    ❯ curl -X POST -d @ceremony-payload.json https://rstuf-api-url/api/v1/bootstrap
