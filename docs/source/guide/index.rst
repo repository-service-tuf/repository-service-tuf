@@ -3,9 +3,10 @@ Repository Service for TUF Guide
 ================================
 
 .. toctree::
-    :maxdepth: 5
+    :maxdepth: 2
 
     general/introduction
+    deployment/guide/quick-start
     general/usage
     general/keys
     deployment/index

@@ -35,9 +35,11 @@ A successful RSTUF deployment will have an RSTUF HTTP(S) API service
 
 Assuming a successful Repository Service for TUF (RSTUF)
 :ref:`guide/deployment/index:Deployment` and
-:ref:`guide/deployment/setup:Service Setup` is complete, these are
-the usage:
+:ref:`guide/deployment/setup:Service Setup` is complete.
 
+Looking for a quick try-out? See the :ref:`guide/deployment/guide/quick-start:Quick Start (Demo deployment)`.
+
+Main RSTUF usage:
 
 Adding/Removing artifacts to TUF Metadata
 #########################################

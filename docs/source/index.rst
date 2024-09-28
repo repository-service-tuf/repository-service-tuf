@@ -39,6 +39,11 @@ Some RSTUF use case examples include but are not limited to:
   and render as a Web UI, the user to download using a web browser.
 
 
+Do you want to try-out RSTUF?
+-----------------------------
+See the :ref:`guide/deployment/guide/quick-start:Quick Start (Demo deployment)` to try it.
+
+
 What is TUF?
 ============
 
@@ -46,6 +51,7 @@ What is TUF?
   that automatically identify and download updates to software. TUF uses a series
   of roles and keys to provide a means to retain security, even when some keys or
   servers are compromised.* [#]_ TUF_
+
 
 Design/Solution
 ===============

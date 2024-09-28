@@ -14,6 +14,7 @@ Deployment Guides
 .. toctree::
    :maxdepth: 2
 
+   guide/quick-start
    guide/helm
    guide/docker
    guide/kubernetes
