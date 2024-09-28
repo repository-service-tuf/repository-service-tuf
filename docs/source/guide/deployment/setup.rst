@@ -140,6 +140,7 @@ connected to RSTUF API. It does not require a
 :ref:`guide/deployment/setup:Bootstrap` step.
 
 .. code::
+
     ❯ rstuf admin --api-server https://rstuf-api-url ceremony
 
 
