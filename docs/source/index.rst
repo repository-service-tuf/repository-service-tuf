@@ -76,6 +76,10 @@ Talks, Posts and Mentions about RSTUF
 Talks
 =====
 
+* Open Source Summit 2024: Securing Content Distribution with RSTUF, an Incubating OpenSSF Project
+  by Kairo De Araujo and & Martin Vrachev (recording coming soon).
+* KubeCon 2024: `Operating a Production TUF Repository <https://youtu.be/WB83-RhMl18?si=H7Yq8ZFlD8JLt8Y2>`_
+  by Kairo de Araujo and Fredrik Skogman.
 * `PackagingCon 2023 <https://cfp.packaging-con.org/2023/talk/997FQK/>`_:
   `“Our stuff” - how to protect users from package compromise with RSTUF <https://www.youtube.com/live/mYzqeS2d96A?si=cqQUH5J5wDPrOQFb&t=3801>`_.
 * `EuroPython 2023 <https://ep2023.europython.eu/session/pep-458-a-solution-not-only-for-pypi>`_:
@@ -95,14 +99,11 @@ Mentions
 ========
 
 * `"Open Source Summit EU 2023: at OpenSSF day Omkhar Arasaratnam, OpenSSF General Manager, mentions
-  Repository Service for TUF" <https://youtu.be/WWY6SWaYhxI?si=bT34fgeQquWWh8ga>`_
-
-    :align: center
-
+  Repository Service for TUF" <https://youtu.be/WWY6SWaYhxI?si=bT34fgeQquWWh8ga>`_.
 
 
 * KubeCon 2023: `"Maintaining TUF, a Talk" <https://www.youtube.com/watch?v=1rM8a9cPo-I>`_
-  by Joshua Lock and Lukas Pühringer
+  by Joshua Lock and Lukas Pühringer.
 
   - `RSTUF part start at 23:41 <https://youtu.be/1rM8a9cPo-I?si=aSFHqTpGvs_YUWp0&t=1421>`_.
 
