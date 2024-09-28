@@ -4,8 +4,7 @@ Repository Service for TUF Documentation
 
 .. note::
 
-    Repository Service for TUF is a work in progress. As of June 2023 RSTUF is
-    considered **beta** - use with caution.
+    Repository Service for TUF is considered in **beta** state.
 
     Please reference the The RSTUF `ROADMAP`_ for feature and functionality plans.
 
