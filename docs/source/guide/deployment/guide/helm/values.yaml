@@ -1,0 +1,57 @@
+rstuf-api:
+  image:
+    repository: ghcr.io/repository-service-tuf/repository-service-tuf-api
+    tag: latest
+  backend:
+    brokerServer: "redis://rstuf-valkey-master.rstuf.svc.cluster.local"
+    redisServer: "redis://rstuf-valkey-master.rstuf.svc.cluster.local"
+  ingress:
+    enabled: true
+    hosts:
+      - host: rstuf.internal.example.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls: []
+
+rstuf-worker:
+  image:
+    repository: ghcr.io/repository-service-tuf/repository-service-tuf-worker
+    tag: latest
+  backend:
+    dbServer: "postgresql://postgres:postgres@rstuf-postgresql.rstuf.svc.cluster.local/rstuf"
+    brokerServer: "redis://rstuf-valkey-master.rstuf.svc.cluster.local"
+    redisServer: "redis://rstuf-valkey-master.rstuf.svc.cluster.local"
+  storage:
+    type: "AWSS3"
+    s3Bucket: "tuf-metadata"
+    s3KeyId: "s3-keyid"
+    s3AccessKey: "s3-access-key"
+    s3Region: "us-east-1"
+
+valkey:
+  enabled: true
+  architecture: standalone
+  auth:
+    enabled: false
+  persistence:
+    enabled: true
+    size: 2Gi
+  master:
+    service:
+      port: 6379
+
+postgresql:
+  enabled: true
+  auth:
+    username: postgres
+    password: postgres
+    database: rstuf
+  primary:
+    persistence:
+      enabled: true
+      size: 8Gi
+  replication:
+    enabled: false
+  service:
+    port: 5432

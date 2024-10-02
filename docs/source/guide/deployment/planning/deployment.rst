@@ -10,7 +10,7 @@ environment and focuses on the technology stacks required by RSTUF services.
 
 This document also complements the published deployment guides for
 :ref:`guide/deployment/guide/docker:Docker` and
-:ref:`guide/deployment/guide/kubernetes:Kubernetes` with some detailed
+:ref:`guide/deployment/guide/kubernetes:Kubernetes (yaml manifest)` with some detailed
 information.
 
 For the purpose of authentication and authorization, make sure that API Gateway is
@@ -135,7 +135,7 @@ It uses the database to perform the TUF metadata management.
 
 .. centered:: RSTUF configuration
 
-* ``RSTUF_SQL_SERVER`` :ref:`RSTUF Worker <guide/repository-service-tuf-worker/Docker_README:(Required) `RSTUF_SQL_SERVER\`>`
+* ``RSTUF_DB_SERVER`` :ref:`RSTUF Worker <guide/repository-service-tuf-worker/Docker_README:(Required) `RSTUF_DB_SERVER\`>`
 
 [Optional] Content Server: Webserver
 ====================================

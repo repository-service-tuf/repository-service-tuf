@@ -2,12 +2,20 @@
 Deployment
 ##########
 
+RSTUF is provided as a set of Container Images that can be deployed in various environments.
+This section provides guides for deploying RSTUF in different environments.
+
+For a more detailed guide on planning a deployment,
+see :ref:`guide/deployment/planning/deployment:Deployment Configuration`.
+
 Deployment Guides
 #################
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
+   guide/quick-start
+   guide/helm
    guide/docker
    guide/kubernetes
 

@@ -4,8 +4,7 @@ Repository Service for TUF Documentation
 
 .. note::
 
-    Repository Service for TUF is a work in progress. As of June 2023 RSTUF is
-    considered **beta** - use with caution.
+    Repository Service for TUF is considered in **beta** state.
 
     Please reference the The RSTUF `ROADMAP`_ for feature and functionality plans.
 
@@ -39,6 +38,11 @@ Some RSTUF use case examples include but are not limited to:
   and render as a Web UI, the user to download using a web browser.
 
 
+Do you want to try-out RSTUF?
+-----------------------------
+See the :ref:`guide/deployment/guide/quick-start:Quick Start (Demo deployment)` to try it.
+
+
 What is TUF?
 ============
 
@@ -46,6 +50,7 @@ What is TUF?
   that automatically identify and download updates to software. TUF uses a series
   of roles and keys to provide a means to retain security, even when some keys or
   servers are compromised.* [#]_ TUF_
+
 
 Design/Solution
 ===============
@@ -76,6 +81,10 @@ Talks, Posts and Mentions about RSTUF
 Talks
 =====
 
+* Open Source Summit 2024: Securing Content Distribution with RSTUF, an Incubating OpenSSF Project
+  by Kairo De Araujo and & Martin Vrachev (recording coming soon).
+* KubeCon 2024: `Operating a Production TUF Repository <https://youtu.be/WB83-RhMl18?si=H7Yq8ZFlD8JLt8Y2>`_
+  by Kairo de Araujo and Fredrik Skogman.
 * `PackagingCon 2023 <https://cfp.packaging-con.org/2023/talk/997FQK/>`_:
   `“Our stuff” - how to protect users from package compromise with RSTUF <https://www.youtube.com/live/mYzqeS2d96A?si=cqQUH5J5wDPrOQFb&t=3801>`_.
 * `EuroPython 2023 <https://ep2023.europython.eu/session/pep-458-a-solution-not-only-for-pypi>`_:
@@ -95,14 +104,11 @@ Mentions
 ========
 
 * `"Open Source Summit EU 2023: at OpenSSF day Omkhar Arasaratnam, OpenSSF General Manager, mentions
-  Repository Service for TUF" <https://youtu.be/WWY6SWaYhxI?si=bT34fgeQquWWh8ga>`_
-
-    :align: center
-
+  Repository Service for TUF" <https://youtu.be/WWY6SWaYhxI?si=bT34fgeQquWWh8ga>`_.
 
 
 * KubeCon 2023: `"Maintaining TUF, a Talk" <https://www.youtube.com/watch?v=1rM8a9cPo-I>`_
-  by Joshua Lock and Lukas Pühringer
+  by Joshua Lock and Lukas Pühringer.
 
   - `RSTUF part start at 23:41 <https://youtu.be/1rM8a9cPo-I?si=aSFHqTpGvs_YUWp0&t=1421>`_.
 

@@ -55,17 +55,40 @@ TUF service.
 
 .. collapse:: See settings details
 
+    * Timestamp, Snapshot, and Targets metadata expiration policy
+
+        Defines how many days this metadata is valid. The metadata is invalid when it
+        expires.
+
+    * Delegations
+
+        - Bins (online key only)
+
+          The target metadata file might contain a large number of artifacts.
+          The target role delegates trust to the hash bin roles to
+          reduce the metadata overhead for clients.
+
+          This metadata is signed using the online key.
+
+        - Custom Delegations (online/offline keys)
+
+          Allows the RSTUF admin to create custom delegation that can use the
+          online key or offline key(s) to sign the metadata.
+          The custom delegation can be used to define the roles and paths for
+          the target metadata.
+
     * Root metadata expiration policy
 
         Defines how long this metadata is valid, for example, 365 days (year).
         This metadata is invalid when it expires.
 
-    * Root number of keys
+    * Root threshold
 
-        It is the total number of root keys (offline keys) used by the TUF Root
-        metadata.
-        The number of keys implies that the number of identities is the TUF
-        Metadata’s top-level administrator.
+        It defines the number of keys required to sign the Root metadata
+        before it's considered trusted and will be published.
+
+        That's the minimum number of keys required to update and sign the TUF Root
+        metadata. It's required to be at least 2.
 
         .. note::
           * Updating the Root metadata with new expiration, changing/updating keys or
@@ -73,31 +96,12 @@ TUF service.
             requires following the :ref:`guide/general/usage:Metadata Update`
             process.
 
-        .. note::
-            RSTUF requires all Root key(s) during the
-            :ref:`guide/deployment/setup:Ceremony`.
 
         .. note::
             RSTUF requires at least a threshold number of Root key(s) defined
             to finish the ceremony. The same applies when performing
             :ref:`guide/general/usage:Metadata Update`.
 
-
-    * Root key threshold
-
-        The minimum number of keys required to update and sign the TUF Root
-        metadata. It's required to be at least 2.
-
-    * Targets, BINS, Snapshot, and Timestamp metadata expiration policy
-
-        Defines how long this metadata is valid. The metadata is invalid when it
-        expires.
-
-    * Targets number of delegated hash bin roles
-
-        The target metadata file might contain a large number of artifacts.
-        The target role delegates trust to the hash bin roles to
-        reduce the metadata overhead for clients.
 
     * Signing
 
@@ -140,6 +144,7 @@ connected to RSTUF API. It does not require a
 :ref:`guide/deployment/setup:Bootstrap` step.
 
 .. code::
+
     ❯ rstuf admin --api-server https://rstuf-api-url ceremony
 
 
@@ -156,15 +161,9 @@ You can do it using the rstuf admin-legacy
 
 .. code::
 
-    ❯ rstuf admin-legacy ceremony -b -u -f ceremony-payload.json --api-url https://rstuf-api-url
+    ❯ rstuf admin --api-server http://rstuf-api-url send bootstrap ceremony-payload.json
     Starting online bootstrap
     Bootstrap status: ACCEPTED (c1d2356d25784ecf90ce373dc65b05c7)
     Bootstrap status:  STARTED
-    .Bootstrap status:  SUCCESS
+    Bootstrap status:  SUCCESS
     Bootstrap completed using `ceremony-payload.json`. 🔐 🎉
-
-Alternatively, you can use the refactored `rstuf admin` and use curl to send the payload to the RSTUF API.
-
-.. code::
-
-    ❯ curl -X POST -d @ceremony-payload.json https://rstuf-api-url/api/v1/bootstrap

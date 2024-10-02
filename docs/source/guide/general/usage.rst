@@ -2,16 +2,6 @@
 Using RSTUF
 ###########
 
-
-Assuming a successful Repository Service for TUF (RSTUF)
-:ref:`guide/deployment/index:Deployment` and
-:ref:`guide/deployment/setup:Service Setup` is complete, these are
-the usage:
-
-
-Adding/Removing artifacts to TUF Metadata
-#########################################
-
 RSTUF allows organizations to easily integrate the robust TUF metadata along
 the existing content repositories using the RSTUF API.
 
@@ -43,6 +33,18 @@ A successful RSTUF deployment will have an RSTUF HTTP(S) API service
 
 ``http://<IP ADDRESS>/api/v1/``
 
+Assuming a successful Repository Service for TUF (RSTUF)
+:ref:`guide/deployment/index:Deployment` and
+:ref:`guide/deployment/setup:Service Setup` is complete.
+
+Looking for a quick try-out? See the :ref:`guide/deployment/guide/quick-start:Quick Start (Demo deployment)`.
+
+Main RSTUF usage:
+
+Adding/Removing artifacts to TUF Metadata
+#########################################
+
+
 Adding artifacts
 ==========================
 
@@ -58,7 +60,7 @@ with a JSON payload.
 * The `add artifacts payload schema <https://repository-service-tuf.github.io/repository-service-tuf-api/#/v1/post_api_v1_artifacts__post>`_
 
 Add artifacts payload
--------------------
+---------------------
 
 .. code-block:: json
     :linenos:
@@ -66,18 +68,39 @@ Add artifacts payload
     {
         "artifacts": [
             {
-            "info": {
-                "length": "<LENGTH>",
-                "hashes": {
-                "<HASH-NAME>": "<HASH>"
+                "info": {
+                    "length": "<LENGTH>",
+                    "hashes": {
+                        "<HASH-NAME>": "<HASH>"
+                    },
+                    "custom": {
+                        "key": "value"
+                    }
                 },
-            },
-            "path": "<PATH>"
+                "path": "<PATH>"
             }
         ]
     }
 
-.. list-table:: Required parameters
+.. list-table:: Artifacts parameters
+    :header-rows: 1
+    :widths: 25 50 25
+
+    * - Parameters
+      - Details
+      - Example
+    * - ``INFO``
+      - `Artifacts Info parameters <#artifacts-info-parameters>`_
+      - ``{"length": 48365, "hashes": {"sha256": "95cef21e0d8707e4b46c85cd130a37c5c03f747f140b7d9e2bd817b7fcc13511"}, "custom" : {"key": "value"}}``
+    * - ``PATH``
+      - The full artifact path, excluding the Base URL. If clients will
+        look for artifacts in
+        ``http://example.com/download/release/projectA/file1.tar.gz`` the
+        path should exclude the Base URL ``http://example.com/download/``
+      - ``release/projectA/file1.tar.gz``
+
+
+.. list-table:: Artifacts Info parameters
     :header-rows: 1
     :widths: 25 50 25
 
@@ -93,13 +116,9 @@ Add artifacts payload
     * - ``HASH``
       - The hash output, such as ``shasum -a 256 <artifact>``
       - ``95cef21e0d8707e4b46c85cd130a37c5c03f747f140b7d9e2bd817b7fcc13511``
-    * - ``PATH``
-      - The full artifact path, excluding the Base URL. If clients will
-        look for artifacts in
-        ``http://example.com/download/release/projectA/file1.tar.gz`` the
-        path should exclude the Base URL ``http://example.com/download/``
-      - ``release/projectA/file1.tar.gz``
-
+    * - ``CUSTOM``
+      - Custom key-value pairs
+      - ``{"key": "value"}``
 
 Removing artifacts
 ============================
@@ -116,7 +135,7 @@ with a JSON payload.
 * The `remove artifacts payload schema <https://repository-service-tuf.github.io/repository-service-tuf-api/#/v1/post_delete_api_v1_artifacts_delete_post>`_
 
 Remove artifacts payload
-----------------------
+------------------------
 
 .. code-block:: json
     :linenos:
@@ -181,7 +200,6 @@ The response will have a body with all task details
             "details": {
                 "key": "value"
             }
-            }
         },
         "message": "Task state."
     }
@@ -213,13 +231,13 @@ Adding artifacts without publishing
     {
         "artifacts": [
             {
-            "info": {
-                "length": "<LENGTH>",
-                "hashes": {
-                "<HASH-NAME>": "<HASH>"
+                "info": {
+                    "length": "<LENGTH>",
+                    "hashes": {
+                        "<HASH-NAME>": "<HASH>"
+                    },
                 },
-            },
-            "path": "<PATH>"
+                "path": "<PATH>"
             }
         ],
         "publish_artifacts": false
@@ -282,7 +300,7 @@ example:
 
 
 Importing existing artifacts
-==========================
+============================
 
 When adopting Repository Service for TUF (RSTUF), with a
 large number of artifacts (artifacts/packages/files/etc.), using

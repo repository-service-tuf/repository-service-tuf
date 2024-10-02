@@ -1,6 +1,6 @@
-##########
-Kubernetes
-##########
+##########################
+Kubernetes (yaml manifest)
+##########################
 
 Multiple RSTUF API instances/replicas can be deployed in a distributed
 environment to support multiple requests.
