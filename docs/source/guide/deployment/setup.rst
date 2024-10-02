@@ -55,9 +55,9 @@ TUF service.
 
 .. collapse:: See settings details
 
-    * Timestamp, Snapshot, and  Targets metadata expiration policy
+    * Timestamp, Snapshot, and Targets metadata expiration policy
 
-        Defines how long this metadata is valid. The metadata is invalid when it
+        Defines how many days this metadata is valid. The metadata is invalid when it
         expires.
 
     * Delegations
@@ -84,9 +84,10 @@ TUF service.
 
     * Root threshold
 
-        It defines the number of keys required to sign the Root metadata.
+        It defines the number of keys required to sign the Root metadata
+        before it's considered trusted and will be published.
 
-        The minimum number of keys required to update and sign the TUF Root
+        That's the minimum number of keys required to update and sign the TUF Root
         metadata. It's required to be at least 2.
 
         .. note::

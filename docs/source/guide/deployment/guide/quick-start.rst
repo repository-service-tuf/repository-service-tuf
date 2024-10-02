@@ -20,7 +20,7 @@ Software and tools
 
 Make sure you have all the required software and tools installed.
 
-RSTUF running in using 4 steps (demo mode)
+Starting RSTUF in 4 steps (demo mode)
 ##########################################
 
 1. Get RSTUF helm chart
@@ -61,7 +61,7 @@ RSTUF running in using 4 steps (demo mode)
     STATUS: deployed
     REVISION: 1
 
-Check if the pods are all running
+Check if the pods are all running:
 
 .. code:: shell
 
@@ -83,7 +83,7 @@ Add to localhost the RSTUF API and Localstack services
     ❯ echo "127.0.0.1 rstuf.localhost localstack.localhost" | sudo tee -a /etc/hosts
 
 
-Start the minikube tunnel
+Start the minikube tunnel:
 
 .. code:: shell
 
@@ -103,8 +103,8 @@ Start the minikube tunnel
 
 .. note::
 
-   - RSTUF API is available in http://rstuf.localhost
-   - TUF Metadata is available in http://localstack.localhost/tuf-metadata
+   - RSTUF API is available at http://rstuf.localhost
+   - TUF Metadata is available at http://localstack.localhost/tuf-metadata
 
 You can go through the RSTUF setup ceremony and bootstrap,
 see :ref:`guide/deployment/setup:Service Setup`.
