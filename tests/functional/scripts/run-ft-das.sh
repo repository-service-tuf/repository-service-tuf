@@ -40,22 +40,22 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-ceremony.py '{
     "Please enter days until expiry for root role (365)": "",
     "Please enter root threshold": "2",
     "[select] Key 1: Select a key type [Key PEM File/Sigstore]:": "Key PEM File",
-    "(root 1) Please enter path to public key": "tests/files/key_storage/JJ.pub",
+    "[input file] (root 1) Please enter path to public key": "tests/files/key_storage/JJ.pub",
     "(root 1) Please enter key name": "JanisJoplin",
     "[select] Info: 1 key missing for threshold 2 (add/remove)": "add",
     "[select] Key 2: Select a key type [Key PEM File/Sigstore]:": "Key PEM File",
-    "(root 2) Please enter path to public key:": "tests/files/key_storage/JH.pub",
+    "[input file] (root 2) Please enter path to public key:": "tests/files/key_storage/JH.pub",
     "(root 2) Please enter key name": "JimiHendrix",
     "[select] (extra key) Info: Threshold 2 is met, more keys can be added (continue/add/remove)": "add",
     "[select] Key 3: Select a key type [Key PEM File/Sigstore]:": "Key PEM File",
-    "(root 3) Please enter path to public key:": "tests/files/key_storage/JC.pub",
+    "[input file] (root 3) Please enter path to public key:": "tests/files/key_storage/JC.pub",
     "(root 3) Please enter key name": "JoeCocker",
     "[select] Info: Threshold 2 is met, more keys can be added (continue/add/remove)": "continue",
     "[select] Select Online Key type": "Key PEM File",
-    "(online key) Please enter path to public key": "tests/files/key_storage/0d9d3d4bad91c455bc03921daa95774576b86625ac45570d0cac025b08e65043.pub",
+    "[input file] (online key) Please enter path to public key": "tests/files/key_storage/0d9d3d4bad91c455bc03921daa95774576b86625ac45570d0cac025b08e65043.pub",
     "(online key) Please enter key name": "online1",
     "[select] Select a key for signing (JanisJoplin/JimiHendrix/JoeCocker)": "JanisJoplin",
-    "(Sign 1) Please enter path to encrypted private key": "tests/files/key_storage/JJ.ecdsa",
+    "[input file] (Sign 1) Please enter path to encrypted private key": "tests/files/key_storage/JJ.ecdsa",
     "(Sign 1) Please enter password": "hunter2",
     "[select] Select a key for signing or continue (continue/JimiHendrix/JoeCocker)": "continue"
 }'
@@ -64,7 +64,7 @@ python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-ceremony.py '{
 python ${UMBRELLA_PATH}/tests/functional/scripts/rstuf-admin-metadata-sign.py '{
     "[select] Select role for signing": "root",
     "[select] Select a key for signing or continue (continue/JimiHendrix/JoeCocker)": "JimiHendrix",
-    "Please enter path to encrypted private key": "tests/files/key_storage/JH.ed25519",
+    "[input file] Please enter path to encrypted private key": "tests/files/key_storage/JH.ed25519",
     "Please enter password": "hunter2"
 }'
 # Get initial trusted Root
@@ -94,7 +94,7 @@ if [[ ${METADATA_BASE_URL} =~ "localstack" ]]; then
     "AWS KMS KeyID": "alias/kms-rstuf-online-1",
     "Please enter key name": "online kms 1",
     "[select] Select a key for signing (JanisJoplin/JimiHendrix)": "JanisJoplin",
-    "(Sign 1) Please enter path to encrypted private key": "tests/files/key_storage/JJ.ecdsa",
+    "[input file] (Sign 1) Please enter path to encrypted private key": "tests/files/key_storage/JJ.ecdsa",
     "(Sign 1) Please enter password": "hunter2",
     "[select] Select a key for signing (continue/JimiHendrix)": "continue"
     }'
@@ -109,10 +109,10 @@ else
     "[select] Info: Threshold 2 is met, more keys can be added (continue/add/remove)": "continue",
     "Do you want to change the online key? [y/n] (y)": "y",
     "[select] Select Online Key type": "Key PEM File",
-    "Please enter path to public key": "tests/files/key_storage/cb20fa1061dde8e6267e0bef0981766aaadae168e917030f7f26edc7a0bab9c2.pub",
+    "[input file] Please enter path to public key": "tests/files/key_storage/cb20fa1061dde8e6267e0bef0981766aaadae168e917030f7f26edc7a0bab9c2.pub",
     "Please enter key name": "online2",
     "[select] Select a key for signing (JanisJoplin/JimiHendrix)": "JanisJoplin",
-    "(Sign 1) Please enter path to encrypted private key": "tests/files/key_storage/JJ.ecdsa",
+    "[input file] (Sign 1) Please enter path to encrypted private key": "tests/files/key_storage/JJ.ecdsa",
     "(Sign 1) Please enter password": "hunter2",
     "[select] Select a key for signing (continue/JimiHendrix)": "continue"
     }'
