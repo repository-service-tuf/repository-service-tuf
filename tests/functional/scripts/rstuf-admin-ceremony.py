@@ -8,7 +8,7 @@ from click.testing import CliRunner
 from repository_service_tuf import Dynaconf, cli
 
 
-def _run(input, selection):
+def _run(input, selection, input_file):
     folder_name = mkdtemp()
     setting_file = os.path.join(folder_name, ".rstuf.yml")
     test_settings = Dynaconf()
@@ -20,6 +20,8 @@ def _run(input, selection):
     # key selection
     cli.admin.helpers._select = mock.MagicMock()
     cli.admin.helpers._select.side_effect = selection
+    cli.admin.helpers._prompt_key = mock.MagicMock()
+    cli.admin.helpers._prompt_key.side_effect = input_file
 
     output = runner.invoke(
         cli.admin.ceremony.ceremony,
@@ -34,12 +36,19 @@ def _run(input, selection):
 
 def main():
     input_dict = json.loads(sys.argv[1])
-    input = [v for k, v in input_dict.items() if not k.startswith("[select]")]
+    input = [
+        v
+        for k, v in input_dict.items()
+        if not k.startswith("[select]") or not k.startswith("[input file]")
+    ]
+    input_file = [
+        v for k, v in input_dict.items() if k.startswith("[input file]")
+    ]
     selection = [v for k, v in input_dict.items() if k.startswith("[select]")]
 
     print("Using parameters:")
     print(json.dumps(input_dict, indent=2))
-    output = _run(input, selection)
+    output = _run(input, selection, input_file)
 
     print(f"\nExit code: {output.exit_code}")
     print("\nOutput: ")
