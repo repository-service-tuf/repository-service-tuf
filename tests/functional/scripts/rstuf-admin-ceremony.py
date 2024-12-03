@@ -36,16 +36,11 @@ def _run(input, selection, input_file):
 
 def main():
     input_dict = json.loads(sys.argv[1])
-    input = [
-        v
-        for k, v in input_dict.items()
-        if not k.startswith("[select]") or not k.startswith("[input file]")
-    ]
+    input = [v for k, v in input_dict.items() if not k.startswith("[")]
     input_file = [
         v for k, v in input_dict.items() if k.startswith("[input file]")
     ]
     selection = [v for k, v in input_dict.items() if k.startswith("[select]")]
-
     print("Using parameters:")
     print(json.dumps(input_dict, indent=2))
     output = _run(input, selection, input_file)
