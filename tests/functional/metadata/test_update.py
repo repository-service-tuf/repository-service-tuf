@@ -151,9 +151,18 @@ def user_signs_the_metadata(http_request, task_id):
     assert count < 60, pytest.rstuf_thread.set()
 
     runner = CliRunner()
-    # role and key selection
+    # CLI role and key selection
     cli.admin.helpers._select = mock.MagicMock()
     cli.admin.helpers._select.side_effect = ["root", "JimiHendrix"]
+
+    # CLI key prompt select key file
+    cli.admin.helpers._prompt_key = mock.MagicMock()
+    cli.admin.helpers._prompt_key.side_effect = [
+        "tests/files/key_storage/JH.ed25519"
+    ]
+
+    # CLI input
+    input = ["hunter2"]
 
     # CLI settings
     folder_name = mkdtemp()
@@ -162,8 +171,6 @@ def user_signs_the_metadata(http_request, task_id):
     test_settings.SERVER = "http://repository-service-tuf-api"
     context = {"settings": test_settings, "config": setting_file}
 
-    # CLI input
-    input = ["tests/files/key_storage/JH.ed25519", "hunter2"]
     try:
         LOGGER.info("[METADATA UPDATE] Signing Metadata if available")
         runner.invoke(
