@@ -169,6 +169,7 @@ def user_signs_the_metadata(http_request, task_id):
     setting_file = os.path.join(folder_name, ".rstuf.yml")
     test_settings = Dynaconf()
     test_settings.SERVER = "http://repository-service-tuf-api"
+    test_settings.HEADERS = None
     context = {"settings": test_settings, "config": setting_file}
 
     try:
