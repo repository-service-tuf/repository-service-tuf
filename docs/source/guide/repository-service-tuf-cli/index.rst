@@ -93,6 +93,8 @@ It executes administrative commands to the Repository Service for TUF.
 
     ╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
     │ --api-server      TEXT  URL to an RSTUF API.                                                                               │
+    │ --headers     -H  TEXT  Headers to include in the request. Example: 'Authorization: Bearer <token>, Content-Type:          │
+    │                         application/json'                                                                                  │
     │ --help        -h        Show this message and exit.                                                                        │
     ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
     ╭─ Commands ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
