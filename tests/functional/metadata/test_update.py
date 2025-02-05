@@ -52,7 +52,7 @@ def rstuf_requests(stop_requests, http_request):
 
     LOGGER.info(
         "Stop adding artifacts. "
-        f"Total requests: {len(pytest.rstuf_added_artifacts )}"
+        f"Total requests: {len(pytest.rstuf_added_artifacts)}"
     )
 
 
