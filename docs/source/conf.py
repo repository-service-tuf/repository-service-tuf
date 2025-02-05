@@ -33,7 +33,7 @@ extensions = [
     'sphinx_rtd_theme',
     'sphinx.ext.todo',
     'sphinxcontrib.plantuml',
-    'sphinxcontrib.needs',
+    'sphinx_needs',
     'sphinx.ext.autosectionlabel',
     'sphinx_toolbox.collapse',
 ]
