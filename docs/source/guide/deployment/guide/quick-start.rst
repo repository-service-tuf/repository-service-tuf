@@ -76,11 +76,11 @@ Check if the pods are all running:
 4. Minikube tunnel
 ==================
 
-Add to localhost the RSTUF API and Localstack services
+Add to .local domain the RSTUF API and Localstack services
 
 .. code:: shell
 
-    ❯ echo "127.0.0.1 rstuf.localhost localstack.localhost" | sudo tee -a /etc/hosts
+    ❯ echo "$(minikube io) rstuf.local localstack.local" | sudo tee -a /etc/hosts
 
 
 Start the minikube tunnel:
@@ -103,16 +103,24 @@ Start the minikube tunnel:
 
 .. note::
 
-   - RSTUF API is available at http://rstuf.localhost
-   - TUF Metadata is available at http://localstack.localhost/tuf-metadata
+   - RSTUF API is available at http://rstuf.local
+   - TUF Metadata is available at http://localstack.local/tuf-metadata
 
 You can go through the RSTUF setup ceremony and bootstrap,
 see :ref:`guide/deployment/setup:Service Setup`.
 
 .. note::
 
-    1. Run ``export AWS_ENDPOINT_URL=http://localstack.localhost`` environment variable
-       to use localstack as the AWS endpoint.
+    1. Export the environment variables to use localstack as the AWS endpoint.
+
+       .. code: shell
+
+           export AWS_ENDPOINT_URL=http://localstack.localhost
+           export AWS_SECRET_ACCESS_KEY=access
+           export AWS_ACCESS_KEY_ID=key
+           export AWS_DEFAULT_REGION=us-east-1
+
+
     2. Use the online key as AWS KMS and AWS KMS KeyID as ``alias/aws-test-key``.
 
 And that's it! You have RSTUF running in your local machine,
