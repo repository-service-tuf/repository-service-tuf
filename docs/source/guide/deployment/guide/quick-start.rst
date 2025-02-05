@@ -113,7 +113,7 @@ see :ref:`guide/deployment/setup:Service Setup`.
 
     1. Export the environment variables to use localstack as the AWS endpoint.
 
-       .. code: shell
+       .. code:: shell
 
            export AWS_ENDPOINT_URL=http://localstack.localhost
            export AWS_SECRET_ACCESS_KEY=access
