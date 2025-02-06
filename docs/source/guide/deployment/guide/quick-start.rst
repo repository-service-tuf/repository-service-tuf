@@ -80,7 +80,7 @@ Add to .local domain the RSTUF API and Localstack services
 
 .. code:: shell
 
-    ❯ echo "$(minikube io) rstuf.local localstack.local" | sudo tee -a /etc/hosts
+    ❯ echo "$(minikube ip) rstuf.local localstack.local" | sudo tee -a /etc/hosts
 
 
 Start the minikube tunnel:
@@ -115,7 +115,7 @@ see :ref:`guide/deployment/setup:Service Setup`.
 
        .. code:: shell
 
-           export AWS_ENDPOINT_URL=http://localstack.localhost
+           export AWS_ENDPOINT_URL=http://localstack.local
            export AWS_SECRET_ACCESS_KEY=access
            export AWS_ACCESS_KEY_ID=key
            export AWS_DEFAULT_REGION=us-east-1
