@@ -260,11 +260,11 @@
         },
         "domdf-python-tools": {
             "hashes": [
-                "sha256:1f8a96971178333a55e083e35610d7688cd7620ad2b99790164e1fc1a3614c18",
-                "sha256:4e1ef365cbc24627d6d1e90cf7d46d8ab8df967e1237f4a26885f6986c78872e"
+                "sha256:2ae308d2f4f1e9145f5f4ba57f840fbfd1c2983ee26e4824347789649d3ae298",
+                "sha256:5e71c1be71bbcc1f881d690c8984b60e64298ec256903b3147f068bc33090c36"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==3.9.0"
+            "version": "==3.10.0"
         },
         "dynaconf": {
             "hashes": [
@@ -568,12 +568,12 @@
         },
         "myst-parser": {
             "hashes": [
-                "sha256:851c9dfb44e36e56d15d05e72f02b80da21a9e0d07cba96baf5e2d476bb91531",
-                "sha256:b9317997552424448c6096c2558872fdb6f81d3ecb3a40ce84a7518798f3f28d"
+                "sha256:5cfea715e4f3574138aecbf7d54132296bfd72bb614d31168f48c477a830a7c4",
+                "sha256:9134e88959ec3b5780aedf8a99680ea242869d012e8821db3126d427edc9c95d"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==4.0.0"
+            "version": "==4.0.1"
         },
         "names-generator": {
             "hashes": [
