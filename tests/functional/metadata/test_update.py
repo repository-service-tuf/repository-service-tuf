@@ -153,7 +153,11 @@ def user_signs_the_metadata(http_request, task_id):
     runner = CliRunner()
     # CLI role and key selection
     cli.admin.helpers._select = mock.MagicMock()
-    cli.admin.helpers._select.side_effect = ["root", "JimiHendrix"]
+    cli.admin.helpers._select.side_effect = [
+        "root",
+        "JimiHendrix",
+        "Key PEM File",
+    ]
 
     # CLI key prompt select key file
     cli.admin.helpers._prompt_key = mock.MagicMock()
