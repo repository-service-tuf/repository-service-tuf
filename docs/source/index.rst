@@ -12,12 +12,6 @@ Repository Service for TUF Documentation
   :start-after: .. readme-logo
   :end-before: .. readme-design
 
-.. raw:: html
-
-  <div style="position: relative; padding-bottom: 56.25%; height: 0; margin-bottom: 2em; overflow: hidden; max-width: 100%; height: auto;">
-      <iframe src="https://www.youtube.com/embed/IAZO5_rlypI" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
-  </div>
-
 TUF is easily implemented on the client side utilizing powerful TUF client libraries.
 
 Use cases
@@ -161,6 +155,7 @@ Documentation List
 
    guide/index
    devel/index
+   blog/index
 
 
 .. _TUF: https://theupdateframework.io
