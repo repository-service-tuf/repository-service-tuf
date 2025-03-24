@@ -58,8 +58,6 @@ Components Milestones:
 Goal: Minimum Valuable Project
 ==============================
 
-Status: September 2024
-
 First Production Deploy
 This release achieves the minimum valuable project for users.
 
@@ -69,12 +67,12 @@ This release achieves the minimum valuable project for users.
 - [x] Support to multiple Key Vaults for online Key during Ceremony/Metadata Update
       - [x] AWS KMS (`Issue #24 <https://github.com/repository-service-tuf/repository-service-tuf/issues/24>`_)
       - [x] Support of HashiCorp Vault (`Issue #509 <https://github.com/repository-service-tuf/repository-service-tuf/issues/509>`_)
-- [ ] Support for Root Signing (Ceremony, Metadata Update and Sign)
-      - [ ] HSM (Yubikey) (`Issue #351[cli] <https://github.com/repository-service-tuf/repository-service-tuf-cli/issues/351>`_)
+- [x] Support for Root Signing (Ceremony, Metadata Update and Sign)
+      - [x] HSM (Yubikey) (`Issue #351[cli] <https://github.com/repository-service-tuf/repository-service-tuf-cli/issues/351>`_)
       - [x] SigStore (`Issue #657[cli] <https://github.com/repository-service-tuf/repository-service-tuf-cli/issues/657>`_)
-- [ ] Improve new admin CLI UI & UX. (`Issue #532[cli] <https://github.com/repository-service-tuf/repository-service-tuf-cli/issues/532>`_)
+- [x] Improve new admin CLI UI & UX. (`Issue #532[cli] <https://github.com/repository-service-tuf/repository-service-tuf-cli/issues/532>`_)
 - [x] Create/Remove custom delegate Target Roles (`Issue #354 <https://github.com/repository-service-tuf/repository-service-tuf/issues/354>`_)
-- [ ] Security Audit on RSTUF Project  (`Issue #246 <https://github.com/repository-service-tuf/repository-service-tuf/issues/546>`_)
+- [x] Security Audit on RSTUF Project  (`Issue #246 <https://github.com/repository-service-tuf/repository-service-tuf/issues/546>`_)
 
 Components Milestones:
 
