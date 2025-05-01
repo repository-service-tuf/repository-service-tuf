@@ -41,7 +41,6 @@ docs:
 
 requirements:
 	pipenv lock
-	pipenv requirements > requirements.txt
 
 reformat:
 	isort -l79 --profile black tests/
@@ -51,9 +50,6 @@ lint:
 	flake8 tests/
 	isort -l79 --profile black --check --diff tests/
 	black -l79 --check --diff tests/
-	pipenv requirements > requirements.commit
-	diff -w requirements.txt requirements.commit
-	rm requirements.commit
 
 functional-tests-exitfirst:
 ifeq ($(SLOW),)
