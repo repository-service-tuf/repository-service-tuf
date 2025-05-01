@@ -1,5 +1,3 @@
-version: "3.9"
-
 volumes:
   repository-service-tuf-storage:
   repository-service-tuf-keyvault:
@@ -59,7 +57,7 @@ services:
       - RSTUF_ONLINE_KEY_DIR=/var/opt/repository-service-tuf/key_storage
       - RSTUF_BROKER_SERVER=redis://redis
       - RSTUF_REDIS_SERVER=redis://redis
-      - RSTUF_SQL_SERVER=postgres:secret@postgres:5432
+      - RSTUF_DB_SERVER=postgresql://postgres:secret@postgres:5432
     volumes:
       - repository-service-tuf-storage:/var/opt/repository-service-tuf/storage
       - ./tests/files/key_storage/:/var/opt/repository-service-tuf/key_storage
@@ -72,7 +70,7 @@ services:
     stdin_open: true
 
   rstuf-ft-runner:
-    image: python:3.10-slim-buster
+    image: python:3.13-slim
     command: python -V
     working_dir: /rstuf-runner
     volumes:
