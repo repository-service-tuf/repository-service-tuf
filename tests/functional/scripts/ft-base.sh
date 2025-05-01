@@ -3,8 +3,10 @@
 CLI_VERSION=$1
 # Install required dependencies for Functional Tests
 apt update
-apt install -y make wget git curl jq ykcs11 g++
-pip install -r ${UMBRELLA_PATH}/requirements.txt
+apt install -y make wget git curl jq g++
+pip install --upgrade pip
+pip install pipenv
+PIPENV_PIPFILE=${UMBRELLA_PATH}/Pipfile pipenv install --system --deploy
 
 # Install CLI
 case ${CLI_VERSION} in

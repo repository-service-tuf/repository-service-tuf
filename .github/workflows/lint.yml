@@ -5,7 +5,7 @@ on:
     branches: [ 'main' ]
     paths:
       - 'tests/**'
-      - 'requirements.txt'
+      - 'Pipfile*'
       - '.github/workflows/lint.yml'
   workflow_dispatch:
 
