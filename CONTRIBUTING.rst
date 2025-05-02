@@ -7,17 +7,20 @@ taking the time to contribute!
 
 Please familiarize yourself with the `Code of Conduct`_ before contributing.
 
+Getting help and involved
+=========================
+
 .. slack-meetings-mail
 
 Slack channel
-=============
+-------------
 
 `#repository-service-for-tuf <https://openssf.slack.com/archives/C052QF5CZFH>`_
 channel on `OpenSSF Slack <https://openssf.slack.com/>`_.
 
 
 Meetings
-========
+--------
 
 * `RSTUF Community Meetings at OpenSSF Calendar <https://calendar.google.com/calendar/u/0?cid=czYzdm9lZmhwNWk5cGZsdGI1cTY3bmdwZXNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ>`_
 
@@ -27,7 +30,7 @@ Meetings
 
 
 RSTUF mailing list
-==================
+------------------
 
 Join the mail list https://lists.openssf.org/g/RSTUF
 
@@ -35,8 +38,8 @@ email: RSTUF@lists.openssf.org
 
 .. dco
 
-DCO
-===
+Developer Certificate of Origin (DCO)
+=====================================
 
 Before you start working with Repository Service for TUF, please read our
 `Developer Certificate of Origin <https://cla.vmware.com/dco>`_.
@@ -65,48 +68,180 @@ Pull Request. Contributions may include:
 
 
 The Repository Service for TUF (RSTUF) has multiple components to which you can
-contribute.
-
-Check the specific repository CONTRIBUTING documentation for more specific
-details:
-
-* `Umbrella Repository Service for TUF <https://github.com/repository-service-tuf/repository-service-tuf/blob/main/CONTRIBUTING.rst>`_
-* `Repository Service for TUF API <https://github.com/repository-service-tuf/repository-service-tuf-api/blob/main/CONTRIBUTING.rst>`_
-* `Repository Service for TUF Worker <https://github.com/repository-service-tuf/repository-service-tuf-worker/blob/main/CONTRIBUTING.rst>`_
-* `Repository Service for TUF Command Line Interface (CLI) <https://github.com/repository-service-tuf/repository-service-tuf-cli/blob/main/CONTRIBUTING.rst>`_
-
-.. rstuf-contributing-links
+contribute: CLI, API, and Worker.
 
 
 Getting the source code
-=======================
+-----------------------
 
-`Fork <https://docs.github.com/en/get-started/quickstart/fork-a-repo>`_ the
-repository on `GitHub <https://github.com/repository-service-tuf/repository-service-tuf>`_ and
-`clone <https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository>`_
-it to your local machine:
+Fork the repository
+^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: console
+Choose the component you want to contribute to and follow the instructions
+below to get the source code.
 
-    git clone git@github.com:YOUR-USERNAME/repository-service-tuf.git
-    cd repository-service-tuf
-    git submodule update --init --recursive
+.. collapse:: Repository Service for TUF CLI (CLI)
+
+    `Fork <https://docs.github.com/en/get-started/quickstart/fork-a-repo>`_ the
+    repository on `GitHub <https://github.com/repository-service-tuf/repository-service-tuf-cli>`_ and
+    `clone <https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository>`_
+    it to your local machine:
+
+    .. code-block:: console
+
+        git clone git@github.com:YOUR-USERNAME/repository-service-tuf-cli.git
+        cd repository-service-tuf-cli
+
+.. collapse:: Repository Service for TUF API (API)
+
+    `Fork <https://docs.github.com/en/get-started/quickstart/fork-a-repo>`_ the
+    repository on `GitHub <https://github.com/repository-service-tuf/repository-service-tuf-api>`_ and
+    `clone <https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository>`_
+    it to your local machine:
+
+    .. code-block:: console
+
+        git clone git@github.com:YOUR-USERNAME/repository-service-tuf-api.git
+        cd repository-service-tuf-cli
+
+
+.. collapse:: Repository Service for TUF Worker (Worker)
+
+    `Fork <https://docs.github.com/en/get-started/quickstart/fork-a-repo>`_ the
+    repository on `GitHub <https://github.com/repository-service-tuf/repository-service-tuf-cli>`_ and
+    `clone <https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository>`_
+    it to your local machine:
+
+    .. code-block:: console
+
+        git clone git@github.com:YOUR-USERNAME/repository-service-tuf-worker.git
+        cd repository-service-tuf-cli        
+
+|
+
+Add a git remote
+^^^^^^^^^^^^^^^^
 
 Add a `remote
 <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-for-a-fork>`_ and
 regularly `sync <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork>`_ to make sure
 you stay up-to-date with our repository:
 
-.. code-block:: console
+Choose the component to get the instructions
 
-    git remote add upstream https://github.com/repository-service-tuf/repository-service-tuf
-    git checkout main
-    git fetch upstream
-    git merge upstream/main
+.. collapse:: Repository Service for TUF CLI (CLI)
 
+    .. code-block:: console
+
+        git remote add upstream https://github.com/repository-service-tuf/repository-service-tuf-cli
+        git checkout main
+        git fetch upstream
+        git merge upstream/main
+
+.. collapse:: Repository Service for TUF API (API)
+
+    .. code-block:: console
+
+        git remote add upstream https://github.com/repository-service-tuf/repository-service-tuf-api
+        git checkout main
+        git fetch upstream
+        git merge upstream/main
+
+.. collapse:: Repository Service for TUF Worker (Worker)
+
+    .. code-block:: console
+
+        git remote add upstream https://github.com/repository-service-tuf/repository-service-tuf-worker
+        git checkout main
+        git fetch upstream
+        git merge upstream/main
+
+|
 
 Preparing the environment
-=========================
+-------------------------
+
+Create your development environment
+
+Verify that you have Make installed
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We use Make to run, build, update docs, tests, formatting, etc.
+Verify that you have Make installed in your environment.
+
+.. code-block:: console
+
+    make --version
+
+If you do not have ``Make`` installed,
+consult your operating system documentation on how to install ``make``.
+
+
+Docker
+^^^^^^
+
+Why Docker?
+
+Docker simplifies development environment set up.
+
+RSTUF uses Docker and `Docker Compose <https://docs.docker.com/compose/>`_
+to automate setting up a "batteries included" development environment. The
+:file:`Dockerfile` and :file:`docker-compose.yml` files include all the
+required steps for installing and configuring all the required external
+services of the development environment.
+
+
+Installing Docker
+~~~~~~~~~~~~~~~~~
+
+* Install `Docker Engine <https://docs.docker.com/engine/installation/>`_
+
+The best experience for building RSTUF on Windows 10 is to use the
+`Windows Subsystem for Linux`_ (WSL) in combination with both
+`Docker for Windows`_ and `Docker for Linux`_. Follow the instructions
+for both platforms.
+
+.. _Docker for Mac: https://docs.docker.com/engine/installation/mac/
+.. _Docker for Windows: https://docs.docker.com/engine/installation/windows/
+.. _Docker for Linux: https://docs.docker.com/engine/installation/linux/
+.. _Windows Subsystem for Linux: https://docs.microsoft.com/windows/wsl/
+
+
+Verifying Docker installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Check that Docker is installed: ``docker -v``
+
+
+Install Docker Compose
+~~~~~~~~~~~~~~~~~~~~~~
+
+Install Docker Compose using the Docker-provided
+`installation instructions <https://docs.docker.com/compose/install/>`_.
+
+.. note::
+   Docker Compose will be installed by `Docker for Mac`_ and
+   `Docker for Windows`_ automatically.
+
+
+Verifying Docker Compose installation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Check that Docker Compose is installed: ``docker compose version``
+
+
+Python and Pipenv
+^^^^^^^^^^^^^^^^^
+
+Make sure you have Python installed, we recommend the latest version of Python 3.x.
+
+https://www.python.org/downloads/
+
+Install Pipenv
+~~~~~~~~~~~~~~
+
+Pipenv is a tool that automatically creates and manages a virtual environment
+and it is used by the RSTUF project to manage dependencies.
 
 After installing Python, install the pipenv tool:
 
@@ -129,6 +264,103 @@ The flag -d will install the development requirements:
 .. code:: shell
 
     $ pipenv install -d
+
+Developement
+------------
+
+.. note::
+   RSTUF development can be done using Makefile scripts which
+   execute all developer actions.
+   
+   The Makefile contains common commands to run the development environment.
+   You can run ``make help`` to see all the available commands.
+
+Here are some of the most common commands:
+
+Running the development environment
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To run the development environment, use the following command:
+
+.. code:: shell
+
+    $ make run-dev
+
+This will start the development environment with all the required services.
+All changes doe in the code will be reflected in the development environment.
+
+- RSTUF API will be available at: http://localhost
+- The TUF Metadata will be available at: http://localhost:8080
+
+The logs will be available in the terminal where you started the development
+environment.
+
+You can stop the development environment with ``CTRL + C`` or stop it in 
+another terminal with:
+
+.. code:: shell
+
+    $ make stop
+
+To clean up the development environment, use the following command:
+
+.. code:: shell
+
+    $ make clean
+
+
+Running checks with pre-commit
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The pre-commit tool is installed as part of the development requirements.
+
+To automatically run checks before you commit your changes you should run:
+
+.. code:: shell
+
+    $ make precommit
+
+This will install the git hook scripts for the first time, and run the
+pre-commit tool.
+Now ``pre-commit`` will run automatically on ``git commit``.
+
+Running tests
+^^^^^^^^^^^^^
+To run the tests, use the following command:
+
+.. code:: shell
+
+    $ make test
+
+
+How to add new dependency
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Install the requirements package.
+
+The flag -d will install the development requirements.
+
+.. code:: shell
+
+    $ pipenv install -d <package>
+    $ pipenv install <package>
+
+
+Build local documentation
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: shell
+
+    $ make docs
+
+
+Reformat the code (linters)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: shell
+
+    $ make reformat
+
 
 Submitting changes
 ==================
@@ -154,48 +386,15 @@ Submitting changes
 
     $ git push
 
-How to add new requirements
-===========================
 
-Install the requirements package.
+Check the specific repository CONTRIBUTING documentation for more specific
+details:
 
-The flag -d will install the development requirements.
+* `Umbrella Repository Service for TUF <https://github.com/repository-service-tuf/repository-service-tuf/blob/main/CONTRIBUTING.rst>`_
+* `Repository Service for TUF API <https://github.com/repository-service-tuf/repository-service-tuf-api/blob/main/CONTRIBUTING.rst>`_
+* `Repository Service for TUF Worker <https://github.com/repository-service-tuf/repository-service-tuf-worker/blob/main/CONTRIBUTING.rst>`_
+* `Repository Service for TUF Command Line Interface (CLI) <https://github.com/repository-service-tuf/repository-service-tuf-cli/blob/main/CONTRIBUTING.rst>`_
 
-.. code:: shell
-
-    $ pipenv install -d <package>
-    $ pipenv install <package>
-
-
-Update all project requirements
--------------------------------
-
-.. code:: shell
-
-    $ make requirements
-
-Build local documentation
-=========================
-
-.. code:: shell
-
-    $ make docs
-
-Run linters
-===========
-
-.. code:: shell
-
-    $ make lint
-
-Run local functional tests
-==========================
-
-You must to have the Repository Service for TUF running local
-
-.. code:: shell
-
-    $ make functional-tests
-
+.. rstuf-contributing-links
 
 .. _Code of Conduct: CODE_OF_CONDUCT.rst
