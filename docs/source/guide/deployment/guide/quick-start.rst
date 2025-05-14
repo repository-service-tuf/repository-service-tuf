@@ -80,7 +80,7 @@ Add to .local domain the RSTUF API and Localstack services
 
 .. code:: shell
 
-    ❯ echo "$(minikube ip) rstuf.local localstack.local" | sudo tee -a /etc/hosts
+    ❯ echo "127.0.0.1 rstuf.local localstack.local" | sudo tee -a /etc/hosts
 
 
 Start the minikube tunnel:
