@@ -102,12 +102,12 @@ Steps
 
       $ docker ps -a
       CONTAINER ID   IMAGE                                                                 COMMAND                  CREATED              STATUS                        PORTS                                                                  NAMES
-      f3eb8e38c244   postgres:15.1                                                         "docker-entrypoint.s…"   59 seconds ago       Up 58 seconds (healthy)       5432/tcp                                                               rstuf_postgres.1.n9bculkxiikst502oneq2y1tl
-      00831512a35d   redis:4.0                                                             "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   6379/tcp                                                               rstuf_redis.1.gy8owq16qa0fbgyklr6ji1hyy
       a15dc8f6f3c9   ghcr.io/repository-service-tuf/repository-service-tuf-api:latest      "bash entrypoint.sh"     About a minute ago   Up About a minute                                                                                    rstuf_rstuf-api.1.o8zmoccz2n4vnxemczlrrg3o9
-      40d410b9c6ff   python:3.10-slim-buster                                               "python -m http.serv…"   About a minute ago   Up About a minute                                                                                    rstuf_web-server.1.s29tparemtrj5tut6l41in8ah
       5762860c1ccc   ghcr.io/repository-service-tuf/repository-service-tuf-worker:latest   "bash entrypoint.sh"     About a minute ago   Up About a minute (healthy)                                                                          rstuf_rstuf-worker.1.aq20wunul0z9lla0nkpo303zn
-
+      7dcc51a56f4d   redis:8.0.0-alpine3.21                                                "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)     0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp                          repository-service-tuf-redis-1
+      9e56cb40a145   python:3.13-slim                                                      "python -m http.serv…"   About a minute ago   Up About a minute               0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp                          repository-service-tuf-web-1
+      fcd0dd134d5c   postgres:17.5-alpine3.21                                              "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)     0.0.0.0:5433->5432/tcp, [::]:5433->5432/tcp                          repository-service-tuf-postgres-1
+      cd7095179f70   python:3.13-slim                                                      "python -V"              About a minute ago   Exited (0) About a minute ago                                                                        repository-service-tuf-rstuf-ft-runner-1
 
   Verify ``rstuf_rstuf-worker`` logs
 

@@ -22,7 +22,7 @@ spec:
         io.kompose.service: redis
     spec:
       containers:
-        - image: redis:4.0
+        - image: redis:8.0.0-alpine3.21
           livenessProbe:
             exec:
               command:
@@ -71,7 +71,7 @@ spec:
                   key: password
             - name: PGDATA
               value: /var/lib/postgresql/data/rstuf
-          image: postgres:15.1
+          image: postgres:17.5-alpine3.21
           livenessProbe:
             exec:
               command:
