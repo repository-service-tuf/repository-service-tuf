@@ -34,7 +34,7 @@ services:
     image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:latest
     volumes:
       - rstuf-storage:/var/opt/repository-service-tuf/storage
-      - ./local-keyvault/:/var/opt/repository-service-tuf/keyvault/ # map the path where your key is stored
+      - ./local-keyvault/:/var/opt/repository-service-tuf/keyvault/ # map the path where is your key
     environment:
       RSTUF_STORAGE_BACKEND: LocalStorage
       RSTUF_LOCAL_STORAGE_BACKEND_PATH: /var/opt/repository-service-tuf/storage
