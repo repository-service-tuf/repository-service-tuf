@@ -93,13 +93,10 @@ def task_completed_within_threshold():
                 url=f"/api/v1/task/?task_id={task_id}",
             )
             assert response.status_code == 200, response.text
-            task_response_json = response.json()
-            # "result" is missing when the task is still "PENDING"
-            result = task_response_json["data"].get("result")
-            if result is not None:
-                # "status" is missing when the task is in its earliest stage
-                if result.get("status") is True:
-                    break
+            task_response_json = response.json()            
+            state = task_response_json["data"].get("state")
+            if state == "SUCCESS":
+                break
 
         perfomance_fail = os.getenv("PERFORMANCE", "true").lower() == "true"
         if (
