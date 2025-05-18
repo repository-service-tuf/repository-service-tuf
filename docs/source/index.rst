@@ -166,3 +166,16 @@ Documentation List
 
 .. [#] `Wikipedia <https://en.wikipedia.org/wiki/The_Update_Framework>`_
 .. [#] Warehouse_
+
+
+Documentation Versions
+=====================
+
+This documentation is versioned to match RSTUF software releases. You are currently viewing the **latest** version.
+
+To access documentation for a specific version:
+
+* Use the version selector in the bottom-left corner of this page
+* Or visit: https://repository-service-tuf.readthedocs.io/en/vX.Y.Z/
+
+For more information, see the :ref:`guide/general/versioning:Documentation Versioning` guide.
