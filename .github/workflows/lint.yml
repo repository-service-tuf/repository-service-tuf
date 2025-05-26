@@ -9,6 +9,9 @@ on:
       - '.github/workflows/lint.yml'
   workflow_dispatch:
 
+permissions:
+  contents: read  # Required: to checkout repository code for linting
+
 jobs:
   lint:
     runs-on: ubuntu-latest
