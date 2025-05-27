@@ -102,7 +102,7 @@ below to get the source code.
     .. code-block:: console
 
         git clone git@github.com:YOUR-USERNAME/repository-service-tuf-api.git
-        cd repository-service-tuf-cli
+        cd repository-service-tuf-api
 
 
 .. collapse:: Repository Service for TUF Worker (Worker)
@@ -115,7 +115,7 @@ below to get the source code.
     .. code-block:: console
 
         git clone git@github.com:YOUR-USERNAME/repository-service-tuf-worker.git
-        cd repository-service-tuf-cli        
+        cd repository-service-tuf-worker      
 
 |
 
@@ -265,7 +265,7 @@ The flag -d will install the development requirements:
 
     $ pipenv install -d
 
-Developement
+Development
 ------------
 
 .. note::
@@ -287,7 +287,7 @@ To run the development environment, use the following command:
     $ make run-dev
 
 This will start the development environment with all the required services.
-All changes doe in the code will be reflected in the development environment.
+All changes done in the code will be reflected in the development environment.
 
 - RSTUF API will be available at: http://localhost
 - The TUF Metadata will be available at: http://localhost:8080
@@ -336,13 +336,20 @@ To run the tests, use the following command:
 How to add new dependency
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Install the requirements package.
+Install the new package as a dependency.
 
-The flag -d will install the development requirements.
+If you are adding a new package that is only needed for development, use the
+``-d`` flag to install it as a development dependency.
 
 .. code:: shell
 
     $ pipenv install -d <package>
+
+If you are adding a new package that is needed for the application to run,
+use the following command without the ``-d`` flag to install it as a runtime dependency.
+
+.. code:: shell
+
     $ pipenv install <package>
 
 
@@ -371,7 +378,19 @@ Submitting changes
 
     $ git checkout -b <new_change_name>
 
-2. Perform the changes
+2. Perform the changes and commit them
+
+.. code:: shell
+
+    $ git add <files_you_changed>
+    $ git commit -m "commit messaage"
+
+3. Push your changes to your fork
+
+.. code:: shell
+
+    $ git push origin <your_new_branch>
+
 3. Run local linters, tests, etc
 4. Create a local commit with a `good title and description
    <https://blogs.vmware.com/opensource/2021/04/14/improve-your-git-commits-in-two-easy-steps/>`_
@@ -380,12 +399,9 @@ Submitting changes
 
     $ git commit -a -s
 
-1. Push to Git
+4. Open a Pull Request
 
-.. code:: shell
-
-    $ git push
-
+   Go to the `GitHub repository <https://github.com/repository-service-tuf/repository-service-tuf>`_ and create a new Pull Request from your branch.
 
 Check the specific repository CONTRIBUTING documentation for more specific
 details:
