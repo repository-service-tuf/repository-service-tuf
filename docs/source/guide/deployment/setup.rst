@@ -26,7 +26,7 @@ Bootstrap.
 To make this process easier,
 the :ref:`guide/repository-service-tuf-cli/index:Repository Service for TUF CLI`
 provides an interactive guided process to perform the
-:ref:`Ceremony <guide/repository-service-tuf-cli/index:Ceremony (``ceremony\`\`)>`.
+:ref:`Ceremony <guide/repository-service-tuf-cli/index:Ceremony>`.
 
 .. note::
     Required RSTUF CLI installed
@@ -128,7 +128,7 @@ separate step.
 .. code::
 
     ❯ rstuf admin ceremony --out
-    Saved result to 'ceremony-payload.json'
+    Saved result to ``ceremony-payload.json``
 
 If the Ceremony is done disconnected, the next step is to perform the bootstrap.
 
@@ -154,10 +154,10 @@ Bootstrap
 If a Ceremony :ref:`guide/deployment/setup:Connected` is complete, skip this,
 as the RSTUF service is ready.
 
-To perform the boostrap you require the payload generated during the
-:ref:`guide/deployment/setup:Bootstrap`.
+To perform the bootstrap you require the payload generated during the
+:ref:`guide/deployment/setup:Disconnected`.
 
-You can do it using the rstuf admin-legacy
+You can do it using the 'rstuf admin' command.
 
 .. code::
 
@@ -166,4 +166,4 @@ You can do it using the rstuf admin-legacy
     Bootstrap status: ACCEPTED (c1d2356d25784ecf90ce373dc65b05c7)
     Bootstrap status:  STARTED
     Bootstrap status:  SUCCESS
-    Bootstrap completed using `ceremony-payload.json`. 🔐 🎉
+    Bootstrap completed using ``ceremony-payload.json``. 🔐 🎉
