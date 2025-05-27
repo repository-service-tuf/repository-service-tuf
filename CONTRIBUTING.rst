@@ -340,6 +340,7 @@ Install the new package as a dependency.
 
 If you are adding a new package that is only needed for development, use the
 ``-d`` flag to install it as a development dependency.
+
 .. code:: shell
 
     $ pipenv install -d <package>
