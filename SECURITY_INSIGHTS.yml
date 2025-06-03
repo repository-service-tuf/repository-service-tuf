@@ -1,0 +1,79 @@
+header:
+  schema-version: 2.1.0
+  last-updated: "2025-06-03" # Update after review
+  last-reviewed: "2025-06-03" # Update after review
+  url: https://github.com/repository-service-tuf/repository-service-tuf
+
+project:
+  name: Repository Service for TUF (RSTUF)
+  administrators:
+    - name: Kairo de Araujo
+      email: kdearaujo@vmware.com
+      social: https://github.com/kairoaraujo
+      primary: true
+    - name: Martin Vrachev
+      email: mvrachev@vmware.com
+      social: https://github.com/MVrachev
+    - name: Radoslav Dimitrov
+      email: dimitrovr@vmware.com
+      social: https://github.com/rdimitrov
+    - name: Lukas Pühringer
+      email: lukas.puehringer@nyu.edu
+      social: https://github.com/lukpueh
+    - name: Konstantinos Papadopoulos
+      email: konpap1996@yahoo.com
+      social: https://github.com/KAUTH
+  repositories:
+    - name: Repository Service for TUF (RSTUF)
+      url: https://github.com/repository-service-tuf/repository-service-tuf
+      comment: |
+        Is the Umbrella Repository Service for TUF
+    - name: Repository Service for TUF Command Line Interface (CLI)
+      url: https://github.com/repository-service-tuf/repository-service-tuf-cli
+      comment: |
+        The Repository Service for TUF Command Line Interface (CLI) is a CLI Python application to manage the Repository Service for TUF.
+    - name: Repository Service for TUF API
+      url: https://github.com/repository-service-tuf/repository-service-tuf-api
+      comment: |
+        Repository Service for TUF API Service
+    - name: Repository Service for TUF Worker
+      url: https://github.com/repository-service-tuf/repository-service-tuf-worker
+      comment: |
+        Repository Service for TUF Worker
+  vulnerability-reporting:
+    reports-accepted: true
+    bug-bounty-available: false
+
+repository:
+  url: https://github.com/repository-service-tuf/repository-service-tuf
+  status: active
+  accepts-change-request: true
+  accepts-automated-change-request: true
+  core-team:
+    - name: Kairo de Araujo
+      email: kdearaujo@vmware.com
+      social: https://github.com/kairoaraujo
+      primary: true
+    - name: Martin Vrachev
+      email: mvrachev@vmware.com
+      social: https://github.com/MVrachev
+    - name: Radoslav Dimitrov
+      email: dimitrovr@vmware.com
+      social: https://github.com/rdimitrov
+    - name: Lukas Pühringer
+      email: lukas.puehringer@nyu.edu
+      social: https://github.com/lukpueh
+    - name: Konstantinos Papadopoulos
+      email: konpap1996@yahoo.com
+      social: https://github.com/KAUTH
+  license:
+    url: https://github.com/repository-service-tuf/repository-service-tuf/blob/main/LICENSE
+    expression: MIT
+  security:
+    assessments:
+      third-party:
+        - evidence: https://repository-service-tuf.readthedocs.io/en/stable/blog/posts/rstuf-security-audit-for-1.0.0.html
+          date: "2025-02-14"
+          comment: |
+            Security assessment conducted by X41 D-Sec GmbH. The assessment focused on the design, implementation, and deployment of RSTUF services and tools. 
+            The X41 team identified a set of findings ranging from low to high severity — importantly, no critical vulnerabilities were discovered.
