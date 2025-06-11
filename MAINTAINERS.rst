@@ -4,21 +4,21 @@ Maintainers
 Kairo de Araujo
 ---------------
 
-Email: kdearaujo@vmware.com
+Email: kairo.araujo@eclipse-foundation.org
 
 GitHub username: @kairoaraujo
 
 Martin Vrachev
 --------------
 
-Email: mvrachev@vmware.com
+Email: martin.vrachev@gmail.com
 
 GitHub username: @MVrachev
 
 Radoslav Dimitrov
 -----------------
 
-Email: dimitrovr@vmware.com
+Email: radoslav@stacklok.com
 
 GitHub username: @rdimitrov
 
