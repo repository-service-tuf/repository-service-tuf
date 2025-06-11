@@ -8,7 +8,7 @@ project:
   name: Repository Service for TUF (RSTUF)
   administrators:
     - name: Kairo de Araujo
-      email: kairo@dearaujo.nl
+      email: kairo.araujo@eclipse-foundation.org
       social: https://github.com/kairoaraujo
       primary: true
     - name: Martin Vrachev
