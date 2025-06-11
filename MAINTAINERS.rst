@@ -4,7 +4,7 @@ Maintainers
 Kairo de Araujo
 ---------------
 
-Email: kairo@dearaujo.nl
+Email: kairo.araujo@eclipse-foundation.org
 
 GitHub username: @kairoaraujo
 
