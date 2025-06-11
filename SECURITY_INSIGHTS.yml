@@ -8,14 +8,14 @@ project:
   name: Repository Service for TUF (RSTUF)
   administrators:
     - name: Kairo de Araujo
-      email: kdearaujo@vmware.com
+      email: kairo@dearaujo.nl
       social: https://github.com/kairoaraujo
       primary: true
     - name: Martin Vrachev
-      email: mvrachev@vmware.com
+      email: martin.vrachev@gmail.com
       social: https://github.com/MVrachev
     - name: Radoslav Dimitrov
-      email: dimitrovr@vmware.com
+      email: radoslav@stacklok.com
       social: https://github.com/rdimitrov
     - name: Lukas Pühringer
       email: lukas.puehringer@nyu.edu
