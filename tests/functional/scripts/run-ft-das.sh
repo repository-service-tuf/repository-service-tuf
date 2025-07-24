@@ -128,4 +128,4 @@ if [[ ${UMBRELLA_PATH} != "." ]]; then
     cp ceremony-payload.json ${UMBRELLA_PATH}/
 fi
 
-make -C ${UMBRELLA_PATH}/ functional-tests-exitfirst PYTEST_GROUP=${PYTEST_GROUP} SLOW=${SLOW}
+make -C ${UMBRELLA_PATH}/ functional-tests-exitfirst PYTEST_GROUP=${PYTEST_GROUP:-1} SLOW=${SLOW}
