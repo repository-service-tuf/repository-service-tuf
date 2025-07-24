@@ -326,11 +326,26 @@ Now ``pre-commit`` will run automatically on ``git commit``.
 
 Running tests
 ^^^^^^^^^^^^^
-To run the tests, use the following command:
+To run the Functional Tests:
+    
+1. Make sure you have a development environment running (``make run-dev``).    
+2. Use one of the following commands:
 
 .. code:: shell
 
-    $ make test
+    $ make ft-das
+    $ make ft-signed
+
+The following parameters can be passed to the commands:
+
+- ``CLI_VERSION``: to use a specific version of the CLI (``make ft-das CLI_VERSION=v0.8.0b1``)
+- ``PYTEST_GROUP``: to run a specific group of tests (``make ft-das PYTEST_GROUP=1``)
+- ``SLOW``: to run the performance tests (``make ft-das SLOW=1``)
+
+.. code:: shell
+
+    $ make ft-das CLI_VERSION=v0.8.0b1 PYTEST_GROUP=1 SLOW=yes
+    $ make ft-signed CLI_VERSION=latest PYTEST_GROUP=1 SLOW=yes
 
 
 How to add new dependency
