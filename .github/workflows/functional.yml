@@ -59,7 +59,7 @@ jobs:
 
     steps:
       - name: Checkout RSTUF Umbrella
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
 
       - name: RSTUF Deployment with docker compose
         uses: isbang/compose-action@40041ff1b97dbf152cd2361138c2b03fa29139df
@@ -84,7 +84,7 @@ jobs:
 
     steps:
       - name: Checkout RSTUF Umbrella
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
 
       - name: RSTUF Deployment
         uses: isbang/compose-action@40041ff1b97dbf152cd2361138c2b03fa29139df
