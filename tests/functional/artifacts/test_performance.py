@@ -97,7 +97,7 @@ def get_tasks(multiple_requests, http_request, timeout):
 
             data = response.json()["data"]
             state = data.get("state", None)
-            if state == "ERRORED":
+            if state in ("SUCCESS", "ERRORED"):
                 tasks_result.append(task)
                 tasks.remove(task)
 
