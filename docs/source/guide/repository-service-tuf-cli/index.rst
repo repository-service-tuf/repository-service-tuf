@@ -30,9 +30,7 @@ Using pip:
     ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
     ╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────────────────────────╮
     │ admin                             Administrative  Commands                                                           │
-    │ admin-legacy                      Administrative (Legacy) Commands                                                   │
     │ artifact                          Artifact Management Commands                                                       │
-    │ key                               Cryptographic Key Commands                                                         │
     │ task                              Task Management Commands                                                           │
     ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
@@ -98,7 +96,8 @@ It executes administrative commands to the Repository Service for TUF.
     │ --help        -h        Show this message and exit.                                                                        │
     ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
     ╭─ Commands ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │ ceremony                         Bootstrap Ceremony to create initial root metadata and RSTUF config.                      │
+    │ ceremony                         Bootstrap Ceremony to create initial root metadata and RSTUF config.
+    │ delegations                      Delegations management.                      
     │ import-artifacts                 Import artifacts information from exported CSV file and send it to RSTUF API deployment.  │
     │ metadata                         Metadata management.                                                                      │
     │ send                             Send a payload to an existing RSTUF API deployment                                        │
@@ -135,7 +134,8 @@ You can do the Ceremony offline. This means on a disconnected computer
 
     ╭─ Options ─────────────────────────────────────────────────────────────────────────────────────────╮
     │ --out          FILENAME  Write output json result to FILENAME (default: 'ceremony-payload.json')  │
-    │ --dry-run                Run ceremony in dry-run mode without sending result to API.              │
+    │ --dry-run                Run ceremony in dry-run mode without sending result to API.              │ 
+    │ --timeout  -t  INTEGER   Timeout in seconds.                                                      │ 
     │ --help     -h            Show this message and exit.                                              │
     ╰───────────────────────────────────────────────────────────────────────────────────────────────────╯
 
@@ -154,7 +154,7 @@ Metadata Management (``metadata``)
 
 .. code::
 
-    ❯ rstuf admin metadata
+    ❯ rstuf admin metadata -h
 
     Usage: rstuf admin metadata [OPTIONS] COMMAND [ARGS]...
 
@@ -164,7 +164,8 @@ Metadata Management (``metadata``)
     │ --help  -h    Show this message and exit.                                                                            │
     ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
     ╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │ sign               Add one signature to root metadata.                                                               │
+    │ sign               Add one signature to root metadata.                                                               │       
+    │ stop-sign          Stop an existing pending signing event for a given metadata role.                                 │
     │ update             Update root metadata and bump version.                                                            │
     ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
@@ -189,12 +190,13 @@ sign (``sign``)
     * If `--dry-run` is passed, result is not sent to API. You can still pass `--out [FILENAME]` to store the result locally.
     * If `--in` and `--dry-run` are passed, `--api-server` admin option and `SERVER` from config will be ignored.
 
-    ╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │ --in           FILENAME  Input file containing the JSON response from the 'GET /api/v1/metadata/sign' RSTUF API endpoint.  │
-    │ --out          FILENAME  Write output JSON result to FILENAME (default: 'sign-payload.json')                               │
-    │ --dry-run                Run sign in dry-run mode without sending result to API.                                           │
-    │ --help     -h            Show this message and exit.                                                                       │
-    ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────╮
+    │ --path        -p  TEXT  A custom path (`TARGETPATH`) for the file, defined in the metadata.            │
+    │ --api-server      TEXT  URL to an RSTUF API.                                                           │
+    │ --headers     -H  TEXT  Headers to include in the request. Example: 'Authorization: Bearer <token>,    │
+    │                         Content-Type: application/json'                                                │  
+    │ --help        -h        Show this message and exit.                                                    │
+    ╰────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
 
 .. rstuf-cli-admin-metadata-update
@@ -413,9 +415,11 @@ This command adds the provided artifact to the TUF Metadata using the RSTUF REST
 
     Add artifacts to the TUF metadata.
 
-    ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────------╮
-    │ --path        -p  TEXT  A custom path (`TARGETPATH`) for the file, defined in the metadata. [required] |
-    | --api-server      TEXT  URL to an RSTUF API.                                                           │
+    ╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────╮
+    │ --path        -p  TEXT  A custom path (`TARGETPATH`) for the file, defined in the metadata.            │
+    │ --api-server      TEXT  URL to an RSTUF API.                                                           │
+    │ --headers     -H  TEXT  Headers to include in the request. Example: 'Authorization: Bearer <token>,    │
+    │                         Content-Type: application/json'                                                │
     │ --help        -h        Show this message and exit.                                                    │
     ╰──────────────────────────────────────────────────────────────────────────────────────────────────------╯
 
@@ -513,6 +517,9 @@ This command provides artifact repository management for the RSTUF repository co
 
     List configured repositories.
 
+    ╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────╮
+    │ --help  -h    Show this message and exit.                                                              │
+    ╰────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 .. code::
 
     ❯ rstuf artifact repository update --help
