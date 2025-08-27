@@ -2,12 +2,6 @@
 Repository Service for TUF Documentation
 ========================================
 
-.. note::
-
-    Repository Service for TUF is considered in **beta** state.
-
-    Please reference the The RSTUF `ROADMAP`_ for feature and functionality plans.
-
 .. include:: ../../README.rst
   :start-after: .. readme-logo
   :end-before: .. readme-design
