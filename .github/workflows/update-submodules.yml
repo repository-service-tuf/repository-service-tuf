@@ -31,7 +31,8 @@ jobs:
           pipenv install -d
           sudo apt update
           sudo apt install plantuml -y
-          sudo wget -O /usr/share/plantuml/plantuml.jar https://github.com/plantuml/plantuml/releases/download/v1.2022.14/plantuml-1.2022.14.jar
+          # Try using the apt version
+          # sudo wget -O /usr/share/plantuml/plantuml.jar https://github.com/plantuml/plantuml/releases/download/v1.2022.14/plantuml-1.2022.14.jar
       - name: Sync git submodules
         run: |
           make sync-submodules
