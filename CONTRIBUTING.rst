@@ -328,10 +328,22 @@ Running tests
 ^^^^^^^^^^^^^
 To run the tests, use the following command:
 
+To run the Functional Tests:        
+1. Make sure you have a development environment running (``make run-dev``).    
+2. Use one of the following command:
+
 .. code:: shell
 
-    $ make test
+    $ make functional-tests
 
+
+The following parameters can be passed to the command:          
+
+- ``CLI_VERSION``: to use a specific version of the CLI.        
+- ``SLOW``: to run the performance tests                  
+
+.. code:: shell
+    $ make functional-tests CLI_VERSION=v0.17.1b1 SLOW=yes
 
 How to add new dependency
 ^^^^^^^^^^^^^^^^^^^^^^^^^
