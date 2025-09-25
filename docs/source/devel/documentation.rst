@@ -74,8 +74,19 @@ documentation using the Makefile (``make docs``)
 For each component, the ``make docs`` should also be available.
 
 
-Releasing new Documentation Version
-===================================
+Versioning Documentation
+=======================
+
+The RSTUF documentation follows the same versioning scheme as the software components (X.Y.Z). When a new version of RSTUF is released, a corresponding version of the documentation is created.
+
+To create a new documentation version:
+
+1. Ensure all documentation changes for the release are merged to the main branch
+2. Tag the repository with the new version (e.g., v1.2.3)
+3. The CI/CD pipeline will build the documentation and create a new version on ReadTheDocs
+4. Update the version history in the :ref:`guide/general/versioning:Documentation Versioning` guide
+
+This ensures users can access documentation specific to their RSTUF version.
 
 In the
 `umbrella repository <https://github.com/repository-service-tuf/repository-service-tuf>`_
