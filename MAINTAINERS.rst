@@ -35,3 +35,10 @@ Konstantinos Papadopoulos
 Email: konpap1996@yahoo.com
 
 GitHub username: @KAUTH
+
+Srinjoy Dutta
+--------------
+
+Email: srinjoydutta03@gmail.com
+
+GitHub username: srinjoydutta03
