@@ -110,3 +110,13 @@ Questions, feedback, and suggestions are welcomed on the
 channel on `OpenSSF Slack <https://openssf.slack.com/>`_.
 
 .. _ROADMAP: ROADMAP.rst
+
+
+Community Meeting
+============
+
+Our community meetings happen monthly with the TUF community meetings. 
+* Time: First Wednesday of the month at 15:00 UTC/11:00am EST/4:00pm PST 
+* Location: `Zoom link <https://zoom-lfx.platform.linuxfoundation.org/meeting/93810832920?password=b3f09489-f959-40d1-89b7-12f10d2ad2cb>`_
+* Agenda and meeting notes: `https://hackmd.io/jdAk9rmPSpOYUdstbIvbjw`_
+* Calendar: `Linux Foundation Calendar <https://zoom-lfx.platform.linuxfoundation.org/meetings/tuf?view=month>`_
