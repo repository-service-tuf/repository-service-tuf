@@ -17,9 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: functional-tests
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
       - name: Set up Python
-        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
         with:
           python-version: '3.13'      
       # Install the dependencies and update plantuml.
@@ -40,7 +40,7 @@ jobs:
         run: |
           pipenv run make docs
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
+        uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore: sync git submodules and docs"
