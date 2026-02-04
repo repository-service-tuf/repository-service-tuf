@@ -22,11 +22,11 @@ channel on `OpenSSF Slack <https://openssf.slack.com/>`_.
 Meetings
 --------
 
-* `RSTUF Community Meetings at OpenSSF Calendar <https://calendar.google.com/calendar/u/0?cid=czYzdm9lZmhwNWk5cGZsdGI1cTY3bmdwZXNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ>`_
-
-  - `Community Meetings <https://docs.google.com/document/d/13a_AtFpPK9WO4PlAN6ciD-G1jiBU3gEDtRD1OUinUFY>`_
-
-  - Sprint Planning Meetings (Every 2 weeks, see the `public calendar <https://calendar.google.com/calendar/u/0?cid=Y19hYWFjYjc2M2NkNTliNWJhOWUyYmY4N2U1MTJhM2Q4ZjEyYjkxNmFmYzdhOWM4YjQxMmZmNjcwZWYzNmFiOTdlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20>`_)
+Our community meetings happen monthly with the TUF community meetings.
+* Time: First Wednesday of the month at 15:00 UTC/11:00am EST/4:00pm PST 
+* Location: `Zoom link <https://zoom-lfx.platform.linuxfoundation.org/meeting/93810832920?password=b3f09489-f959-40d1-89b7-12f10d2ad2cb>`_
+* Agenda and meeting notes: `https://hackmd.io/jdAk9rmPSpOYUdstbIvbjw`_
+* Calendar: `Linux Foundation Calendar <https://zoom-lfx.platform.linuxfoundation.org/meetings/tuf?view=month>`_
 
 
 RSTUF mailing list
