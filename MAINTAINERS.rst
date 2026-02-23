@@ -42,3 +42,10 @@ Camila Vilarinho
 Email: camilaavilarinho@gmail.com
 
 GitHub username: @camilaavilarinho
+
+Srinjoy Dutta
+--------------
+
+Email: srinjoydutta03@gmail.com
+
+GitHub username: srinjoydutta03
