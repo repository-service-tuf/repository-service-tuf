@@ -36,6 +36,13 @@ Email: konpap1996@yahoo.com
 
 GitHub username: @KAUTH
 
+Camila Vilarinho
+-------------------------
+
+Email: camilaavilarinho@gmail.com
+
+GitHub username: @camilaavilarinho
+
 Srinjoy Dutta
 --------------
 
