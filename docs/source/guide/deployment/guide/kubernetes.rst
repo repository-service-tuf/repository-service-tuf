@@ -116,7 +116,7 @@ type as ``LocalStorage`` which requires a
 * RSTUF Workers will use the ``RSTUF_STORAGE_BACKEND_PATH`` as this volume
 
 * WebServer will use the same volume the HTTP root document (htdocs) to
-  expose the TUF Metadata at ``http://webserver/``
+  expose the TUF Metadata at ``http://webserver:8080/``
 
 redis-data persistent volume
 ============================
@@ -170,7 +170,7 @@ postgres service
 
 web-metadata
 ============
-* Exposes the port 80 externally, using a load balancer
+* Exposes the port 8080 externally, using a load balancer
 
 rstuf-api
 =========
@@ -201,7 +201,7 @@ Applying services
   postgres       ClusterIP      10.128.54.79     <none>            5432/TCP       30s
   redis          ClusterIP      10.128.202.49    <none>            6379/TCP       30s
   rstuf-api      LoadBalancer   10.128.44.53     <PUBLIC_IP>       8080:30158/TCP   30s
-  web-metadata   LoadBalancer   10.128.135.249   <PUBLIC_IP>       80:32744/TCP   30s
+  web-metadata   LoadBalancer   10.128.135.249   <PUBLIC_IP>       8080:32744/TCP   30s
 
 Deployment
 ##########
@@ -229,7 +229,7 @@ web-metadata is the Web Server is Apache which exposes the TUF Metadata
 
 * Web Server will use :ref:`guide/deployment/guide/kubernetes:rstuf-storage persistent volume`
   mounted on ``/usr/local/apache2/htdocs``
-* Web Server container will use port 80
+* Web Server container will use port 8080
 
 rstuf-api deployment
 ====================
