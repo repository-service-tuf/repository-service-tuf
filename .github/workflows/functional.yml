@@ -18,11 +18,11 @@ on:
           default: "latest"
           type: string
           required: False
-      docker_compose:
-        description: "Docker Compose File"
-        default: "docker-compose.yml"
-        type: string
-        required: False
+        docker_compose:
+          description: "Docker Compose File"
+          default: "docker-compose.yml"
+          type: string
+          required: False
 
   workflow_call:
     inputs:
