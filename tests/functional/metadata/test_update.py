@@ -172,7 +172,7 @@ def user_signs_the_metadata(http_request, task_id):
     folder_name = mkdtemp()
     setting_file = os.path.join(folder_name, ".rstuf.yml")
     test_settings = Dynaconf()
-    test_settings.SERVER = "http://repository-service-tuf-api"
+    test_settings.SERVER = "http://repository-service-tuf-api:8080"
     test_settings.HEADERS = None
     context = {"settings": test_settings, "config": setting_file}
 
