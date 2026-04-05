@@ -27,7 +27,7 @@ Some required services:
 
 ```shell
 
-docker run -p 80:80 \
+docker run -p 8080:8080 \
     --env="RSTUF_BROKER_SERVER=amqp://guest:guest@rabbitmq:5672" \
     --env="RSTUF_REDIS_SERVER=redis://redis" \
     ghcr.io/repository-service-tuf/repository-service-tuf-api:latest
@@ -95,7 +95,7 @@ A list can be given as shown in the example bellow:
 
 SSL Certificate file. Example ``/path/to/api.crt``
 
-Conainer running port will be 443
+Conainer running port will be 8443
 
 Requires a another environment variable ``SECRETS_RSTUF_SSL_KEY`` with the
 certificate key file. Example ``/path/to/api.key``
@@ -116,6 +116,6 @@ SECRETS_RSTUF_SSL_KEY=/run/secrets/SECRETS_RSTUF_SSL_KEY
 
 ### Ports
 
-Default port 80
+Default port 8080
 
-If using ``SECRETS_RSTUF_SSL_CERT``, port 443
+If using ``SECRETS_RSTUF_SSL_CERT``, port 8443
