@@ -32,7 +32,7 @@ def http_request():
     def _run_requests(
         method,
         headers=None,
-        host="http://repository-service-tuf-api",
+        host="http://repository-service-tuf-api:8080",
         url="/",
         data=None,
         json=None,
@@ -97,6 +97,10 @@ def task_completed_within_threshold():
             state = task_response_json["data"].get("state")
             if state == "SUCCESS":
                 break
+            # Add small delay to handle eventual consistency in CI
+            import time
+
+            time.sleep(0.5)
 
         perfomance_fail = os.getenv("PERFORMANCE", "true").lower() == "true"
         if (

@@ -174,7 +174,7 @@ web-metadata
 
 rstuf-api
 =========
-* Exposes the port 80 externally, using a load balancer
+* Exposes the port 8080 externally, using a load balancer
 
 Services example
 ----------------
@@ -200,7 +200,7 @@ Applying services
   kubernetes     ClusterIP      10.128.0.1       <none>            443/TCP        32d
   postgres       ClusterIP      10.128.54.79     <none>            5432/TCP       30s
   redis          ClusterIP      10.128.202.49    <none>            6379/TCP       30s
-  rstuf-api      LoadBalancer   10.128.44.53     <PUBLIC_IP>       80:30158/TCP   30s
+  rstuf-api      LoadBalancer   10.128.44.53     <PUBLIC_IP>       8080:30158/TCP   30s
   web-metadata   LoadBalancer   10.128.135.249   <PUBLIC_IP>       80:32744/TCP   30s
 
 Deployment
@@ -237,7 +237,7 @@ rstuf-api deployment
 * RSTUF API will use environment variables ``RSTUF_BROKER_SERVER`` and
   ``RSTUF_REDIS_SERVER`` as :ref:`guide/deployment/guide/kubernetes:redis deployment`
   address (``redis://redis``).
-* RSTUF API container will use port 80 to serve the API (internally)
+* RSTUF API container will use port 8080 to serve the API (internally)
 
 rstuf-worker deployment
 =======================
