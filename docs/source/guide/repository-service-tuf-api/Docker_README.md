@@ -95,7 +95,7 @@ A list can be given as shown in the example bellow:
 
 SSL Certificate file. Example ``/path/to/api.crt``
 
-Conainer running port will be 8443
+Container running port will be 8443
 
 Requires a another environment variable ``SECRETS_RSTUF_SSL_KEY`` with the
 certificate key file. Example ``/path/to/api.key``
