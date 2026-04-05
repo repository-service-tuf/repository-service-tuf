@@ -3,6 +3,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+import time
 from datetime import datetime, timezone
 from typing import List
 
@@ -80,6 +81,9 @@ def get_target_info():
 def task_completed_within_threshold():
     def _run_task_completion_check(http_request, response_json, threshold):
         """Validates that a task has finished within a threshold of seconds."""
+        task_threshold = max(
+            threshold, int(os.getenv("RSTUF_TASK_THRESHOLD", "0"))
+        )
         task_id = response_json["data"]["task_id"]
         task_submitted = dateutil.parser.parse(
             response_json["data"]["last_update"]
@@ -87,7 +91,7 @@ def task_completed_within_threshold():
         task_response_json = None
         while (
             datetime.now(tz=timezone.utc) - task_submitted
-        ).total_seconds() <= threshold:
+        ).total_seconds() <= task_threshold:
             response = http_request(
                 method="GET",
                 url=f"/api/v1/task/?task_id={task_id}",
@@ -98,8 +102,6 @@ def task_completed_within_threshold():
             if state == "SUCCESS":
                 break
             # Add small delay to handle eventual consistency in CI
-            import time
-
             time.sleep(0.5)
 
         perfomance_fail = os.getenv("PERFORMANCE", "true").lower() == "true"
@@ -108,10 +110,10 @@ def task_completed_within_threshold():
             and (
                 datetime.now(tz=timezone.utc) - task_submitted
             ).total_seconds()
-            > threshold
+            > task_threshold
         ):
             raise TimeoutError(
-                f"Task should be completed in {threshold} seconds."
+                f"Task should be completed in {task_threshold} seconds."
             )
 
         return task_response_json
