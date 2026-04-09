@@ -1,0 +1,106 @@
+# Lychee Link Checker Configuration
+# Repository: Repository Service for TUF (RSTUF)
+# Issue: #945 - Automate detection of outdated or broken links
+# Documentation: .github/LINK_CHECK_GUIDE.md
+# https://github.com/lycheeverse/lychee
+
+# ============================================================================
+# PERFORMANCE SETTINGS
+# ============================================================================
+
+# Timeout for each link check (in seconds)
+# Increase if checking slow servers, decrease for faster feedback
+timeout = 30
+
+# Number of retries for failed requests
+# Helps with transient network issues and rate limiting
+retries = 3
+
+# User agent for HTTP requests
+# Some servers block requests without a proper user agent
+user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+
+# ============================================================================
+# EXCLUSION PATTERNS - URLs to skip
+# ============================================================================
+# These patterns are excluded from link checking to avoid false positives
+# and improve performance. Add more patterns as needed.
+
+exclude = [
+  # Localhost and internal addresses
+  "^http://localhost",
+  "^http://127\\.0\\.0\\.1",
+  "^http://0\\.0\\.0\\.0",
+  
+  # Email addresses (mailto: links)
+  "^mailto:",
+  
+  # Private/internal domains
+  "^http://internal",
+  "^http://private",
+  
+  # File paths (local file references)
+  "^file://",
+  
+  # Zoom meeting links (dynamic, may have access restrictions)
+  "zoom\\.lfx\\.platform\\.linuxfoundation\\.org",
+  
+  # HackMD (collaborative docs, may have access restrictions)
+  "hackmd\\.io",
+  
+  # Git SSH URLs
+  "^git@",
+  
+  # Submodule references (handled separately in their own repos)
+  "repository-service-tuf-api",
+  "repository-service-tuf-cli",
+  "repository-service-tuf-worker",
+]
+
+# ============================================================================
+# EXCLUSION PATTERNS - Paths to skip
+# ============================================================================
+# These directories are excluded from scanning to improve performance
+# and avoid checking generated or temporary files.
+
+exclude_path = [
+  "docs/build",           # Generated HTML output
+  "docs/diagrams",        # PlantUML source files
+  "tests",                # Test files
+  ".git",                 # Git metadata
+  "node_modules",         # Node.js dependencies
+  "__pycache__",          # Python cache
+  "*.egg-info",           # Python package info
+  ".venv",                # Virtual environment
+  "venv",                 # Virtual environment
+]
+
+# ============================================================================
+# HTTP BEHAVIOR
+# ============================================================================
+
+# Verbosity level: quiet, normal, verbose
+# Use 'verbose' for debugging, 'quiet' for CI environments
+verbosity = "normal"
+
+# Accept invalid certificates (use with caution)
+# Set to true only if checking internal servers with self-signed certs
+insecure = false
+
+# Ignore specific HTTP status codes
+# 429 = Too Many Requests (rate limiting)
+ignore_status_codes = [
+  429,
+]
+
+# Check URL fragments (anchors)
+# Set to true to validate that anchor links exist on the page
+check_fragments = true
+
+# Follow HTTP redirects
+# Set to true to follow 301/302 redirects
+follow_redirects = true
+
+# Require HTTPS
+# Set to true to reject HTTP URLs
+require_https = false

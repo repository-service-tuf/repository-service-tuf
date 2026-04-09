@@ -2,7 +2,6 @@ volumes:
   repository-service-tuf-storage:
   repository-service-tuf-keyvault:
   repository-service-tuf-api-data:
-  repository-service-tuf-redis-data:
   repository-service-tuf-pgsql-data:
 
 services:
@@ -25,10 +24,12 @@ services:
     ports:
       - 80:80
     environment:
-      - RSTUF_BROKER_SERVER=redis://redis
-      - RSTUF_REDIS_SERVER=redis://redis
+      - RSTUF_BROKER_SERVER=amqp://guest:guest@rabbitmq:5672
+      - RSTUF_DB_SERVER=postgresql://postgres:secret@postgres:5432
     depends_on:
-      redis:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
         condition: service_healthy
 
   web:
@@ -39,14 +40,16 @@ services:
     ports:
       - "8080:8080"
 
-  redis:
-    image: redis:8.0.0-alpine3.21
-    volumes:
-      - repository-service-tuf-redis-data:/data
+  rabbitmq:
+    image: rabbitmq:3.13-alpine
     ports:
-      - "6379:6379"
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
       interval: 1s
 
   repository-service-tuf-worker:
@@ -55,16 +58,15 @@ services:
       - RSTUF_STORAGE_BACKEND=LocalStorage
       - RSTUF_LOCAL_STORAGE_BACKEND_PATH=/var/opt/repository-service-tuf/storage
       - RSTUF_ONLINE_KEY_DIR=/var/opt/repository-service-tuf/key_storage
-      - RSTUF_BROKER_SERVER=redis://redis
-      - RSTUF_REDIS_SERVER=redis://redis
+      - RSTUF_BROKER_SERVER=amqp://guest:guest@rabbitmq:5672
       - RSTUF_DB_SERVER=postgresql://postgres:secret@postgres:5432
     volumes:
       - repository-service-tuf-storage:/var/opt/repository-service-tuf/storage
       - ./tests/files/key_storage/:/var/opt/repository-service-tuf/key_storage
     depends_on:
-      redis:
-        condition: service_healthy
       postgres:
+        condition: service_healthy
+      rabbitmq:
         condition: service_healthy
     tty: true
     stdin_open: true
