@@ -120,6 +120,29 @@ Steps
 
   .. include:: ../setup.rst
 
+
+TUF Metadata Visualizer (Optional)
+==================================
+
+The TUF Metadata Visualizer provides a web-based interface to inspect TUF metadata and roles.
+
+To run the visualizer alongside the RSTUF Docker stack:
+
+1. Clone the TUF Metadata Visualizer repository as a sibling directory:
+
+  .. code:: shell
+
+      $ git clone https://github.com/repository-service-tuf/tuf-metadata-visualizer ../TUF-Metadata-Visualizer
+
+2. Start the services with the ``visualizer`` profile enabled:
+
+  .. code:: shell
+
+      $ docker compose --profile visualizer up
+
+3. Access the visualizer in your browser at ``http://localhost:3000``.
+
+
 Remove RSTUF deployment
 =======================
 
