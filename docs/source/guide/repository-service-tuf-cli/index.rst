@@ -316,7 +316,7 @@ This content requires the following data:
 - `path <https://theupdateframework.github.io/specification/latest/#targetpath>`_: The artifact path
 - `size <https://theupdateframework.github.io/specification/latest/#targets-obj-length>`_: The artifact size
 - `hash-type <https://theupdateframework.github.io/specification/latest/#targets-obj-length>`_: The defined hash as a metafile. Example: blak2b-256
-- `hash <https://theupdateframework.github.io/specification/latest/#targets-obj-length>`_: The hash
+- `hash <https://theupdateframework.github.io/specification/latest/#targets-obj-hashes>`_: The `hexadecimal digest <https://theupdateframework.github.io/specification/latest/#targets-obj-hashes>`_ of the artifact hash
 
 The CSV must use a semicolon as the separator, following the format
 ``path;size;hash-type;hash`` without a header.

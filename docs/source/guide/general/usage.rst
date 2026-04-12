@@ -114,7 +114,7 @@ Add artifacts payload
       - `A hash algorithm names <https://theupdateframework.github.io/specification/latest/#targets-obj-length>`_
       - ``sha256``
     * - ``HASH``
-      - The hash output, such as ``shasum -a 256 <artifact>``
+      - The `hexadecimal digest <https://theupdateframework.github.io/specification/latest/#targets-obj-hashes>`_ of the artifact hash, such as ``shasum -a 256 <artifact>``
       - ``95cef21e0d8707e4b46c85cd130a37c5c03f747f140b7d9e2bd817b7fcc13511``
     * - ``CUSTOM``
       - Custom key-value pairs
