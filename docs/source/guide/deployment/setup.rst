@@ -156,8 +156,7 @@ as the RSTUF service is ready.
 
 To perform the boostrap you require the payload generated during the
 :ref:`guide/deployment/setup:Bootstrap`.
-
-You can do it using the rstuf admin-legacy
+You can do it using the rstuf admin:
 
 .. code::
 
