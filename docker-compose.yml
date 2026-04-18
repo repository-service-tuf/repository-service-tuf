@@ -26,9 +26,12 @@ services:
       - 80:80
     environment:
       - RSTUF_BROKER_SERVER=redis://redis
-      - RSTUF_REDIS_SERVER=redis://redis
+      - RSTUF_REDIS_SERVER=${RSTUF_REDIS_SERVER:-redis://redis}
+      - RSTUF_DB_SERVER=postgresql://postgres:secret@postgres:5432
     depends_on:
       redis:
+        condition: service_healthy
+      postgres:
         condition: service_healthy
 
   web:
@@ -56,7 +59,7 @@ services:
       - RSTUF_LOCAL_STORAGE_BACKEND_PATH=/var/opt/repository-service-tuf/storage
       - RSTUF_ONLINE_KEY_DIR=/var/opt/repository-service-tuf/key_storage
       - RSTUF_BROKER_SERVER=redis://redis
-      - RSTUF_REDIS_SERVER=redis://redis
+      - RSTUF_REDIS_SERVER=${RSTUF_REDIS_SERVER:-redis://redis}
       - RSTUF_DB_SERVER=postgresql://postgres:secret@postgres:5432
     volumes:
       - repository-service-tuf-storage:/var/opt/repository-service-tuf/storage

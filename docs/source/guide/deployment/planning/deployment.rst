@@ -89,11 +89,16 @@ backend result for `24 hours <https://docs.celeryq.dev/en/stable/userguide/confi
 
 .. centered:: RSTUF configuration
 
-* ``RSTUF_REDIS_SERVER`` :ref:`RSTUF API <guide/repository-service-tuf-api/Docker_README:(Required) `RSTUF_REDIS_SERVER\`>`
-* ``RSTUF_REDIS_SERVER`` :ref:`RSTUF Worker <guide/repository-service-tuf-worker/Docker_README:(Required) `RSTUF_REDIS_SERVER\`>`
+* ``RSTUF_REDIS_SERVER`` :ref:`RSTUF API <guide/repository-service-tuf-api/Docker_README:(Optional) `RSTUF_REDIS_SERVER\`>`
+* ``RSTUF_REDIS_SERVER`` :ref:`RSTUF Worker <guide/repository-service-tuf-worker/Docker_README:(Optional) `RSTUF_REDIS_SERVER\`>`
+
+.. Note::
+   ``RSTUF_REDIS_SERVER`` is optional when ``RSTUF_DB_SERVER`` is configured.
+   In that setup, RSTUF stores Dynaconf settings and acquires distributed locks
+   directly in the PostgreSQL database.
 
 .. Caution::
-   Both services, RSTUF API and Worker, must access the same Redis.
+   Both services, RSTUF API and Worker, must access the same Redis when enabled.
 
 .. Note::
  When using Redis as a message queue/broker, the same
@@ -125,9 +130,10 @@ Database: Postgres server
 
 * https://www.postgresql.org
 
-Only the RSTUF Worker uses the Postgres server
-
-It uses the database to perform the TUF metadata management.
+RSTUF Worker uses the Postgres server to perform the TUF metadata management.
+Additionally, when Redis is not used for configuration storage, both RSTUF API
+and RSTUF Worker use PostgreSQL as the shared Dynaconf configuration and distributed
+locking backend.
 
 .. Caution::
 
@@ -135,6 +141,7 @@ It uses the database to perform the TUF metadata management.
 
 .. centered:: RSTUF configuration
 
+* ``RSTUF_DB_SERVER`` :ref:`RSTUF API <guide/repository-service-tuf-api/Docker_README:(Optional) `RSTUF_DB_SERVER\`>`
 * ``RSTUF_DB_SERVER`` :ref:`RSTUF Worker <guide/repository-service-tuf-worker/Docker_README:(Required) `RSTUF_DB_SERVER\`>`
 
 [Optional] Content Server: Webserver

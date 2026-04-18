@@ -59,9 +59,9 @@ See [Celery Broker Instructions](https://docs.celeryq.dev/en/stable/getting-star
 
 Example: `guest:guest@rabbitmq:5672`
 
-#### (Required) `RSTUF_REDIS_SERVER`
+#### (Optional) `RSTUF_REDIS_SERVER`
 
-Redis server address.
+Redis server address. Optional when `RSTUF_DB_SERVER` is used for shared configuration and locking.
 
 The result backend must to be compatible with Celery. See
 [Celery Task result backend settings](https://docs.celeryq.dev/en/stable/userguide/configuration.html#task-result-backend-settings)
