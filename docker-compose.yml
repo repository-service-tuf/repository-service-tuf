@@ -7,7 +7,7 @@ volumes:
 
 services:
   postgres:
-    image: postgres:17.5-alpine3.21
+    image: postgres:18.3-alpine3.21
     ports:
       - "5433:5432"
     environment:
@@ -32,7 +32,7 @@ services:
         condition: service_healthy
 
   web:
-    image: python:3.13-slim
+    image: python:3.14-slim
     command: python -m http.server -d /var/opt/repository-service-tuf/storage 8080
     volumes:
       - repository-service-tuf-storage:/var/opt/repository-service-tuf/storage
@@ -40,7 +40,7 @@ services:
       - "8080:8080"
 
   redis:
-    image: redis:8.0.0-alpine3.21
+    image: redis:8.0.1-alpine3.21
     volumes:
       - repository-service-tuf-redis-data:/data
     ports:
@@ -70,7 +70,7 @@ services:
     stdin_open: true
 
   rstuf-ft-runner:
-    image: python:3.13-slim
+    image: python:3.14-slim
     command: python -V
     working_dir: /rstuf-runner
     volumes:
