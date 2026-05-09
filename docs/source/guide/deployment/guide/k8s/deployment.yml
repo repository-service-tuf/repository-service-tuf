@@ -150,11 +150,11 @@ spec:
               value: redis://redis
             - name: RSTUF_REDIS_SERVER
               value: redis://redis
-            - name: RSTUF_SQL_SERVER
-              value: postgres:5433
-            - name: RSTUF_SQL_USER
-              value: postgres
-            - name: RSTUF_SQL_PASSWORD
+            - name: RSTUF_DB_SERVER
+              value: "postgres:5433"
+            - name: RSTUF_DB_USER
+              value: "postgres"
+            - name: RSTUF_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgrespassword
