@@ -1,0 +1,80 @@
+# Link Check Workflow
+# Automatically detects broken or outdated links in documentation
+# Addresses: https://github.com/repository-service-tuf/repository-service-tuf/issues/945
+
+name: Link Check
+
+on:
+  # Run on pull requests to catch issues early
+  pull_request:
+    paths:
+      - 'docs/**'
+      - '*.md'
+      - '*.rst'
+  
+  # Run on pushes to main branch
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - '*.md'
+      - '*.rst'
+  
+  # Run weekly scan on Monday at 2 AM UTC for full repository coverage
+  schedule:
+    - cron: '0 2 * * 1'
+  
+  # Allow manual trigger from GitHub UI
+  workflow_dispatch:
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      # Detect which files changed (only for PR/push, not for scheduled runs)
+      - name: Get changed files
+        if: github.event_name != 'schedule'
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files: |
+            docs/**/*.md
+            docs/**/*.rst
+            *.md
+            *.rst
+      
+      # Run link check on changed files for PR/push mode
+      - name: Check links in changed files
+        if: github.event_name != 'schedule' && steps.changed-files.outputs.any_changed == 'true'
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: --config lychee.toml ${{ steps.changed-files.outputs.all_changed_files }}
+          fail: true
+      
+      # Run full repository link check for scheduled mode
+      - name: Check all links (scheduled scan)
+        if: github.event_name == 'schedule'
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: --config lychee.toml docs/ README.rst CONTRIBUTING.rst CODE_OF_CONDUCT.rst ROADMAP.rst TAC.rst MAINTAINERS.rst SECURITY.md
+          fail: false
+      
+      # Create issue if scheduled scan finds broken links
+      - name: Create issue on broken links
+        if: github.event_name == 'schedule' && failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🔗 Broken Links Detected in Documentation (Weekly Scan)',
+              body: 'The weekly link check detected broken or outdated links. Check the workflow run for details.',
+              labels: ['documentation', 'automated']
+            })
