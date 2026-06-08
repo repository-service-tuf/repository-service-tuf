@@ -2,7 +2,6 @@ volumes:
   repository-service-tuf-storage:
   repository-service-tuf-keyvault:
   repository-service-tuf-api-data:
-  repository-service-tuf-redis-data:
   repository-service-tuf-pgsql-data:
 
 services:
@@ -18,6 +17,14 @@ services:
       test: ["CMD", "pg_isready", "-U", "postgres", "-d", "postgres"]
       interval: 1s
 
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "5672"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   repository-service-tuf-api:
     image: ghcr.io/repository-service-tuf/repository-service-tuf-api:${API_VERSION}
     volumes:
@@ -25,10 +32,12 @@ services:
     ports:
       - 80:80
     environment:
-      - RSTUF_BROKER_SERVER=redis://redis
-      - RSTUF_REDIS_SERVER=redis://redis
+      - RSTUF_BROKER_SERVER=amqp://guest:guest@rabbitmq:5672
+      - RSTUF_DB_SERVER=postgresql://postgres:secret@postgres:5432
     depends_on:
-      redis:
+      rabbitmq:
+        condition: service_healthy
+      postgres:
         condition: service_healthy
 
   web:
@@ -39,30 +48,19 @@ services:
     ports:
       - "8080:8080"
 
-  redis:
-    image: redis:8.0.0-alpine3.21
-    volumes:
-      - repository-service-tuf-redis-data:/data
-    ports:
-      - "6379:6379"
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 1s
-
   repository-service-tuf-worker:
     image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:${WORKER_VERSION}
     environment:
       - RSTUF_STORAGE_BACKEND=LocalStorage
       - RSTUF_LOCAL_STORAGE_BACKEND_PATH=/var/opt/repository-service-tuf/storage
       - RSTUF_ONLINE_KEY_DIR=/var/opt/repository-service-tuf/key_storage
-      - RSTUF_BROKER_SERVER=redis://redis
-      - RSTUF_REDIS_SERVER=redis://redis
+      - RSTUF_BROKER_SERVER=amqp://guest:guest@rabbitmq:5672
       - RSTUF_DB_SERVER=postgresql://postgres:secret@postgres:5432
     volumes:
       - repository-service-tuf-storage:/var/opt/repository-service-tuf/storage
       - ./tests/files/key_storage/:/var/opt/repository-service-tuf/key_storage
     depends_on:
-      redis:
+      rabbitmq:
         condition: service_healthy
       postgres:
         condition: service_healthy
