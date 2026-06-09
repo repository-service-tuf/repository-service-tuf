@@ -39,6 +39,7 @@ documentation:
   project-members: https://github.com/repository-service-tuf/repository-service-tuf/blob/main/MAINTAINERS.rst
 
 security-artifacts:
+  best-practices-badge: https://bestpractices.coreinfrastructure.org/projects/6587
   third-party-assessments:
     - evidence: https://repository-service-tuf.readthedocs.io/en/stable/blog/posts/rstuf-security-audit-for-1.0.0.html
       date: "2025-02-14"
