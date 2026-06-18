@@ -20,6 +20,11 @@ services:
 
   repository-service-tuf-api:
     image: ghcr.io/repository-service-tuf/repository-service-tuf-api:${API_VERSION}
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
     volumes:
       - repository-service-tuf-api-data:/data
     ports:
@@ -51,6 +56,11 @@ services:
 
   repository-service-tuf-worker:
     image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:${WORKER_VERSION}
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
     environment:
       - RSTUF_STORAGE_BACKEND=LocalStorage
       - RSTUF_LOCAL_STORAGE_BACKEND_PATH=/var/opt/repository-service-tuf/storage
