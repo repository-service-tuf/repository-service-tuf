@@ -92,19 +92,17 @@ Start the minikube tunnel:
 
     📌  NOTE: Please do not close this terminal as this process must stay alive for the tunnel to be accessible ...
 
-    ❗  The service/ingress rstuf-localstack requires privileged ports to be exposed: [80 443]
-    🔑  sudo permission will be asked for it.
-    ❗  The service/ingress rstuf-rstuf-api requires privileged ports to be exposed: [80 443]
+    ❗  The service/ingress rstuf-localstack requires ports to be exposed: [8080 8443]
     🏃  Starting tunnel for service rstuf-localstack.
-    🔑  sudo permission will be asked for it.
     🏃  Starting tunnel for service rstuf-rstuf-api.
+    ❗  The service/ingress rstuf-rstuf-api requires ports to be exposed: [8080 8443]
     Password:
 
 
 .. note::
 
-   - RSTUF API is available at http://rstuf.local
-   - TUF Metadata is available at http://localstack.local/tuf-metadata
+   - RSTUF API is available at http://rstuf.local:8080
+   - TUF Metadata is available at http://localstack.local:8080/tuf-metadata
 
 You can go through the RSTUF setup ceremony and bootstrap,
 see :ref:`guide/deployment/setup:Service Setup`.
@@ -115,7 +113,7 @@ see :ref:`guide/deployment/setup:Service Setup`.
 
        .. code:: shell
 
-           export AWS_ENDPOINT_URL=http://localstack.local
+           export AWS_ENDPOINT_URL=http://localstack.local:8080
            export AWS_SECRET_ACCESS_KEY=access
            export AWS_ACCESS_KEY_ID=key
            export AWS_DEFAULT_REGION=us-east-1
