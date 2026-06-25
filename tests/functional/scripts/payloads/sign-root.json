@@ -1,0 +1,8 @@
+{
+  "[select] Select role for signing": "root",
+  "[select] Select a key for signing or continue (continue/JimiHendrix/JoeCocker)": "JimiHendrix",
+  "[select] (JH) Select Online Key type": "Key PEM File",
+  "[input file] Please enter path to encrypted private key": "tests/files/key_storage/JH.ed25519",
+  "Please enter password": "hunter2"
+}
+
