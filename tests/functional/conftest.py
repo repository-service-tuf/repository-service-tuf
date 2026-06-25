@@ -65,9 +65,12 @@ def get_target_info():
         path = os.path.join(temp_md_dir.name, "root.json")
         shutil.copy(os.path.join("metadata", "1.root.json"), path)
         metadata_base_url = os.getenv("METADATA_BASE_URL") or "http://web:8080"
+        with open(path, "rb") as f:
+            root_bytes = f.read()
         updater = Updater(
             metadata_dir=temp_md_dir.name,
             metadata_base_url=metadata_base_url,
+            bootstrap=root_bytes,
             config=UpdaterConfig(prefix_targets_with_hash=False),
         )
         updater.refresh()
