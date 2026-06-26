@@ -18,11 +18,11 @@ on:
           default: "latest"
           type: string
           required: False
-      docker_compose:
-        description: "Docker Compose File"
-        default: "docker-compose.yml"
-        type: string
-        required: False
+        docker_compose:
+          description: "Docker Compose File"
+          default: "docker-compose.yml"
+          type: string
+          required: False
 
   workflow_call:
     inputs:
@@ -48,6 +48,8 @@ on:
         required: False
     secrets:
       RSTUF_ONLINE_KEY:
+        required: True
+      POSTGRES_PASSWORD:
         required: True
 jobs:
   functional-das:
@@ -96,6 +98,7 @@ jobs:
           # If you use "RSTUF_ONLINE_KEY" make sure it's
           # defined in the repositories you use for prs.
           RSTUF_ONLINE_KEY: ${{ secrets.RSTUF_ONLINE_KEY }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
 
       - name: Bootstrap/Setup RSTUF full signed and run Functional Tests
         timeout-minutes: 30

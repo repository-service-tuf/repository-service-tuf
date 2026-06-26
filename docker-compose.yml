@@ -14,10 +14,17 @@ services:
       - POSTGRES_PASSWORD=secret
     volumes:
       - "repository-service-tuf-pgsql-data:/var/lib/postgresql/data"
+      - "./db-init:/docker-entrypoint-initdb.d:ro"
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres", "-d", "postgres"]
       interval: 1s
-
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp
+      - /var/run/postgresql
+    secrets:
+      - postgres_password
   repository-service-tuf-api:
     image: ghcr.io/repository-service-tuf/repository-service-tuf-api:${API_VERSION}
     volumes:
@@ -30,25 +37,38 @@ services:
     depends_on:
       redis:
         condition: service_healthy
-
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /var/run/postgresql
   web:
     image: python:3.13-slim
     command: python -m http.server -d /var/opt/repository-service-tuf/storage 8080
     volumes:
-      - repository-service-tuf-storage:/var/opt/repository-service-tuf/storage
+      - repository-service-tuf-storage:/var/opt/repository-service-tuf/storage:ro
     ports:
       - "8080:8080"
-
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
   redis:
     image: redis:8.0.0-alpine3.21
     volumes:
-      - repository-service-tuf-redis-data:/data
+      - repository-service-tuf-redis-data:/data:rw
     ports:
       - "6379:6379"
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 1s
-
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp
+      - /var/run/redis
   repository-service-tuf-worker:
     image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:${WORKER_VERSION}
     environment:
@@ -57,10 +77,10 @@ services:
       - RSTUF_ONLINE_KEY_DIR=/var/opt/repository-service-tuf/key_storage
       - RSTUF_BROKER_SERVER=redis://redis
       - RSTUF_REDIS_SERVER=redis://redis
-      - RSTUF_DB_SERVER=postgresql://postgres:secret@postgres:5432
+      - RSTUF_DB_SERVER=postgresql://postgres:{POSTGRES_PASSWORD}@postgres:5432
     volumes:
-      - repository-service-tuf-storage:/var/opt/repository-service-tuf/storage
-      - ./tests/files/key_storage/:/var/opt/repository-service-tuf/key_storage
+      - repository-service-tuf-storage:/var/opt/repository-service-tuf/storage:rw
+      - ./tests/files/key_storage/:/var/opt/repository-service-tuf/key_storage:ro
     depends_on:
       redis:
         condition: service_healthy
@@ -68,10 +88,23 @@ services:
         condition: service_healthy
     tty: true
     stdin_open: true
-
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp
+      - /var/run/postgresql
   rstuf-ft-runner:
     image: python:3.13-slim
     command: python -V
     working_dir: /rstuf-runner
     volumes:
       - ./:/rstuf-runner
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /var/run/postgresql
+secrets:
+  postgres_password:
+    file: ./secrets/postgres_password.txt
