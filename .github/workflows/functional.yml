@@ -49,6 +49,11 @@ on:
     secrets:
       RSTUF_ONLINE_KEY:
         required: True
+
+permissions:
+  contents: read  # Required: to checkout repository code
+  actions: read   # Required: to access workflow artifacts and metadata
+
 jobs:
   functional-das:
     name: "DAS"
