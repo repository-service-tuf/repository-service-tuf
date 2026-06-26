@@ -18,6 +18,7 @@ else
     export AWS_ACCESS_KEY_ID=foo
     export AWS_SECRET_ACCESS_KEY=bar
     export AWS_ENDPOINT_URL=http://localstack:4566
+    export RSTUF_TASK_THRESHOLD=180
     pip install awscli-local awscli
     awslocal kms create-key \
         --key-spec RSA_4096 \
