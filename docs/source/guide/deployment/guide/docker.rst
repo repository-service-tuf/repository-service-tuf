@@ -80,7 +80,7 @@ Steps
      - Online Key directory: ``RSTUF_ONLINE_KEY_DIR``
      - Broker Server: ``RSTUF_BROKER_SERVER``
      - Redis Server: ``RSTUF_REDIS_SERVER``
-     - SQL (Postgres) Server: ``RSTUF_SQL_SERVER``
+     - SQL (Postgres) Server: ``RSTUF_DB_SERVER``
 
 3. Run using Docker stack
 

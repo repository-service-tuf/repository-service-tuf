@@ -41,7 +41,7 @@ services:
       RSTUF_ONLINE_KEY_DIR: /var/opt/repository-service-tuf/keyvault
       RSTUF_BROKER_SERVER: redis://redis
       RSTUF_REDIS_SERVER: redis://redis
-      RSTUF_SQL_SERVER: postgresql://postgres:secret@postgres:5432
+      RSTUF_DB_SERVER: postgresql://postgres:secret@postgres:5432
 
     depends_on:
       - postgres
