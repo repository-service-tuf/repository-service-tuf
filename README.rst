@@ -3,12 +3,12 @@ Repository Service for TUF (RSTUF)
 
 .. image:: ./docs/source/_static/logo/PNG/rstuf_horizontal-color.png
 
-.. readme-logo
-
 |OpenSSF Best Practices|
 
 .. |OpenSSF Best Practices| image:: https://bestpractices.coreinfrastructure.org/projects/6587/badge
   :target: https://bestpractices.coreinfrastructure.org/projects/6587
+
+.. readme-logo
 
 .. readme-intro
 
