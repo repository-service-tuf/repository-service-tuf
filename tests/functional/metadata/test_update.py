@@ -192,35 +192,14 @@ def user_signs_the_metadata(http_request, task_id):
             pass
 
 
-@then("the '2.root.json' will be available in the TUF Metadata")
-def root_metadata_2_root_is_available(http_request):
-    # double check if the new version is available in the metadata storage
-    metadata_base_url = os.getenv("METADATA_BASE_URL") or "http://web:8080"
-    count = 0
-    while count < 60:
-        response = http_request(
-            "GET",
-            host=metadata_base_url,
-        )
-        if "2.root.json" in response.text:
-            LOGGER.info(
-                "[METADATA UPDATE] Metadata Update available (2.root.json)"
-            )
-            # wait add artifacts continue 2 seconds after metadata update
-            time.sleep(5)
-            pytest.rstuf_thread.set()
-            break
-        else:
-            count += 1
-            time.sleep(0.5)
-
-    assert count < 60, pytest.rstuf_thread.set()
-
-
 @then("the user downloads will not have inconsistency during this process")
 def verify_artifacts_consistency(
     get_target_info, http_request, task_completed_within_threshold
 ):
+    # wait add artifacts continue 5 seconds after metadata update starts
+    time.sleep(5)
+    pytest.rstuf_thread.set()
+
     try:
         # wait all artifact tasks to be complete and check the consistency
         count = 1
