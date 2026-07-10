@@ -23,7 +23,7 @@ services:
     volumes:
       - repository-service-tuf-api-data:/data
     ports:
-      - 80:80
+      - 8000:80
     environment:
       - RSTUF_BROKER_SERVER=redis://redis
       - RSTUF_REDIS_SERVER=redis://redis
@@ -75,3 +75,16 @@ services:
     working_dir: /rstuf-runner
     volumes:
       - ./:/rstuf-runner
+
+  rstuf-visualizer:
+    build:
+      context: ../TUF-Metadata-Visualizer
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_RSTUF_API=http://repository-service-tuf-api:80/api/v1/metadata/
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_RSTUF_API=http://repository-service-tuf-api:80/api/v1/metadata/
+    depends_on:
+      - repository-service-tuf-api
