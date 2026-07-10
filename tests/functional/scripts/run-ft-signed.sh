@@ -13,6 +13,7 @@ if [[ $? -eq 0 ]]; then
     export METADATA_BASE_URL=http://web:8080
 else
     export METADATA_BASE_URL=http://localstack:4566/tuf-metadata
+    export RSTUF_TASK_THRESHOLD=180
 fi
 
 # Execute the Ceremony and Bootstrap RSTUF API
