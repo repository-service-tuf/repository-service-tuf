@@ -1,0 +1,47 @@
+header:
+  schema-version: 2.1.0
+  last-updated: "2026-03-26"
+  last-reviewed: "2026-03-26"
+  project-url: https://github.com/repository-service-tuf/repository-service-tuf
+
+project:
+  name: Repository Service for TUF (RSTUF)
+  repositories:
+    - name: RSTUF Umbrella
+      url: https://github.com/repository-service-tuf/repository-service-tuf
+    - name: RSTUF API
+      url: https://github.com/repository-service-tuf/repository-service-tuf-api
+    - name: RSTUF CLI
+      url: https://github.com/repository-service-tuf/repository-service-tuf-cli
+    - name: RSTUF Worker
+      url: https://github.com/repository-service-tuf/repository-service-tuf-worker
+
+repository:
+  url: https://github.com/repository-service-tuf/repository-service-tuf
+  status: active
+
+project-lifecycle:
+  status: active
+  core-maintainers:
+    - https://github.com/kairoaraujo
+    - https://github.com/MVrachev
+    - https://github.com/rdimitrov
+    - https://github.com/lukpueh
+    - https://github.com/KAUTH
+
+contribution-policy:
+  accepts-pull-requests: true
+  contributing-policy: https://github.com/repository-service-tuf/repository-service-tuf/blob/main/CONTRIBUTING.rst
+  code-of-conduct: https://github.com/repository-service-tuf/repository-service-tuf/blob/main/CODE_OF_CONDUCT.rst
+
+documentation:
+  security-policy: https://github.com/repository-service-tuf/repository-service-tuf/blob/main/SECURITY.md
+  project-members: https://github.com/repository-service-tuf/repository-service-tuf/blob/main/MAINTAINERS.rst
+
+security-artifacts:
+  third-party-assessments:
+    - evidence: https://repository-service-tuf.readthedocs.io/en/stable/blog/posts/rstuf-security-audit-for-1.0.0.html
+      date: "2025-02-14"
+      comment: |
+        Security assessment conducted by X41 D-Sec GmbH. The assessment focused on the design,
+        implementation, and deployment of RSTUF services and tools.

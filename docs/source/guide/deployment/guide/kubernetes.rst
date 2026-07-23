@@ -250,10 +250,10 @@ rstuf-worker deployment
   - environment variables ``RSTUF_BROKER_SERVER`` and ``RSTUF_REDIS_SERVER`` as
     :ref:`guide/deployment/guide/kubernetes:redis deployment` (``redis://redis``).
 
-  - environment variables ``RSTUF_SQL_SERVER`` as
+  - environment variables ``RSTUF_DB_SERVER`` as
     the :ref:`guide/deployment/guide/kubernetes:postgres deployment`
-    (``postgres:5432``), ``RSTUF_SQL_USER`` as ``postgres``, and
-    ``RSTUF_SQL_PASSWORD`` as the :ref:`guide/deployment/guide/kubernetes:postgrespassword secret`.
+    (``postgres:5432``), ``RSTUF_DB_USER`` as ``postgres``, and
+    ``RSTUF_DB_PASSWORD`` as the :ref:`guide/deployment/guide/kubernetes:postgrespassword secret`.
 
   - environment variable ``RSTUF_ONLINE_KEY_DIR`` as
     :ref:`guide/deployment/guide/kubernetes:onlinekey secret`

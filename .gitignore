@@ -7,6 +7,9 @@ ceremony-payload.json
 metadata-update-payload.json
 .rstuf.yml
 assets/
+.test_durations*
+metadata/
+sign-payload.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

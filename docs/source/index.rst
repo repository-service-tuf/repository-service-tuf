@@ -2,12 +2,6 @@
 Repository Service for TUF Documentation
 ========================================
 
-.. note::
-
-    Repository Service for TUF is considered in **beta** state.
-
-    Please reference the The RSTUF `ROADMAP`_ for feature and functionality plans.
-
 .. include:: ../../README.rst
   :start-after: .. readme-logo
   :end-before: .. readme-design
@@ -75,8 +69,14 @@ Talks, Posts and Mentions about RSTUF
 Talks
 =====
 
-* Open Source Summit 2024: Securing Content Distribution with RSTUF, an Incubating OpenSSF Project
-  by Kairo De Araujo and & Martin Vrachev (recording coming soon).
+* KubeCon 2025 EU:
+
+  - `TUF-en up Your Software Supply Chain - Marina Moore, Edera & Kairo De Araujo <https://youtu.be/lIYXVIPsk_U?si=MfP0WD2ZnKNNouwy>`_
+  - `Identity-based Trust - Till Death Do We Part? - John Kjell & Kairo De Araujo <https://youtu.be/26p_qvuCy-s?si=BlJa5ehZs1-KOxAf>`_
+
+* Open Source Security Podcast: `Repository signing with Kairo De Araujo <https://opensourcesecurity.io/2025/2025-05-rstuf-with-kairo-de-araujo/>`_.
+* Open Source Summit 2024: `Securing Content Distribution with RSTUF, an Incubating OpenSSF Project
+  by Kairo De Araujo and & Martin Vrachev <https://youtu.be/0ct-u_jOLG8?si=Me6Bw40dt4CyJga6>`_ .
 * KubeCon 2024: `Operating a Production TUF Repository <https://youtu.be/WB83-RhMl18?si=H7Yq8ZFlD8JLt8Y2>`_
   by Kairo de Araujo and Fredrik Skogman.
 * `PackagingCon 2023 <https://cfp.packaging-con.org/2023/talk/997FQK/>`_:

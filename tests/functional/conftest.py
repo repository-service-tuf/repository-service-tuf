@@ -65,9 +65,12 @@ def get_target_info():
         path = os.path.join(temp_md_dir.name, "root.json")
         shutil.copy(os.path.join("metadata", "1.root.json"), path)
         metadata_base_url = os.getenv("METADATA_BASE_URL") or "http://web:8080"
+        with open(path, "rb") as f:
+            root_bytes = f.read()
         updater = Updater(
             metadata_dir=temp_md_dir.name,
             metadata_base_url=metadata_base_url,
+            bootstrap=root_bytes,
             config=UpdaterConfig(prefix_targets_with_hash=False),
         )
         updater.refresh()
@@ -97,6 +100,10 @@ def task_completed_within_threshold():
             state = task_response_json["data"].get("state")
             if state == "SUCCESS":
                 break
+            # Add small delay to handle eventual consistency in CI
+            import time
+
+            time.sleep(0.5)
 
         perfomance_fail = os.getenv("PERFORMANCE", "true").lower() == "true"
         if (

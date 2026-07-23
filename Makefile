@@ -64,18 +64,14 @@ endif
 functional-tests:
 	pytest --gherkin-terminal-reporter tests -vvv --cucumberjson=test-report.json --durations=0 --html=test-report.html
 
+# Set default values
+CLI_VERSION ?= dev
+PYTEST_GROUP ?= 1
+
 # CLI_VERSION enables using specific RSTUF CLI version, default: dev
-# usage: `make ft-das CLI_VERSION=v0.8.0b1`
+# usage: `make ft-das CLI_VERSION=v0.8.0b1 PYTEST_GROUP=2`
 ft-das:
-ifneq ($(CLI_VERSION),)
-	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh dev $(PYTEST_GROUP) $(SLOW)
-else
 	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-das.sh $(CLI_VERSION) $(PYTEST_GROUP) $(SLOW)
-endif
 
 ft-signed:
-ifneq ($(CLI_VERSION),)
-	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-signed.sh dev $(PYTEST_GROUP) $(SLOW)
-else
 	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-signed.sh $(CLI_VERSION) $(PYTEST_GROUP) $(SLOW)
-endif

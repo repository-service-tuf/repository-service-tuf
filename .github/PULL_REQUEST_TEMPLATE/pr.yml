@@ -34,6 +34,11 @@ body:
         - label: Tests have been added for the bug fix or new feature
         - label: Docs have been added for the bug fix or new feature
   - type: checkboxes
+    attributes:
+      label: Use of AI
+      options:
+        - label: AI was used to generate or assist with generating this PR. *Please specify how AI was used and what manual verification steps were taken to validate the changes*.
+  - type: checkboxes
     id: terms
     attributes:
       label: Code of Conduct
