@@ -5,6 +5,11 @@ volumes:
   repository-service-tuf-redis-data:
   repository-service-tuf-pgsql-data:
 
+networks:
+  frontend:
+  backend:
+    internal: true
+
 services:
   postgres:
     image: postgres:17.5-alpine3.21
@@ -12,6 +17,8 @@ services:
       - "5433:5432"
     environment:
       - POSTGRES_PASSWORD=secret
+    networks:
+      - backend
     volumes:
       - "repository-service-tuf-pgsql-data:/var/lib/postgresql/data"
     healthcheck:
@@ -20,6 +27,9 @@ services:
 
   repository-service-tuf-api:
     image: ghcr.io/repository-service-tuf/repository-service-tuf-api:${API_VERSION}
+    networks:
+      - frontend
+      - backend
     volumes:
       - repository-service-tuf-api-data:/data
     ports:
@@ -34,6 +44,8 @@ services:
   web:
     image: python:3.13-slim
     command: python -m http.server -d /var/opt/repository-service-tuf/storage 8080
+    networks:
+      - frontend
     volumes:
       - repository-service-tuf-storage:/var/opt/repository-service-tuf/storage
     ports:
@@ -41,6 +53,8 @@ services:
 
   redis:
     image: redis:8.0.0-alpine3.21
+    networks:
+      - backend
     volumes:
       - repository-service-tuf-redis-data:/data
     ports:
@@ -58,6 +72,8 @@ services:
       - RSTUF_BROKER_SERVER=redis://redis
       - RSTUF_REDIS_SERVER=redis://redis
       - RSTUF_DB_SERVER=postgresql://postgres:secret@postgres:5432
+    networks:
+      - backend
     volumes:
       - repository-service-tuf-storage:/var/opt/repository-service-tuf/storage
       - ./tests/files/key_storage/:/var/opt/repository-service-tuf/key_storage
@@ -73,5 +89,7 @@ services:
     image: python:3.13-slim
     command: python -V
     working_dir: /rstuf-runner
+    networks:
+      - frontend
     volumes:
       - ./:/rstuf-runner
