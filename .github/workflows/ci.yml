@@ -27,6 +27,10 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  contents: read # Required: to checkout source code in the reusable functional workflow
+  actions: read  # Required: to access workflow run information and artifacts from other workflows
+
 jobs:
   functional-tests:
     uses: ./.github/workflows/functional.yml
