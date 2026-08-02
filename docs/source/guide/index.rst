@@ -11,6 +11,7 @@ Repository Service for TUF Guide
     general/keys
     deployment/index
     general/client
+    general/getting-help
 
 Components documentation
 ########################
