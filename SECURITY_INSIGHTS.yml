@@ -45,3 +45,6 @@ security-artifacts:
       comment: |
         Security assessment conducted by X41 D-Sec GmbH. The assessment focused on the design,
         implementation, and deployment of RSTUF services and tools.
+
+security-tooling:
+  automated-security-scanning: true
