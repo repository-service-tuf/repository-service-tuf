@@ -237,7 +237,8 @@ rstuf-api deployment
 * RSTUF API will use environment variables ``RSTUF_BROKER_SERVER`` and
   ``RSTUF_REDIS_SERVER`` as :ref:`guide/deployment/guide/kubernetes:redis deployment`
   address (``redis://redis``).
-* RSTUF API container will use port 80 to serve the API (internally)
+* RSTUF API container will use port 8080 to serve the API (internally)
+* Containers run as a non-root user (UID 1000) for security hardening.
 
 rstuf-worker deployment
 =======================

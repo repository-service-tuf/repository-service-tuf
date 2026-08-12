@@ -94,7 +94,7 @@ Start the minikube tunnel:
 
     ❗  The service/ingress rstuf-localstack requires privileged ports to be exposed: [80 443]
     🔑  sudo permission will be asked for it.
-    ❗  The service/ingress rstuf-rstuf-api requires privileged ports to be exposed: [80 443]
+    ❗  The service/ingress rstuf-rstuf-api requires ports to be exposed: [8080 8443]
     🏃  Starting tunnel for service rstuf-localstack.
     🔑  sudo permission will be asked for it.
     🏃  Starting tunnel for service rstuf-rstuf-api.
@@ -103,7 +103,7 @@ Start the minikube tunnel:
 
 .. note::
 
-   - RSTUF API is available at http://rstuf.local
+   - RSTUF API is available at http://rstuf.local:8080
    - TUF Metadata is available at http://localstack.local/tuf-metadata
 
 You can go through the RSTUF setup ceremony and bootstrap,

@@ -20,10 +20,13 @@ services:
 
   repository-service-tuf-api:
     image: ghcr.io/repository-service-tuf/repository-service-tuf-api:${API_VERSION}
+    user: "1000:1000"
+    security_opt:
+      - no-new-privileges:true
     volumes:
       - repository-service-tuf-api-data:/data
     ports:
-      - 80:80
+      - 80:8080
     environment:
       - RSTUF_BROKER_SERVER=redis://redis
       - RSTUF_REDIS_SERVER=redis://redis
@@ -51,6 +54,9 @@ services:
 
   repository-service-tuf-worker:
     image: ghcr.io/repository-service-tuf/repository-service-tuf-worker:${WORKER_VERSION}
+    user: "1000:1000"
+    security_opt:
+      - no-new-privileges:true
     environment:
       - RSTUF_STORAGE_BACKEND=LocalStorage
       - RSTUF_LOCAL_STORAGE_BACKEND_PATH=/var/opt/repository-service-tuf/storage
