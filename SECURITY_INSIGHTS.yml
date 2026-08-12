@@ -1,7 +1,7 @@
 header:
   schema-version: 2.1.0
-  last-updated: "2026-03-26"
-  last-reviewed: "2026-03-26"
+  last-updated: "2026-04-14"
+  last-reviewed: "2026-04-14"
   project-url: https://github.com/repository-service-tuf/repository-service-tuf
 
 project:
@@ -29,6 +29,23 @@ project-lifecycle:
     - https://github.com/lukpueh
     - https://github.com/KAUTH
 
+vulnerability-reporting:
+  accepts-vulnerability-reports: true
+  policy-url: https://github.com/repository-service-tuf/repository-service-tuf/blob/main/SECURITY.md
+  preferred-contact-method: "GitHub Private Vulnerability Reporting"
+
+security-contacts:
+  - name: Kairo de Araujo
+    url: https://github.com/kairoaraujo
+  - name: Martin Vrachev
+    url: https://github.com/MVrachev
+  - name: Radoslav Dimitrov
+    url: https://github.com/rdimitrov
+  - name: Lukas Pühringer
+    url: https://github.com/lukpueh
+  - name: Konstantinos Papadopoulos
+    url: https://github.com/KAUTH
+
 contribution-policy:
   accepts-pull-requests: true
   contributing-policy: https://github.com/repository-service-tuf/repository-service-tuf/blob/main/CONTRIBUTING.rst
@@ -38,6 +55,9 @@ documentation:
   security-policy: https://github.com/repository-service-tuf/repository-service-tuf/blob/main/SECURITY.md
   project-members: https://github.com/repository-service-tuf/repository-service-tuf/blob/main/MAINTAINERS.rst
 
+security-tooling:
+  automated-security-scanning: true
+
 security-artifacts:
   third-party-assessments:
     - evidence: https://repository-service-tuf.readthedocs.io/en/stable/blog/posts/rstuf-security-audit-for-1.0.0.html
@@ -45,3 +65,4 @@ security-artifacts:
       comment: |
         Security assessment conducted by X41 D-Sec GmbH. The assessment focused on the design,
         implementation, and deployment of RSTUF services and tools.
+  best-practices-badge: https://bestpractices.coreinfrastructure.org/projects/6587
