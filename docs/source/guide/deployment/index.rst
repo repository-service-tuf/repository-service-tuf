@@ -38,3 +38,41 @@ Deployment Planning
    planning/services
    planning/networking
 
+
+Security Updates and Maintenance
+-------------------------------
+
+Deployments should be kept up to date to apply security patches.
+
+The RSTUF deployment includes multiple components that require regular updates:
+* API (Repository Service for TUF API)
+* Worker (Repository Service for TUF Worker)
+* Redis (message queue and result backend)
+* PostgreSQL (metadata storage)
+
+Update Strategy
+===============
+
+Regularly pull updated Docker images and restart services to apply changes.
+
+Example update workflow:
+
+.. code-block:: shell
+
+   docker compose pull
+   docker compose up -d
+
+Security Communication
+======================
+
+Security updates are communicated through:
+* GitHub Releases
+* GitHub Security Advisories
+
+Operational Responsibility
+==========================
+
+Administrators should monitor for updates and apply patches in a timely manner.
+
+Updates should be tested before being applied to production systems.
+
