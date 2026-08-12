@@ -1,0 +1,74 @@
+# Lychee Link Checker Configuration
+# Configures link validation for the Repository Service for TUF project
+# See: https://github.com/lycheeverse/lychee
+
+# Timeout for each link check request (in seconds)
+timeout = 30
+
+# Number of retries for failed requests
+retries = 3
+
+# User agent to identify as a browser (some servers block bots)
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+
+# Check URL fragments/anchors (e.g., #section-name)
+check_fragments = true
+
+# Follow HTTP redirects
+follow_redirects = true
+
+# HTTP status codes to ignore (e.g., 429 = rate limiting)
+ignore_status_codes = [429]
+
+# URLs to exclude from checking
+exclude = [
+  # Local development URLs
+  "localhost",
+  "127.0.0.1",
+  "0.0.0.0",
+  
+  # Email addresses
+  "mailto:.*",
+  
+  # Dynamic Zoom links (access restricted)
+  "zoom.lfx.platform.linuxfoundation.org",
+  
+  # Collaborative docs with access restrictions
+  "hackmd.io",
+  
+  # Git SSH URLs
+  "git@.*",
+  
+  # Submodule references
+  "repository-service-tuf-api",
+  "repository-service-tuf-cli",
+  "repository-service-tuf-worker",
+]
+
+# Paths to exclude from checking
+exclude_path = [
+  # Generated documentation
+  "docs/build/",
+  
+  # PlantUML source files
+  "docs/diagrams/",
+  
+  # Test files
+  "tests/",
+  
+  # Git metadata
+  ".git/",
+  
+  # Python build artifacts
+  "__pycache__/",
+  "*.egg-info/",
+  ".venv/",
+  "venv/",
+  ".tox/",
+  
+  # IDE and editor files
+  ".vscode/",
+  ".idea/",
+  "*.swp",
+  "*.swo",
+]
