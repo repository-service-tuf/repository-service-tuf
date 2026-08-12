@@ -37,6 +37,7 @@ contribution-policy:
 documentation:
   security-policy: https://github.com/repository-service-tuf/repository-service-tuf/blob/main/SECURITY.md
   project-members: https://github.com/repository-service-tuf/repository-service-tuf/blob/main/MAINTAINERS.rst
+  security-assessment: https://github.com/repository-service-tuf/repository-service-tuf/blob/main/docs/security-assessment.md
 
 security-artifacts:
   third-party-assessments:
