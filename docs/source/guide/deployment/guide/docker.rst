@@ -12,6 +12,18 @@ This deployment uses Docker Engine and Docker Compose yaml file to deploy RSTUF.
 
   * This deployment does not use secrets for sensitive credentials.
 
+  * This deployment does not isolate services into separate Docker networks.
+    All containers share a single default network, meaning a compromised
+    public-facing container (e.g., the web server) could access internal
+    services such as Redis or PostgreSQL. For production environments, consider
+    using network segmentation to restrict inter-container communication, or use
+    the :ref:`guide/deployment/guide/helm:Helm` deployment.
+
+  * The PostgreSQL example uses a default password (``secret``). This is
+    acceptable for local development and testing only. For any production or
+    publicly accessible deployment, use strong, unique credentials and manage
+    them through secrets.
+
 
 .. note::
   See the complete :ref:`guide/deployment/planning/deployment:Deployment Configuration`
