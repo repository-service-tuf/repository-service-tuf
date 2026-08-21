@@ -75,3 +75,8 @@ ft-das:
 
 ft-signed:
 	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-signed.sh $(CLI_VERSION) $(PYTEST_GROUP) $(SLOW)
+
+# Role-specific online keys feature: dedicated bootstrap (two online keys)
+# and its own test module, so the shared repository is left untouched.
+ft-role-specific-online-keys:
+	docker compose run --env UMBRELLA_PATH=. --rm rstuf-ft-runner bash tests/functional/scripts/run-ft-role-specific-online-keys.sh $(CLI_VERSION)
