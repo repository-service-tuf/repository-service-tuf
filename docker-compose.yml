@@ -75,3 +75,20 @@ services:
     working_dir: /rstuf-runner
     volumes:
       - ./:/rstuf-runner
+
+  rstuf-visualizer:
+    profiles:
+      - visualizer
+    image: ghcr.io/repository-service-tuf/tuf-metadata-visualizer:latest
+    build:
+      context: ../TUF-Metadata-Visualizer
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_RSTUF_API=http://localhost:80/api/v1/metadata/
+    ports:
+      - "3000:3000"
+    environment:
+      - RSTUF_API_URL=http://repository-service-tuf-api:80/api/v1/metadata/
+      - NEXT_PUBLIC_RSTUF_API=http://localhost:80/api/v1/metadata/
+    depends_on:
+      - repository-service-tuf-api
