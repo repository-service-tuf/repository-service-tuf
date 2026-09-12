@@ -373,6 +373,36 @@ Reformat the code (linters)
 Submitting changes
 ==================
 
+Commit message convention
+-------------------------
+
+RSTUF follows the `Conventional Commits <https://www.conventionalcommits.org/en/v1.0.0/>`_
+specification for commit messages, rather than a project-specific set of
+types. A commit message should look like:
+
+.. code:: shell
+
+    <type>[optional scope]: <description>
+
+    [optional body]
+
+    [optional footer(s)]
+
+Commonly used types include:
+
+- ``feat``: a new feature
+- ``fix``: a bug fix
+- ``docs``: documentation-only changes
+- ``build``: changes to the build system or external dependencies (this
+  includes dependency version bumps, e.g. from Dependabot)
+- ``ci``: changes to CI configuration files and scripts
+- ``test``: adding or correcting tests
+- ``refactor``: a code change that neither fixes a bug nor adds a feature
+
+See the `Conventional Commits specification
+<https://www.conventionalcommits.org/en/v1.0.0/#specification>`_ for the
+full list of types and rules, including how to denote breaking changes.
+
 1. Create a new branch
 
 .. code:: shell
