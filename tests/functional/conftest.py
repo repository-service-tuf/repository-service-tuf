@@ -32,7 +32,7 @@ def http_request():
     def _run_requests(
         method,
         headers=None,
-        host="http://repository-service-tuf-api",
+        host="http://repository-service-tuf-api:8080",
         url="/",
         data=None,
         json=None,
