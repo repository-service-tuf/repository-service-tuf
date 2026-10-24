@@ -69,5 +69,7 @@ services:
     environment:
       RSTUF_BROKER_SERVER: redis://redis
       RSTUF_REDIS_SERVER: redis://redis
+      RSTUF_DB_SERVER: postgresql://postgres:secret@postgres:5432
     depends_on:
       - rstuf-worker
+      - postgres
