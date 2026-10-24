@@ -19,8 +19,8 @@ def the_tufrepositoryservice_rstufcli_is_installed(rstuf_cli):
 @when("the admin run rstuf for ceremony bootstrap", target_fixture="bootstrap")
 def the_administrator_uses_rstufcli_bootstrap(rstuf_cli):
     rc, output = rstuf_cli(
-        "admin --api-server http://repository-service-tuf-api send bootstrap "
-        "ceremony-payload.json"
+        "admin --api-server http://repository-service-tuf-api:8080 "
+        "send bootstrap ceremony-payload.json"
     )
     return rc, output
 
@@ -48,8 +48,8 @@ def test_bootstrap_using_rstuf_cli_with_invalid_payload(): ...
 )
 def the_administrator_uses_rstufcli_bootstrap_invalid_payload(rstuf_cli):
     rc, output = rstuf_cli(
-        "admin --api-server http://repository-service-tuf-api send bootstrap "
-        "tests/data/payload-invalid.json "
+        "admin --api-server http://repository-service-tuf-api:8080 "
+        "send bootstrap tests/data/payload-invalid.json "
     )
 
     return rc, output
