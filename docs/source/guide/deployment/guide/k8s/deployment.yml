@@ -144,6 +144,10 @@ spec:
       labels:
         io.kompose.service: rstuf-worker
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
       containers:
         - env:
             - name: RSTUF_BROKER_SERVER
@@ -215,6 +219,10 @@ spec:
       labels:
         io.kompose.service: rstuf-api
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
       containers:
         - env:
             - name: RSTUF_BROKER_SERVER
@@ -224,7 +232,7 @@ spec:
           image: ghcr.io/repository-service-tuf/repository-service-tuf-api:latest
           name: rstuf-api
           ports:
-            - containerPort: 80
+            - containerPort: 8080
           resources: {}
       volumes:
       restartPolicy: Always
