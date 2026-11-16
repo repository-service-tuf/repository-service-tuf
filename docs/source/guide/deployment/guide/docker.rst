@@ -72,6 +72,7 @@ Steps
      environment variables:
      - Broker Server: ``RSTUF_BROKER_SERVER``
      - Redis Server: ``RSTUF_REDIS_SERVER``
+     - SQL (Postgres) Server: ``RSTUF_DB_SERVER``
 
    * It provisions the ``repository-service-tuf-worker`` configuration as
      environment variables:

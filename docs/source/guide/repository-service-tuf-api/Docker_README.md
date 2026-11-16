@@ -44,9 +44,13 @@ The broker must to be compatible with Celery. See [Celery Broker Instructions](h
 
 Example: `amqp://guest:guest@rabbitmq:5672`
 
-#### (Required) `RSTUF_REDIS_SERVER`
+#### (Optional) `RSTUF_REDIS_SERVER`
 
-Redis server address.
+Redis server address. Optional when `RSTUF_DB_SERVER` is configured.
+
+#### (Optional) `RSTUF_DB_SERVER`
+
+PostgreSQL database server address (e.g. `postgresql://postgres:secret@postgres:5432`). Used to store shared dynamic configuration when `RSTUF_REDIS_SERVER` is omitted.
 
 #### (Optional) `RSTUF_REDIS_SERVER_PORT`
 

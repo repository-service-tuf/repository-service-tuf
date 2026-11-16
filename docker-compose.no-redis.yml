@@ -1,0 +1,17 @@
+# Docker Compose override for Redis-optional deployment
+#
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.no-redis.yml up
+#
+# Runs RSTUF with Dynaconf settings and distributed locking backed by
+# PostgreSQL (RSTUF_DB_SERVER) instead of Redis (RSTUF_REDIS_SERVER).
+# Celery uses Redis as the default message broker (RSTUF_BROKER_SERVER).
+
+services:
+  repository-service-tuf-api:
+    environment:
+      - RSTUF_REDIS_SERVER=
+
+  repository-service-tuf-worker:
+    environment:
+      - RSTUF_REDIS_SERVER=
