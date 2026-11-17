@@ -8,7 +8,7 @@ from click.testing import CliRunner
 from repository_service_tuf import Dynaconf, cli
 
 
-def _run(input, selection, input_file):
+def _run(input, selection, input_file, multiple_selection):
     folder_name = mkdtemp()
     setting_file = os.path.join(folder_name, ".rstuf.yml")
     test_settings = Dynaconf()
@@ -23,6 +23,10 @@ def _run(input, selection, input_file):
     cli.admin.helpers._select.side_effect = selection
     cli.admin.helpers._prompt_key = mock.MagicMock()
     cli.admin.helpers._prompt_key.side_effect = input_file
+
+    # Selecting an online-key subset for a delegation uses multi-selection.
+    cli.admin.helpers.beaupy.select_multiple = mock.MagicMock()
+    cli.admin.helpers.beaupy.select_multiple.side_effect = multiple_selection
 
     output = runner.invoke(
         cli.admin.ceremony.ceremony,
@@ -42,9 +46,12 @@ def main():
         v for k, v in input_dict.items() if k.startswith("[input file]")
     ]
     selection = [v for k, v in input_dict.items() if k.startswith("[select]")]
+    multiple_selection = [
+        v for k, v in input_dict.items() if k.startswith("[select multiple]")
+    ]
     print("Using parameters:")
     print(json.dumps(input_dict, indent=2))
-    output = _run(input, selection, input_file)
+    output = _run(input, selection, input_file, multiple_selection)
 
     print(f"\nExit code: {output.exit_code}")
     print("\nOutput: ")

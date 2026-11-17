@@ -19,8 +19,16 @@ case ${CLI_VERSION} in
         pip install --upgrade repository-service-tuf
         ;;
 
-    source) # it install froom the source code (used by CLI)
-        pip install -e .
+    source) # install from the local source code (used by CLI)
+        # In the umbrella runner "." is the umbrella checkout, not the CLI
+        # repository, so use the CLI source path explicitly.
+        CLI_SOURCE_PATH=${CLI_SOURCE_PATH:-${UMBRELLA_PATH}/repository-service-tuf-cli}
+        if [ ! -f "${CLI_SOURCE_PATH}/pyproject.toml" ]; then
+            echo "No CLI source at '${CLI_SOURCE_PATH}'." >&2
+            echo "Set CLI_SOURCE_PATH to the repository-service-tuf-cli checkout." >&2
+            exit 1
+        fi
+        pip install -e "${CLI_SOURCE_PATH}"
         ;;
 
     *) # dev or none
