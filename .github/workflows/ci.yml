@@ -34,5 +34,7 @@ jobs:
       api_version: dev
       worker_version: dev
       cli_version: dev
+      postgres_password: ${{ secrets.POSTGRES_PASSWORD }}
     secrets:
       RSTUF_ONLINE_KEY: ${{ secrets.RSTUF_ONLINE_KEY }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
