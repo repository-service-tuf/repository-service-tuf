@@ -3,6 +3,12 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 8 * * *"
+
+permissions:
+  contents: write      # Required: to checkout repository code and create commits for submodule/docs updates
+  pull-requests: write # Required: to create pull requests with synchronized submodules and documentation
+  actions: read        # Required: to access workflow artifacts and metadata for the functional-tests job
+
 jobs:
   functional-tests:
     uses: ./.github/workflows/functional.yml
