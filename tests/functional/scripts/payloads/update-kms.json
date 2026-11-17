@@ -1,0 +1,16 @@
+{
+  "Root expires on 04/16/25. Do you want to change the expiry date? [y/n]": "",
+  "Please enter days until expiry for root role (365)": "",
+  "Root signature threshold is 1. Do you want to change the threshold? [y/n] (n)": "",
+  "[select] Info: Threshold 2 is met, more keys can be added (continue/add/remove)": "continue",
+  "Do you want to change the online key? [y/n] (y)": "y",
+  "[select] Select Online Key type": "AWS KMS",
+  "AWS KMS KeyID": "alias/kms-rstuf-online-1",
+  "Please enter key name": "online kms 1",
+  "[select] Select a key for signing (JanisJoplin/JimiHendrix)": "JanisJoplin",
+  "[select] (JJ) Select Online Key type": "Key PEM File",
+  "[input file] (Sign 1) Please enter path to encrypted private key": "tests/files/key_storage/JJ.ecdsa",
+  "(Sign 1) Please enter password": "hunter2",
+  "[select] Select a key for signing (continue/JimiHendrix)": "continue"
+}
+
