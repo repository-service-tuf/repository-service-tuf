@@ -1,8 +1,10 @@
+import logging
 import os
 import re
 import shutil
 import subprocess
 import tempfile
+import time
 from datetime import datetime, timezone
 from typing import List
 
@@ -73,8 +75,21 @@ def get_target_info():
             bootstrap=root_bytes,
             config=UpdaterConfig(prefix_targets_with_hash=False),
         )
-        updater.refresh()
-        return updater.get_targetinfo(target_path)
+
+        for i in range(60):
+            try:
+                updater.refresh()
+                target_info = updater.get_targetinfo(target_path)
+                if target_info:
+                    return target_info
+            except Exception as e:
+                logging.info(
+                    f"Target info fetching failed: {e}. Retrying {i+1}/60..."
+                )
+                pass
+            time.sleep(2)
+
+        return None
 
     return _run_get_target_info
 
